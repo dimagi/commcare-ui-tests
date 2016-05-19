@@ -3,7 +3,7 @@ Feature: Lookup Table Update
 Scenario: Ensure lookup table changes are pulled on sync
     Then I upload the "initial_cities_table.xlsx" lookup table
     Then I install the ccz app at "integration_test_app.ccz"
-    Then I login with username "fp" and password "test"
+    Then I login with username "test" and password "123"
     Then I scroll until I see the "Start" text
     Then I touch the "Start" text
     Then I select module "Misc"
