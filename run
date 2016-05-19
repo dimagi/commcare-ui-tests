@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+  echo "Command arg format: ['master' OR odk PR number] [tag OR feature path]"
+  echo "for example:"
+  echo "    ./run master @Integration"
+  echo "    ./run 1059 feature/lookup_table_sync.feature"
+  exit
+fi
+
+BUILD=$1
+TAG=$2
+
+rm "*.png"
+rm "reports.html"
+rm "commcare.apk"
+
+# download/build apk
+if [ "$BUILD" == "master" ]; then
+  sh scripts/get_latest_apk_and_resign.sh
+else
+  ./scripts/build_pr_apk.py $BUILD
+fi
+
+# unlock phone
+adb shell input keyevent 82
+
+# run tests
+if [[ $TAG = \@* ]] ; then
+  FEATURE="--tags $TAG"
+else
+  FEATURE=$TAG
+fi
+calabash-android run commcare.apk $FEATURE --format html --out reports.html
+
+# report results
+echo "TODO: report results"
