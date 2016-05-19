@@ -1,0 +1,3 @@
+[submodule "commcare-hq-api"]
+	path = commcare-hq-api
+	url = git@github.com:dimagi/commcare-hq-api.git

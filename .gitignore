@@ -1,0 +1,11 @@
+*.swp
+vendor/*
+.bundle/*
+*.ropeproject
+*.irb-history
+*.png
+*.DS_STORE
+test_servers/*
+.idea
+features.zip
+*.apk
