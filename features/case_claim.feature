@@ -13,11 +13,7 @@ Scenario: Create a case with one user, claim it with another
     Then I enter text "luca"
     Then Next
     Then I enter text "boston"
-    Then Next
-    Then Next
-    Then Next
-    Then Next
-    Then Next
+    Then Forward 5
     Then Submit
 
     # Sync the case creation form and logout
@@ -75,8 +71,7 @@ Scenario: Create a case with one user, claim it with another
     # complete the case close form
     Then I wait for form entry
     Then I touch the "Live Birth" text
-    Then Next
-    Then Next
+    Then Forward 2
     Then I enter text "Ivan"
     Then Next
     Then Submit

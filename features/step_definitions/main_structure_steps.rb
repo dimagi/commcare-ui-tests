@@ -47,6 +47,13 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
+Then (/^Forward (\d+)/) do |count|
+  for _ in 0..count
+    tap_when_element_exists("* id:'nav_btn_next'")
+    sleep(1)
+  end
+end
+
 Then (/^Next$/) do
   tap_when_element_exists("* id:'nav_btn_next'")
 end

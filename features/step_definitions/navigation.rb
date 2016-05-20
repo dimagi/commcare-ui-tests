@@ -1,10 +1,9 @@
 Then (/^I logout/) do
-  if current_activity() == "CommCareHomeActivity"
-    touch("android.support.v7.widget.CardView index:4")
-  else
+  if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
-    touch("android.support.v7.widget.CardView index:4")
   end
+  index = query("android.support.v7.widget.CardView").length - 1
+  touch("android.support.v7.widget.CardView index:#{index}")
 end
 
 Then (/^I go back to the home screen$/) do
