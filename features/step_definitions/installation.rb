@@ -11,7 +11,7 @@ end
 
 # peform offline install using ccz file pushed from repository
 Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
-  perform_action("press_menu")
+  press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Offline install'}")
   push("features/resource_files/ccz_apps/%s" % path, "/sdcard/%s" % path)
   step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)

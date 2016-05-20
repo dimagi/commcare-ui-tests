@@ -47,31 +47,8 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
-Then (/^Forward (\d+)/) do |count|
-  for _ in 0..count
-    tap_when_element_exists("* id:'nav_btn_next'")
-    sleep(1)
-  end
-end
-
-Then (/^Next$/) do
-  tap_when_element_exists("* id:'nav_btn_next'")
-end
-
-Then (/^Submit/) do
-  if element_exists("* id:'nav_btn_finish'")
-    tap_when_element_exists("* id:'nav_btn_finish'")
-  else
-    tap_when_element_exists("* id:'nav_btn_next'")
-  end
-end
-
-Then (/^Prev$/) do
-  tap_when_element_exists("* id:'nav_btn_prev'")
-end
-
 Then (/^Rotate Portrait$/) do
-  perform_action('set_activity_orientation', 'portrait')
+  set_activity_orientation('portrait')
 end
 
 Then (/^I see (\d+) list entries$/) do |expected_count|

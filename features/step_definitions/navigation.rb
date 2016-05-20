@@ -1,3 +1,7 @@
+Then (/^I press start/) do
+  touch("android.support.v7.widget.CardView index:0")
+end
+
 Then (/^I logout/) do
   if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
@@ -20,3 +24,29 @@ Then (/^I go back to the home screen$/) do
     sleep 1
   end
 end
+
+# ----------------------------
+# Form Entry Navigation
+# ----------------------------
+Then (/^Forward (\d+)/) do |count|
+  for _ in 0..count.to_i
+    tap_when_element_exists("* id:'nav_btn_next'")
+  end
+end
+
+Then (/^Next$/) do
+  tap_when_element_exists("* id:'nav_btn_next'")
+end
+
+Then (/^Submit/) do
+  if element_exists("* id:'nav_btn_finish'")
+    tap_when_element_exists("* id:'nav_btn_finish'")
+  else
+    tap_when_element_exists("* id:'nav_btn_next'")
+  end
+end
+
+Then (/^Prev$/) do
+  tap_when_element_exists("* id:'nav_btn_prev'")
+end
+

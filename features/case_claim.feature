@@ -5,15 +5,14 @@ Scenario: Create a case with one user, claim it with another
 
     # create a case with one user
     Then I login with username "test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
     Then I select module "Pregnancy"
     Then I select module "Registration"
     Then I wait for form entry
     Then I enter text "luca"
     Then Next
     Then I enter text "boston"
-    Then Forward 5
+    Then Forward 4
     Then Submit
 
     # Sync the case creation form and logout
@@ -25,8 +24,7 @@ Scenario: Create a case with one user, claim it with another
 
     # log in with another user
     Then I login with username "fp" and password "test"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "Visit"
     Then I don't see the text "luca"
@@ -89,8 +87,7 @@ Scenario: Create a case with one user, claim it with another
     Then I touch the "Sync" text
     Then I wait for progress
 
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "Visit"
     Then I don't see the text "luca"
