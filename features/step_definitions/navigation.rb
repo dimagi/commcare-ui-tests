@@ -29,7 +29,7 @@ end
 # Form Entry Navigation
 # ----------------------------
 Then (/^Forward (\d+)/) do |count|
-  for _ in 0..count.to_i
+  for _ in 0..(count.to_i - 1)
     tap_when_element_exists("* id:'nav_btn_next'")
   end
 end

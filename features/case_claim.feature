@@ -12,7 +12,7 @@ Scenario: Create a case with one user, claim it with another
     Then I enter text "luca"
     Then Next
     Then I enter text "boston"
-    Then Forward 4
+    Then Forward 5
     Then Submit
 
     # Sync the case creation form and logout
