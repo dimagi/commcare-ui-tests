@@ -19,7 +19,6 @@ Scenario: Create a case with one user, claim it with another
     Then I wait to see "Sync"
     Then I touch the "Sync" text
     Then I wait for progress
-    Then I scroll down
     Then I logout
 
     # log in with another user
@@ -78,7 +77,6 @@ Scenario: Create a case with one user, claim it with another
     Then I wait to see "Sync"
     Then I touch the "Sync" text
     Then I wait for progress
-    Then I scroll down
     Then I logout
 
     # login with first user, sync and make sure the case is no longer around
