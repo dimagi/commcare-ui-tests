@@ -87,10 +87,3 @@ Then (/^I see (\d+) list entries$/) do |expected_count|
     fail("Expected to see %s entries but got %s" % [expected_count, list_count])
   end
 end
-
-Then (/^I see (\d+) select options$/) do |expected_count|
-  list_count = query("org.commcare.views.widgets.SelectOneWidget", "getChildCount")[0] / 2
-  if list_count.to_i != expected_count.to_i
-    fail("Expected to see %s entries but got %s" % [expected_count, list_count])
-  end
-end
