@@ -25,7 +25,11 @@ Then (/^I close the keyboard$/) do
 end
 
 Then (/^I enter text "([^\"]*)"$/) do |text|
-  keyboard_enter_text("'#{text}'")
+  keyboard_enter_text("#{text}")
+end
+
+Then (/^I press button with text "([^\"]*)"$/) do |text|
+  tap_when_element_exists("android.widget.Button text:'#{text}'")
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|

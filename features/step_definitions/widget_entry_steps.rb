@@ -1,4 +1,13 @@
 
+# CONFIRMATION BOX
+Then (/^I see the message "([^\"]*)" with a confirmation box.$/) do |message|
+  step("I see the text \"#{message}\"")
+  if element_does_not_exist("android.widget.CheckBox")
+    fail("No confirmation box present")
+  end
+end
+
+
 # SINGLE SELECT WIDGET
 Then (/^I see (\d+) select options in a single-select$/) do |expected_count|
   list_count = query("org.commcare.views.widgets.SelectOneWidget", "getChildCount")[0] / 2
@@ -80,3 +89,43 @@ Then (/^I enter today's date$/) do
   date = Time.new
   step("I set the date to #{date} on DatePicker with index \"0\"")
 end
+
+
+# INTEGER WIDGET
+Then (/^I test an integer widget question$/) do
+  # Test that the keyboard is in numeric-only format
+  keyboard_enter_text("abc")
+  step("I don't see the text \"abc\"")
+  keyboard_enter_text("000")
+  step("I see the text \"000\"")
+  test_persistence("000")
+end
+
+def test_persistence(entered_text)
+   step("Next")
+   step("Prev")
+   step("I see the text \"#{entered_text}\"")
+end
+
+
+# Also a numeric-only question, but via a regex instead of being an integer widget
+Then (/^I test a question that requires numeric entry$/) do
+  keyboard_enter_text("abc")
+  step("Next")
+  step("I see the text \"Sorry, this response is invalid!\"")
+  clear_answers()
+  keyboard_enter_text("123")
+end
+
+def clear_answers()
+  clear_text("android.widget.EditText")
+end
+
+
+# SIGNATURE WIDGET
+Then (/^I test a signature widget question$/) do
+  step("I press button with text \"Gather Signature\"")
+  step("I sign with a cross")
+  step("I press button with text \"Save and Close\"")
+end
+
