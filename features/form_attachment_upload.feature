@@ -1,6 +1,7 @@
 Feature: Submit form with multimedia
 @HasExternal @Integration
 Scenario: Test that form multimedia attachments get uploaded to HQ
+    Then I store most recent form submission time
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
     Then I scroll until I see the "Start" text
@@ -22,3 +23,4 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I touch the "Saved" text
     Then I wait for the view with id "screen_entity_select_list" to appear
     Then I see 1 list entries
+    Then I check form was uploaded
