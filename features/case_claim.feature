@@ -15,10 +15,25 @@ Scenario: Create a case with one user, claim it with another
     Then Forward 5
     Then Submit
 
+    # try to claim the case you just created
+    Then I press start
+    Then I select module "Visit"
+
+    Then I scroll until I see the "Global Search" text
+    Then I touch the "Global Search" text
+
+    Then I enter text "luca"
+    Then I touch the "Query" text
+    Then I wait for the "EntitySelectActivity" screen to appear
+    Then I touch the "luca" text
+    Then I touch the "Continue" text
+    Then I see the text "Start"
+
     # Sync the case creation form and logout
     Then I wait to see "Sync"
     Then I touch the "Sync" text
     Then I wait for progress
+    ## TODO
     Then I logout
 
     # log in with another user
