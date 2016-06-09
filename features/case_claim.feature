@@ -9,11 +9,17 @@ Scenario: Create a case with one user, claim it with another
     Then I select module "Pregnancy"
     Then I select module "Registration"
     Then I wait for form entry
-    Then I enter text "luca"
+    Then I enter text "karen"
     Then Next
     Then I enter text "boston"
     Then Forward 5
     Then Submit
+
+    # Sync the case creation form
+    Then I wait to see "Sync"
+    Then I touch the "Sync" text
+    Then I wait for progress
+    Then I wait for progress
 
     # try to claim the case you just created
     Then I press start
@@ -22,26 +28,20 @@ Scenario: Create a case with one user, claim it with another
     Then I scroll until I see the "Global Search" text
     Then I touch the "Global Search" text
 
-    Then I enter text "luca"
+    Then I enter text "karen"
     Then I touch the "Query" text
     Then I wait for the "EntitySelectActivity" screen to appear
-    Then I touch the "luca" text
+    Then I touch the "karen" text
     Then I touch the "Continue" text
     Then I see the text "Start"
 
-    # Sync the case creation form and logout
-    Then I wait to see "Sync"
-    Then I touch the "Sync" text
-    Then I wait for progress
-    ## TODO
-    Then I logout
-
     # log in with another user
+    Then I logout
     Then I login with username "fp" and password "test"
     Then I press start
 
     Then I select module "Visit"
-    Then I don't see the text "luca"
+    Then I don't see the text "karen"
 
     Then I scroll until I see the "Global Search" text
     Then I touch the "Global Search" text
@@ -54,7 +54,7 @@ Scenario: Create a case with one user, claim it with another
     Then I see the text "Query"
 
     Then I clear input field number 1
-    Then I enter text "luca"
+    Then I enter text "karen"
 
     # This should move to the next prompt
     #press_user_action_button('search')
@@ -63,9 +63,9 @@ Scenario: Create a case with one user, claim it with another
 
     Then I touch the "Query" text
 
-    # select the luca result
+    # select the karen result
     Then I wait for the "EntitySelectActivity" screen to appear
-    Then I touch the "luca" text
+    Then I touch the "karen" text
     Then I touch the "Continue" text
 
     # wait for claim and sync to occur
@@ -73,10 +73,10 @@ Scenario: Create a case with one user, claim it with another
 
     # make sure the claimed case appears
     Then I select module "Visit"
-    Then I see the text "luca"
+    Then I see the text "karen"
 
     # close the claimed case
-    Then I touch the "luca" text
+    Then I touch the "karen" text
     Then I touch the "Continue" text
     Then I select module "Copy of Birth Outcome"
 
@@ -103,4 +103,4 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select module "Visit"
-    Then I don't see the text "luca"
+    Then I don't see the text "karen"
