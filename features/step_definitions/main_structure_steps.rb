@@ -64,3 +64,15 @@ Then (/^I see (\d+) select options$/) do |expected_count|
     fail("Expected to see %s entries but got %s" % [expected_count, list_count])
   end
 end
+
+Then (/^I update the app$/) do
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
+end
+
+Then (/^I apply the update/) do
+  tap_when_element_exists("* {text CONTAINS[c] 'Update to version'}'")
+  step("I wait for progress")
+end
+
