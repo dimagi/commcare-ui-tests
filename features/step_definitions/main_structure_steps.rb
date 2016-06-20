@@ -29,7 +29,9 @@ Then (/^I enter text "([^\"]*)"$/) do |text|
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
+  clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   wait_for_element_exists("* id:'edit_password'", timeout: 6000)
+  clear_text_in("android.widget.EditText id:'edit_password'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
   enter_text("android.widget.EditText id:'edit_password'", password)
   tap_when_element_exists("* id:'login_button'")
@@ -94,3 +96,15 @@ Then (/^I see (\d+) select options$/) do |expected_count|
     fail("Expected to see %s entries but got %s" % [expected_count, list_count])
   end
 end
+
+Then (/^I update the app$/) do
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
+end
+
+Then (/^I apply the update/) do
+  tap_when_element_exists("* {text CONTAINS[c] 'Update to version'}'")
+  step("I wait for progress")
+end
+
