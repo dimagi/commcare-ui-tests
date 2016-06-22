@@ -76,3 +76,10 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
+Then (/^I don't find the text "([^\"]*)"$/) do |text|
+  sleep 1
+  count = query("* {text CONTAINS[c] '#{text}'}").length
+  if count != 0
+    fail("Found %s occurrences of %s; expected none" % [count, text])
+  end
+end

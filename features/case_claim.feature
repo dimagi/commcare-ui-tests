@@ -6,6 +6,14 @@ Scenario: Create a case with one user, claim it with another
     # create a case with one user
     Then I login with username "test" and password "123"
     Then I press start
+
+    # make sure case doesn't already exist
+    Then I select module "Visit"
+    Then I don't find the text "karen"
+
+    Then I go back to the home screen
+    Then I press start
+
     Then I select module "Pregnancy"
     Then I select module "Registration"
     Then I wait for form entry
@@ -15,11 +23,7 @@ Scenario: Create a case with one user, claim it with another
     Then Forward 5
     Then Submit
 
-    # Sync the case creation form
-    Then I wait to see "Sync"
-    Then I touch the "Sync" text
-    Then I wait for progress
-    Then I wait for progress
+    Then I sync
 
     # try to claim the case you just created
     Then I press start
@@ -57,7 +61,6 @@ Scenario: Create a case with one user, claim it with another
     Then I enter text "karen"
 
     # This should move to the next prompt
-    #press_user_action_button('search')
     Then I press the enter button
     Then I enter text "boston"
 
@@ -89,9 +92,7 @@ Scenario: Create a case with one user, claim it with another
     Then Submit
 
     # sync the case close form
-    Then I wait to see "Sync"
-    Then I touch the "Sync" text
-    Then I wait for progress
+    Then I sync
     Then I logout
 
     # login with first user, sync and make sure the case is no longer around
@@ -103,4 +104,4 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select module "Visit"
-    Then I don't see the text "karen"
+    Then I don't find the text "karen"
