@@ -16,9 +16,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I sign with a cross
     Then I press the "Save and Close" button
     Then Submit
-    Then I wait to see "Sync"
-    Then I touch the "Sync" text
-    Then I wait for progress
+    Then I sync
     Then I scroll until I see the "Saved" text
     Then I touch the "Saved" text
     Then I wait for the view with id "screen_entity_select_list" to appear

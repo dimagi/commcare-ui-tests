@@ -10,9 +10,10 @@ Then (/^I store most recent form submission time$/) do
 end
 
 Then (/^I check that (\d+) attachments for latest form are on HQ$/) do |attachment_count|
-  correct_attachment_count = system("python3 commcare-hq-api/utils.py assert_attachments #{attachment_count}")
+  # since the form.xml is counted as an attachment, increment count
+  attachment_count_including_form = attachment_count.to_i + 1
+  correct_attachment_count = system("python3 commcare-hq-api/utils.py assert_attachments #{attachment_count_including_form}")
   if not correct_attachment_count
-    # TODO
-    fail("No new form submission since last check")
+    fail("Submitted form didn't contain the expected #{attachment_count} attachments")
   end
 end
