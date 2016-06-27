@@ -31,7 +31,4 @@ if [[ $TAG = \@* ]] ; then
 else
   FEATURE=$TAG
 fi
-calabash-android run commcare.apk $FEATURE --format html --out reports.html
-
-# report results
-echo "TODO: report results"
+calabash-android run commcare.apk $FEATURE --format JUnit --out reports.html
