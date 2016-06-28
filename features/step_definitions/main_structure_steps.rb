@@ -25,8 +25,12 @@ Then (/^I close the keyboard$/) do
 end
 
 Then (/^I enter text "([^\"]*)"$/) do |text|
-  keyboard_enter_text("'#{text}'")
+  keyboard_enter_text("#{text}")
 end
+
+Then (/^I sleep (\d+) seconds$/) do |sleep_time|
+  sleep(sleep_time.to_i)
+end  
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
@@ -39,6 +43,11 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
 end
 
 Then (/^I select module "([^\"]*)"$/) do |text|
+  wait_for_element_exists("* id:'screen_entity_select_list'")
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
+Then (/^I select case "([^\"]*)"$/) do |text|
   wait_for_element_exists("* id:'screen_suite_menu_list'")
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
@@ -108,3 +117,25 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
+Then (/^I make sure "([^\"]*)" is not present$/) do |text|
+  if element_exists("* {text CONTAINS[c] '#{text}'}")
+    fail("Item %s should have been deleted" % [text])
+  end
+end
+
+
+Then (/^I press "([^\"]*)" button$/) do |text|
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}'")
+end  
+
+Then (/^I look for "([^\"]*)"$/) do |text|
+  check_element_exists("* {text CONTAINS[c] '#{text}'}")
+end  
+
+Then (/^I flip to landscape$/) do 
+  perform_action('set_activity_orientation', 'landscape')
+end
+
+Then (/^I go back one$/) do
+  press_back_button
+end  
