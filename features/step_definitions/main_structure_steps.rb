@@ -33,10 +33,10 @@ Then (/^I sleep (\d+) seconds$/) do |sleep_time|
 end  
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   wait_for_element_exists("* id:'edit_password'", timeout: 6000)
-  clear_text_in("android.widget.EditText id:'edit_password'")
+  clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
+  clear_text_in("android.widget.EditText id:'edit_password'")
   enter_text("android.widget.EditText id:'edit_password'", password)
   tap_when_element_exists("* id:'login_button'")
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 6000)
@@ -56,40 +56,8 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
-Then (/^Next$/) do
-  tap_when_element_exists("* id:'nav_btn_next'")
-end
-
-Then (/^Submit/) do
-  if element_exists("* id:'nav_btn_finish'")
-    tap_when_element_exists("* id:'nav_btn_finish'")
-  else
-    tap_when_element_exists("* id:'nav_btn_next'")
-  end
-end
-
-Then (/^I go back to the home screen$/) do
-  while true
-    press_back_button
-
-    if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
-      tap_when_element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
-    end
-
-    # wait before checking if we are on the home screen because activity
-    # dispatch goes through the home screen causing this to always be true if
-    # checked immediately
-    sleep 1
-    break if element_exists("* {text CONTAINS[c] 'Sync with Server'}")
-  end
-end
-
-Then (/^Prev$/) do
-  tap_when_element_exists("* id:'nav_btn_prev'")
-end
-
 Then (/^Rotate Portrait$/) do
-  perform_action('set_activity_orientation', 'portrait')
+  set_activity_orientation('portrait')
 end
 
 Then (/^I see (\d+) list entries$/) do |expected_count|
@@ -123,7 +91,6 @@ Then (/^I make sure "([^\"]*)" is not present$/) do |text|
   end
 end
 
-
 Then (/^I press "([^\"]*)" button$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}'")
 end  
@@ -139,3 +106,11 @@ end
 Then (/^I go back one$/) do
   press_back_button
 end  
+
+Then (/^I don't find the text "([^\"]*)"$/) do |text|
+  sleep 1
+  count = query("* {text CONTAINS[c] '#{text}'}").length
+  if count != 0
+    fail("Found %s occurrences of %s; expected none" % [count, text])
+  end
+end
