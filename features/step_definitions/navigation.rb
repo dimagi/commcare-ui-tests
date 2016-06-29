@@ -1,3 +1,8 @@
+Then (/^I select "([^\"]*)" menu item$/) do |entry|
+  press_menu_button()
+  touch("* {text CONTAINS[c] '#{entry}'}")
+end
+
 Then (/^I press start/) do
   touch("android.support.v7.widget.CardView index:0")
 end
