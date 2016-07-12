@@ -10,3 +10,7 @@ test_servers/*
 features.zip
 *.apk
 *.html
+*.txt
+*/__pycache__
+scripts/ccc
+scripts/checkout_cross_request_repo.py

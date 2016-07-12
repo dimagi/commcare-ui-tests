@@ -9,7 +9,7 @@ Scenario: Make sure recovery syncs work
 
     # count cases
     Then I select module "Visit"
-    Then I remember case list count
+    Then I store case list count
 
     # perform 'recovery' sync
     Then I go back to the home screen
@@ -17,5 +17,6 @@ Scenario: Make sure recovery syncs work
     Then I sync
 
     # make sure the same number of cases are around
+    Then I press start
     Then I select module "Visit"
-    Then I assert case list count
+    Then I assert case list count against stored count
