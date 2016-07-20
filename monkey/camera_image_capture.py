@@ -6,6 +6,7 @@ Take a photo for image capture callout and mark it okay.
 
 import sys
 import os
+import time
 
 try:
     view_path = os.environ['ANDROID_VIEW_CLIENT_HOME']
@@ -24,7 +25,13 @@ def image_cature_marshmallow():
     vc.dump()
     vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
     vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+    try:
+        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+    except:
+        # try one more time, sometimes it takes a while due to focus issues
+        time.sleep(2)
+        vc.dump()
+        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
 
 
 def image_capture_jellybean():
