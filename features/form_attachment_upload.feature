@@ -15,7 +15,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I press the "Gather Signature" button
     Then I sign with a cross
     Then I press the "Save and Close" button
-    Then Rotate Portrait
+    Then I rotate to portrait
     Then Submit
     Then I sync
     Then I scroll until I see the "Saved" text

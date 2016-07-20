@@ -47,8 +47,8 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
-Then (/^Rotate Portrait$/) do
-  set_activity_orientation('portrait')
+Then (/^I rotate to portrait$/) do
+  perform_action('set_activity_orientation', 'portrait')
 end
 
 Then (/^I see (\d+) list entries$/) do |expected_count|
