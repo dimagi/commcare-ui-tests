@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 """
 Take a photo for image capture callout and mark it okay.
