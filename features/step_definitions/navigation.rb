@@ -10,6 +10,15 @@ Then (/^I logout/) do
   touch("android.support.v7.widget.CardView index:#{index}")
 end
 
+Then (/^I exit form entry$/) do
+    hide_soft_keyboard()
+    press_back_button
+
+    if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
+      tap_when_element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
+    end
+end
+
 Then (/^I go back to the home screen$/) do
   while current_activity() != "CommCareHomeActivity"
     press_back_button

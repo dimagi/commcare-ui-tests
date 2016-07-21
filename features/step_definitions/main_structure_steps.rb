@@ -43,12 +43,22 @@ Then (/^I select module "([^\"]*)"$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
 
+# same as module selection, just used for user clarity
+Then (/^I select form "([^\"]*)"$/) do |text|
+  wait_for_element_exists("* id:'screen_suite_menu_list'")
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
 Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
+end
+
+Then (/^I rotate to landscape/) do
+  perform_action('set_activity_orientation', 'landscape')
 end
 
 Then (/^I see (\d+) list entries$/) do |expected_count|
