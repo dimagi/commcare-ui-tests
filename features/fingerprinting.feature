@@ -8,17 +8,17 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I login with username "test" and password "123"
 
     # create a case
-    # Then I press start
-    # Then I select module "Registration"
-    # Then I select form "Registration"
-    # Then I wait for form entry
-    # Then Next
-    # Then I enter text "2"
-    # Then I touch the "Get Data" text
-    # Then I see the text "Update Data"
-    # Then Next
-    # Then I enter text "Lonny"
-    # Then Submit
+    Then I press start
+    Then I select module "Registration"
+    Then I select form "Registration"
+    Then I wait for form entry
+    Then Next
+    Then I enter text "2"
+    Then I touch the "Get Data" text
+    Then I see the text "Update Data"
+    Then Next
+    Then I enter text "Lonny"
+    Then Submit
 
     Then I press start
     Then I select module "Follow Up"
