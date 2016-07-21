@@ -6,8 +6,9 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I install the ccz app at "fingerprinting.ccz"
 
     Then I login with username "test" and password "123"
-    Then I press start
 
+    # create a case
+    Then I press start
     Then I select module "Registration"
     Then I select form "Registration"
     Then I wait for form entry
@@ -37,6 +38,7 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I rotate to portrait
     Then I see the text "results matching"
     Then I press list item number 1
+    Then I wait for 1 second
     Then I go back
     Then I see the text "results matching"
 
@@ -53,11 +55,10 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I wait for form entry
     # check that we correctly tracked the callout
     Then I see the text "Was callout query"
-    Then I exit form entry
 
     Then I go back to the home screen
     Then I press start
-    Then I select module "Follow  Up"
+    Then I select module "Follow Up"
     # check that we correctly tracked the text search
     Then I press view with id "search_action_bar"
     Then I enter text "nny"
@@ -67,7 +68,8 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
 
     Then I wait for form entry
     # check that we correctly tracked the text search
-    Then I see the text "Was search query"
+    Then I see the text "Was string query"
+    Then I exit form entry
 
     # close the case
     Then I select form "Close"
@@ -76,6 +78,7 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I enter text "auto"
     Then Submit
 
+    # test auto-launching the search callout
     Then I press start
     Then I select module "auto-launch"
     Then I see the text "results matching"
