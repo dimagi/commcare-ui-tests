@@ -9,7 +9,7 @@ reports/*
 test_servers/*
 .idea
 features.zip
-*.apk
+*commcare*.apk
 *.html
 *.txt
 */__pycache__
