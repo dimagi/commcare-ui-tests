@@ -29,7 +29,7 @@ Then (/^I enter text "([^\"]*)"$/) do |text|
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  step("I login with username %s and password %s, without waiting for home screen" % [username, password])
+  step("I login with username \"%s\" and password \"%s\", without waiting for home screen" % [username, password])
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 60)
 end
 
