@@ -49,7 +49,7 @@ end
 
 Then (/^I check that an async restore occurred successfully$/) do
   # Indicates that at least 1 retry response was received
-  wait_for_element_exists("* {text CONTAINS[c] 'Waiting for Server Progress'}'", timeout: 30)
+  wait_for_element_exists("* {text CONTAINS[c] 'Waiting for Server Progress'}'", timeout: 15)
 
   # Allow the async restore to take up to 5 minutes to send back a full response
   wait_for_element_exists("* {text CONTAINS[c] 'Processing Data from Server'}'", timeout: 300)
