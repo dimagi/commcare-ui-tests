@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 """
 Take a photo for image capture callout and mark it okay.
@@ -6,6 +6,7 @@ Take a photo for image capture callout and mark it okay.
 
 import sys
 import os
+import time
 
 try:
     view_path = os.environ['ANDROID_VIEW_CLIENT_HOME']
@@ -20,11 +21,23 @@ device, serialno = ViewClient.connectToDeviceOrExit()
 vc = ViewClient(device, serialno, autodump=False)
 
 
-def image_cature_marshmallow():
+def image_capture_marshmallow():
     vc.dump()
     vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
     vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+    try:
+        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+    except:
+        # try one more time, sometimes it takes a while due to focus issues
+        time.sleep(2)
+        vc.dump()
+        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+
+
+def image_capture_kitkat_tablet():
+    device.press('KEYCODE_VOLUME_DOWN')
+    vc.dump()
+    vc.findViewWithTextOrRaise(u'Save').touch()
 
 
 def image_capture_jellybean():
@@ -51,7 +64,8 @@ def no_implementation():
 
 
 image_capture_implementations = {
-    23: image_cature_marshmallow,
+    23: image_capture_marshmallow,
+    19: image_capture_kitkat_tablet,
     17: image_capture_jellybean,
 }
 

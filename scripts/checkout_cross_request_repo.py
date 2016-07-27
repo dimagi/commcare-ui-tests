@@ -13,7 +13,7 @@ import sys
 
 
 # Repo PR -> String
-def getCrossBranch(target_repo, source_pr):
+def get_cross_branch(target_repo, source_pr):
     """
     Get target repo branch name that was labeled as cross-requested in source
     pull request.
@@ -27,7 +27,7 @@ def getCrossBranch(target_repo, source_pr):
         branch_name = target_repo.pull_request(pr_number).head.ref
         return branch_name
     else:
-        return "master"
+        return source_pr.base.ref
 
 
 # String Integer String String -> None
@@ -39,7 +39,7 @@ def checkout_pr_branch(local_parent_dir, pr_number,
 
     src_pr = src_repo.pull_request(pr_number)
     checkout_branch(src_repo.name, src_pr.head.ref)
-    cross_branch = getCrossBranch(target_repo, src_pr)
+    cross_branch = get_cross_branch(target_repo, src_pr)
 
     if not os.path.exists(target_repo.name):
         print("Checking out {} for {}".format(cross_branch, target_repo_name))

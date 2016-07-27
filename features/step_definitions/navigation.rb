@@ -56,6 +56,7 @@ Then (/^Prev$/) do
 end
 
 Then (/^I sync$/) do
+  sleep 1
   if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
   end
