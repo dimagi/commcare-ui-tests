@@ -33,13 +33,17 @@ Then (/^I sleep (\d+) seconds$/) do |sleep_time|
 end  
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  wait_for_element_exists("* id:'edit_password'", timeout: 6000)
+  step("I login with username \"%s\" and password \"%s\", without waiting for home screen" % [username, password])
+  wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 60)
+end
+
+Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for home screen$/) do |username, password|
+  wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
   clear_text_in("android.widget.EditText id:'edit_password'")
   enter_text("android.widget.EditText id:'edit_password'", password)
   tap_when_element_exists("* id:'login_button'")
-  wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 6000)
 end
 
 Then (/^I select module "([^\"]*)"$/) do |text|
@@ -56,8 +60,8 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
-Then (/^Rotate Portrait$/) do
-  set_activity_orientation('portrait')
+Then (/^I rotate to portrait$/) do
+  perform_action('set_activity_orientation', 'portrait')
 end
 
 Then (/^I see (\d+) list entries$/) do |expected_count|

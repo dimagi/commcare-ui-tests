@@ -12,13 +12,15 @@ BUILD=$1
 TAG=$2
 
 rm "*.png"
-rm "reports.html"
+rm -rf "reports"
 rm "commcare.apk"
 
 # download/build apk
 if [ "$BUILD" == "master" ]; then
+  echo "downloading latest master apk from jenkins"
   sh scripts/get_latest_apk_and_resign.sh
 else
+  echo "building from pull request"
   ./scripts/build_pr_apk.py $BUILD
 fi
 
@@ -31,4 +33,4 @@ if [[ $TAG = \@* ]] ; then
 else
   FEATURE=$TAG
 fi
-calabash-android run commcare.apk $FEATURE --format JUnit --out reports.html
+calabash-android run commcare.apk $FEATURE --format junit --out reports
