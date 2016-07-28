@@ -10,44 +10,42 @@ Scenario: Create a case, update a case, close a case
 	Then I select case "Create a Case"
 	Then I enter text "aSaumya"
 	Then Next
-	Then I press "Confirm" button
+	Then I press the "Confirm" button
 	Then Next
 
 	Then I select case "Update a Case"
 	Then I select case "aSaumya"
-	Then I press "Continue" button
+	Then I press the "Continue" button
 	Then I enter text "Sample Text"
 	Then Next
-	Then I press "A" button
+	Then I touch the "A" text
 	Then Next
-	Then I press "A" button
-	Then I press "B" button
+	Then I touch the "A" text
+	Then I touch the "B" text
 	Then Next
 	Then I enter text "7732024343"
 	Then Next
 	Then I enter text "1234"
-	Then Next
-	Then Next
-	Then Next
-	Then I press "OK" button
+	Then Forward 3
+	Then I press the "OK" button
 	Then Next
 
 	Then I select module "aSaumya"
-	Then I look for "aSaumya"
-	Then I flip to landscape
-	Then Rotate Portrait
+	Then I see "aSaumya"
+	Then I rotate to landscape
+	Then I rotate to portrait
 	Then I go back
 	Then I go back
 
 	Then I select case "Close a Case"
 	Then I select module "aSaumya"
-	Then I press "Continue" button
-	Then I press "Cancel" button
+	Then I press the "Continue" button
+	Then I press the "Cancel" button
 	Then Next
 
 	Then I select module "aSaumya"
-	Then I press "Continue" button
-	Then I press "Confirm" button
+	Then I press the "Continue" button
+	Then I press the "Confirm" button
 	Then Next
 	Then I sleep 3 seconds
 	Then I go back

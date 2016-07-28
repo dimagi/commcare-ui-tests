@@ -64,6 +64,10 @@ Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
 end
 
+Then (/^I rotate to landscape$/) do 
+  perform_action('set_activity_orientation', 'landscape')
+end
+
 Then (/^I see (\d+) list entries$/) do |expected_count|
   list_count = query("ListView","getAdapter","getCount").first
   if list_count.to_i != expected_count.to_i
@@ -87,24 +91,6 @@ end
 Then (/^I apply the update/) do
   tap_when_element_exists("* {text CONTAINS[c] 'Update to version'}'")
   step("I wait for progress")
-end
-
-Then (/^I make sure "([^\"]*)" is not present$/) do |text|
-  if element_exists("* {text CONTAINS[c] '#{text}'}")
-    fail("Item %s should have been deleted" % [text])
-  end
-end
-
-Then (/^I press "([^\"]*)" button$/) do |text|
-  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}'")
-end  
-
-Then (/^I look for "([^\"]*)"$/) do |text|
-  check_element_exists("* {text CONTAINS[c] '#{text}'}")
-end  
-
-Then (/^I flip to landscape$/) do 
-  perform_action('set_activity_orientation', 'landscape')
 end
 
 Then (/^I go back one$/) do

@@ -23,14 +23,14 @@ Scenario: Create a case; add data to a case; view previous case data; don't cloe
 
 	Then I select case "Create a Sub Case"
 	Then I select module "aParent"
-	Then I press "Continue" button
-	Then I press "OK" button
+	Then I press the "Continue" button
+	Then I press the "OK" button
 	Then Next
 	Then I enter text "dummy subcase"
 	Then Next
 	Then I enter text "2"
 	Then Next
-	Then I press "Cancel" button
+	Then I press the "Cancel" button
 	Then Next
 	
 	Then I sleep 3 seconds
@@ -38,67 +38,66 @@ Scenario: Create a case; add data to a case; view previous case data; don't cloe
 	Then I select case "Case Tests"
 	Then I select case "Create a Sub Case"
 	Then I select module "aParent"
-	Then I press "Continue" button
-	Then I press "OK" button
+	Then I press the "Continue" button
+	Then I press the "OK" button
 	Then Next
 	Then I enter text "asubcase"
 	Then Next
 	Then I enter text "2"
 	Then Next
-	Then I press "Confirm" button
+	Then I press the "Confirm" button
 	Then Next
 
 	Then I sleep 3 seconds
 	Then I touch the "Start" text
 	Then I select case "Sub Case One"
 	Then I select module "asubcase"
-	Then I look for "aParent"
-	Then I press "Continue" button
+	Then I see "aParent"
+	Then I press the "Continue" button
 	Then I select case "Close Case"
-	Then I press "Yes" button
+	Then I press the "Yes" button
 	Then Next
 
 	Then I sleep 3 seconds
 	Then I touch the "Start" text
 	Then I select case "Sub Case One"
-	Then I make sure "asubcase" is not present
+	Then I don't see "asubcase" is not present
 	Then I go back
 	Then I sleep 3 seconds
 	Then I select case "Case Tests"
 	Then I select case "Create Multiple Sub Cases"
 	Then I select module "aParent"
-	Then I press "Continue" button
+	Then I press the "Continue" button
 	Then I enter text "sub case 1"
 	Then Next
 	Then I enter text "1"
 	Then Next
 	Then I enter text "sub case 2"
-	Then Next
-	Then Next
+	Then Forward 2
 
 	Then I sleep 3 seconds
 	Then I touch the "Start" text
 	Then I select case "Sub Case One"
 	Then I scroll until I see the "sub case 1" text
 	Then I select module "sub case 1"
-	Then I look for "aParent"
+	Then I see "aParent"
 	Then I go back
 	Then I go back
 	Then I select case "Sub Case Two"
 	Then I scroll until I see the "sub case 2" text
 	Then I select module "sub case 2"
-	Then I look for "aParent"
+	Then I see "aParent"
 	Then I go back
 	Then I go back
 
 	Then I select case "Case Tests"
 	Then I select case "Close a Case"
 	Then I select module "aParent"
-	Then I press "Continue" button
-	Then I press "Confirm" button
+	Then I press the "Continue" button
+	Then I press the "Confirm" button
 	Then Next
 	Then I sleep 3 seconds
-	Then I make sure "aParent" is not present
+	Then I dont' see "aParent"
 
 	Then I sleep 3 seconds
 	Then I go back
@@ -108,9 +107,9 @@ Scenario: Create a case; add data to a case; view previous case data; don't cloe
 	Then I select case "Sub Case One"
 	Then I scroll until I see the "sub case 1" text
 	Then I select module "sub case 1"
-	Then I press "Continue" button
+	Then I press the "Continue" button
 	Then I select case "Close Case"
-	Then I press "Yes" button
+	Then I press the "Yes" button
 	Then Next
 
 	Then I sleep 3 seconds
@@ -118,9 +117,9 @@ Scenario: Create a case; add data to a case; view previous case data; don't cloe
 	Then I select case "Sub Case Two"
 	Then I scroll until I see the "sub case 2" text
 	Then I select module "sub case 2"
-	Then I press "Continue" button
+	Then I press the "Continue" button
 	Then I select case "Close Case"
-	Then I press "Yes" button
+	Then I press the "Yes" button
 	Then Next
 
 
