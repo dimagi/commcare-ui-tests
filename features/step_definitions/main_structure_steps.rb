@@ -26,11 +26,7 @@ end
 
 Then (/^I enter text "([^\"]*)"$/) do |text|
   keyboard_enter_text("#{text}")
-end
-
-Then (/^I sleep (\d+) seconds$/) do |sleep_time|
-  sleep(sleep_time.to_i)
-end  
+end 
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
   step("I login with username \"%s\" and password \"%s\", without waiting for home screen" % [username, password])

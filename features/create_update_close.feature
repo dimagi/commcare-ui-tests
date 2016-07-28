@@ -47,5 +47,5 @@ Scenario: Create a case, update a case, close a case
 	Then I press the "Continue" button
 	Then I press the "Confirm" button
 	Then Next
-	Then I sleep 3 seconds
+	Then I wait for 3 seconds
 	Then I go back
