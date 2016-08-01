@@ -51,6 +51,10 @@ Then (/^I wait for form entry$/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
 
+Then (/^I rotate to landscape/) do
+  perform_action('set_activity_orientation', 'landscape')
+end
+
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
 end
