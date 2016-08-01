@@ -98,8 +98,7 @@ Scenario: Create a case with one user, claim it with another
     # login with first user, sync and make sure the case is no longer around
     Then I login with username "test" and password "123"
     Then I wait to see "Sync"
-    Then I touch the "Sync" text
-    Then I wait for progress
+    Then I sync
 
     Then I press start
 

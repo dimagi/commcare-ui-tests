@@ -4,8 +4,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I store most recent form submission time
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
     Then I select module "Form Attachments"
     Then I select module "Multimedia Capture"
     Then I wait for form entry

@@ -21,7 +21,7 @@ device, serialno = ViewClient.connectToDeviceOrExit()
 vc = ViewClient(device, serialno, autodump=False)
 
 
-def image_cature_marshmallow():
+def image_capture_marshmallow():
     vc.dump()
     vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
     vc.dump()
@@ -32,6 +32,12 @@ def image_cature_marshmallow():
         time.sleep(2)
         vc.dump()
         vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
+
+
+def image_capture_kitkat_tablet():
+    device.press('KEYCODE_VOLUME_DOWN')
+    vc.dump()
+    vc.findViewWithTextOrRaise(u'Save').touch()
 
 
 def image_capture_jellybean():
@@ -58,7 +64,8 @@ def no_implementation():
 
 
 image_capture_implementations = {
-    23: image_cature_marshmallow,
+    23: image_capture_marshmallow,
+    19: image_capture_kitkat_tablet,
     17: image_capture_jellybean,
 }
 
