@@ -1,5 +1,6 @@
 *.swp
 vendor/*
+reports/*
 .bundle/*
 *.ropeproject
 *.irb-history
@@ -8,7 +9,7 @@ vendor/*
 test_servers/*
 .idea
 features.zip
-*.apk
+*commcare*.apk
 *.html
 *.txt
 */__pycache__
