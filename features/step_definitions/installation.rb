@@ -27,5 +27,5 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
 end
 
 Then (/^I install the "([^\"]*)" apk$/) do |apk|
-  system("adb install -r %s.apk" % apk)
+  system("adb install -r features/resource_files/apks/%s.apk" % apk)
 end
