@@ -18,14 +18,20 @@ rm "commcare.apk"
 # download/build apk
 if [ "$BUILD" == "master" ]; then
   echo "downloading latest master apk from jenkins"
-  sh scripts/get_latest_apk_and_resign.sh
+  wget "https://jenkins.dimagi.com/job/commcare-android/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
+  calabash-android resign commcare.apk
+elif [ "$BUILD" == "release" ]; then
+  echo "downloading latest release apk from jenkins"
+  URL=$(./scripts/get_latest_release_url.py)
+  wget $URL -O commcare.apk
+  calabash-android resign commcare.apk
 else
   echo "building from pull request"
   ./scripts/build_pr_apk.py $BUILD
 fi
 
 # unlock phone
-adb shell input keyevent 82
+# adb shell input keyevent 82
 
 # run tests
 if [[ $TAG = \@* ]] ; then
