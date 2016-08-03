@@ -23,7 +23,7 @@ if [ "$BUILD" == "master" ]; then
   calabash-android resign commcare.apk
 elif [ "$BUILD" == "release" ]; then
   echo "downloading latest release apk from jenkins"
-  URL=$(./scripts/get_latest_release_url.py)
+  URL=$(python3 scripts/get_latest_release_url.py)
   wget $URL -O commcare.apk
   calabash-android resign commcare.apk
 else
