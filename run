@@ -3,7 +3,8 @@
 if [ "$#" -ne 2 ]; then
   echo "Command arg format: ['master' OR odk PR number] [tag OR feature path]"
   echo "for example:"
-  echo "    ./run master @Integration"
+  echo "    ./run master @Basic"
+  echo "    ./run release @Integration"
   echo "    ./run 1059 feature/lookup_table_sync.feature"
   exit
 fi
