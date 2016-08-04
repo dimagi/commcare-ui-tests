@@ -43,6 +43,28 @@ Then (/^I assert case list count against stored count$/) do
   end
 end
 
+Then (/^I make sure that user "([^\"]*)" is in group "([^\"]*)"$/) do |user_id, group_id|
+  in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+  if not in_group
+    system("python3 commcare-hq-api/utils.py set_user_group #{user_id} #{group_id}")
+    in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+    if not in_group
+      fail("Could not successfully add user to group")
+    end
+  end
+end
+
+Then (/^I make sure that user "([^\"]*)" is not in group "([^\"]*)"$/) do |user_id, group_id|
+  in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+  if in_group
+    system("python3 commcare-hq-api/utils.py set_user_group #{user_id} []")
+    in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+    if in_group
+      fail("Could not successfully remove user from group")
+    end
+  end
+end
+
 Then (/^I set the next restore to clear cache$/) do
   system("python3 scripts/ccc clear_restore_cache")
 end
@@ -57,6 +79,12 @@ Then (/^I check that an async restore occurred successfully$/) do
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 30)
 end
 
+Then (/^I check that an async incremental sync occurred successfully$/) do
+  # Indicates that at least 1 retry response was received
+  wait_for_element_exists("* {text CONTAINS[c] 'Waiting for Server Progress'}'", timeout: 15)
 
+  # Allow the async restore to take up to 5 minutes to send back a full response
+  wait_for_element_exists("* {text CONTAINS[c] 'Processing Data from Server'}'", timeout: 300)
 
-
+  wait_for_element_does_not_exist("android.widget.ProgressBar")
+end

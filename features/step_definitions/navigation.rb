@@ -63,18 +63,3 @@ end
 Then (/^Prev$/) do
   tap_when_element_exists("* id:'nav_btn_prev'")
 end
-
-Then (/^I sync$/) do
-  sleep 1
-  if current_activity() != "CommCareHomeActivity"
-    step("I go back to the home screen")
-  end
-  index = query("android.support.v7.widget.CardView").length - 2
-  touch("android.support.v7.widget.CardView index:#{index}")
-  wait_for_element_does_not_exist("android.widget.ProgressBar")
-  sleep 1
-  count = query("android.widget.ProgressBar")
-  if count != 0
-    wait_for_element_does_not_exist("android.widget.ProgressBar")
-  end
-end

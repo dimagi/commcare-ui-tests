@@ -29,17 +29,36 @@ Then (/^I enter text "([^\"]*)"$/) do |text|
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  step("I login with username \"%s\" and password \"%s\", without waiting for home screen" % [username, password])
+  step("I login with username \"%s\" and password \"%s\", without waiting for completion" % [username, password])
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 60)
 end
 
-Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for home screen$/) do |username, password|
+Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
   clear_text_in("android.widget.EditText id:'edit_password'")
   enter_text("android.widget.EditText id:'edit_password'", password)
   tap_when_element_exists("* id:'login_button'")
+end
+
+Then (/^I sync$/) do
+  step("I sync, without waiting for completion")
+  wait_for_element_does_not_exist("android.widget.ProgressBar")
+  sleep 1
+  count = query("android.widget.ProgressBar")
+  if count != 0
+    wait_for_element_does_not_exist("android.widget.ProgressBar")
+  end
+end
+
+Then (/^I sync, without waiting for completion$/) do
+  sleep 1
+  if current_activity() != "CommCareHomeActivity"
+    step("I go back to the home screen")
+  end
+  index = query("android.support.v7.widget.CardView").length - 2
+  touch("android.support.v7.widget.CardView index:#{index}")
 end
 
 Then (/^I select module "([^\"]*)"$/) do |text|
