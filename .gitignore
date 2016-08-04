@@ -11,7 +11,7 @@ test_servers/*
 features.zip
 *commcare*.apk
 *.html
-*.txt
 */__pycache__
 scripts/ccc
 scripts/checkout_cross_request_repo.py
+latest_form_time.txt

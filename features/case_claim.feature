@@ -34,6 +34,7 @@ Scenario: Create a case with one user, claim it with another
 
     Then I enter text "karen"
     Then I touch the "Query" text
+    Then I wait for progress
     Then I wait for the "EntitySelectActivity" screen to appear
     Then I touch the "karen" text
     Then I touch the "Continue" text
@@ -65,6 +66,7 @@ Scenario: Create a case with one user, claim it with another
     Then I enter text "boston"
 
     Then I touch the "Query" text
+    Then I wait for progress
 
     # select the karen result
     Then I wait for the "EntitySelectActivity" screen to appear
