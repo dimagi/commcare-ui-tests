@@ -57,8 +57,9 @@ Then (/^I sync, without waiting for completion$/) do
   if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
   end
-  index = query("android.support.v7.widget.CardView").length - 2
-  touch("android.support.v7.widget.CardView index:#{index}")
+  tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
+  #index = query("android.support.v7.widget.CardView").length - 2
+  #touch("android.support.v7.widget.CardView index:#{index}")
 end
 
 Then (/^I select module "([^\"]*)"$/) do |text|
