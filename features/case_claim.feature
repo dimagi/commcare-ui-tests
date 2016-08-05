@@ -1,6 +1,8 @@
 Feature: Claim a case
 @Integration
 Scenario: Create a case with one user, claim it with another
+    # ensure 'karen' case isn't around, due to a test failure in the past
+    Then I close case with name "karen"
     Then I install the ccz app at "case_claim.ccz"
 
     # create a case with one user
