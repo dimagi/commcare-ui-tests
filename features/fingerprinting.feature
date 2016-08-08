@@ -1,6 +1,7 @@
 Feature: Simprints (case-list) callout tests
 @Basic
 Scenario: Ensure registration and search callouts to (fake) simprints app work
+    Then I uninstall the "com.dimagi.test.external" apk app
     Then I install the "tester" apk
 
     Then I install the ccz app at "fingerprinting.ccz"
@@ -14,6 +15,7 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I wait for form entry
     Then I enter text "2"
     Then I touch the "Get Data" text
+    Then I wait for 1 second
     Then I see the text "Update Data"
     Then Next
     Then I enter text "Lonny"
