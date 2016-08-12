@@ -1,6 +1,6 @@
 Feature: Perform Async Restore
 
-@Integration
+@Integration @2.29
 Scenario: Do an async restore on an initial login
 
 	# Make sure user many.cases1 is in the Async Restore Testing group
@@ -11,7 +11,7 @@ Scenario: Do an async restore on an initial login
 	Then I login with username "many.cases1" and password "123", without waiting for completion
 	Then I check that an async restore occurred successfully
 
-@Integration
+@Integration @2.29
 Scenario: Do an async restore on an incremental sync
 
 	# Make sure that the user many.cases2 is NOT in the Async Restore Testing group
