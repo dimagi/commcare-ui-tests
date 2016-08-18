@@ -10,7 +10,6 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
 
     # create a case
     Then I press start
-    Then I select module "Registration"
     Then I select form "Registration"
     Then I wait for form entry
     Then I enter text "2"
