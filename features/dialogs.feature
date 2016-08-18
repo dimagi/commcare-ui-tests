@@ -6,7 +6,7 @@ Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I press start
     Then I select module "Errors"
 
-    Then I select module "Error on open"
+    Then I select form "Error on open"
     Then I wait for form entry
 
     Then I see the text "Error Occurred"
@@ -15,7 +15,7 @@ Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I rotate to portrait
     Then I touch the "OK" text
 
-    Then I select module "Error on repeat creation"
+    Then I select form "Error on repeat creation"
     Then I wait for form entry
     Then Next
 
