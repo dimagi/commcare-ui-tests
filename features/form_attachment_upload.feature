@@ -6,7 +6,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I login with username "test" and password "123"
     Then I press start
     Then I select module "Form Attachments"
-    Then I select module "Multimedia Capture"
+    Then I select form "Multimedia Capture"
     Then I wait for form entry
     Then I press the "Take Picture" button
     Then I take a photo
