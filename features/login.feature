@@ -38,12 +38,12 @@ Scenario: Ensure login shows proper error messages
     Then I logout
 
     # try logging in with bad password
-    Then I login with username "user_with_no_data" and password "bad pass"
+    Then I login with username "user_with_no_data" and password "bad pass", without waiting for completion
     Then I wait for progress
     Then I see the text "Invalid Username or Password"
 
     # try logging in with bad username
-    Then I login with username "fake user" and password "bad pass"
+    Then I login with username "fake user" and password "bad pass", without waiting for completion
     Then I wait for progress
     Then I see the text "Invalid Username or Password"
 
