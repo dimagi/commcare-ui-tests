@@ -1,6 +1,6 @@
+# Open the options menu and select the given entry
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
-  press_menu_button()
-  touch("* {text CONTAINS[c] '#{entry}'}")
+  select_options_menu_item(entry)
 end
 
 Then (/^I press start$/) do
