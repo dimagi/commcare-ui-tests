@@ -1,7 +1,3 @@
-# Open the options menu and select the given entry
-Then (/^I select "([^\"]*)" menu item$/) do |entry|
-  select_options_menu_item(entry)
-end
 
 Then (/^I press start$/) do
   touch("android.support.v7.widget.CardView index:0")

@@ -113,3 +113,8 @@ Then (/^I don't find the text "([^\"]*)"$/) do |text|
     fail("Found %s occurrences of %s; expected none" % [count, text])
   end
 end
+
+Then (/^I see an empty EditText$/) do
+  wait_for_element_exists("android.widget.EditText text:''")
+end
+
