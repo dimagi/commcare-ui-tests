@@ -1,17 +1,15 @@
 
-Then (/^I select the "([^\"]*)" item in a CheckedTextView list with items "([^\"]*)", exit, rotate, re-enter, and make sure it is still selected$/) do |item_text, all_items|
-	step("I touch the \"#{item_text}\" text")
+Then (/^After selecting the "([^\"]*)" item in the CheckedTextView list for the "([^\"]*)" setting, rotate, re-enter, and make sure it is still selected$/) do |item_text, setting_name|
 	
-	# Verify that the window closes and we return to the Application Preferences screen
-	for item in all_items.split(",")
-		step("I don't see the text \"#{item}\"")
-	end
+	# Verify that the window closed and we return to the Application Preferences screen
 	step("I see the text \"CommCare > Application Preferences\"")
-	
+	wait_for_element_does_not_exist("android.widget.CheckedTextView")
+
 	step("I rotate to landscape")
 
-	# Now re-enter and make sure "Daily" is still selected
-	step("I touch the \"Auto Update Frequency\" text")
+	step("I scroll until I see the \"#{setting_name}\" text")
+	step("I touch the \"#{setting_name}\" text")
+	step("I wait")
 	step("I check that the \"#{item_text}\" item in the CheckedTextView list is selected")
 
 	step("I rotate to portrait")

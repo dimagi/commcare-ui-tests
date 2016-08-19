@@ -1,14 +1,14 @@
 Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
   while true
-    pan_up
     break if element_exists("* id:'#{id}'")
+    pan_up
   end
 end
 
 Then (/^I scroll until I see the "([^\"]*)" text$/) do |text|
   while true
-    pan_up
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
+    pan_up
   end
 end
 
