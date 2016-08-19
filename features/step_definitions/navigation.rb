@@ -3,8 +3,13 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
   touch("* {text CONTAINS[c] '#{entry}'}")
 end
 
-Then (/^I press start/) do
+Then (/^I press start$/) do
   touch("android.support.v7.widget.CardView index:0")
+end
+
+Then (/^I open incomplete forms$/) do
+  touch("* {text CONTAINS[c] 'Incomplete'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
 end
 
 Then (/^I logout/) do
