@@ -1,6 +1,5 @@
 Then (/^I see "([^"]*)" above "([^"]*)"$/) do |first,second|
   text_on_screen = query("Textview","text")
-  puts text_on_screen
 
   first_index = text_on_screen.find_index(first)
   if first_index.nil?

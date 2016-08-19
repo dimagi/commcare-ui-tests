@@ -14,5 +14,19 @@ Scenario:
     Then I see "Earliest" above "Middle"
     Then I see "Middle" above "Last"
 
+    Then I select "Sort By..." from the menu
+    Then I touch the "Name" text
 
+    Then I see "Earliest" above "Last"
+    Then I see "Last" above "Middle"
+    Then I see "Middle" above "Missing"
+
+    Then I select "Sort By..." from the menu
+    Then I touch the "(^) Name" text
+
+    Then I see "Missing" above "Middle"
+    Then I see "Middle" above "Last"
+    Then I see "Last" above "Earliest"
+
+    
 

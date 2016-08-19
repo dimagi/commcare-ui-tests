@@ -9,6 +9,7 @@ Scenario: Ensure app update can be obtained from HQ
 
     Then I select module "first module"
     And I select form "empty form"
+    Then I wait for form entry
     Then I see the text "A label"
     Then I go back to the home screen
 
@@ -22,6 +23,7 @@ Scenario: Ensure app update can be obtained from HQ
 
     Then I select module "first module"
     And I select form "empty form"
+    Then I wait for form entry
     Then I see the text "An updated label"
     Then I go back to the home screen
 
