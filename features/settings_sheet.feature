@@ -101,18 +101,14 @@ Scenario: Verify that Auto Update Frequency settings are working
 	Then I see the text "CommCare > Application Preferences"
 	
 	Then I touch the "Auto Update Frequency" text
-	Then I see the text "Never"
-	Then I see the text "Daily"
-	Then I see the text "Weekly"
-	Then I touch the "Daily" text
+	Then I see a list that contains all of these items "Never,Daily,Weekly"
 
-	# Verify that the window closes and we return to the Application Preferences screen
-	Then I don't see the text "Never"
-	Then I don't see the text "Daily"
-	Then I don't see the text "Weekly"
+	Then I select the "Daily" item in a CheckedTextView list with items "Never,Daily,Weekly", exit, rotate, re-enter, and make sure it is still selected
+
+	Then I select the "Weekly" item in a CheckedTextView list with items "Never,Daily,Weekly", exit, rotate, re-enter, and make sure it is still selected
+
+	Then I select the "Never" item in a CheckedTextView list with items "Never,Daily,Weekly", exit, rotate, re-enter, and make sure it is still selected
+
+	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
-
-	# Make sure 'Daily' is now selected
-	Then I touch the "Auto Update Frequency" text
-	Then I check that the "Daily" item in the CheckedTextView list is selected
 
