@@ -9,9 +9,20 @@ Scenario: Ensure login shows proper error messages
     Then I logout
 
     # login in portrait mode
+    # which is way more annoying than landscape mode...
     Then I rotate to landscape
     Then I close the keyboard
-    Then I login with username "user_with_no_data" and password "123"
+    Then I clear input field number 1
+    Then I close the keyboard
+    Then I clear input field number 2
+    Then I close the keyboard
+    Then I enter "user_with_no_data" into input field number 1
+    Then I close the keyboard
+    Then I enter "123" into input field number 2
+    Then I close the keyboard
+    Then I press login
+    Then I wait for progress
+
     # TODO: consider counting the home screen buttons
     Then I logout
     Then I rotate to portrait
@@ -30,7 +41,6 @@ Scenario: Ensure login shows proper error messages
     Then I login with username "user_with_no_data" and password "bad pass"
     Then I wait for progress
     Then I see the text "Invalid Username or Password"
-    Then I see the text "Either the password"
 
     # try logging in with bad username
     Then I login with username "fake user" and password "bad pass"
