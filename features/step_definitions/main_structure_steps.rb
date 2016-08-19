@@ -96,8 +96,7 @@ Then (/^I see (\d+) select options$/) do |expected_count|
 end
 
 Then (/^I update the app$/) do
-  press_menu_button()
-  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  select_options_menu_item("Update App")
   wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
 end
 
@@ -111,5 +110,12 @@ Then (/^I don't find the text "([^\"]*)"$/) do |text|
   count = query("* {text CONTAINS[c] '#{text}'}").length
   if count != 0
     fail("Found %s occurrences of %s; expected none" % [count, text])
+  end
+end
+
+Then (/^I see at least one element of type "([^\"]*)"$/) do |text|
+  count = query("'#{text}'}").length
+  if count < 1
+    fail("Didn't find any occurrences of %s" % text)
   end
 end

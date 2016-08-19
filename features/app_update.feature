@@ -1,33 +1,54 @@
 Feature: App update test
-@Integration
+@Integration @QA
 Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
-    Then I login with username "test" and password "123"
+    Then I login with username "user_with_no_data" and password "123"
 
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
-
-    Then I select module "first module"
-    And I select form "empty form"
-    Then I see the text "A label"
+    # check base form content
+    Then I press start
+    Then I see the text "Module Three"
+    Then I select module "Module One"
+    And I select form "Example 1"
+    Then I see the text "A text question"
     Then I go back to the home screen
 
-    Then I update the app
-    Then I see the text "version 10"
+    # download the app update
+    Then I select "Update App" from the menu
+    Then I see the text "Current version: 2"
+    Then I touch the "Stop checking" text
+
+    Then I rotate to portrait
+    Then I touch the "Recheck" text
+    Then I rotate to landscape
+
+    Then I wait to see "Update to version"
+    Then I see the text "version 6"
+
+    # reopen update screen to see if progress is saved
+    Then I go back
+    Then I select "Update App" from the menu
+    Then I wait to see "Update to version"
     Then I apply the update
-    Then I login with username "test" and password "123"
 
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    # check updated data, including multimedia
+    Then I login with username "user_with_no_data" and password "123"
 
-    Then I select module "first module"
-    And I select form "empty form"
-    Then I see the text "An updated label"
+    Then I press start
+    Then I don't see the text "Module Three"
+    Then I select module "Module One"
+    And I select form "Example 1"
+    Then I see the text "Question with audio"
+    Then I see at least one element of type "AudioButton"
     Then I go back to the home screen
 
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    # make sure there are no new updates
+    Then I select "Update App" menu item
+    Then I see the text "Current version: 6"
+    Then I touch the "Recheck" text
+    Then I see the text "Current version: 6"
 
-    Then I select module "second module"
-    And I select form "form with label"
-    Then I see the text "first form in second module"
+    # turn off wifi and try updating
+    Then I turn wifi off
+    Then I touch the "Recheck" text
+    Then I see the text "Failed to download updates"
+    Then I turn wifi on
