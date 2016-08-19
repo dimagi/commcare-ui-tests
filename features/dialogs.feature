@@ -35,7 +35,7 @@ Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I touch the "OK" text
 
     Then I go back to the home screen
-    Then I select "About CommCare" menu item
+    Then I select "About CommCare" from the menu
     Then I see the text "OK"
     Then I rotate to landscape
     Then I see the text "OK"
