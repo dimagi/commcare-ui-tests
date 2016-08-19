@@ -119,3 +119,11 @@ Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
     fail("Didn't find any occurrences of %s" % text)
   end
 end
+
+Then (/^I check that the "([^\"]*)" button is enabled$/) do |button|
+  check_element_exists("* text:'#{button}' enabled:'true'")
+end
+
+Then (/^I check that the "([^\"]*)" button is disabled/) do |button|
+  check_element_exists("* text:'#{button}' enabled:'false'")
+end
