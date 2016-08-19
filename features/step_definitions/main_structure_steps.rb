@@ -120,10 +120,10 @@ Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
   end
 end
 
-Then (/^I check that the "([^\"]*)" button is enabled$/) do |button|
-  check_element_exists("* text:'#{button}' enabled:'true'")
+Then (/^I check that id "([^\"]*)" is enabled$/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'true'")
 end
 
-Then (/^I check that the "([^\"]*)" button is disabled/) do |button|
-  check_element_exists("* text:'#{button}' enabled:'false'")
+Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'false'")
 end
