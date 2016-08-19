@@ -83,10 +83,9 @@ Scenario: Create a case with one user, claim it with another
     # close the claimed case
     Then I touch the "karen" text
     Then I touch the "Continue" text
-    Then I select module "Close"
+    Then I select form "Close"
 
     # complete the case close form
-    Then I wait for form entry
     Then I touch the "Yes" text
     Then Next
     Then I enter text "Robot says bye"
