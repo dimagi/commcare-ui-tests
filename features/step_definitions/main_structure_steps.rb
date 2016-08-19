@@ -113,8 +113,8 @@ Then (/^I don't find the text "([^\"]*)"$/) do |text|
   end
 end
 
-Then (/^I see at least one element of type "([^\"]*)"$/) do |text|
-  count = query("'#{text}'}").length
+Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
+  count = query("#{element}").length
   if count < 1
     fail("Didn't find any occurrences of %s" % text)
   end

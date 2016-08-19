@@ -48,7 +48,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I see the text "Current version: 6"
 
     # turn off wifi and try updating
-    Then I turn wifi off
+    Then I toggle airplaine mode
     Then I touch the "Recheck" text
     Then I see the text "Failed to download updates"
-    Then I turn wifi on
+    Then I toggle airplaine mode

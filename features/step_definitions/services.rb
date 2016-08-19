@@ -1,7 +1,5 @@
-Then (/^I turn wifi off$/) do
-  system("adb shell svc wifi disable")
-end
-
-Then (/^I turn wifi on$/) do
-  system("adb shell svc wifi enable")
+Then (/^I toggle airplaine mode$/) do
+  system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS")
+  system("adb shell input keyevent 19 & adb shell input keyevent 23")
+  press_back_button
 end
