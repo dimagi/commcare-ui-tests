@@ -11,7 +11,6 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     # create a case
     Then I press start
     Then I select form "Registration"
-    Then I wait for form entry
     Then I enter text "2"
     Then I touch the "Get Data" text
     Then I wait for 1 second
@@ -52,7 +51,6 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I touch the "Continue" text
     Then I select form "Visit"
 
-    Then I wait for form entry
     # check that we correctly tracked the callout
     Then I see the text "Was callout query"
 
@@ -66,14 +64,12 @@ Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I touch the "Continue" text
     Then I select form "Visit"
 
-    Then I wait for form entry
     # check that we correctly tracked the text search
     Then I see the text "Was string query"
     Then I exit form entry
 
     # close the case
     Then I select form "Close"
-    Then I wait for form entry
     Then Next
     Then I enter text "auto"
     Then Submit

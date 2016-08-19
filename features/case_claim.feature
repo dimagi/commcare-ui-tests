@@ -18,7 +18,6 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select form "Registration"
-    Then I wait for form entry
     Then I enter text "karen"
     Then Next
     Then I enter text "boston"
