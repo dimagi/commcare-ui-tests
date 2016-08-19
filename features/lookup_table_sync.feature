@@ -8,7 +8,6 @@ Scenario: Ensure lookup table changes are pulled on sync
     Then I touch the "Start" text
     Then I select module "Misc"
     And I select form "Lookup Tables"
-    Then I wait for form entry
     Then I see 1 select options
     Then I upload the "extended_cities_table.xlsx" lookup table
     Then I go back to the home screen 
@@ -18,5 +17,4 @@ Scenario: Ensure lookup table changes are pulled on sync
     Then I touch the "Start" text
     Then I select module "Misc"
     And I select form "Lookup Tables"
-    Then I wait for form entry
     Then I see 7 select options
