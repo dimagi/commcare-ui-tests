@@ -2,8 +2,8 @@ Feature: Claim a case
 
 @Integration @2.29
 Scenario: Create a case with one user, claim it with another
-    # ensure 'karen' case isn't around, due to a test failure in the past
-    Then I close case with name "karen"
+    # ensure 'cordelia' case isn't around, due to a test failure in the past
+    Then I close case with name "cordelia"
     Then I install the ccz app at "case_claim.ccz"
 
     # create a case with one user
@@ -12,13 +12,13 @@ Scenario: Create a case with one user, claim it with another
 
     # make sure case doesn't already exist
     Then I select module "Follow Up"
-    Then I don't find the text "karen"
+    Then I don't find the text "cordelia"
 
     Then I go back to the home screen
     Then I press start
 
     Then I select form "Registration"
-    Then I enter text "karen"
+    Then I enter text "cordelia"
     Then Next
     Then I enter text "boston"
     Then Submit
@@ -32,13 +32,14 @@ Scenario: Create a case with one user, claim it with another
     Then I scroll until I see the "SEARCH ALL" text
     Then I touch the "SEARCH ALL" text
 
-    Then I enter text "karen"
+    Then I enter text "cordelia"
     Then I touch the "Query" text
     Then I wait for progress
     Then I wait for the "EntitySelectActivity" screen to appear
-    Then I touch the "karen" text
+    Then I touch the "cordelia" text
     Then I touch the "Continue" text
-    Then I see the text "Start"
+    # you are taken to the form list for that case
+    Then I see the text "Close"
 
     # log in with another user
     Then I logout
@@ -46,7 +47,7 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select module "Follow Up"
-    Then I don't see the text "karen"
+    Then I don't see the text "cordelia"
 
     Then I scroll until I see the "SEARCH ALL" text
     Then I touch the "SEARCH ALL" text
@@ -59,7 +60,7 @@ Scenario: Create a case with one user, claim it with another
     Then I see the text "Query"
 
     Then I clear input field number 1
-    Then I enter text "karen"
+    Then I enter text "cordelia"
 
     # This should move to the next prompt
     Then I press the enter button
@@ -68,9 +69,9 @@ Scenario: Create a case with one user, claim it with another
     Then I touch the "Query" text
     Then I wait for progress
 
-    # select the karen result
+    # select the cordelia result
     Then I wait for the "EntitySelectActivity" screen to appear
-    Then I touch the "karen" text
+    Then I touch the "cordelia" text
     Then I touch the "Continue" text
 
     # wait for claim and sync to occur
@@ -78,10 +79,10 @@ Scenario: Create a case with one user, claim it with another
 
     # make sure the claimed case appears
     Then I select module "Follow Up"
-    Then I see the text "karen"
+    Then I see the text "cordelia"
 
     # close the claimed case
-    Then I touch the "karen" text
+    Then I touch the "cordelia" text
     Then I touch the "Continue" text
     Then I select form "Close"
 
@@ -103,4 +104,4 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select module "Follow Up"
-    Then I don't find the text "karen"
+    Then I don't find the text "cordelia"
