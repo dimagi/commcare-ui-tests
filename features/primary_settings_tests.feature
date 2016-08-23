@@ -1,6 +1,6 @@
-Feature: Settings Sheet of the QA test plan
-@QA
+Feature: Test settings on the "Application Preferences" screen
 
+@QA
 Scenario: Verify that all server settings menus can be opened and edited
 
 	# INSTALL APP AND LOGIN
@@ -93,7 +93,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I touch the "OK" text
 	Then I see the text "CommCare > Server Settings"
 
-
+@QA
 Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -113,7 +113,7 @@ Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-
+@QA
 Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -135,7 +135,7 @@ Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-
+@QA
 Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"
