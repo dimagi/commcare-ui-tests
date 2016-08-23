@@ -94,7 +94,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I see the text "CommCare > Server Settings"
 
 
-Scenario: Verify that the Fuzzy Search Matches settings are working
+Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
@@ -114,7 +114,7 @@ Scenario: Verify that the Fuzzy Search Matches settings are working
 	Then I see the text "CommCare > Application Preferences"
 
 
-Scenario: Verify that the Auto Update Frequency settings are working
+Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
@@ -136,7 +136,7 @@ Scenario: Verify that the Auto Update Frequency settings are working
 	Then I see the text "CommCare > Application Preferences"
 
 
-Scenario: Verify that the Set Print Template setting opens a file browswer of some sort
+Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
