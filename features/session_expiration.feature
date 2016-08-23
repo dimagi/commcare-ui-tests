@@ -14,7 +14,6 @@ Scenario: Ensure form saves and redirect to login on session expiration
     Then I press start
     Then I select module "Basic"
     Then I select form "Session"
-    Then I wait for form entry
     Then Next
     Then I select option from single-select with text "2"
     Then I wait for 30 seconds
