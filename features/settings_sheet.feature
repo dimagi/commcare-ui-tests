@@ -135,3 +135,14 @@ Scenario: Verify that Auto Update Frequency settings are working
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
+
+Scenario: Verify that Set Print Template opens a file browswer of some sort
+	
+	Then I login with username "settings.test" and password "123"
+	Then I select "Settings" from the menu
+	Then I see the text "CommCare > Application Preferences"
+	
+	Then I touch the "Set Print Template" text
+	Then I wait
+	Then I don't see the text "Your device does not have a file browser installed. Please download one from the playstore and then try again."
+
