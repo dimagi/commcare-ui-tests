@@ -94,7 +94,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I see the text "CommCare > Server Settings"
 
 
-Scenario: Verify that Fuzzy Search Matches settings are working
+Scenario: Verify that the Fuzzy Search Matches settings are working
 
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
@@ -114,7 +114,7 @@ Scenario: Verify that Fuzzy Search Matches settings are working
 	Then I see the text "CommCare > Application Preferences"
 
 
-Scenario: Verify that Auto Update Frequency settings are working
+Scenario: Verify that the Auto Update Frequency settings are working
 
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
@@ -136,7 +136,7 @@ Scenario: Verify that Auto Update Frequency settings are working
 	Then I see the text "CommCare > Application Preferences"
 
 
-Scenario: Verify that Set Print Template opens a file browswer of some sort
+Scenario: Verify that the Set Print Template setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"
 	Then I select "Settings" from the menu
@@ -145,4 +145,3 @@ Scenario: Verify that Set Print Template opens a file browswer of some sort
 	Then I touch the "Set Print Template" text
 	Then I wait
 	Then I don't see the text "Your device does not have a file browser installed. Please download one from the playstore and then try again."
-
