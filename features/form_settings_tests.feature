@@ -48,7 +48,7 @@ Scenario: Test the 'Text Size' setting
 	Then I select "Change Settings" from the menu
 	Then I touch the "Text Font Size" text
 	Then I touch the "Extra Small" text
-	Then I navigate back
+	Then I go back
 	Then I wait
 
 	# IMPORTANT: Part of completing QA must be for a human to view this screenshot and confirm that the text is very small
@@ -58,7 +58,7 @@ Scenario: Test the 'Text Size' setting
 	Then I select "Change Settings" from the menu
 	Then I touch the "Text Font Size" text
 	Then I touch the "Extra Large" text
-	Then I navigate back
+	Then I go back
 	Then I wait
 
 	# IMPORTANT: Part of completing QA must be for a human to view this screenshot and confirm that the text is very large

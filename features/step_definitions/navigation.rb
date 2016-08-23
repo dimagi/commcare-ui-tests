@@ -40,10 +40,6 @@ Then (/^I go back to the home screen$/) do
   end
 end
 
-Then (/^I navigate back$/) do
-  press_back_button
-end
-
 # ----------------------------
 # Form Entry Navigation
 # ----------------------------
