@@ -3,7 +3,7 @@ Feature: Claim a case
 @Integration @2.29
 Scenario: Create a case with one user, claim it with another
     # ensure 'cordelia' case isn't around, due to a test failure in the past
-    Then I close case with name "cordelia"
+    Then I close case with name "cordelia" of type "human" as user_id "d58f7a55dbe2bf22d0b6838311ada205"
     Then I install the ccz app at "case_claim.ccz"
 
     # create a case with one user
@@ -77,17 +77,11 @@ Scenario: Create a case with one user, claim it with another
     # wait for claim and sync to occur
     Then I wait for progress
 
-    # make sure the claimed case appears
-    Then I select module "Follow Up"
-    Then I see the text "cordelia"
-
-    # close the claimed case
-    Then I touch the "cordelia" text
-    Then I touch the "Continue" text
+    # you are taken to the form list for that case
     Then I select form "Close"
 
     # complete the case close form
-    Then I touch the "Yes" text
+    Then I select option from single-select with text "Yes"
     Then Next
     Then I enter text "Robot says bye"
     Then Submit
