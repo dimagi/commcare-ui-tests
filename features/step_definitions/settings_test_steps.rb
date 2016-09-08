@@ -22,8 +22,20 @@ Then (/^I check that the "([^\"]*)" item in the CheckedTextView list is selected
 	end
 end
 
-Then (/^I see a list that contains all of these items "([^\"]*)"$/) do |all_items|
-	for item in all_items.split(",")
-		step("I see the text \"#{item}\"")
+Then (/^I open the options menu$/) do
+	press_menu_button()
+end
+
+Then (/^I see the expected recovery mode UI$/) do
+	if query("* {text CONTAINS 'CommCare has entered Recovery Mode due to a problem with the local device'}").length != 1 or query("* {text CONTAINS 'This device has no unsent forms'}").length != 1 or query("* {text CONTAINS 'App is installed and valid'}").length != 1 or query("* {text CONTAINS 'Waiting'}").length != 1
+		fail("Expected text not found")
+	end
+	
+	if query("button text:'Send Data' isEnabled:false").length != 1
+		fail("Send Data button not found")
+	end
+
+	if query("button text:'Attempt Reinstall' isEnabled:false").length != 1
+		fail("Attempt Reinstall button not found")
 	end
 end

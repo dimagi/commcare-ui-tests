@@ -45,20 +45,24 @@ Then (/^I see (\d+) select options$/) do |expected_count|
   end
 end
 
+Then (/^I see a list that contains all of these items "([^\"]*)"$/) do |all_items|
+  for item in all_items.split(",")
+    step("I scroll until I see the \"#{item}\" text")
+  end
+end
+
 Then (/^I rename file "([^\"]*)" to "([^\"]*)"$/) do |original_filename, new_filename|
   system("mv #{original_filename} #{new_filename}")
 end
 
-Then (/^I don't find the text "([^\"]*)"$/) do |text|
-  sleep 1
-  count = query("* {text CONTAINS[c] '#{text}'}").length
-  if count != 0
-    fail("Found %s occurrences of %s; expected none" % [count, text])
-  end
-end
-
 Then (/^I see an empty EditText$/) do
   wait_for_element_exists("android.widget.EditText text:''")
+end
+
+Then (/^I verify that the current activity is "([^\"]*)"$/) do |activity_name|
+  if current_activity != activity_name
+    fail("Current activity is %s, but expected %s" % [current_activity, activity_name])
+  end
 end
 
 

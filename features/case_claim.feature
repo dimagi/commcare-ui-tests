@@ -12,7 +12,7 @@ Scenario: Create a case with one user, claim it with another
 
     # make sure case doesn't already exist
     Then I select module "Follow Up"
-    Then I don't find the text "cordelia"
+    Then I don't see the text "cordelia"
 
     Then I go back to the home screen
     Then I press start
@@ -104,4 +104,4 @@ Scenario: Create a case with one user, claim it with another
     Then I press start
 
     Then I select module "Follow Up"
-    Then I don't find the text "cordelia"
+    Then I don't see the text "cordelia"
