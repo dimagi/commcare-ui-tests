@@ -84,3 +84,7 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
+Then (/^I open the options menu$/) do
+  press_menu_button()
+end
+
