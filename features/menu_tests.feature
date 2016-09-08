@@ -1,4 +1,4 @@
-Feature: Test the settings available from CommCare home screen menu
+Feature: Test all primary CommCare menu options
 
 @QA
 Scenario: Test that all actions available from the home screen options menu work properly 
