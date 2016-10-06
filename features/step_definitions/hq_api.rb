@@ -43,8 +43,8 @@ Then (/^I assert case list count against stored count$/) do
   end
 end
 
-Then (/^I close case with name "([^\"]*)"$/) do |name|
-  system("python3 commcare-hq-api/utils.py close_case_named #{name}")
+Then (/^I close case with name "([^\"]*)" of type "([^\"]*)" as user_id "([^\"]*)"$/) do |name, type, user_id|
+  system("python3 commcare-hq-api/utils.py close_case_named #{name} #{type} #{user_id}")
 end
 
 Then (/^I make sure that user "([^\"]*)" is in group "([^\"]*)"$/) do |user_id, group_id|
