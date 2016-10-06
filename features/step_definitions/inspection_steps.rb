@@ -51,6 +51,13 @@ Then (/^I see a list that contains all of these items "([^\"]*)"$/) do |all_item
   end
 end
 
+Then (/^I see a choice dialog with (\d+) panels$/) do |expected_count|
+  panel_count = query("* id:'choice_dialog_panel'").length
+  if panel_count.to_i != expected_count.to_i
+    fail("Expected to see %s choice panels but got %s" % [expected_count, panel_count])
+  end
+end
+
 Then (/^I rename file "([^\"]*)" to "([^\"]*)"$/) do |original_filename, new_filename|
   system("mv #{original_filename} #{new_filename}")
 end

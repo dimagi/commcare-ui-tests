@@ -7,9 +7,23 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I login with username "settings.test" and password "123"
 
 	Then I open the options menu
-	Then I see a list that contains all of these items "Update App,Saved Forms,Change Language,About CommCare,Advanced,Settings"
+	Then I see the text "Update App" 
+	Then I see the text "Saved Forms"
+	Then I see the text "Change Language"
+	Then I see the text "About CommCare"
+	Then I see the text "Advanced"
+	Then I see the text "Settings"
+	Then I rotate to landscape
+	Then I see the text "Update App" 
+	Then I see the text "Saved Forms"
+	Then I see the text "Change Language"
+	Then I see the text "About CommCare"
+	Then I see the text "Advanced"
+	Then I see the text "Settings"
+	Then I rotate to portrait
+	Then I go back to the home screen
 
-	# Necessary to call this again due to some inexplicable behavior in calabash that causes the options menu to close after calling the line above
+	# Necessary due to some inexplicable behavior in calabash where it isn't able to select anything from the options menu subsequently without this initial call 
 	Then I open the options menu
 
 	Then I select "Update App" from the menu
@@ -17,11 +31,18 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I see the text "App is up to date" 
 	Then I go back to the home screen
 
-	Then I touch the "Saved" text
+	Then I select "Saved Forms" from the menu
 	Then I verify that the current activity is "FormRecordListActivity"
 	Then I touch the "Filter By: All Completed Forms" text
 	Then I see a list that contains all of these items "Filter By: All Completed Forms,Filter By: Only Submitted Forms,Filter By: Only Unsent Forms,Only Incomplete Forms,Filter: Quarantined Forms"
 	Then I go back to the home screen
+
+	Then I select "Change Language" from the menu
+	Then I see a choice dialog with 2 panels
+	Then I rotate to landscape
+	Then I see a choice dialog with 2 panels
+	Then I rotate to portrait
+	Then I go back
 
 	Then I select "About CommCare" from the menu
 	Then I see the text "About CommCare"
@@ -30,16 +51,16 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I rotate to portrait
 	Then I press view with id "button1"
 
-	Then I select "Settings" from the menu
-	Then I verify that the current activity is "CommCarePreferences"
-	Then I see the text "CommCare > Application Preferences"
-	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
-	Then I go back to the home screen
-
 	Then I select "Advanced" from the menu
 	Then I verify that the current activity is "AdvancedActionsActivity"
 	Then I see the text "CommCare > Advanced"
 	Then I see a list that contains all of these items "Wifi Direct,Manage SD,Report Problem,Force Log Submission,Validate Media,Connection Test,Recovery Mode,Clear User Data"
+	Then I go back to the home screen
+
+	Then I select "Settings" from the menu
+	Then I verify that the current activity is "CommCarePreferences"
+	Then I see the text "CommCare > Application Preferences"
+	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
 	Then I go back to the home screen
 
 
@@ -101,6 +122,10 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I rotate to portrait
 	Then I go back to the home screen
 
+	Then I select "Advanced" from the menu
+	Then I touch the "Clear User Data" text
+	Then I press view with id "positive_button"
+	Then I verify that the current activity is "LoginActivity"
 
 
 
