@@ -8,7 +8,7 @@ Scenario: Ensure login shows proper error messages
     # TODO: consider counting the home screen buttons
     Then I logout
 
-    # login in portrait mode
+    # login in landscape mode
     # which is way more annoying than landscape mode...
     Then I rotate to landscape
     Then I close the keyboard
@@ -26,9 +26,10 @@ Scenario: Ensure login shows proper error messages
     # TODO: consider counting the home screen buttons
     Then I logout
     Then I rotate to portrait
+    Then I wait
 
     # login in demo mode
-    Then I select "Enter as Demo User" from the menu
+    Then I select "Enter as Demo User" menu item
     Then I wait for progress
     Then I wait to see "Starting Demo Mode"
     Then I rotate to landscape
@@ -54,10 +55,10 @@ Scenario: Ensure login shows proper error messages
 
     # try offline login with bad password
     Then I login with username "user_with_no_data" and password "bad pass", without waiting for completion
-    Then I see the text "Either the password"
+    Then I see the text "Either the password you entered was incorrect, or CommCare couldn't reach the server"
 
     # try offline login with bad username
     Then I login with username "fake user" and password "bad pass", without waiting for completion
-    Then I see the text "Reach Server"
+    Then I see the text "Couldn't Reach Server. Please check your network connection"
 
     Then I toggle airplane mode
