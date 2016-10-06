@@ -28,7 +28,7 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I rotate to landscape
 	Then I see the text "About CommCare"
 	Then I rotate to portrait
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 
 	Then I select "Settings" from the menu
 	Then I verify that the current activity is "CommCarePreferences"
