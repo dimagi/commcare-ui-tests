@@ -70,15 +70,12 @@ Then (/^I select form "([^\"]*)"$/) do |text|
   wait_for_element_exists("* id:'nav_pane'")
 end
 
-Then (/^I rotate to landscape$/) do 
-  perform_action('set_activity_orientation', 'landscape')
-end
-
 Then (/^I see (\d+) list entries$/) do |expected_count|
   list_count = query("ListView","getAdapter","getCount").first
   if list_count.to_i != expected_count.to_i
     fail("Expected to see %s entries but got %s" % [expected_count, list_count])
   end
+end
 
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
@@ -114,4 +111,3 @@ end
 Then (/^I open the options menu$/) do
   press_menu_button()
 end
-
