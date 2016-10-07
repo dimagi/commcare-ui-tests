@@ -7,19 +7,19 @@ Scenario: Create a case, update a case, close a case
 	Then I login with username "cases" and password "123"
 	Then I scroll until I see the "Start" text
 	Then I touch the "Start" text
-	Then I select case "Case Tests"
-	Then I select case "Create a Case"
+	Then I select module "Case Tests"
+	Then I select form "Create a Case"
 	Then I enter text "Batman"
 	Then Next
 	Then I press the "Confirm" button
 	Then Submit
 	# Confirm that case was created and case list is correct
-	Then I touch the "Update a Case" text
+	Then I select module "Update a Case"
  	# The step definition Then I select the "Update a Case" module wasn't working for me
 	Then I see the text "Name"
 	Then I see the text "Date Opened"
 	Then I see the text "Status"
-	Then I touch the "Batman" text
+	Then I select case "Batman"
 	# Confirm case details
 	Then I see the text "Name"
 	Then I see the text "Date Opened"
@@ -39,7 +39,7 @@ Scenario: Create a case, update a case, close a case
 	Then Forward 3
 	Then Submit
 	# Confirm details updated
-	Then I touch the "Batman" text
+	Then I select case "Batman"
 	Then I see the text "Batman"
 	Then I see the text "Text"
 	Then I see the text "Phone Number"
@@ -63,21 +63,20 @@ Scenario: Create a case, update a case, close a case
 	Then I touch the "6789" text
 	Then I see the text "Call"
 	Then I see the text "Send SMS"
-
-	Then I go back
-	Then I go back
-	Then I go back
 	# Hitting back too quickly in succession stopped registering
+	Then I go back
+	Then I wait for 2 seconds
+	Then I go back
 	Then I wait for 1 second
 	Then I go back
 	# Test NOT closing case
-	Then I touch the "Close a Case" text
-	Then I touch the "Batman" text
+	Then I select module "Close a Case"
+	Then I select case "Batman"
 	Then I press the "Continue" button
 	Then I press the "Cancel" button
 	Then Submit
 	# Test closing case
-	Then I touch the "Batman" text
+	Then I select case "Batman"
 	Then I press the "Continue" button
 	Then I press the "Confirm" button
 	Then Submit

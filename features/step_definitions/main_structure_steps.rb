@@ -47,12 +47,12 @@ Then (/^I sync, without waiting for completion$/) do
 end
 
 Then (/^I select module "([^\"]*)"$/) do |text|
-  wait_for_element_exists("* id:'screen_entity_select_list'")
+  wait_for_element_exists("* id:'screen_suite_menu_list'")
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
 
 Then (/^I select case "([^\"]*)"$/) do |text|
-  wait_for_element_exists("* id:'screen_suite_menu_list'")
+  wait_for_element_exists("* id:'screen_entity_select_list'")
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
 
