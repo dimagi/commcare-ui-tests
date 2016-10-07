@@ -1,17 +1,3 @@
-Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
-  while true
-    pan_up
-    break if element_exists("* id:'#{id}'")
-  end
-end
-
-Then (/^I scroll until I see the "([^\"]*)" text$/) do |text|
-  while true
-    pan_up
-    break if element_exists("* {text CONTAINS[c] '#{text}'}")
-  end
-end
-
 Then (/^I enter my name$/) do
   keyboard_enter_text("Will")
 end
@@ -65,6 +51,12 @@ Then (/^I select module "([^\"]*)"$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
 
+Then (/^I open the incomplete form with title "([^\"]*)"$/) do |title|
+  tap_when_element_exists("* {text CONTAINS[c] '#{title}'}")
+  tap_when_element_exists("* {text CONTAINS[c] 'Go To Start'}")
+  wait_for_element_exists("* id:'nav_pane'")
+end
+
 # same as module selection, just used for user clarity
 Then (/^I select form "([^\"]*)"$/) do |text|
   wait_for_element_exists("* id:'screen_suite_menu_list'")
@@ -81,20 +73,6 @@ Then (/^I rotate to landscape/) do
   perform_action('set_activity_orientation', 'landscape')
 end
 
-Then (/^I see (\d+) list entries$/) do |expected_count|
-  list_count = query("ListView","getAdapter","getCount").first
-  if list_count.to_i != expected_count.to_i
-    fail("Expected to see %s entries but got %s" % [expected_count, list_count])
-  end
-end
-
-Then (/^I see (\d+) select options$/) do |expected_count|
-  list_count = query("org.commcare.views.widgets.SelectOneWidget", "getChildCount")[0] / 2
-  if list_count.to_i != expected_count.to_i
-    fail("Expected to see %s entries but got %s" % [expected_count, list_count])
-  end
-end
-
 Then (/^I update the app$/) do
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
@@ -106,10 +84,7 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
-Then (/^I don't find the text "([^\"]*)"$/) do |text|
-  sleep 1
-  count = query("* {text CONTAINS[c] '#{text}'}").length
-  if count != 0
-    fail("Found %s occurrences of %s; expected none" % [count, text])
-  end
+Then (/^I open the options menu$/) do
+  press_menu_button()
 end
+
