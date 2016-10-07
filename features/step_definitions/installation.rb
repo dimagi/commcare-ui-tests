@@ -25,3 +25,11 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
   tap_when_element_exists("* {text CONTAINS[c] 'Install App'}")
   wait_for_element_exists("* id:'edit_password'", timeout: 6000)
 end
+
+Then (/^I uninstall the "([^\"]*)" apk app$/) do |apk|
+  system("adb uninstall %s" % apk)
+end
+
+Then (/^I install the "([^\"]*)" apk$/) do |apk|
+  system("adb install -r features/resource_files/apks/%s.apk" % apk)
+end

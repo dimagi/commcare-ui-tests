@@ -1,5 +1,11 @@
-Then (/^I press start/) do
+
+Then (/^I press start$/) do
   touch("android.support.v7.widget.CardView index:0")
+end
+
+Then (/^I open incomplete forms$/) do
+  touch("* {text CONTAINS[c] 'Incomplete'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
 end
 
 Then (/^I logout/) do
@@ -8,6 +14,15 @@ Then (/^I logout/) do
   end
   index = query("android.support.v7.widget.CardView").length - 1
   touch("android.support.v7.widget.CardView index:#{index}")
+end
+
+Then (/^I exit form entry$/) do
+    hide_soft_keyboard()
+    press_back_button
+
+    if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
+      tap_when_element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
+    end
 end
 
 Then (/^I go back to the home screen$/) do
@@ -48,19 +63,4 @@ end
 
 Then (/^Prev$/) do
   tap_when_element_exists("* id:'nav_btn_prev'")
-end
-
-Then (/^I sync$/) do
-  sleep 1
-  if current_activity() != "CommCareHomeActivity"
-    step("I go back to the home screen")
-  end
-  index = query("android.support.v7.widget.CardView").length - 2
-  touch("android.support.v7.widget.CardView index:#{index}")
-  wait_for_element_does_not_exist("android.widget.ProgressBar")
-  sleep 1
-  count = query("android.widget.ProgressBar")
-  if count != 0
-    wait_for_element_does_not_exist("android.widget.ProgressBar")
-  end
 end

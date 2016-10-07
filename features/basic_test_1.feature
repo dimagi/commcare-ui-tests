@@ -8,8 +8,7 @@ Scenario: The setup screen is correct
     Then I scroll until I see the "Start" text
 	Then I touch the "Start" text
 	Then I select module "Basic Form Tests"
-	Then I select module "Question Types"
-	Then I wait for form entry
+	Then I select form "Question Types"
 	Then Next
 	Then I enter text "William Pride"
 	Then Next

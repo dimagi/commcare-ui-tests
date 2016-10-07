@@ -1,5 +1,6 @@
 *.swp
 vendor/*
+reports/*
 .bundle/*
 *.ropeproject
 *.irb-history
@@ -8,9 +9,9 @@ vendor/*
 test_servers/*
 .idea
 features.zip
-*.apk
+*commcare*.apk
 *.html
-*.txt
 */__pycache__
 scripts/ccc
 scripts/checkout_cross_request_repo.py
+latest_form_time.txt
