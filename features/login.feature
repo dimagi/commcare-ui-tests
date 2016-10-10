@@ -1,6 +1,6 @@
 Feature: Login behavior
 @QA
-Scenario: Ensure login shows proper error messages
+Scenario: Test login logic: error handling, demo mode, and normal behavior
     Then I install the ccz app at "test_list_search.ccz"
 
     # normal login
@@ -55,10 +55,19 @@ Scenario: Ensure login shows proper error messages
 
     # try offline login with bad password
     Then I login with username "user_with_no_data" and password "bad pass", without waiting for completion
-    Then I see the text "Either the password you entered was incorrect, or CommCare couldn't reach the server"
+    # Check that you see "Either the password you entered was incorrect, or
+    # CommCare couldn't reach the server"
+    Then I see the text "Either the password"
 
     # try offline login with bad username
     Then I login with username "fake user" and password "bad pass", without waiting for completion
-    Then I see the text "Couldn't Reach Server. Please check your network connection"
+
+    # Check that you see "Couldn't Reach Server. Please check your network
+    # connection"
+    Then I see the text "Reach Server"
 
     Then I toggle airplane mode
+
+    Then I clear input field number 2
+    Then I press login
+    Then I see the text "Empty Password"
