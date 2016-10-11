@@ -6,6 +6,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     # normal login
     Then I login with username "user_with_no_data" and password "123"
     # TODO: consider counting the home screen buttons
+    Then I verify that all home buttons are present
     Then I logout
 
     # login in landscape mode
@@ -36,6 +37,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     Then I wait to see "Starting Demo Mode"
     Then I rotate to portrait
     Then I touch the "OK" text
+    Then I verify that demo home buttons are present
     Then I logout
 
     # try logging in with bad password

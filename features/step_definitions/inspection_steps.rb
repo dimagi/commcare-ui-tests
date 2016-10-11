@@ -72,4 +72,26 @@ Then (/^I verify that the current activity is "([^\"]*)"$/) do |activity_name|
   end
 end
 
+Then (/^I verify that all home buttons are present$/) do
+  expected_texts = ['Start', 'Sync with Server', 'Log out']
+  check_home_buttons(expected_texts)
+end
 
+Then (/^I verify that demo home buttons are present$/) do
+  expected_texts = ['Explore CommCare Demo', 'Submit Demo Data to Server', 'Log out']
+  check_home_buttons(expected_texts)
+end
+
+def check_home_buttons( expected_texts)
+  expected_button_count = expected_texts.length
+  button_count = query("android.support.v7.widget.CardView").length
+  if button_count != expected_button_count
+    fail("Expected %s home screen buttons, found %s" % [expected_button_count, button_count])
+  end
+
+  for button_text in expected_texts
+    if not element_exists("* {text CONTAINS[c] '%s'}" % button_text)
+      fail("Didn't find %s" % button_text)
+    end
+  end
+end
