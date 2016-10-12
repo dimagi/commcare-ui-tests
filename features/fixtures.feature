@@ -12,7 +12,7 @@ Feature: Fixtures
     Then I should see "Error Occurred"
     Then I should see "XPath evaluation"
 
-  Scenario: Ensure that we can use fixtures correctly
+  Scenario: Ensure that we can use fixtures correctly, and that fixtures work in saved forms
     Then I login with username "fixtures_works" and password "123"
     Then I press start
     Then I select module "Fixtures"
