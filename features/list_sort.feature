@@ -1,7 +1,7 @@
 Feature: List Sorting
     
-@Basic
-Scenario: 
+@QA
+Scenario: Sorting Select Lists
     Then I install the ccz app at "test_list_search.ccz"
     Then I login with username "test_sort" and password "123"
     Then I scroll until I see the "Start" text
