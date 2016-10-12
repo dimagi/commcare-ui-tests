@@ -1,7 +1,7 @@
 Feature: Select Filters
     
-@Basic
-Scenario: 
+@QA
+Scenario: Filtering forms by case data
     Then I install the ccz app at "test_select_filters.ccz"
     Then I login with username "test_filter" and password "123"
     Then I press start
@@ -30,8 +30,8 @@ Scenario:
     Then I see "Placeholder"
     Then I go back
     
-@Basic
-Scenario: 
+@QA
+Scenario: Filtering forms by user data
     Then I login with username "test_filters_user_data" and password "123"
     Then I press start
 
@@ -63,14 +63,13 @@ Scenario:
     Then I go back
 
 
-@Basic
-Scenario: 
+@QA
+Scenario: Filtering forms by user data with no case select in the session
     Then I login with username "test_filter" and password "123"
     Then I press start
 
     Then I select module "Filter Tests"
 
-    #Case Select
     Then I see the text "Select B"
     Then I see the text "Select C"
 
