@@ -1,20 +1,41 @@
-Feature: Fixture Succeeds Test
-  Scenario: Test that case sharing works properly
+Feature: Case Sharing Features
+
+@QA
+Scenario: Obtain a clean environment
     Then I install the ccz app at "case_sharing.ccz"
     Then I login with username "case_sharing_1" and password "123"
+
+    Then I press start
+    Then I select module "Test Cleanup"
+    Then Submit
+
+    Then I press start
+    Then I select module "Follow Up"
+    Then I don't see the text "First Case"
+    Then I don't see the text "Second Case"
+    Then I sync
+    
+
+@QA    
+Scenario: Create a case with user 1
+    Then I login with username "case_sharing_1" and password "123"
+        
     Then I press start
     Then I select module "Registration"
     Then I enter text "First Case"
     Then Next
     Then I enter text "1"
     Then Submit
+    Then I sync
+    
     # validate that case was created
     Then I press start
     Then I select module "Follow Up"
     Then I see the text "First Case"
     Then I touch the "First Case" text
-    Then I logout
 
+@QA    
+Scenario: Create a case with user 2, and update user 1 case    
     Then I login with username "case_sharing_2" and password "123"
     Then I press start
     Then I select module "Registration"
@@ -34,8 +55,10 @@ Feature: Fixture Succeeds Test
     Then I see the text "1"
     Then I enter text "2"
     Then Submit
-    Then I logout
+    Then I sync
 
+@QA
+Scenario: Receive User 2 changes and close cases
     Then I login with username "case_sharing_1" and password "123"
     Then I sync
     Then I press start
@@ -57,8 +80,10 @@ Feature: Fixture Succeeds Test
     Then I touch the "Continue" text
     Then I select module "Close"
     Then Submit
-    Then I logout
+    Then I sync
 
+@QA
+Scenario: Validate all cases closed
     Then I login with username "case_sharing_2" and password "123"
     Then I sync
     Then I press start
