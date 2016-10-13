@@ -28,6 +28,10 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   tap_when_element_exists("* id:'login_button'")
 end
 
+Then (/^I press login$/) do
+  tap_when_element_exists("* id:'login_button'")
+end
+
 Then (/^I sync$/) do
   step("I sync, without waiting for completion")
   wait_for_element_does_not_exist("android.widget.ProgressBar")
