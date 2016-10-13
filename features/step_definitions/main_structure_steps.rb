@@ -93,3 +93,7 @@ Then (/^I open the options menu$/) do
   press_menu_button()
 end
 
+Then (/^I wait for form to load/) do
+   wait_for_element_exists("* id:'nav_pane'")
+end
+	
