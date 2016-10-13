@@ -4,6 +4,7 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
+  wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
   touch("android.support.v7.widget.CardView index:0")
 end
 
