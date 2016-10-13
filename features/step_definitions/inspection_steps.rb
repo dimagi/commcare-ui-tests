@@ -77,7 +77,7 @@ Then (/^I verify that all home buttons are present$/) do
 end
 
 Then (/^I verify that demo home buttons are present$/) do
-  expected_texts = ['Explore CommCare Demo', 'Submit Demo Data to Server', 'Log out']
+  expected_texts = ['Explore CommCare', 'Submit Practice Data to Server', 'Log out']
   check_home_buttons(expected_texts)
 end
 
@@ -97,15 +97,22 @@ Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
 end
 
 def check_home_buttons( expected_texts)
-  expected_button_count = expected_texts.length
-  button_count = query("android.support.v7.widget.CardView").length
-  if button_count != expected_button_count
-    fail("Expected %s home screen buttons, found %s" % [expected_button_count, button_count])
-  end
-
   for button_text in expected_texts
-    if not element_exists("* {text CONTAINS[c] '%s'}" % button_text)
-      fail("Didn't find %s" % button_text)
+    scroll_count = 0
+    # scroll until text is found, otherwise timeout
+    while true
+      break if element_exists("* {text CONTAINS[c] '#{button_text}'}")
+      if scroll_count > 10
+        fail("Didn't find %s button" % button_text)
+      end
+      scroll_count += 1
+      pan_up
+    end
+
+    # scroll back to original place
+    while scroll_count > 0
+      pan_down
+      scroll_count -= 1
     end
   end
 end
