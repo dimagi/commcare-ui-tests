@@ -78,8 +78,7 @@ Then (/^I rotate to landscape/) do
 end
 
 Then (/^I update the app$/) do
-  press_menu_button()
-  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  select_options_menu_item("Update App")
   wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
 end
 

@@ -44,6 +44,18 @@ Then (/^I go back to the home screen$/) do
   end
 end
 
+Then (/^I go to Saved Forms/) do
+  if current_activity() != "CommCareHomeActivity"
+    step("I go back to the home screen")
+  end
+  while true
+    pan_up
+    break if element_exists("* {text CONTAINS[c] 'Saved'}")
+  end
+  tap_when_element_exists("* {text CONTAINS[c] 'Saved'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
+end
+
 # ----------------------------
 # Form Entry Navigation
 # ----------------------------
