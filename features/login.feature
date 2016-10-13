@@ -11,6 +11,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
 
     # login in landscape mode
     # which is way more annoying than landscape mode...
+    Then I wait
     Then I rotate to landscape
     Then I close the keyboard
     Then I clear input field number 1
