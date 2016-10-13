@@ -28,6 +28,11 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   tap_when_element_exists("* id:'login_button'")
 end
 
+Then (/^I select case "([^\"]*)"$/) do |text|
+   wait_for_element_exists("* id:'screen_entity_select_list'")
+   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
 Then (/^I sync$/) do
   step("I sync, without waiting for completion")
   wait_for_element_does_not_exist("android.widget.ProgressBar")
