@@ -24,7 +24,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     Then I press login
     Then I wait for progress
 
-    # TODO: consider counting the home screen buttons
+    Then I verify that all home buttons are present
     Then I logout
     Then I rotate to portrait
     Then I wait
@@ -53,6 +53,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     # login offline
     Then I toggle airplane mode
     Then I login with username "user_with_no_data" and password "123"
+    Then I verify that all home buttons are present
     Then I logout
 
     # try offline login with bad password
