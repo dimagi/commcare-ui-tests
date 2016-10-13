@@ -16,7 +16,6 @@ Then (/^I see "([^"]*)" above "([^"]*)"$/) do |first,second|
   end
 end
 
-
 Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
   while true
     break if element_exists("* id:'#{id}'")
@@ -72,4 +71,18 @@ Then (/^I verify that the current activity is "([^\"]*)"$/) do |activity_name|
   end
 end
 
+Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
+  count = query("#{element}").length
+  if count < 1
+    fail("Didn't find any occurrences of %s" % text)
+  end
+end
+
+Then (/^I check that id "([^\"]*)" is enabled$/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'true'")
+end
+
+Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'false'")
+end
 
