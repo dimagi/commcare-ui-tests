@@ -19,7 +19,7 @@ Scenario: Test incomplete form creation
 	#Cancel Update of Incomplete form
 	Then I press "Languages"
 	Then I press "Go To Start"
-	Then I wait
+	Then I wait for form to load
 	#Press Enter a name to open keyboard
 	Then I press "Enter a name:"
 	Then I enter test
