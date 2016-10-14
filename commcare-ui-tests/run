@@ -1,0 +1,49 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then
+  echo "Command arg format: ['master' OR odk PR number] [tag OR feature path]"
+  echo "for example:"
+  echo "    ./run master @Basic"
+  echo "    ./run release @Integration"
+  echo "    ./run 1059 feature/lookup_table_sync.feature"
+  echo "    ./run version feature/lookup_table_sync.feature 2.29"
+  exit
+fi
+
+BUILD=$1
+TAG=$2
+VERSION=$3
+
+rm "*.png"
+rm -rf "reports"
+rm "commcare.apk"
+
+# download/build apk
+if [ "$BUILD" == "master" ]; then
+  echo "downloading latest master apk from jenkins"
+  wget "https://jenkins.dimagi.com/job/commcare-android/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
+  bundler exec calabash-android resign commcare.apk
+elif [ "$BUILD" == "version" ]; then
+  echo "downloading latest master apk from jenkins"
+  wget "https://jenkins.dimagi.com/job/commcare-android-$VERSION/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
+  bundler exec calabash-android resign commcare.apk
+elif [ "$BUILD" == "release" ]; then
+  echo "downloading latest release apk from jenkins"
+  URL=$(python3 scripts/get_latest_release_url.py)
+  wget $URL -O commcare.apk
+  bundler exec calabash-android resign commcare.apk
+else
+  echo "building from pull request"
+  ./scripts/build_pr_apk.py $BUILD
+fi
+
+# unlock phone
+adb shell input keyevent 82
+
+# run tests
+if [[ $TAG = \@* ]] ; then
+  FEATURE="--tags $TAG"
+else
+  FEATURE=$TAG
+fi
+bundler exec calabash-android run commcare.apk $FEATURE --format junit --out reports
