@@ -4,6 +4,7 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
+  wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
   touch("android.support.v7.widget.CardView index:0")
 end
 
@@ -31,8 +32,11 @@ Then (/^I logout/) do
   if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
   end
-  index = query("android.support.v7.widget.CardView").length - 1
-  touch("android.support.v7.widget.CardView index:#{index}")
+  while true
+    break if element_exists("* {text CONTAINS[c] 'Logged in'}")
+    pan_up
+  end
+  touch("* {text CONTAINS[c] 'Log out'}")
 end
 
 Then (/^I exit form entry$/) do
