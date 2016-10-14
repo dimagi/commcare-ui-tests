@@ -24,7 +24,7 @@ Then (/^I save form as incomplete$/) do
     if element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
       tap_when_element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
     end
-	wait_for_element_exists("android.support.v7.widget.CardView index:0", timeout: 60)
+    wait_for_element_exists("android.support.v7.widget.CardView index:0", timeout: 60)
 end
 
 Then (/^I logout/) do
