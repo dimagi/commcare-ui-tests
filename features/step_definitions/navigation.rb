@@ -1,3 +1,7 @@
+Then (/^I select "([^\"]*)" menu item$/) do |entry|
+  press_menu_button()
+  touch("* {text CONTAINS[c] '#{entry}'}")
+end
 
 Then (/^I press start$/) do
   touch("android.support.v7.widget.CardView index:0")
@@ -8,6 +12,11 @@ Then (/^I open incomplete forms$/) do
   wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
 end
 
+Then (/^I open saved forms$/) do
+  touch("* {text CONTAINS[c] 'Saved'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
+end
+
 Then (/^I save form as incomplete$/) do
     hide_soft_keyboard()
     press_back_button
@@ -15,6 +24,7 @@ Then (/^I save form as incomplete$/) do
     if element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
       tap_when_element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
     end
+	wait_for_element_exists("android.support.v7.widget.CardView index:0", timeout: 60)
 end
 
 Then (/^I logout/) do
