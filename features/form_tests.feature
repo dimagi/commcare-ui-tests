@@ -8,6 +8,7 @@ Scenario: Test incomplete form creation
   # Scenario covers Incomplete Forms 1 through 5
   Then I install the ccz app at "languages.ccz"
   Then I login with username "user_with_no_data" and password "123"
+
   # Create Incomplete Form
   Then I press start
   Then I select module "Basic Form Tests"
@@ -96,13 +97,21 @@ Scenario: Sync Tests
   Then Submit
 
   # confirm unsent form
+  Then I wait
+  Then I press start
+  Then I wait
+  Then I go back
   Then I see the text "Unsent Forms: 1"
-  Then I logout
   Then I toggle airplane mode
+  # wait for wifi to connect again
+  Then I wait for 3 seconds
 
   # confirm form was sent
   Then I sync
   Then I don't see the text "Unsent Forms:"
+  Then I press start
+  Then I wait
+  Then I go back
   Then I see the text "You last synced with the server:"
 
   Then I open saved forms
@@ -120,6 +129,7 @@ Scenario: Save case forms
   Then I select case "Snow"
   Then I press the "Continue" button
   Then I wait for form to load
+  Then I go back
   Then I save form as incomplete
 
   # testing notification for having incomplete form for case already made
