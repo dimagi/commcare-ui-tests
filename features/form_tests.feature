@@ -64,6 +64,9 @@ Scenario: Save in form from menu
 
   Then I enter text "test"
   Then I select "Save Form" menu item
+  Then I wait
+  Then I exit form entry
+  Then I see the text "Basic Form Tests"
   Then I go back to the home screen
 
   Then I wait
@@ -72,9 +75,6 @@ Scenario: Save in form from menu
   Then I press "Go To Start"
 
   Then I see the text "test"
-
-  Then I exit form entry
-  Then I see the text "Basic Form Tests"
 
 Scenario: Form Entry Quirks
   # Form Entry Quirks 1

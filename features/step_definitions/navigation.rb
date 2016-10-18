@@ -46,6 +46,7 @@ Then (/^I exit form entry$/) do
     if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
       tap_when_element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
     end
+    sleep 1
 end
 
 Then (/^I go back to the home screen$/) do
