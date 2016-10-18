@@ -4,6 +4,7 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
+  wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
   touch("android.support.v7.widget.CardView index:0")
 end
 
@@ -12,12 +13,30 @@ Then (/^I open incomplete forms$/) do
   wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
 end
 
+Then (/^I open saved forms$/) do
+  touch("* {text CONTAINS[c] 'Saved'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
+end
+
+Then (/^I save form as incomplete$/) do
+    hide_soft_keyboard()
+    press_back_button
+
+    if element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
+      tap_when_element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
+    end
+    wait_for_element_exists("android.support.v7.widget.CardView index:0", timeout: 60)
+end
+
 Then (/^I logout/) do
   if current_activity() != "CommCareHomeActivity"
     step("I go back to the home screen")
   end
-  index = query("android.support.v7.widget.CardView").length - 1
-  touch("android.support.v7.widget.CardView index:#{index}")
+  while true
+    break if element_exists("* {text CONTAINS[c] 'Logged in'}")
+    pan_up
+  end
+  touch("* {text CONTAINS[c] 'Log out'}")
 end
 
 Then (/^I exit form entry$/) do
@@ -27,6 +46,7 @@ Then (/^I exit form entry$/) do
     if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
       tap_when_element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
     end
+    sleep 1
 end
 
 Then (/^I go back to the home screen$/) do
@@ -42,6 +62,18 @@ Then (/^I go back to the home screen$/) do
     # checked immediately
     sleep 1
   end
+end
+
+Then (/^I go to Saved Forms/) do
+  if current_activity() != "CommCareHomeActivity"
+    step("I go back to the home screen")
+  end
+  while true
+    pan_up
+    break if element_exists("* {text CONTAINS[c] 'Saved'}")
+  end
+  tap_when_element_exists("* {text CONTAINS[c] 'Saved'}")
+  wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
 end
 
 # ----------------------------

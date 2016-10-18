@@ -1,11 +1,3 @@
-Then (/^I enter my name$/) do
-  keyboard_enter_text("Will")
-end
-
-Then (/^I enter test$/) do
-  keyboard_enter_text("test")
-end
-
 Then (/^I close the keyboard$/) do
   hide_soft_keyboard()
 end
@@ -25,6 +17,10 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
   clear_text_in("android.widget.EditText id:'edit_password'")
   enter_text("android.widget.EditText id:'edit_password'", password)
+  tap_when_element_exists("* id:'login_button'")
+end
+
+Then (/^I press login$/) do
   tap_when_element_exists("* id:'login_button'")
 end
 
@@ -88,3 +84,11 @@ Then (/^I open the options menu$/) do
   press_menu_button()
 end
 
+Then (/^I select case "([^\"]*)"$/) do |text|
+  wait_for_element_exists("* id:'screen_entity_select_list'")
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
+Then (/^I wait for form to load/) do
+  wait_for_element_exists("* id:'nav_pane'")
+end
