@@ -26,7 +26,7 @@ Scenario: Test incomplete form creation
   Then I wait for form to load
   # Press Enter a name to open keyboard
   Then I press "Enter a name:"
-  Then I enter test
+  Then I enter text "test"
   Then I go back to the home screen
 
   Then I open incomplete forms
@@ -36,7 +36,7 @@ Scenario: Test incomplete form creation
 
   Then I wait
   Then I press "Enter a name:"
-  Then I enter test
+  Then I enter text "test"
   Then I go back
   Then I save form as incomplete
 
@@ -44,7 +44,14 @@ Scenario: Test incomplete form creation
   Then I press "Languages"
   Then I press "Go To Start"
   Then I see the text "test"
-  Then I exit form entry
+
+  # check that the form moved from incomplete to saved
+  Then Submit
+  Then I open saved forms
+  Then I see the text "Languages"
+  Then I go back to the home screen
+  Then I open incomplete forms
+  Then I don't see the text "Languages"
 
 Scenario: Save in form from menu
   # Incomplete Forms 6
@@ -55,7 +62,7 @@ Scenario: Save in form from menu
   Then I select module "Basic Form Tests"
   And I select form "Languages"
 
-  Then I enter test
+  Then I enter text "test"
   Then I select "Save Form" menu item
   Then I go back to the home screen
 
@@ -65,7 +72,9 @@ Scenario: Save in form from menu
   Then I press "Go To Start"
 
   Then I see the text "test"
-  Then I go back to the home screen
+
+  Then I exit form entry
+  Then I see the text "Basic Form Tests"
 
 Scenario: Form Entry Quirks
   # Form Entry Quirks 1
@@ -129,6 +138,8 @@ Scenario: Save case forms
   Then I select case "Snow"
   Then I press the "Continue" button
   Then I wait for form to load
+  Then Next
+  Then I enter text "hello"
   Then I go back
   Then I save form as incomplete
 
@@ -147,6 +158,8 @@ Scenario: Save case forms
   Then I press the "No" button
 
   Then I select option from single-select with text "A"
+  Then Next
+  Then I don't see the text "hello"
   Then I save form as incomplete
 
   # Deleting one incomplete form for case
