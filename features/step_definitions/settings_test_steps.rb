@@ -1,4 +1,3 @@
-
 Then (/^After selecting the "([^\"]*)" item in the CheckedTextView list for the "([^\"]*)" setting, rotate, re-enter, and make sure it is still selected$/) do |item_text, setting_name|
 	
 	# Verify that the window closed and we return to the Application Preferences screen
@@ -34,4 +33,12 @@ Then (/^I see the expected recovery mode UI$/) do
 	if query("button text:'Attempt Reinstall' isEnabled:false").length != 1
 		fail("Attempt Reinstall button not found")
 	end
+end
+
+Then (/^I clear user data$/) do
+    step("I go back to the home screen")
+    press_menu_button()
+    touch("* {text CONTAINS[c] 'Advanced'}")
+    touch("* {text CONTAINS[c] 'Clear User Data'}")
+    touch("* {text CONTAINS[c] 'OK'}")
 end
