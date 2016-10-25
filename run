@@ -37,6 +37,14 @@ else
   ./scripts/build_pr_apk.py $BUILD
 fi
 
+# make sure we aren't in airplane mode
+IN_AIRPLANE=$(adb shell settings get global airplane_mode_on)
+if [[ $IN_AIRPLANE -eq 1 ]]; then
+  adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5
+  adb shell input keyevent 19 && sleep 0.3 && adb shell input keyevent 23
+  adb shell input keyevent 4
+fi
+
 # unlock phone
 adb shell input keyevent 82
 
