@@ -38,7 +38,7 @@ else
 fi
 
 # make sure we aren't in airplane mode
-IN_AIRPLANE=$(adb shell settings get global airplane_mode_on)
+IN_AIRPLANE=$(adb shell settings get global airplane_mode_on | dos2unix)
 if [[ $IN_AIRPLANE -eq 1 ]]; then
   adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5
   adb shell input keyevent 19 && sleep 0.3 && adb shell input keyevent 23
