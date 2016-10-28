@@ -1,11 +1,3 @@
-Then (/^I enter my name$/) do
-  keyboard_enter_text("Will")
-end
-
-Then (/^I enter test$/) do
-  keyboard_enter_text("test")
-end
-
 Then (/^I close the keyboard$/) do
   hide_soft_keyboard()
 end

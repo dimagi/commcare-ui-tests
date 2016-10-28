@@ -7,7 +7,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I login with username "settings.test" and password "123"
 
 	# NAVIGATE TO MAIN SETTINGS MENU > SERVER SETTINGS
-	Then I select "Settings" from the menu
+	Then I select "Settings" menu item
 	Then I see the text "CommCare > Application Preferences"
 	Then I touch the "Server Settings" text
 
@@ -80,7 +80,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
-	Then I select "Settings" from the menu
+	Then I select "Settings" menu item
 	Then I see the text "CommCare > Application Preferences"
 	
 	Then I touch the "Fuzzy Search Matches" text
@@ -100,7 +100,7 @@ Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
-	Then I select "Settings" from the menu
+	Then I select "Settings" menu item
 	Then I see the text "CommCare > Application Preferences"
 	
 	Then I touch the "Auto Update Frequency" text
@@ -122,7 +122,7 @@ Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"
-	Then I select "Settings" from the menu
+	Then I select "Settings" menu item
 	Then I see the text "CommCare > Application Preferences"
 	
 	Then I touch the "Set Print Template" text
