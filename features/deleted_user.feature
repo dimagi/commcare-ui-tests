@@ -1,4 +1,4 @@
-Feature: Verify that a deleted user errors correctly
+Feature: Verify that syncing with a deleted user errors correctly
 
 @Integration @2.31
 Scenario: Create and restore a user, then delete and sync
