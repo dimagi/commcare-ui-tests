@@ -33,3 +33,7 @@ end
 Then (/^I install the "([^\"]*)" apk$/) do |apk|
   system("adb install -r features/resource_files/apks/%s.apk" % apk)
 end
+
+Then (/^I open the "([^\"]*)" app$/) do |path|
+  system("adb shell am start -n %s" % path)
+end
