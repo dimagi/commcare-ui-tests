@@ -48,7 +48,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I select module "Module One"
     And I select form "Example 1"
     Then I see the text "Question with audio"
-    Then I see at least one element of type "AudioButton"
+    Then I see at least one element of type "AudioPlaybackButton"
     Then I go back to the home screen
 
     # make sure case list column was added
