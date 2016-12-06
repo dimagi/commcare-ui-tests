@@ -36,7 +36,7 @@ end
 
 Then (/^I sync, without waiting for completion$/) do
   sleep 1
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
