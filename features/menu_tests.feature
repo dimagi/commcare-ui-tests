@@ -74,8 +74,8 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I select "Advanced" menu item
 	Then I touch the "Validate Media" text
 	Then I see the text "Verifying Multimedia"
-	Then I wait to see "CommCare > Advanced"
-	Then I go back to the home screen  
+	# Wait until we are back on the home screen
+	Then I wait to see "Start"
 
 	# Just verifying that the buttons work properly; the actual feature is tested elsewhere
 	Then I select "Advanced" menu item
@@ -125,7 +125,7 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I select "Advanced" menu item
 	Then I touch the "Clear User Data" text
 	Then I press view with id "positive_button"
-	Then I verify that the current activity is "LoginActivity"
+	Then I see the text "Welcome back! Please log in."
 
 
 
