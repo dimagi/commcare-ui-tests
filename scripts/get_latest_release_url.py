@@ -10,9 +10,12 @@ import github3
 
 def main():
     repo = github3.repository('dimagi', 'commcare-android')
-    latest_release = repo.latest_release()
-    apk_assets = [a for a in latest_release.assets() if is_release_apk(a.name)]
-    print(apk_assets[0].browser_download_url)
+    # Find first non-lts release
+    for release in repo.releases():
+        apk_assets = [a for a in release.assets() if is_release_apk(a.name)]
+        if len(apk_assets) > 0:
+            print(apk_assets[0].browser_download_url)
+            return
 
 
 def is_release_apk(name):
