@@ -7,6 +7,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I login with username "settings.test" and password "123"
 
 	# NAVIGATE TO MAIN SETTINGS MENU > SERVER SETTINGS
+	Then I wait
 	Then I select "Settings" menu item
 	Then I see the text "CommCare > Application Preferences"
 	Then I touch the "Server Settings" text
@@ -21,7 +22,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
 	# DATA SERVER
@@ -34,7 +35,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
 	# SUBMISSION SERVER
@@ -47,7 +48,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/receiver/"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
 	# KEY SERVER
@@ -60,7 +61,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://pact.dimagi.com/keys/getkey"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
 	# FORM RECORD SERVER
@@ -73,7 +74,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I see an empty EditText
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I touch the "OK" text
+	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
 @QA

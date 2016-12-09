@@ -1,4 +1,5 @@
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
+  sleep 2
   press_menu_button()
   touch("* {text CONTAINS[c] '#{entry}'}")
 end

@@ -29,7 +29,9 @@ Scenario: Searching and sorting the case list
 
     #persist on rotation
     Then I rotate to landscape
+    Then I wait
     Then I close the keyboard
+    Then I wait
     
     Then I see "1 of 4"   
     Then I see "ch"

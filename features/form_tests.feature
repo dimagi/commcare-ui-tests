@@ -118,7 +118,7 @@ Scenario: Sync Tests
   Then I see the text "Unsent Forms: 1"
   Then I toggle airplane mode
   # wait for wifi to connect again
-  Then I wait for 3 seconds
+  Then I wait for 10 seconds
 
   # confirm form was sent
   Then I sync

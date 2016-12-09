@@ -50,6 +50,7 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I see the text "About CommCare"
 	Then I rotate to portrait
 	Then I press view with id "button1"
+	Then I wait
 
 	Then I select "Advanced" menu item
 	Then I verify that the current activity is "AdvancedActionsActivity"
@@ -58,7 +59,6 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I go back to the home screen
 
 	Then I select "Settings" menu item
-	Then I verify that the current activity is "CommCarePreferences"
 	Then I see the text "CommCare > Application Preferences"
 	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
 	Then I go back to the home screen
