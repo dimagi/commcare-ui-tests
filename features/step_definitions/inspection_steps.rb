@@ -84,7 +84,7 @@ end
 Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
   count = query("#{element}").length
   if count < 1
-    fail("Didn't find any occurrences of %s" % text)
+    fail("Didn't find any occurrences of a %s element" % element)
   end
 end
 

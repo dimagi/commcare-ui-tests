@@ -7,7 +7,7 @@ Feature: Fixtures
     Then I press start
     Then I select module "Fixtures"
     Then I select form "Fixtures Form"
-    Then I wait for form entry
+    Then I wait for form to load
     Then Next
     # Should error
     Then I should see "Error Occurred"
@@ -19,7 +19,7 @@ Feature: Fixtures
     Then I press start
     Then I select module "Fixtures"
     Then I select form "Fixtures Form"
-    Then I wait for form entry
+    Then I wait for form to load
     Then Next
     Then I toggle checkbox number 1
     Then I toggle checkbox number 2
@@ -40,7 +40,7 @@ Feature: Fixtures
     Then I press start
     Then I select module "Fixtures"
     Then I select form "Fixtures Form"
-    Then I wait for form entry
+    Then I wait for form to load
     Then Next
     Then I toggle checkbox number 1
     Then I toggle checkbox number 2
@@ -76,7 +76,9 @@ Feature: Fixtures
     Then I press start
     Then I select module "Fixtures"
     Then I select form "1MB Fixture"
-    Then I wait for form entry
+    Then I wait for form to load
+    # AMS - test fails without this extra wait step, I think just because of how slow the form is
+    Then I wait 
     Then Next
     Then I should see "Please select an option"
     Then I touch the "Increase Enalapril" text

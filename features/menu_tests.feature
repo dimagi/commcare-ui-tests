@@ -50,6 +50,7 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I see the text "About CommCare"
 	Then I rotate to portrait
 	Then I press view with id "button1"
+	Then I wait
 
 	Then I select "Advanced" menu item
 	Then I verify that the current activity is "AdvancedActionsActivity"
@@ -58,7 +59,6 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I go back to the home screen
 
 	Then I select "Settings" menu item
-	Then I verify that the current activity is "CommCarePreferences"
 	Then I see the text "CommCare > Application Preferences"
 	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
 	Then I go back to the home screen
@@ -74,8 +74,8 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I select "Advanced" menu item
 	Then I touch the "Validate Media" text
 	Then I see the text "Verifying Multimedia"
-	Then I wait to see "CommCare > Advanced"
-	Then I go back to the home screen  
+	# Wait until we are back on the home screen
+	Then I wait to see "Start"
 
 	# Just verifying that the buttons work properly; the actual feature is tested elsewhere
 	Then I select "Advanced" menu item
@@ -125,7 +125,7 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I select "Advanced" menu item
 	Then I touch the "Clear User Data" text
 	Then I press view with id "positive_button"
-	Then I verify that the current activity is "LoginActivity"
+	Then I see the text "Welcome back! Please log in."
 
 
 
