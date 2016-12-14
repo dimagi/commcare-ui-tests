@@ -1,6 +1,7 @@
 Feature: Fixtures
 
   @QA
+  @AWS
   Scenario: Ensure that we error cleanly when missing a fixture
     Then I install the ccz app at "fixtures.ccz"
     Then I login with username "fixtures_fails" and password "123"
@@ -14,6 +15,7 @@ Feature: Fixtures
     Then I should see "XPath evaluation"
 
   @QA
+  @AWS
   Scenario: Ensure that we can use fixtures correctly, and that fixtures work in saved forms
     Then I login with username "fixtures_works" and password "123"
     Then I press start
@@ -35,6 +37,7 @@ Feature: Fixtures
     Then I should see "Saugus"
 
   @QA
+  @AWS
   Scenario: Ensure that fixture filtering works
     Then I login with username "fixtures_works" and password "123"
     Then I press start
@@ -71,6 +74,7 @@ Feature: Fixtures
     Then Submit
 
   @QA
+  @AWS
   Scenario: Ensure that 1MB Fixtures Work
     Then I login with username "fixtures_1MB" and password "123"
     Then I press start
