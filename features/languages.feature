@@ -1,5 +1,5 @@
 Feature: Languages
-@QA @Languages
+@QA @Languages @AWS
 Scenario: Ensure you can change languages in CommCare
 	Then I install the ccz app at "languages.ccz"
 	Then I login with username "user_with_no_data" and password "123"
@@ -52,7 +52,7 @@ Scenario: Ensure you can change languages in CommCare
 	Then I select form "Hin: Languages"
 	Then I go back to the home screen
 
-@QA
+@QA @AWS
 Scenario: Update test
 	#Setting language on device to English
 	#Seem to get logged out due to new scenario, so adding login steps.

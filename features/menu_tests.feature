@@ -1,6 +1,6 @@
 Feature: Test all primary CommCare menu options
 
-@QA
+@QA @AWS
 Scenario: Test that all actions available from the home screen options menu work properly 
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -64,7 +64,7 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I go back to the home screen
 
 
-@QA
+@QA @AWS
 Scenario: Test that all actions available from the Advanced Actions menu work properly
 
 	Then I login with username "settings.test" and password "123"
