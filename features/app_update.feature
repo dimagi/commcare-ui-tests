@@ -23,6 +23,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I select "Update App" menu item
     Then I see the text "Current version: 2"
     Then I touch the "Stop checking" text
+    Then I wait
 
     Then I rotate to portrait
     Then I touch the "Recheck" text
