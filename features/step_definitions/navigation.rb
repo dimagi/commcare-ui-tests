@@ -1,4 +1,5 @@
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
+  sleep 2
   press_menu_button()
   touch("* {text CONTAINS[c] '#{entry}'}")
 end
@@ -29,7 +30,7 @@ Then (/^I save form as incomplete$/) do
 end
 
 Then (/^I logout/) do
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   while true
@@ -50,7 +51,7 @@ Then (/^I exit form entry$/) do
 end
 
 Then (/^I go back to the home screen$/) do
-  while current_activity() != "CommCareHomeActivity"
+  while current_activity() != "StandardHomeActivity"
     press_back_button
 
     if element_exists("* {text CONTAINS[c] 'EXIT WITHOUT SAVING'}")
@@ -65,7 +66,7 @@ Then (/^I go back to the home screen$/) do
 end
 
 Then (/^I go to Saved Forms/) do
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   while true
