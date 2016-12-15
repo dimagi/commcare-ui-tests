@@ -1,6 +1,6 @@
 Feature: Test all form entry settings
 
-@QA @AWS
+@AWS
 Scenario: Test the 'Save Form' setting
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -22,7 +22,7 @@ Scenario: Test the 'Save Form' setting
 	Then Next
 	Then I see the text "Test Value 123"
 
-@QA @AWS
+@AWS
 Scenario: Test the 'Go To Prompt' setting
 
 	Then I login with username "settings.test" and password "123"
@@ -37,7 +37,7 @@ Scenario: Test the 'Go To Prompt' setting
 	Then I touch the "Go To End" text
 	Then I see the text "FINISH"
 
-@QA @AWS
+@AWS
 Scenario: Test the 'Text Size' setting
 
 	Then I login with username "settings.test" and password "123"
@@ -70,7 +70,7 @@ Scenario: Test the 'Text Size' setting
 	Then I touch the "Text Font Size" text
 	Then I touch the "Medium" text
 
-@QA @AWS
+@AWS
 Scenario: Test the 'Change Language' setting
 
 	Then I login with username "settings.test" and password "123"

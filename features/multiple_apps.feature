@@ -1,5 +1,5 @@
 Feature: Multiple Applications Test
-@QA @Multiple_Apps @Test
+@Test
 Scenario: Install Multiple Applications to Device
 	Then I install the ccz app at "languages.ccz"
 	Then I select "Go to App Manager" menu item
