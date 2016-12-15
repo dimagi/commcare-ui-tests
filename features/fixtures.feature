@@ -82,7 +82,7 @@ Feature: Fixtures
     Then I wait for 10 seconds
     Then I should see "This form contains a 1MB fixture."
     Then Next
-    Then I wait for 10 seconds
+    Then I wait for 20 seconds
     Then I should see "Please select an option"
     Then I touch the "Increase Enalapril" text
     Then Submit

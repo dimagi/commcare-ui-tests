@@ -1,5 +1,5 @@
 Feature: Languages
-@QA @Languages @AWS
+@QA @AWS
 Scenario: Ensure you can change languages in CommCare
 	Then I install the ccz app at "languages.ccz"
 	Then I login with username "user_with_no_data" and password "123"

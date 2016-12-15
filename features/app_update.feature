@@ -1,4 +1,5 @@
 Feature: App update test
+# Not AWS due to airplane mode
 @Integration @QA
 Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
