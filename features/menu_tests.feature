@@ -1,6 +1,6 @@
 Feature: Test all primary CommCare menu options
 
-@AWS @Test
+@AWS
 Scenario: Test that all actions available from the home screen options menu work properly 
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
