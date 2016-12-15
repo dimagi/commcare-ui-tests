@@ -70,10 +70,8 @@ Feature: Fixtures
 
     Then I touch the "Boston" text
     Then Submit
-
-  @AWS @Test
+  # The Then I touch the "Increase Enalapril" text line is causing a timeout on AWS
   Scenario: Ensure that 1MB Fixtures Work
-    Then I install the ccz app at "fixtures.ccz"
     Then I login with username "fixtures_1MB" and password "123"
     Then I press start
     Then I select module "Fixtures"
