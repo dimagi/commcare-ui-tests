@@ -1,6 +1,5 @@
 Feature: Test dialog creation
-@Basic
-@AWS
+@Basic @AWS @Test
 Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
@@ -15,7 +14,8 @@ Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I rotate to portrait
     Then I touch the "OK" text
 
-    Then I select form "Error on repeat creation"
+    # Change to module since nav_pane doesn't get foreground
+    Then I select module "Error on repeat creation"
     Then Next
 
     # check the repeat creation dialog
