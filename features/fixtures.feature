@@ -11,7 +11,7 @@ Feature: Fixtures
     Then Next
     # Should error
     Then I should see "Error Occurred"
-    Then I should see "XPath evaluation"
+    Then I should see "Make sure the 'Test' lookup table is available"
 
   @QA @AWS @Test
   Scenario: Ensure that we can use fixtures correctly, and that fixtures work in saved forms
@@ -80,6 +80,6 @@ Feature: Fixtures
     # AMS - test fails without this extra wait step, I think just because of how slow the form is
     Then I wait 
     Then Next
-    Then I should see "Please select an option"
+    # Then I should see "Please select an option"
     Then I touch the "Increase Enalapril" text
     Then Submit
