@@ -1,6 +1,6 @@
 Feature: Test all primary CommCare menu options
 
-@QA @AWS
+@QA @AWS @Test
 Scenario: Test that all actions available from the home screen options menu work properly 
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -40,8 +40,10 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I select "Change Language" menu item
 	Then I see a choice dialog with 2 panels
 	Then I rotate to landscape
+	Then I wait 5 seconds
 	Then I see a choice dialog with 2 panels
 	Then I rotate to portrait
+	Then I wait 5 seconds
 	Then I go back
 
 	Then I select "About CommCare" menu item

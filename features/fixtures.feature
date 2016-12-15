@@ -71,7 +71,7 @@ Feature: Fixtures
     Then I touch the "Boston" text
     Then Submit
 
-  @QA @AWS
+  @QA @AWS @Test
   Scenario: Ensure that 1MB Fixtures Work
     Then I login with username "fixtures_1MB" and password "123"
     Then I press start

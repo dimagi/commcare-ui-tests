@@ -1,6 +1,6 @@
 Feature: Test settings on the "Application Preferences" screen
 
-@QA @AWS
+@QA @AWS @Test
 Scenario: Verify that all server settings menus can be opened and edited
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
