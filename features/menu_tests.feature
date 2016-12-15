@@ -63,8 +63,8 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
 	Then I go back to the home screen
 
-
-@QA @AWS
+# Not AWS due to airplane mode
+@QA
 Scenario: Test that all actions available from the Advanced Actions menu work properly
 
 	Then I login with username "settings.test" and password "123"
