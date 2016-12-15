@@ -79,10 +79,10 @@ Feature: Fixtures
     Then I select form "1MB Fixture"
     Then I wait for form to load
     # AMS - test fails without this extra wait step, I think just because of how slow the form is
-    Then I wait 
-    Then Next
+    Then I wait for 10 seconds
     Then I should see "This form contains a 1MB fixture."
     Then Next
+    Then I wait for 10 seconds
     Then I should see "Please select an option"
     Then I touch the "Increase Enalapril" text
     Then Submit
