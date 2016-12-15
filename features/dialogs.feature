@@ -1,6 +1,5 @@
 Feature: Test dialog creation
-@Basic
-@AWS
+@Basic @AWS @Test
 Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
