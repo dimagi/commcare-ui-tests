@@ -73,6 +73,7 @@ Feature: Fixtures
 
   @AWS @Test
   Scenario: Ensure that 1MB Fixtures Work
+    Then I install the ccz app at "fixtures.ccz"
     Then I login with username "fixtures_1MB" and password "123"
     Then I press start
     Then I select module "Fixtures"
