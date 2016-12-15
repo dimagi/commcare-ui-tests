@@ -1,6 +1,6 @@
 Feature: Test settings on the "Application Preferences" screen
 
-@AWS
+@AWS @Test
 Scenario: Verify that all server settings menus can be opened and edited
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -77,7 +77,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I press view with id "button1"
 	Then I see the text "CommCare > Server Settings"
 
-@AWS
+@AWS @Test
 Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
