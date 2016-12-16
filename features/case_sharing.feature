@@ -36,7 +36,7 @@ Scenario: Create a case with user 1
     Then I see the text "First Case"
     Then I touch the "First Case" text
 
-@AWS @Test
+@AWS
 Scenario: Create a case with user 2, and update user 1 case    
     Then I login with username "case_sharing_2" and password "123"
     Then I press start
