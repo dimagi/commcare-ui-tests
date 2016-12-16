@@ -6,8 +6,12 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
-  wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
-  touch("android.support.v7.widget.CardView index:0")
+  while true
+    hide_soft_keyboard()
+    break if element_exists("* id:'screen_suite_menu_list'")
+    wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
+    touch("android.support.v7.widget.CardView index:0")
+  end
 end
 
 Then (/^I open incomplete forms$/) do
