@@ -1,6 +1,7 @@
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
   sleep 2
   press_menu_button()
+  sleep 2
   touch("* {text CONTAINS[c] '#{entry}'}")
 end
 
@@ -65,7 +66,7 @@ Then (/^I go back to the home screen$/) do
   end
 end
 
-Then (/^I go to Saved Forms/) do
+Then (/^I go to Saved Forms$/) do
   if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
@@ -75,6 +76,20 @@ Then (/^I go to Saved Forms/) do
   end
   tap_when_element_exists("* {text CONTAINS[c] 'Saved'}")
   wait_for_element_exists("* id:'screen_entity_select_list'", timeout: 60)
+end
+
+Then (/^I go to back to Server Settings$/) do
+  while true
+    hide_soft_keyboard()
+    break if element_exists("* {text CONTAINS[c] 'CommCare > Server Settings'}")
+    if element_exists("* {text CONTAINS[c] 'OK'}")
+      touch("* {text CONTAINS[c] 'OK'}")
+    end
+    if element_exists("* {text CONTAINS[c] 'Cancel'}")
+      touch("* {text CONTAINS[c] 'Cancel'}")
+    end
+    sleep 1
+  end
 end
 
 # ----------------------------
