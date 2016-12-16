@@ -67,10 +67,10 @@ Scenario: Ensure app update can be obtained from HQ
 
     # turn off wifi and try updating
     Then I go back
-    Then I turn off wifi
+    Then I toggle airplane mode
     Then I wait
     Then I select "Update App" menu item
     Then I wait
     Then I check that id "button" is disabled
     Then I see the text "No network connectivity"
-    Then I turn on wifi
+    Then I toggle airplane mode
