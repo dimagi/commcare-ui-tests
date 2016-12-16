@@ -1,6 +1,6 @@
 Feature: Test settings on the "Application Preferences" screen
 
-@Test
+@AWS
 Scenario: Verify that all server settings menus can be opened and edited
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -71,7 +71,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	# Verify that we are back on the Server Settings screen	
 	Then I go to back to Server Settings
 
- @Test
+@AWS
 Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -91,7 +91,7 @@ Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-@Test
+@AWS
 Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -113,7 +113,7 @@ Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-@Test
+@AWS
 Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"

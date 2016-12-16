@@ -1,6 +1,6 @@
 Feature: Case Sharing Features
 
-@AWS @Test
+@AWS
 Scenario: Obtain a clean environment
     Then I install the ccz app at "case_sharing.ccz"
     Then I login with username "case_sharing_1" and password "123"
@@ -18,7 +18,7 @@ Scenario: Obtain a clean environment
     Then I sync
     
 
-@AWS @Test
+@AWS
 Scenario: Create a case with user 1
     Then I login with username "case_sharing_1" and password "123"
         
@@ -59,7 +59,7 @@ Scenario: Create a case with user 2, and update user 1 case
     Then Submit
     Then I sync
 
-@AWS @Test
+@AWS
 Scenario: Receive User 2 changes and close cases
     Then I login with username "case_sharing_1" and password "123"
     Then I sync
@@ -84,7 +84,7 @@ Scenario: Receive User 2 changes and close cases
     Then Submit
     Then I sync
 
-@AWS @Test
+@AWS
 Scenario: Validate all cases closed
     Then I login with username "case_sharing_2" and password "123"
     Then I sync
