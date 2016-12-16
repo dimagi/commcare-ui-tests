@@ -6,6 +6,8 @@ Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I press start
     Then I select module "Errors"
 
+    # Even though this is a form, need to use "select module" since nav pane isn't focused
+    # due to the error message
     Then I select module "Error on open"
 
     Then I see the text "Error Occurred"
