@@ -1,5 +1,5 @@
 Feature: The Setup Screen
-@AWS
+@AWS @Test
 Scenario: The setup screen is correct
 	Then I see the text "Welcome to CommCare!"
 	Then I see the text "Please choose an installation method below"
