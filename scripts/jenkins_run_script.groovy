@@ -11,8 +11,8 @@ stage('test') {
         echo 'Running tests...'
         for (tag in tagArray) {
             retry(3) {
-                echo 'Testing ${->tag}'
-                build job: 'commcare-odk-tests', parameters: [[$class: 'StringParameterValue', name: 'TAG_NAME', value: '${->tag}']]
+                echo 'Testing ${tag}'
+                build job: 'commcare-odk-tests', parameters: [[$class: 'StringParameterValue', name: 'TAG_NAME', value: '${tag}']]
             }
         }
         currentBuild.result = 'SUCCESS'
