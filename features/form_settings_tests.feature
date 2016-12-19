@@ -1,3 +1,4 @@
+@FormSettings
 Feature: Test all form entry settings
 
 @AWS

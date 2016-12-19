@@ -1,3 +1,4 @@
+@CaseSharing
 Feature: Case Sharing Features
 
 @AWS

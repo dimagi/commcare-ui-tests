@@ -1,3 +1,4 @@
+@Dialogs
 Feature: Test dialog creation
 @AWS
 Scenario: Make sure dialogs create, dismiss, and rotate correctly

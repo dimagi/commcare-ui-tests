@@ -1,3 +1,4 @@
+@CaseListSort
 Feature: List Sorting
     
 @AWS

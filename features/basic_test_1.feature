@@ -1,3 +1,4 @@
+@Setup
 Feature: The Setup Screen
 @AWS @Test
 Scenario: The setup screen is correct

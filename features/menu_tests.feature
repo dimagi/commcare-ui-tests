@@ -1,20 +1,21 @@
+@MenuTests
 Feature: Test all primary CommCare menu options
 
 @AWS
-Scenario: Test that all actions available from the home screen options menu work properly 
+Scenario: Test that all actions available from the home screen options menu work properly
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
 	Then I login with username "settings.test" and password "123"
 
 	Then I open the options menu
-	Then I see the text "Update App" 
+	Then I see the text "Update App"
 	Then I see the text "Saved Forms"
 	Then I see the text "Change Language"
 	Then I see the text "About CommCare"
 	Then I see the text "Advanced"
 	Then I see the text "Settings"
 	Then I rotate to landscape
-	Then I see the text "Update App" 
+	Then I see the text "Update App"
 	Then I see the text "Saved Forms"
 	Then I see the text "Change Language"
 	Then I see the text "About CommCare"
@@ -23,12 +24,12 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I rotate to portrait
 	Then I go back to the home screen
 
-	# Necessary due to some inexplicable behavior in calabash where it isn't able to select anything from the options menu subsequently without this initial call 
+	# Necessary due to some inexplicable behavior in calabash where it isn't able to select anything from the options menu subsequently without this initial call
 	Then I open the options menu
 
 	Then I select "Update App" menu item
 	Then I verify that the current activity is "UpdateActivity"
-	Then I see the text "App is up to date" 
+	Then I see the text "App is up to date"
 	Then I go back to the home screen
 
 	Then I select "Saved Forms" menu item

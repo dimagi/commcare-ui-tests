@@ -1,3 +1,4 @@
+@FormEntry
 Feature: Form Tests
 @AWS
 Scenario: Test incomplete form creation

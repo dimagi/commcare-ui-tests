@@ -1,3 +1,4 @@
+@Fixtures
 Feature: Fixtures
 
   @AWS

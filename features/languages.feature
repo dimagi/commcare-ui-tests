@@ -1,3 +1,4 @@
+@Languages
 Feature: Languages
 @AWS
 Scenario: Ensure you can change languages in CommCare

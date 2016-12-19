@@ -1,3 +1,4 @@
+@Settings
 Feature: Test settings on the "Application Preferences" screen
 
 @AWS

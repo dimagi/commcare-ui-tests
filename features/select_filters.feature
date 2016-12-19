@@ -1,3 +1,4 @@
+@FormFiltering
 Feature: Select Filters
     
 @AWS

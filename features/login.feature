@@ -1,3 +1,4 @@
+@Login
 Feature: Login behavior
 @AWS
 Scenario: Test login logic: error handling, demo mode, and normal behavior

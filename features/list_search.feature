@@ -1,3 +1,4 @@
+@CaseListSearch
 Feature: List Search
 
 @AWS

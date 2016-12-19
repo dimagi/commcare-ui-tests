@@ -1,3 +1,4 @@
+@SessionExpiration
 Feature: User session expiration
 
 @AWS
