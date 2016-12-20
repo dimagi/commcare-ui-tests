@@ -1,4 +1,4 @@
-@FormEntry
+@FormEntry @Test
 Feature: Form Tests
 @AWS
 Scenario: Test incomplete form creation
@@ -98,10 +98,10 @@ Scenario: Form Entry Quirks
   Then I open incomplete forms
   Then I see the text "Constraint"
   Then I go back to the home screen
-@AWS @Test
+@AWS
 Scenario: Sync Tests
   Then I install the ccz app at "languages.ccz"
-  Then I toggle airplane mode
+  Then I throttle the internet
   Then I wait
   Then I login with username "user_with_no_data" and password "123"
 
@@ -118,7 +118,7 @@ Scenario: Sync Tests
   Then I wait
   Then I go back
   Then I see the text "Unsent Forms: 1"
-  Then I toggle airplane mode
+  Then I dethrottle the internet
   # wait for wifi to connect again
   Then I wait for 10 seconds
 
