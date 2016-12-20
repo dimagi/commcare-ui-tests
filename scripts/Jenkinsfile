@@ -2,6 +2,8 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
+def notify = false
+
 stage('test') {
 
     def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
@@ -12,7 +14,10 @@ stage('test') {
         for (tag in tagArray) {
             retry(3) {
                 echo "Testing ${tag}"
-                build job: 'commcare-odk-tests', parameters: [[$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"]]
+                build job: 'commcare-odk-tests',
+                            parameters: [
+                                [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "Nightly"]]
             }
         }
         currentBuild.result = 'SUCCESS'
@@ -20,14 +25,15 @@ stage('test') {
         currentBuild.result = 'FAILURE'
         throw error
     } finally {
-        if (currentBuild.result == 'SUCCESS') {
-            slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
-        } else {
-            slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
-            mail (to: 'mobiledev@dimagi.com',
-                subject: "Amazon device farm tests failed.",
-                body: "Amazon device farm tests failed.");
+        if (notify) {
+            if (currentBuild.result == 'SUCCESS') {
+                slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+            } else {
+                slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+                mail (to: 'mobiledev@dimagi.com',
+                    subject: "Amazon device farm tests failed.",
+                    body: "Amazon device farm tests failed.");
+            }
         }
-
     }
 }
