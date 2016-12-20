@@ -21,9 +21,9 @@ stage('test') {
         throw error
     } finally {
         if (currentBuild.result == 'SUCCESS') {
-            slackSend color: 'good', message: 'Amazon device farm tests passed.'
+            slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
         } else {
-            slackSend color: 'bad', message: 'Amazon device farm tests failed, feel bad!'
+            slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
             mail (to: 'mobiledev@dimagi.com',
                 subject: "Amazon device farm tests failed.",
                 body: "Amazon device farm tests failed.");
