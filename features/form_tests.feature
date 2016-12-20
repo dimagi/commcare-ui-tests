@@ -98,8 +98,9 @@ Scenario: Form Entry Quirks
   Then I open incomplete forms
   Then I see the text "Constraint"
   Then I go back to the home screen
-@AWS
+@AWS @Test
 Scenario: Sync Tests
+  Then I install the ccz app at "languages.ccz"
   Then I toggle airplane mode
   Then I wait
   Then I login with username "user_with_no_data" and password "123"
