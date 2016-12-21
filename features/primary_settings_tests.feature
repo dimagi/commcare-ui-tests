@@ -1,6 +1,7 @@
+@Settings
 Feature: Test settings on the "Application Preferences" screen
 
-@QA @AWS
+@AWS
 Scenario: Verify that all server settings menus can be opened and edited
 
 	Then I install the ccz app at "settings_sheet_tests.ccz"
@@ -22,8 +23,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I press view with id "button1"
-	Then I see the text "CommCare > Server Settings"
+	Then I go to back to Server Settings
 
 	# DATA SERVER
 	Then I touch the "Data Server" text
@@ -35,8 +35,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I press view with id "button1"
-	Then I see the text "CommCare > Server Settings"
+	Then I go to back to Server Settings
 
 	# SUBMISSION SERVER
 	Then I touch the "Submission Server" text
@@ -47,9 +46,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I see the text "CommCare Submission Server"
 	Then I should see text containing "https://www.commcarehq.org/a/ui-tests/receiver/"
 	Then I rotate to portrait
-	# Verify that we are back on the Server Settings screen	
-	Then I press view with id "button1"
-	Then I see the text "CommCare > Server Settings"
+	Then I go to back to Server Settings
 
 	# KEY SERVER
 	Then I touch the "Key Server" text
@@ -61,8 +58,7 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I should see text containing "https://pact.dimagi.com/keys/getkey"
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I press view with id "button1"
-	Then I see the text "CommCare > Server Settings"
+	Then I go to back to Server Settings
 
 	# FORM RECORD SERVER
 	Then I touch the "Form Record Server" text
@@ -74,10 +70,9 @@ Scenario: Verify that all server settings menus can be opened and edited
 	Then I see an empty EditText
 	Then I rotate to portrait
 	# Verify that we are back on the Server Settings screen	
-	Then I press view with id "button1"
-	Then I see the text "CommCare > Server Settings"
+	Then I go to back to Server Settings
 
-@QA
+@AWS
 Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -97,7 +92,7 @@ Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-@QA
+@AWS
 Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
 	Then I login with username "settings.test" and password "123"
@@ -119,7 +114,7 @@ Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 	Then I touch the "Cancel" text
 	Then I see the text "CommCare > Application Preferences"
 
-@QA
+@AWS
 Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
 	
 	Then I login with username "settings.test" and password "123"

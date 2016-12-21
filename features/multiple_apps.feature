@@ -1,5 +1,5 @@
 Feature: Multiple Applications Test
-@QA @Multiple_Apps
+
 Scenario: Install Multiple Applications to Device
 	Then I install the ccz app at "languages.ccz"
 	Then I select "Go to App Manager" menu item
@@ -77,7 +77,7 @@ Scenario: Install Multiple Applications to Device
 	Then I see the text "Test: List Searching"
 	Then I don't see the text "Language Test"
 
-	Scenario: Validate MM
+Scenario: Validate MM
 	#Installing app for MM tests
 	Then I select "Go to App Manager" menu item
 	Then I wait for progress

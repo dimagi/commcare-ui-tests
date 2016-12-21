@@ -1,6 +1,7 @@
+@CaseListSearch
 Feature: List Search
-    
-@QA
+
+@AWS
 Scenario: Searching and sorting the case list 
     Then I install the ccz app at "test_list_search.ccz"
     Then I login with username "test_list_search" and password "123"

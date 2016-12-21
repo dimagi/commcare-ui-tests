@@ -1,6 +1,7 @@
+@CaseListSort
 Feature: List Sorting
     
-@QA @AWS
+@AWS
 Scenario: Sorting Select Lists
     Then I install the ccz app at "test_list_search.ccz"
     Then I login with username "test_sort" and password "123"

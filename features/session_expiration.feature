@@ -1,5 +1,7 @@
+@SessionExpiration
 Feature: User session expiration
-@QA @AWS
+
+@AWS
 Scenario: Ensure form saves and redirect to login on session expiration
     Then I install the ccz app at "session_expiration.ccz"
     Then I login with username "user_with_no_data" and password "123"

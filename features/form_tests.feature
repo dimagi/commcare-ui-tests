@@ -1,5 +1,5 @@
+@FormEntry
 Feature: Form Tests
-@Form_Tests @QA
 @AWS
 Scenario: Test incomplete form creation
   # Using language.ccz instead of ccqa.ccz. Issues with accessing Basic Form of

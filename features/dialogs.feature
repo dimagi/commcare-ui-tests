@@ -1,5 +1,5 @@
+@Dialogs
 Feature: Test dialog creation
-@Basic
 @AWS
 Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I install the ccz app at "integration_test_app.ccz"

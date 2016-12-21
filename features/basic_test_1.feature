@@ -1,5 +1,5 @@
+@Setup
 Feature: The Setup Screen
-@Basic
 @AWS
 Scenario: The setup screen is correct
 	Then I see the text "Welcome to CommCare!"
