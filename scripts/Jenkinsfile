@@ -9,22 +9,26 @@ stage('test') {
     def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration',
                     '@Dialogs', '@MenuTests']
+    def poolArray = ['asus', 'galaxy']
 
     try {
         echo 'Running tests...'
-        for (tag in tagArray) {
-            retry(3) {
-                echo "Testing ${tag}"
-                build job: 'commcare-odk-tests',
-                            parameters: [
-                                [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "Nightly"]]
+        for (pool in poolArray) {
+            for (tag in tagArray) {
+                try {
+                retry(3) {
+                    echo "Testing ${tag}"
+                    build job: 'commcare-odk-tests',
+                                parameters: [
+                                    [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                    [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "pool"]]
+                } catch(error) {
+                    currentBuild.result = 'FAILURE'
+                    throw error
+                }
             }
         }
         currentBuild.result = 'SUCCESS'
-    } catch(error) {
-        currentBuild.result = 'FAILURE'
-        throw error
     } finally {
         if (notify) {
             if (currentBuild.result == 'SUCCESS') {
