@@ -67,7 +67,6 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I go back to the home screen
 
 # Not AWS due to airplane mode
-@AWS
 Scenario: Test that all actions available from the Advanced Actions menu work properly
 
 	Then I login with username "settings.test" and password "123"
