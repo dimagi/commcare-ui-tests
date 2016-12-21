@@ -8,7 +8,7 @@ stage('test') {
 
     def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration',
-                    '@Dialogs', @MenuTests]
+                    '@Dialogs', '@MenuTests']
 
     def tagArray = ["@Test"]
 
