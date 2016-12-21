@@ -1,6 +1,6 @@
 Feature: App update test
 # Not AWS due to airplane mode
-@Integration
+@AWS
 Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
@@ -67,10 +67,10 @@ Scenario: Ensure app update can be obtained from HQ
 
     # turn off wifi and try updating
     Then I go back
-    Then I toggle airplane mode
+    Then I throttle the internet
     Then I wait
     Then I select "Update App" menu item
     Then I wait
     Then I check that id "button" is disabled
     Then I see the text "No network connectivity"
-    Then I toggle airplane mode
+    Then I dethrottle the internet
