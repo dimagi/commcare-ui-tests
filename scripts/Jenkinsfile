@@ -16,12 +16,13 @@ stage('test') {
         for (pool in poolArray) {
             for (tag in tagArray) {
                 try {
-                retry(3) {
-                    echo "Testing ${tag}"
-                    build job: 'commcare-odk-tests',
-                                parameters: [
-                                    [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                    [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "pool"]]
+                    retry(3) {
+                        echo "Testing ${tag}"
+                        build job: 'commcare-odk-tests',
+                                    parameters: [
+                                        [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                        [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "pool"]]
+                    }
                 } catch(error) {
                     currentBuild.result = 'FAILURE'
                     throw error
