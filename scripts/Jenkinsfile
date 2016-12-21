@@ -6,8 +6,9 @@ def notify = false
 
 stage('test') {
 
-    //def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
-    //                '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration', '@Dialogs']
+    def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration',
+                    '@Dialogs', @MenuTests]
 
     def tagArray = ["@Test"]
 
