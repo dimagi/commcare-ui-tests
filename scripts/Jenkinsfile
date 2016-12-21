@@ -10,8 +10,6 @@ stage('test') {
                     '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration',
                     '@Dialogs', '@MenuTests']
 
-    def tagArray = ["@Test"]
-
     try {
         echo 'Running tests...'
         for (tag in tagArray) {
