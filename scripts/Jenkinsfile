@@ -13,11 +13,12 @@ stage('test') {
 
     try {
         echo 'Running tests...'
+        currentBuild.result = 'SUCCESS'
         for (pool in poolArray) {
             for (tag in tagArray) {
                 try {
                     retry(3) {
-                        echo "Testing ${tag}"
+                        echo "Testing ${tag} on ${pool}"
                         build job: 'commcare-odk-tests',
                                     parameters: [
                                         [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
@@ -25,11 +26,9 @@ stage('test') {
                     }
                 } catch(error) {
                     currentBuild.result = 'FAILURE'
-                    throw error
                 }
             }
         }
-        currentBuild.result = 'SUCCESS'
     } finally {
         if (notify) {
             if (currentBuild.result == 'SUCCESS') {
