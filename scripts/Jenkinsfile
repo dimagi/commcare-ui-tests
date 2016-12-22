@@ -21,7 +21,7 @@ stage('test') {
                         build job: 'commcare-odk-tests',
                                     parameters: [
                                         [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                        [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "pool"]]
+                                        [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${tag}"]]
                     }
                 } catch(error) {
                     currentBuild.result = 'FAILURE'
