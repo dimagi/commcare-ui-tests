@@ -17,8 +17,10 @@ stage('test') {
         for (pool in poolArray) {
             for (tag in tagArray) {
                 try {
+                    def stageString = "Testing ${tag} on ${pool}"
+                    stage stageString
+                    echo stageString
                     retry(3) {
-                        echo "Testing ${tag} on ${pool}"
                         build job: 'commcare-odk-tests',
                                     parameters: [
                                         [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
