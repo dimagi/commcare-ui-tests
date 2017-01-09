@@ -110,7 +110,7 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I wait to see "No problems were detected."
 	Then I throttle the internet
 	Then I touch the "Run Connection Test" text
-	Then I see the text "Please run this test again after connecting to Wi-Fi or mobile data."
+	Then I see the text "Please run this test again after verifying your network connection."
 	Then I dethrottle the internet
 	Then I go back to the home screen
 
