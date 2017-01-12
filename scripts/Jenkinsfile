@@ -16,17 +16,20 @@ stage('test') {
         currentBuild.result = 'SUCCESS'
         for (pool in poolArray) {
             for (tag in tagArray) {
+                def stageString = "Testing ${tag} on ${pool}"
                 try {
-                    def stageString = "Testing ${tag} on ${pool}"
-                    stage stageString
-                    echo stageString
-                    retry(3) {
-                        build job: 'commcare-odk-tests',
-                                    parameters: [
-                                        [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                        [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"]]
+                    stage(stageString) {
+                        count = 1
+                        retry(3) {
+                            echo "Testing ${stageString} try number ${count}"
+                            build job: 'commcare-odk-tests',
+                                        parameters: [
+                                            [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"]]
+                        }
                     }
                 } catch(error) {
+                    echo "Failed testing ${stageString}"
                     currentBuild.result = 'FAILURE'
                 }
             }
