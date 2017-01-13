@@ -6,8 +6,8 @@ def notify = true
 
 stage('test') {
 
-    def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration',
+    def tagArray = ['@Login', '@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@SessionExpiration',
                     '@Dialogs', '@MenuTests']
     def poolArray = ['asus']
 
