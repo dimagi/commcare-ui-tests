@@ -64,7 +64,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     # try offline login with bad password
     Then I login with username "user_with_no_data" and password "bad pass", without waiting for completion
 
-    Then I wait for progress
+    Then I wait up to 300 seconds to see "Either the password"
 
     # Check that you see "Either the password you entered was incorrect, or
     # CommCare couldn't reach the server"
