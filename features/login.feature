@@ -64,18 +64,16 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     # try offline login with bad password
     Then I login with username "user_with_no_data" and password "bad pass", without waiting for completion
 
-    Then I wait up to 300 seconds to see "Either the password"
-
     # Check that you see "Either the password you entered was incorrect, or
     # CommCare couldn't reach the server"
-    Then I see the text "Either the password"
+    Then I wait up to 300 seconds to see "Either the password"
 
     # try offline login with bad username
     Then I login with username "fake user" and password "bad pass", without waiting for completion
 
     # Check that you see "Couldn't Reach Server. Please check your network
     # connection"
-    Then I see the text "Reach Server"
+    Then I wait up to 300 seconds to see "Reach Server"
 
     Then I dethrottle the internet
 
