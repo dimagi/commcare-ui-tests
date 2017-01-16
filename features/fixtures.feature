@@ -61,7 +61,7 @@ Feature: Fixtures
     Then Next
     Then I should see "Cambridge"
     Then I should see "Wilmington"
-    Then I should see "Billerica"
+    Then I should see "Billerica"x
     Then Prev
 
     Then I touch the "Suffolk" text
@@ -84,6 +84,6 @@ Feature: Fixtures
     Then Next
     Then I wait for 20 seconds
     Then I should see "Please select an option"
-    Then I touch the "Increase Enalapril" text
+    Then I robust touch the "Increase Enalapril" text
     Then I wait for 10 seconds
     Then Submit
