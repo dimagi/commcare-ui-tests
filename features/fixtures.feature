@@ -61,7 +61,7 @@ Feature: Fixtures
     Then Next
     Then I should see "Cambridge"
     Then I should see "Wilmington"
-    Then I should see "Billerica"x
+    Then I should see "Billerica"
     Then Prev
 
     Then I touch the "Suffolk" text
