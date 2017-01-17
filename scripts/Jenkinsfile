@@ -2,14 +2,12 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
-def notify = true
+def notify = false
 
 stage('test') {
 
-    def tagArray = ['@Fixtures', '@FormSettings', '@Login', '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@SessionExpiration',
-                    '@Dialogs', '@MenuTests']
-    def poolArray = ['asus']
+    def tagArray = ['@Fixtures']
+    def poolArray = ['htc']
 
     try {
         echo 'Running tests...'
