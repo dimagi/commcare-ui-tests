@@ -6,7 +6,9 @@ def notify = false
 
 stage('test') {
 
-    def tagArray = ['@Fixtures']
+    def tagArray = ['@Fixtures', '@FormSettings', '@Login', '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@SessionExpiration',
+                    '@Dialogs', '@MenuTests']
     def poolArray = ['htc']
 
     try {
