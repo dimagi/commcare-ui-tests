@@ -9,7 +9,7 @@ stage('test') {
     def tagArray = ['@Fixtures', '@FormSettings', '@Login', '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@SessionExpiration',
                     '@Dialogs', '@MenuTests']
-    def poolArray = ['htc']
+    def poolArray = ['asus']
 
     try {
         echo 'Running tests...'
