@@ -1,7 +1,7 @@
-@Fixtures
+
 Feature: Fixtures
 
-  @AWS
+  @AWS @Fixtures
   Scenario: Ensure that we error cleanly when missing a fixture
     Then I install the ccz app at "fixtures.ccz"
     Then I login with username "fixtures_fails" and password "123"
@@ -15,7 +15,7 @@ Feature: Fixtures
     Then I should see "Make sure the"
     Then I should see "lookup table is available"
 
-  @AWS
+  @AWS @Fixtures
   Scenario: Ensure that we can use fixtures correctly, and that fixtures work in saved forms
     Then I login with username "fixtures_works" and password "123"
     Then I press start
@@ -36,7 +36,7 @@ Feature: Fixtures
     Then I should see "Essex"
     Then I should see "Saugus"
 
-  @AWS
+  @AWS @Fixtures
   Scenario: Ensure that fixture filtering works
     Then I login with username "fixtures_works" and password "123"
     Then I press start
@@ -84,6 +84,6 @@ Feature: Fixtures
     Then Next
     Then I wait for 20 seconds
     Then I should see "Please select an option"
-    Then I touch the "Increase Enalapril" text
+    Then I robust touch the "Increase Enalapril" text
     Then I wait for 10 seconds
     Then Submit

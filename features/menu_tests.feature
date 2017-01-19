@@ -66,7 +66,7 @@ Scenario: Test that all actions available from the home screen options menu work
 	Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
 	Then I go back to the home screen
 
-# Not AWS due to airplane mode
+@AWS
 Scenario: Test that all actions available from the Advanced Actions menu work properly
 
 	Then I login with username "settings.test" and password "123"
@@ -108,10 +108,10 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I touch the "Run Connection Test" text
 	Then I see the text "Running Connection Tests"
 	Then I wait to see "No problems were detected."
-	Then I toggle airplane mode
+	Then I throttle the internet
 	Then I touch the "Run Connection Test" text
-	Then I see the text "Please run this test again after connecting to Wi-Fi or mobile data."
-	Then I toggle airplane mode
+	Then I see the text "Please run this test again after verifying your network connection."
+	Then I dethrottle the internet
 	Then I go back to the home screen
 
 	# NOT ABLE TO TEST "Force Log Submission"

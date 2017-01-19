@@ -80,12 +80,11 @@ Scenario: Test the 'Change Language' setting
 	Then I select form "Question Types"
 
 	Then I select "Change Language" menu item
-	Then I see a list that contains all of these items "en,hin"
-	Then I touch the "hin" text
+	Then I see a list that contains all of these items "English,Hindi"
+	Then I touch the "Hindi" text
 	Then I see the text "HINDI TRANSLATION"
 
 	Then I select "Change Language" menu item
-	Then I see a list that contains all of these items "en,hin"
-	Then I touch the "en" text
+	Then I see a list that contains all of these items "English,Hindi"
+	Then I touch the "English" text
 	Then I don't see the text "HINDI TRANSLATION"
-
