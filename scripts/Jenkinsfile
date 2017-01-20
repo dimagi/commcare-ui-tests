@@ -11,6 +11,8 @@ stage('test') {
                     '@Dialogs', '@MenuTests']
     def poolArray = ['asus']
 
+    def cc_android_branch = 'commcare-android-2.33'
+
     try {
         echo 'Running tests...'
         currentBuild.result = 'SUCCESS'
@@ -25,7 +27,8 @@ stage('test') {
                             build job: 'commcare-odk-tests',
                                         parameters: [
                                             [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"]]
+                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
+                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
                         }
                     }
                 } catch(error) {
