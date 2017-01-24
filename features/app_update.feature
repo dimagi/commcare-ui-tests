@@ -66,7 +66,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I see the text "Current version: 11"
 
     # turn off wifi and try updating
-    Then I go back
+    Then I go back to the home screen
     Then I toggle airplane mode
     Then I wait
     Then I select "Update App" menu item
