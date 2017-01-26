@@ -75,7 +75,7 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 
 	Then I select "Advanced" menu item
 	Then I touch the "Validate Media" text
-	Then I see the text "Verifying Multimedia"
+	Then I see the text "multimedia is installed"
 	# Wait until we are back on the home screen
 	Then I wait to see "Start"
 

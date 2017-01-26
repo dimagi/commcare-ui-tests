@@ -6,10 +6,13 @@ def notify = true
 
 stage('test') {
 
-    def tagArray = ['@Fixtures', '@FormSettings', '@Login', '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@SessionExpiration',
-                    '@Dialogs', '@MenuTests']
+    def tagArray = ['@MenuTests', '@Fixtures', '@FormSettings', '@Login',
+                    '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+                    '@SessionExpiration', '@Dialogs']
     def poolArray = ['asus']
+
+    def cc_android_branch = 'commcare-android'
 
     try {
         echo 'Running tests...'
@@ -25,7 +28,8 @@ stage('test') {
                             build job: 'commcare-odk-tests',
                                         parameters: [
                                             [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"]]
+                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
+                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
                         }
                     }
                 } catch(error) {
