@@ -6,10 +6,7 @@ def notify = true
 
 stage('test') {
 
-    def tagArray = ['@MenuTests', '@Fixtures', '@FormSettings', '@Login',
-                    '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                    '@SessionExpiration', '@Dialogs']
+    def tagArray = ['@DeletedUser']
     def poolArray = ['asus']
 
     def cc_android_branch = 'commcare-android'
