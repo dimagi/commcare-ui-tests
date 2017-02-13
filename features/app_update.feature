@@ -6,7 +6,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I login with username "user_with_no_data" and password "123"
 
     # Make sure the update endpoint is set to "Latest starred build"
-    Then I select the "Settings" menu item
+    Then I select "Settings" menu item
     Then I touch the "Update Options" text
     Then I touch the "Latest starred build" text
     Then I go back to the home screen
@@ -73,7 +73,7 @@ Scenario: Ensure app update can be obtained from HQ
 
     # Change the update endpoint to "Latest build" and update again 
     Then I go back to the home screen
-    Then I select the "Settings" menu item
+    Then I select "Settings" menu item
     Then I touch the "Update Options" text
     Then I touch the "Latest build" text
     Then I go back to the home screen
@@ -87,7 +87,7 @@ Scenario: Ensure app update can be obtained from HQ
 
     # Change the update endpoint to "Latest saved state" and update again 
     Then I go back to the home screen
-    Then I select the "Settings" menu item
+    Then I select "Settings" menu item
     Then I touch the "Update Options" text
     Then I touch the "Latest saved state" text
     Then I go back to the home screen
@@ -96,7 +96,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I apply the update
     Then I login with username "user_with_no_data" and password "123"
     Then I press start
-    Then I do not see the text "Module One, renamed"
+    Then I don't see the text "Module One, renamed"
     Then I see the text "Module Two, renamed"
 
     # turn off wifi and try updating
