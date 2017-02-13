@@ -5,6 +5,12 @@ Scenario: Ensure app update can be obtained from HQ
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
 
+    # Make sure the update endpoint is set to "Latest starred build"
+    Then I select "Settings" menu item
+    Then I touch the "Update Options" text
+    Then I touch the "Latest starred build" text
+    Then I go back to the home screen
+    
     # check base form content
     Then I press start
     Then I see the text "Module Three"
@@ -64,6 +70,34 @@ Scenario: Ensure app update can be obtained from HQ
     Then I see the text "Current version: 11"
     Then I touch the "Recheck" text
     Then I see the text "Current version: 11"
+
+    # Change the update endpoint to "Latest build" and update again 
+    Then I go back to the home screen
+    Then I select "Settings" menu item
+    Then I touch the "Update Options" text
+    Then I touch the "Latest build" text
+    Then I go back to the home screen
+    Then I select "Update App" menu item
+    Then I wait to see "Update to version"
+    Then I see the text "version 12"
+    Then I apply the update
+    Then I login with username "user_with_no_data" and password "123"
+    Then I press start
+    Then I see the text "Module One, renamed"
+
+    # Change the update endpoint to "Latest saved state" and update again 
+    Then I go back to the home screen
+    Then I select "Settings" menu item
+    Then I touch the "Update Options" text
+    Then I touch the "Latest saved state" text
+    Then I go back to the home screen
+    Then I select "Update App" menu item
+    Then I wait to see "Update to version"
+    Then I apply the update
+    Then I login with username "user_with_no_data" and password "123"
+    Then I press start
+    Then I don't see the text "Module One, renamed"
+    Then I see the text "Module Two, renamed"
 
     # turn off wifi and try updating
     Then I go back to the home screen
