@@ -79,7 +79,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I go back to the home screen
     Then I select "Update App" menu item
     Then I wait to see "Update to version"
-    Then I see the text "version 12"
+    Then I see the text "version 22"
     Then I apply the update
     Then I login with username "user_with_no_data" and password "123"
     Then I press start
