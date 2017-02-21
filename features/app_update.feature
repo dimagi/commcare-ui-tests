@@ -85,21 +85,6 @@ Scenario: Ensure app update can be obtained from HQ
     Then I press start
     Then I see the text "Module One, renamed"
 
-    # Change the update endpoint to "Latest saved state" and update again 
-    Then I go back to the home screen
-    Then I select "Settings" menu item
-    Then I touch the "Update Options" text
-    Then I touch the "Latest saved state" text
-    Then I go back to the home screen
-    Then I select "Update App" menu item
-    Then I wait to see "Update to version"
-    Then I see the text "version 16"
-    Then I apply the update
-    Then I login with username "user_with_no_data" and password "123"
-    Then I press start
-    Then I don't see the text "Module One, renamed"
-    Then I see the text "Module Two, renamed"
-
     # turn off wifi and try updating
     Then I go back to the home screen
     Then I toggle airplane mode
