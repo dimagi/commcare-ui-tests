@@ -1,2 +1,3 @@
 cp features/resource_files/aws/aws_steps.rb features/step_definitions/services.rb
+mkdir aws
 zip -r aws/features.zip features/*
