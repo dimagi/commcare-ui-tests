@@ -2,11 +2,14 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
-def notify = false
+def notify = true
 
 stage('test') {
 
-    def tagArray = ['@DeletedUser']
+    def tagArray = ['@MenuTests', '@Fixtures', '@FormSettings', '@Login',
+                    '@Setup', '@CaseSharing', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+                    '@SessionExpiration', '@Dialogs']
     def poolArray = ['asus']
 
     def cc_android_branch = 'commcare-android'
