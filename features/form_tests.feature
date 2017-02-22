@@ -100,7 +100,7 @@ Scenario: Form Entry Quirks
   Then I go back to the home screen
 @AWS
 Scenario: Sync Tests
-  Then I throttle the internet
+  Then I turn off the internet
   Then I wait
   Then I login with username "user_with_no_data" and password "123"
 
@@ -117,7 +117,7 @@ Scenario: Sync Tests
   Then I wait
   Then I go back
   Then I see the text "Unsent Forms: 1"
-  Then I dethrottle the internet
+  Then I turn on the internet
   # wait for wifi to connect again
   Then I wait for 10 seconds
 

@@ -108,10 +108,10 @@ Scenario: Test that all actions available from the Advanced Actions menu work pr
 	Then I touch the "Run Connection Test" text
 	Then I see the text "Running Connection Tests"
 	Then I wait to see "No problems were detected."
-	Then I throttle the internet
+	Then I turn off the internet
 	Then I touch the "Run Connection Test" text
 	Then I see the text "Please run this test again after verifying your network connection."
-	Then I dethrottle the internet
+	Then I turn on the internet
 	Then I go back to the home screen
 
 	# NOT ABLE TO TEST "Force Log Submission"

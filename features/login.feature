@@ -56,7 +56,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     Then I see the text "Invalid Username or Password"
 
     # login offline
-    Then I throttle the internet
+    Then I turn off the internet
     Then I login with username "user_with_no_data" and password "123"
     Then I verify that all home buttons are present
     Then I logout
@@ -75,7 +75,7 @@ Scenario: Test login logic: error handling, demo mode, and normal behavior
     # connection"
     Then I wait up to 300 seconds to see "Reach Server"
 
-    Then I dethrottle the internet
+    Then I turn on the internet
 
     Then I clear input field number 2
     Then I press login
