@@ -1,7 +1,6 @@
 @FormEntry
 Feature: Form Tests
 
-  @AWS
   Scenario: Test incomplete form creation
     # Using language.ccz instead of ccqa.ccz. Issues with accessing Basic Form of
     # ccqa.ccz. Should only need to change a few lines/words in the first 2
@@ -55,7 +54,6 @@ Feature: Form Tests
     Then I open incomplete forms
     Then I don't see the text "Languages"
 
-  @AWS
   Scenario: Save in form from menu
     # Incomplete Forms 6
     # Save incomplete from menu option in form
@@ -84,7 +82,6 @@ Feature: Form Tests
 
     Then I see the text "test"
 
-  @AWS
   Scenario: Form Entry Quirks
     # Form Entry Quirks 1
     Then I login with username "user_with_no_data" and password "123"
@@ -102,7 +99,6 @@ Feature: Form Tests
     Then I see the text "Constraint"
     Then I go back to the home screen
 
-  @AWS
   Scenario: Sync Tests
     Then I turn off the internet
     Then I wait
@@ -137,7 +133,6 @@ Feature: Form Tests
     Then I see the text "Languages"
     Then I go back to the home screen
 
-  @AWS
   Scenario: Save case forms
     # Incomplete 7, Case Links 1 - 2b
     # Create incomplete update case form
