@@ -8,7 +8,7 @@ stage('test') {
 
     def poolArray = ['asus']
 
-    def tagArray = ['@MenuTests', '@Login', @FormEntry']
+    def tagArray = ['@MenuTests', '@Login', '@FormEntry']
 
     def cc_android_branch = 'commcare-android'
 
