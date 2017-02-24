@@ -1,5 +1,5 @@
-Feature: Case Management
-@Basic
+Feature: Parent Cases
+@ParentChild
 Scenario: Create a case; add data to a case; view previous case data; don't cloes a case; close a case
 
 	Then I install the app at "28OQrA2"

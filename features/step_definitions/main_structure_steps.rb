@@ -110,11 +110,6 @@ Then (/^I open the options menu$/) do
   press_menu_button()
 end
 
-Then (/^I select case "([^\"]*)"$/) do |text|
-  wait_for_element_exists("* id:'screen_entity_select_list'")
-  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
-end
-
 Then (/^I wait for form to load/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
