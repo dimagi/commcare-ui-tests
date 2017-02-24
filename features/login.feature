@@ -1,6 +1,6 @@
 @Login
 Feature: Login behavior
-  @Login
+
   Scenario: Test login logic: error handling, demo mode, and normal behavior
     Then I install the ccz app at "test_list_search.ccz"
 
