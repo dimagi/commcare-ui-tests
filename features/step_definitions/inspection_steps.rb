@@ -16,7 +16,6 @@ Then (/^I see "([^"]*)" above "([^"]*)"$/) do |first,second|
   end
 end
 
-
 Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
   while true
     break if element_exists("* id:'#{id}'")
@@ -72,4 +71,48 @@ Then (/^I verify that the current activity is "([^\"]*)"$/) do |activity_name|
   end
 end
 
+Then (/^I verify that all home buttons are present$/) do
+  expected_texts = ['Start', 'Sync with Server', 'Log out']
+  check_home_buttons(expected_texts)
+end
 
+Then (/^I verify that demo home buttons are present$/) do
+  expected_texts = ['Explore CommCare', 'Submit Practice Data to Server', 'Log out']
+  check_home_buttons(expected_texts)
+end
+
+Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
+  count = query("#{element}").length
+  if count < 1
+    fail("Didn't find any occurrences of a %s element" % element)
+  end
+end
+
+Then (/^I check that id "([^\"]*)" is enabled$/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'true'")
+end
+
+Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
+  check_element_exists("* id:'#{element_id}' enabled:'false'")
+end
+
+def check_home_buttons( expected_texts)
+  for button_text in expected_texts
+    scroll_count = 0
+    # scroll until text is found, otherwise timeout
+    while true
+      break if element_exists("* {text CONTAINS[c] '#{button_text}'}")
+      if scroll_count > 10
+        fail("Didn't find %s button" % button_text)
+      end
+      scroll_count += 1
+      pan_up
+    end
+
+    # scroll back to original place
+    while scroll_count > 0
+      pan_down
+      scroll_count -= 1
+    end
+  end
+end

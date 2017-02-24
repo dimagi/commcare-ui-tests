@@ -1,0 +1,33 @@
+stage('build') {
+    build job: 'commcare-odk-build-tests'
+}
+
+stage('test') {
+
+    def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration', '@Dialogs']
+
+    try {
+        echo 'Running tests...'
+        for (tag in tagArray) {
+            retry(3) {
+                echo "Testing ${tag}"
+                build job: 'commcare-odk-tests', parameters: [[$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"]]
+            }
+        }
+        currentBuild.result = 'SUCCESS'
+    } catch(error) {
+        currentBuild.result = 'FAILURE'
+        throw error
+    } finally {
+        if (currentBuild.result == 'SUCCESS') {
+            slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+        } else {
+            slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+            mail (to: 'mobiledev@dimagi.com',
+                subject: "Amazon device farm tests failed.",
+                body: "Amazon device farm tests failed.");
+        }
+
+    }
+}

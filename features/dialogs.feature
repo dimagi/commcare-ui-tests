@@ -1,12 +1,15 @@
+@Dialogs
 Feature: Test dialog creation
-@Basic
+@AWS
 Scenario: Make sure dialogs create, dismiss, and rotate correctly
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
     Then I press start
     Then I select module "Errors"
 
-    Then I select form "Error on open"
+    # Even though this is a form, need to use "select module" since nav pane isn't focused
+    # due to the error message
+    Then I select module "Error on open"
 
     Then I see the text "Error Occurred"
     Then I rotate to landscape

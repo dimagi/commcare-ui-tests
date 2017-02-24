@@ -64,6 +64,7 @@ def no_implementation():
 
 
 image_capture_implementations = {
+    24: image_capture_marshmallow,
     23: image_capture_marshmallow,
     19: image_capture_kitkat_tablet,
     17: image_capture_jellybean,

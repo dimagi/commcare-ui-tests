@@ -92,3 +92,11 @@ Then (/^I check that an async incremental sync occurred successfully$/) do
 
   wait_for_element_does_not_exist("android.widget.ProgressBar")
 end
+
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |name, password|
+  system("python3 commcare-hq-api/commcare_hq_api.py user_create #{name} #{password}")
+end
+
+Then (/^I delete the user with name "([^\"]*)"$/) do |name|
+  system("python3 commcare-hq-api/commcare_hq_api.py delete_worker_named #{name}")
+end

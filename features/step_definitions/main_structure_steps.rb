@@ -1,11 +1,3 @@
-Then (/^I enter my name$/) do
-  keyboard_enter_text("Will")
-end
-
-Then (/^I enter test$/) do
-  keyboard_enter_text("test")
-end
-
 Then (/^I close the keyboard$/) do
   hide_soft_keyboard()
 end
@@ -28,6 +20,10 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   tap_when_element_exists("* id:'login_button'")
 end
 
+Then (/^I press login$/) do
+  tap_when_element_exists("* id:'login_button'")
+end
+
 Then (/^I sync$/) do
   step("I sync, without waiting for completion")
   wait_for_element_does_not_exist("android.widget.ProgressBar")
@@ -40,7 +36,7 @@ end
 
 Then (/^I sync, without waiting for completion$/) do
   sleep 1
-  if current_activity() != "CommCareHomeActivity"
+  if current_activity() != "StandardHomeActivity"
     step("I go back to the home screen")
   end
   tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
@@ -79,10 +75,12 @@ end
 
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
+  step("I wait for 5 seconds")
 end
 
 Then (/^I rotate to landscape/) do
   perform_action('set_activity_orientation', 'landscape')
+  step("I wait for 5 seconds")
 end
 
 Then (/^I update the app$/) do
@@ -110,4 +108,13 @@ end
 
 Then (/^I open the options menu$/) do
   press_menu_button()
+end
+
+Then (/^I select case "([^\"]*)"$/) do |text|
+  wait_for_element_exists("* id:'screen_entity_select_list'")
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
+Then (/^I wait for form to load/) do
+  wait_for_element_exists("* id:'nav_pane'")
 end

@@ -1,7 +1,8 @@
+@CaseListSearch
 Feature: List Search
-    
-@Basic
-Scenario: 
+
+@AWS
+Scenario: Searching and sorting the case list 
     Then I install the ccz app at "test_list_search.ccz"
     Then I login with username "test_list_search" and password "123"
     Then I scroll until I see the "Start" text
@@ -29,7 +30,9 @@ Scenario:
 
     #persist on rotation
     Then I rotate to landscape
+    Then I wait
     Then I close the keyboard
+    Then I wait
     
     Then I see "1 of 4"   
     Then I see "ch"

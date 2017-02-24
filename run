@@ -18,20 +18,28 @@ rm "*.png"
 rm -rf "reports"
 rm "commcare.apk"
 
+# make sure we aren't in airplane mode
+IN_AIRPLANE=$(adb shell settings get global airplane_mode_on | tr -d '\r')
+if [[ "$IN_AIRPLANE" -eq "1" ]]; then
+  adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5
+  adb shell input keyevent 19 && sleep 0.3 && adb shell input keyevent 23
+  adb shell input keyevent 4
+fi
+
 # download/build apk
 if [ "$BUILD" == "master" ]; then
   echo "downloading latest master apk from jenkins"
   wget "https://jenkins.dimagi.com/job/commcare-android/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
-  calabash-android resign commcare.apk
+  bundler exec calabash-android resign commcare.apk
 elif [ "$BUILD" == "version" ]; then
   echo "downloading latest master apk from jenkins"
   wget "https://jenkins.dimagi.com/job/commcare-android-$VERSION/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
-  calabash-android resign commcare.apk
+  bundler exec calabash-android resign commcare.apk
 elif [ "$BUILD" == "release" ]; then
   echo "downloading latest release apk from jenkins"
   URL=$(python3 scripts/get_latest_release_url.py)
   wget $URL -O commcare.apk
-  calabash-android resign commcare.apk
+  bundler exec calabash-android resign commcare.apk
 else
   echo "building from pull request"
   ./scripts/build_pr_apk.py $BUILD
@@ -46,4 +54,4 @@ if [[ $TAG = \@* ]] ; then
 else
   FEATURE=$TAG
 fi
-calabash-android run commcare.apk $FEATURE --format junit --out reports
+bundler exec calabash-android run commcare.apk $FEATURE --format junit --out reports

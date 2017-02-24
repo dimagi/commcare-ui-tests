@@ -1,5 +1,5 @@
 Feature: Simprints (case-list) callout tests
-@Basic
+
 Scenario: Ensure registration and search callouts to (fake) simprints app work
     Then I uninstall the "com.dimagi.test.external" apk app
     Then I install the "tester" apk
