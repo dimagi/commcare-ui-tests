@@ -1,0 +1,12 @@
+app_update.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/0841e3049fd00508782eb4f996e36611/
+case_claim.ccz --> 
+case_sharing.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/74f57b9558045e21329034d67ad71862/
+ccqa.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/db79603c9810a2ed3f637ebaf518bd1e/
+fingerprinting.ccz -->
+fixtures.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/8895d9d9adce7f31ae4a77ad8d29cd44/
+integration_test_app.ccz -->
+languages.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/9814884c597380a16767a2746a431ff1/
+session_expiration.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/9946ed17f21fbf2d8e950df12aa2a6b7/
+settings_sheet_tests.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/3a8891c60af83ac44f2dc242f3e7fe2c/
+test_list_search.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/a5c7bb6839b4f31463827956e80cf4a5/
+test_select_filters.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/7d5921a03ba61e4b048458590fbb3001/
