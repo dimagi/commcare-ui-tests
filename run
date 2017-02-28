@@ -14,6 +14,13 @@ BUILD=$1
 TAG=$2
 VERSION=$3
 
+# Find next version number, IE 2.33 -> 2.34
+IFS='.' read -a VERSION_ARRAY <<< "$3"
+MAJOR_VERSION="${VERSION_ARRAY[0]}"
+MINOR_VERSION="${VERSION_ARRAY[1]}"
+NEW_MINOR_VERSION="$((MINOR_VERSION+1))"
+NEW_VERSION_TAG="${MAJOR_VERSION}.${NEW_MINOR_VERSION}"
+
 rm "*.png"
 rm -rf "reports"
 rm "commcare.apk"
@@ -50,7 +57,7 @@ adb shell input keyevent 82
 
 # run tests
 if [[ $TAG = \@* ]] ; then
-  FEATURE="--tags $TAG"
+  FEATURE="--tags $TAG --tags ~@${NEW_VERSION_TAG}"
 else
   FEATURE=$TAG
 fi
