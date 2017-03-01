@@ -9,7 +9,7 @@ Then (/^I press start$/) do
   while true
     hide_soft_keyboard()
     break if element_exists("* id:'screen_suite_menu_list'")
-    wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 15)
+    wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 60)
     touch("android.support.v7.widget.CardView index:0")
   end
 end
