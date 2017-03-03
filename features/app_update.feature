@@ -1,7 +1,7 @@
 Feature: App update test
 # Not AWS due to airplane mode
 @Integration
-    Scenario: Ensure app update can be obtained from HQ 
+Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
 
