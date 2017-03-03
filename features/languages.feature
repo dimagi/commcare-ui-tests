@@ -41,9 +41,9 @@ Scenario: Ensure you can change languages in CommCare
 	And I select form "HIN: Languages"
 
 	Then I select "Change Language" menu item
-	Then I see the text "en"
-	Then I see the text "hin"
-	Then I press "en"
+	Then I see the text "English"
+	Then I see the text "Hindi"
+	Then I press "English"
 
 	Then I don't see the text "HIN: Enter a name"
 	Then I see the text "Enter a name:"
