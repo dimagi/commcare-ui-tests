@@ -22,14 +22,14 @@ Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
     count = 0
     while count < attempts
       break if element_exists("* id:'#{id}'")
-      scroll_up
+      scroll_down
       count = count + 1;
     end
     break if element_exists("* id:'#{id}'")
     count = 0
     while count < attempts
       break if element_exists("* id:'#{id}'")
-      scroll_down
+      scroll_up
       count = count + 1;
     end
     break if element_exists("* id:'#{id}'")
@@ -43,14 +43,14 @@ Then (/^I scroll until I see the "([^\"]*)" text$/) do |text|
     count = 0
     while count < attempts
       break if element_exists("* {text CONTAINS[c] '#{text}'}")
-      scroll_up
+      scroll_down
       count = count + 1
     end
     count = 0
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
     while count < attempts
       break if element_exists("* {text CONTAINS[c] '#{text}'}")
-      scroll_down
+      scroll_up
       count = count + 1
     end
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
