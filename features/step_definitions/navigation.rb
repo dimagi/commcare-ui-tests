@@ -1,8 +1,17 @@
 Then (/^I select "([^\"]*)" menu item$/) do |entry|
-  sleep 2
-  press_menu_button()
-  sleep 2
-  touch("* {text CONTAINS[c] '#{entry}'}")
+  menu_query = "* {text CONTAINS[c] '#{entry}' id:'title'}"
+  attempts = 2
+  while attempts > 0
+    press_menu_button()
+    begin
+      wait_for_element_exists(menu_query, timeout:4)
+      break
+    rescue
+      attempts = attempts - 1
+    end
+  end
+  check_element_exists(menu_query)
+  touch(menu_query)
 end
 
 Then (/^I press start$/) do
@@ -85,7 +94,7 @@ end
 Then (/^I go to back to Server Settings$/) do
   while true
     hide_soft_keyboard()
-    break if element_exists("* {text CONTAINS[c] 'CommCare > Server Settings'}")
+    break if (element_exists("* {text CONTAINS[c] 'CommCare > Server Settings'}") and not element_exists("* {class CONTAINS[c] 'Dialog'}"))
     if element_exists("* {text CONTAINS[c] 'OK'}")
       touch("* {text CONTAINS[c] 'OK'}")
     end
