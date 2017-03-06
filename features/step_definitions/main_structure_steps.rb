@@ -4,7 +4,7 @@ end
 
 Then (/^I enter text "([^\"]*)"$/) do |text|
   keyboard_enter_text("#{text}")
-end
+end 
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
   step("I login with username \"%s\" and password \"%s\", without waiting for completion" % [username, password])
@@ -47,6 +47,11 @@ Then (/^I select module "([^\"]*)"$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
 end
 
+Then (/^I select case "([^\"]*)"$/) do |text|
+  wait_for_element_exists("* id:'screen_entity_select_list'")
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+end
+
 Then (/^I open the incomplete form with title "([^\"]*)"$/) do |title|
   tap_when_element_exists("* {text CONTAINS[c] '#{title}'}")
   tap_when_element_exists("* {text CONTAINS[c] 'Go To Start'}")
@@ -59,6 +64,13 @@ Then (/^I select form "([^\"]*)"$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
   # wait for form loading to finish
   wait_for_element_exists("* id:'nav_pane'")
+end
+
+Then (/^I see (\d+) list entries$/) do |expected_count|
+  list_count = query("ListView","getAdapter","getCount").first
+  if list_count.to_i != expected_count.to_i
+    fail("Expected to see %s entries but got %s" % [expected_count, list_count])
+  end
 end
 
 Then (/^I rotate to portrait$/) do
@@ -82,13 +94,20 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
-Then (/^I open the options menu$/) do
-  press_menu_button()
+Then (/^I go back one$/) do
+  press_back_button
+end  
+
+Then (/^I don't find the text "([^\"]*)"$/) do |text|
+  sleep 1
+  count = query("* {text CONTAINS[c] '#{text}'}").length
+  if count != 0
+    fail("Found %s occurrences of %s; expected none" % [count, text])
+  end
 end
 
-Then (/^I select case "([^\"]*)"$/) do |text|
-  wait_for_element_exists("* id:'screen_entity_select_list'")
-  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+Then (/^I open the options menu$/) do
+  press_menu_button()
 end
 
 Then (/^I wait for form to load/) do
