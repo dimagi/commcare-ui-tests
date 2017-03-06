@@ -22,9 +22,14 @@ vc = ViewClient(device, serialno, autodump=False)
 
 
 def image_capture_marshmallow():
-    vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
-    vc.dump()
+    try :
+        vc.dump()
+        vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
+        vc.dump()
+    except:
+        vc.dump()
+        vc.findViewWithContentDescriptionOrRaise(u'''Shutter''').touch()
+        vc.dump()
     try:
         vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
     except:

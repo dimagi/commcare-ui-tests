@@ -2,7 +2,6 @@
 Feature: Test settings on the "Application Preferences" screen
 
   Scenario: Verify that all server settings menus can be opened and edited
-
     Then I install the ccz app at "settings_sheet_tests.ccz"
     Then I login with username "settings.test" and password "123"
 
@@ -26,11 +25,12 @@ Feature: Test settings on the "Application Preferences" screen
 
    # DATA SERVER
     Then I touch the "Data Server" text
+    Then I wait
    # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "CommCare Data Server"
+    Then I see the text "Data Server"
     Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
     Then I rotate to landscape
-    Then I see the text "CommCare Data Server"
+    Then I see the text "Data Server"
     Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
     Then I rotate to portrait
    # Verify that we are back on the Server Settings screen

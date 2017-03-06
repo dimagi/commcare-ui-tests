@@ -32,6 +32,7 @@ Feature: Multiple Applications Test
     Then I press "Archive"
     Then I see the text "Unarchive"
     Then I go back
+    Then I wait
     Then I go back
     Then I don't see the app selector button
 
@@ -69,6 +70,11 @@ Feature: Multiple Applications Test
     Then I see the text "Uninstalling your app"
     Then I press "OK"
     Then I wait for progress
+
+      #Restarting now puts you back in the app manager
+    Then I wait
+    Then I go back
+    Then I wait
     Then I see the text "Welcome back! Please log in."
     Then I don't see the app selector button
 
@@ -102,7 +108,7 @@ Feature: Multiple Applications Test
     Then I select "Go to App Manager" menu item
     Then I press "Multiple Apps"
     Then I press "Validate Multimedia"
-    Then I access Install Multimedia
+    Then I select "Install Multimedia" menu item
     Then I install the multimedia at "commcare.zip"
 
    #Confirm 2 apps on login screen

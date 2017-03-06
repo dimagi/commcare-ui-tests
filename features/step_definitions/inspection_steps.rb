@@ -17,16 +17,44 @@ Then (/^I see "([^"]*)" above "([^"]*)"$/) do |first,second|
 end
 
 Then (/^I scroll until I see the "([^\"]*)" id$/) do |id|
+  attempts = 4
   while true
+    count = 0
+    while count < attempts
+      break if element_exists("* id:'#{id}'")
+      scroll_down
+      count = count + 1;
+    end
     break if element_exists("* id:'#{id}'")
-    pan_up
+    count = 0
+    while count < attempts
+      break if element_exists("* id:'#{id}'")
+      scroll_up
+      count = count + 1;
+    end
+    break if element_exists("* id:'#{id}'")
+    attempts = attempts * 5
   end
 end
 
 Then (/^I scroll until I see the "([^\"]*)" text$/) do |text|
+  attempts = 4
   while true
+    count = 0
+    while count < attempts
+      break if element_exists("* {text CONTAINS[c] '#{text}'}")
+      scroll_down
+      count = count + 1
+    end
+    count = 0
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
-    pan_up
+    while count < attempts
+      break if element_exists("* {text CONTAINS[c] '#{text}'}")
+      scroll_up
+      count = count + 1
+    end
+    break if element_exists("* {text CONTAINS[c] '#{text}'}")
+    attempts = attempts * 5
   end
 end
 
