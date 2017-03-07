@@ -2,32 +2,60 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
+def notify = true
+
 stage('test') {
 
-    def tagArray = ['@Setup', '@CaseSharing', '@Fixtures', '@FormSettings', '@FormEntry', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Login', '@Settings', '@FormFiltering', '@SessionExpiration', '@Dialogs']
+    def poolArray = ['asus']
+
+    # All of the tags run on AWS. We specify these individually so that we can iterate over each
+    # tag and retry them granularly when they fail.
+
+    def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
+                    '@Setup', '@CaseSharing', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+                    '@SessionExpiration', '@Dialogs']
+
+    def cc_android_branch = 'commcare-android'
 
     try {
         echo 'Running tests...'
-        for (tag in tagArray) {
-            retry(3) {
-                echo "Testing ${tag}"
-                build job: 'commcare-odk-tests', parameters: [[$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"]]
+        currentBuild.result = 'SUCCESS'
+
+        # Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+        # times on failure.s
+
+        for (pool in poolArray) {
+            for (tag in tagArray) {
+                def stageString = "Testing ${tag} on ${pool}"
+                try {
+                    stage(stageString) {
+                        count = 1
+                        retry(3) {
+                            echo "Testing ${stageString} try number ${count}"
+                            build job: 'commcare-odk-tests',
+                                        parameters: [
+                                            [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
+                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
+                        }
+                    }
+                } catch(error) {
+                    echo "Failed testing ${stageString}"
+                    currentBuild.result = 'FAILURE'
+                }
             }
         }
-        currentBuild.result = 'SUCCESS'
-    } catch(error) {
-        currentBuild.result = 'FAILURE'
-        throw error
     } finally {
-        if (currentBuild.result == 'SUCCESS') {
-            slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
-        } else {
-            slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
-            mail (to: 'mobiledev@dimagi.com',
-                subject: "Amazon device farm tests failed.",
-                body: "Amazon device farm tests failed.");
+        if (notify) {
+            if (currentBuild.result == 'SUCCESS') {
+                slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+            } else {
+                slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+                mail (to: 'mobiledev@dimagi.com',
+                    subject: "Amazon device farm tests failed.",
+                    body: "Amazon device farm tests failed.");
+            }
         }
-
     }
 }
