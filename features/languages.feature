@@ -33,15 +33,6 @@ Feature: Languages
     Then I select module "Basic Form Tests"
     And I select form "HIN: Languages"
 
-	Then I select "Change Language" menu item
-	Then I see the text "English"
-	Then I see the text "Hindi"
-	Then I press "English"
-
-    Then I press start
-    Then I select module "Basic Form Tests"
-    And I select form "HIN: Languages"
-
     Then I select "Change Language" menu item
     Then I see the text "English"
     Then I see the text "Hindi"
@@ -50,6 +41,7 @@ Feature: Languages
     Then I don't see the text "HIN: Enter a name"
     Then I see the text "Enter a name:"
     Then I exit form entry
+    
    #Confirm application language remains the same
     Then I wait
     Then I select form "Hin: Languages"
