@@ -109,7 +109,7 @@ Feature: Test all primary CommCare menu options
     Then I wait to see "No problems were detected."
     Then I turn off the internet
     Then I touch the "Run Connection Test" text
-    Then I see the text "Please run this test again after verifying your network connection."
+    Then I see the text "Please run this test again after connecting to Wi-Fi or mobile data"
     Then I turn on the internet
     Then I go back to the home screen
 

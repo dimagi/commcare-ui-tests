@@ -20,7 +20,7 @@ Feature: Multiple Applications Test
    #Confirm 2 apps on Login Screen
     Then I go back
     Then I see the app selector button
-    Then I press "Test: List Searching"
+    Then I press view with id "app_selection_spinner"
     Then I press "Language Test"
     Then I wait for progress
     Then I see the app selector button
