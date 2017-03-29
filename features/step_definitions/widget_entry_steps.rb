@@ -7,6 +7,12 @@ Then (/^I see the message "([^\"]*)" with a confirmation box.$/) do |message|
   end
 end
 
+Then (/^I see the message "([^\"]*)" with no confirmation box.$/) do |message|
+  step("I see the text \"#{message}\"")
+  if element_exists("android.widget.CheckBox")
+    fail("Confirmation box is present")
+  end
+end
 
 # SINGLE SELECT WIDGET
 Then (/^I see (\d+) select options in a single-select$/) do |expected_count|
@@ -16,6 +22,25 @@ Then (/^I see (\d+) select options in a single-select$/) do |expected_count|
   end
 end
 
+Then (/^I select option from single-select with text "([^\"]*)"$/) do |target_text|
+  touch("RadioButton text:'#{target_text}'")
+end
+
+Then(/^I check that the "([^"]*)" item in the single-select list is selected$/) do |item_text|
+	is_checked = query("org.commcare.views.widgets.SelectOneWidget:'#{item_text}'", "isChecked")[0]
+	if not is_checked
+		fail("The specified RadioButton is not selected")
+	end
+end 
+
+Then(/^I check that the "([^"]*)" item in the single-select list is not selected$/) do |item_text|
+	is_checked = query("org.commcare.views.widgets.SelectOneWidget:'#{item_text}'", "isChecked")[0]
+	if not is_checked
+		fail("The specified Single Select option was selected")
+	end
+end 
+
+#MULTI-SELECT WIDGET
 Then (/^I see (\d+) select options in a multi-select$/) do |expected_count|
   list_count = query("org.commcare.views.widgets.SelectMultiWidget", "getChildCount")[0] / 2
   if list_count.to_i != expected_count.to_i
@@ -23,6 +48,25 @@ Then (/^I see (\d+) select options in a multi-select$/) do |expected_count|
   end
 end
 
+Then (/^I select option from multi-select with text "([^\"]*)"$/) do |target_text|
+  touch("CheckBox text:'#{target_text}'")
+end
+
+Then(/^I check that the "([^"]*)" item in the multi-select list is selected$/) do |item_text|
+	is_checked = query("org.commcare.views.widgets.SelectMultiWidget:'#{item_text}'", "isChecked")[0]
+	if not is_checked
+		fail("The specified Mutliple Select option is not selected")
+	end
+end 
+
+#MINIMAL SINGLE-SELECT WIDGET
+Then (/^I select the single-select dropdown list$/) do
+	touch('Spinner')
+end
+
+Then (/^I select "([^"]*)" from the single-select dropdown list$/) do |target_text|
+	touch("TextView text:'#{target_text}'")
+end
 
 #COMPACT SINGLE-SELECT WIDGET
 #TODO: implement actually answering this (right now it just checks that the structure is correct)
@@ -41,7 +85,34 @@ Then (/^I see a compact single-select widget with row labels "([^\"]*)" and opti
     fail("The number of radio buttons present is not correct, based upon the given labels and options")
   end
 end
-    
+ 
+#SINGLE-SELECT LIST
+Then(/^I press single-select item number "([^"]*)"$/) do |arg1|
+  query("RadioButton index:0")
+  tap_when_element_exists("RadioButton index:#{arg1}")
+  sleep(1)
+end
+
+Then(/^I check that single-select item number "([^"]*)" is selected$/) do |arg1|
+	is_checked = query("RadioButton index:0:'#{arg1}','isChecked'")[0]
+	if not is_checked
+		fail("The specified option was not selected")
+	end
+end
+
+#TODO: Implement validation steps/confirm options actually selected. 
+Then(/^I press single-select image number "([^"]*)"$/) do |arg1|
+  query("imageView index:0")
+  tap_when_element_exists("imageView index:#{arg1}")
+  sleep(1)
+end
+
+Then(/^I check that single-select image number "([^"]*)" is selected$/) do |arg1|
+	is_checked = query("imageView index:0:'#{arg1}','isChecked'")[0]
+	if not is_checked
+		fail("The specified option was not selected")
+	end
+end
 
 # Assert that all of the given text views are present, and appear in the order they were inputted
 def test_text_views_present_in_order(labels)
@@ -62,17 +133,6 @@ def test_text_views_present_in_order(labels)
     end
   end
 end
-
-
-# MULTI SELECT WIDGET
-Then (/^I select option from single-select with text "([^\"]*)"$/) do |target_text|
-  touch("RadioButton text:'#{target_text}'")
-end
-
-Then (/^I select option from multi-select with text "([^\"]*)"$/) do |target_text|
-  touch("CheckBox text:'#{target_text}'")
-end
-
 
 # DATE-TIME WIDGET
 # NOT WORKING
@@ -118,5 +178,14 @@ Then (/^I test a signature widget question$/) do
   step("I press button with text \"Gather Signature\"")
   step("I sign with a cross")
   step("I press button with text \"Save and Close\"")
+end
+
+# COMBOBOX WIDGET
+Then (/^I select the combobox text field$/) do
+	touch('Combobox')
+end
+
+Then (/^I clear the combobox text field$/) do
+  clear_text_in("* org.commcare.views.Combobox")
 end
 
