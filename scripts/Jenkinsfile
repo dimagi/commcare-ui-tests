@@ -8,8 +8,8 @@ stage('test') {
 
     def poolArray = ['asus']
 
-    # All of the tags run on AWS. We specify these individually so that we can iterate over each
-    # tag and retry them granularly when they fail.
+    // All of the tags run on AWS. We specify these individually so that we can iterate over each
+    // tag and retry them granularly when they fail.
 
     def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
@@ -22,8 +22,8 @@ stage('test') {
         echo 'Running tests...'
         currentBuild.result = 'SUCCESS'
 
-        # Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-        # times on failure.s
+        // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+        // times on failure.s
 
         for (pool in poolArray) {
             for (tag in tagArray) {
