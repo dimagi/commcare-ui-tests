@@ -94,3 +94,8 @@ end
 Then (/^I wait for form to load/) do
   wait_for_element_exists("* id:'nav_pane'")
 end
+
+Then (/^I robust touch the "([^\"]*)" text$/) do |text|
+  tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
+  step("I wait for 10 seconds")
+end
