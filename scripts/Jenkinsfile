@@ -2,7 +2,7 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
-def notify = true
+def notify = false
 
 stage('test') {
 
@@ -37,7 +37,7 @@ stage('test') {
                                         parameters: [
                                             [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
                                             [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
-                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
+                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: 'commcare-android-2.36']]
                         }
                     }
                 } catch(error) {
