@@ -16,7 +16,7 @@ stage('test') {
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
                     '@SessionExpiration', '@Dialogs']
 
-    def cc_android_branch = 'commcare-android'
+    def cc_android_branch = 'commcare-android-2.36'
 
     try {
         echo 'Running tests...'
