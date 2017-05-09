@@ -11,10 +11,7 @@ stage('test') {
     // All of the tags run on AWS. We specify these individually so that we can iterate over each
     // tag and retry them granularly when they fail.
 
-    def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
-                    '@Setup', '@CaseSharing', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                    '@SessionExpiration', '@Dialogs']
+    def tagArray = ['@MenuTests']
 
     def cc_android_branch = 'commcare-android-2.36'
 
@@ -31,7 +28,7 @@ stage('test') {
                 try {
                     stage(stageString) {
                         count = 1
-                        retry(3) {
+                        retry(1) {
                             echo "Testing ${stageString} try number ${count}"
                             build job: 'commcare-odk-tests',
                                         parameters: [
