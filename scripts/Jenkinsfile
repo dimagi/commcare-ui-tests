@@ -2,7 +2,7 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
-def notify = true
+def notify = false
 
 stage('test') {
 
@@ -11,12 +11,9 @@ stage('test') {
     // All of the tags run on AWS. We specify these individually so that we can iterate over each
     // tag and retry them granularly when they fail.
 
-    def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
-                    '@Setup', '@CaseSharing', '@Languages',
-                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                    '@SessionExpiration', '@Dialogs']
+    def tagArray = ['@MenuTests']
 
-    def cc_android_branch = 'commcare-android'
+    def cc_android_branch = 'commcare-android-2.36'
 
     try {
         echo 'Running tests...'
@@ -31,13 +28,13 @@ stage('test') {
                 try {
                     stage(stageString) {
                         count = 1
-                        retry(3) {
+                        retry(1) {
                             echo "Testing ${stageString} try number ${count}"
                             build job: 'commcare-odk-tests',
                                         parameters: [
                                             [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
                                             [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
-                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
+                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: 'commcare-android-2.36']]
                         }
                     }
                 } catch(error) {
