@@ -63,8 +63,8 @@ Scenario: Install an app by getting the list of available apps for a web user
 	Then I scroll until I see the "Integration Tests" text
 	Then I scroll until I see the "Demo - Form Design Patterns" text
 	Then I scroll until I see the "Demo - Live XForm Examples" text
-	Then I scroll until I see the "SWAT: App Tracker" text
 	Then I scroll until I see the "SWAT: CommCare Projects Phone Survey" text
+	Then I scroll until I see the "SWAT: App Tracker" text
 
 	# Install 1 of the apps
 	Then I install app "SWAT: App Tracker" from the list of available apps

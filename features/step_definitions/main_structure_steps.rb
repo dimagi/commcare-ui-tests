@@ -47,9 +47,9 @@ end
 
 Then (/^I install app "([^\"]*)" from the list of available apps$/) do |appName|
   tap_when_element_exists("* {text CONTAINS[c] '#{appName}'}")
-  tap_when_element_exists("* {text CONTAINS[c] 'Start Install'}")
-  # Either we'll end up on the install screen or on the app manager screen, both of which should be
-  # showing the app name if the install was successful
+  wait_for_element_exists("* {text CONTAINS[c] 'Setting Up App'}")
+  # After the install process, we'll either end up on the install screen or the app
+  # manager, both of which should be showing the app name if the install was successful
   wait_for_element_exists("* {text CONTAINS[c] '#{appName}'}")
 end
 
