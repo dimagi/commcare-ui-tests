@@ -2,7 +2,7 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
-def notify = true
+def notify = false
 
 stage('test') {
 
