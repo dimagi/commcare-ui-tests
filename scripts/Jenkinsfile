@@ -35,7 +35,7 @@ stage('test') {
                             echo "Testing ${stageString} try number ${count}"
                             build job: 'commcare-odk-tests',
                                         parameters: [
-                                            [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
+                                            [$class: 'StringParameterValue', name: 'TAG_NAME', value: tag],
                                             [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
                                             [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
                         }
