@@ -28,7 +28,7 @@ stage('test') {
                 try {
                     stage(stageString) {
                         count = 1
-                        retry(3) {
+                        retry(1) {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
                             build job: 'commcare-odk-tests',
                                         parameters: [[$class: 'StringParameterValue', name: 'TAG_NAME', value: '@MenuTests']]
