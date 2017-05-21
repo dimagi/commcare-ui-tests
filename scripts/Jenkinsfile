@@ -29,12 +29,9 @@ stage('test') {
                     stage(stageString) {
                         count = 1
                         retry(3) {
-                            echo "Testing ${stageString} try number ${count}"
+                            echo "Testing ${stageString} try number ${count} tag ${tag}"
                             build job: 'commcare-odk-tests',
-                                        parameters: [
-                                            [$class: 'StringParameterValue', name: 'TAG_NAME', value: tag],
-                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
-                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
+                                        parameters: [[$class: 'StringParameterValue', name: 'TAG_NAME', value: tag]]
                         }
                     }
                 } catch(error) {
