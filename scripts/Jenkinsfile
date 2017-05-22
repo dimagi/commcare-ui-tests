@@ -3,17 +3,18 @@ stage('build') {
 }
 
 def notify = false
+def retries = 3
+
 node {
     stage('test') {
 
         def poolArray = ['asus']
 
+        // job to copy the tested APK from
+        def cc_android_job = 'commcare-android'
+
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-
-        def tagArray = ['@MenuTests']
-
-        def cc_android_branch = 'commcare-android'
         def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
@@ -33,7 +34,7 @@ node {
               flatten: true]);
 
            step ([$class: 'CopyArtifact',
-              projectName: 'commcare-android',
+              projectName: cc-android-job,
               filter: '**/app-commcare-release.apk',
               fingerprintArtifacts: true,
               flatten: true]);
@@ -44,7 +45,7 @@ node {
                     try {
                         stage(stageString) {
                             count = 1
-                            retry(1) {
+                            retry(retries) {
                                 echo "Testing ${stageString} try number ${count} tag ${tag}"
                                 step([$class: 'AWSDeviceFarmRecorder',
                                                     projectName: 'commcare-odk',
