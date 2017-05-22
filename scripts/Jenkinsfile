@@ -22,6 +22,18 @@ stage('test') {
         // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
         // times on failure.s
 
+       step ([$class: 'CopyArtifact',
+          projectName: 'commcare-odk-build-tests',
+          filter: 'aws/features.zip',
+          fingerprintArtifacts: true,
+          flatten: true]);
+
+       step ([$class: 'CopyArtifact',
+          projectName: 'commcare-android',
+          filter: '**/app-commcare-release.apk',
+          fingerprintArtifacts: true,
+          flatten: true]);
+
         for (pool in poolArray) {
             for (tag in tagArray) {
                 def stageString = "Testing ${tag} on ${pool}"
@@ -30,8 +42,18 @@ stage('test') {
                         count = 1
                         retry(1) {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            build job: 'commcare-odk-tests',
-                                        parameters: [string(name: 'TAG_NAME', value: String.valueOf(tag))]
+                            step([$class: 'AWSDeviceFarmRecorder',
+                                                projectName: 'commcare-odk',
+                                                devicePoolName: 'custom pool',
+                                                runName: 'jenkins-functional-tests-${BUILD_ID}',
+                                                appArtifact: 'app-commcare-release.apk',
+                                                testToRun: 'CALABASH',
+                                                calabashFeatures: 'features.zip',
+                                                calabashTags: '@MenuTets' ,
+                                                ignoreRunError: false,
+                                                isRunUnmetered: true,
+                                                storeResults: true,
+                                            ])
                         }
                     }
                 } catch(error) {
