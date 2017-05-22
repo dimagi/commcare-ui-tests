@@ -3,74 +3,75 @@ stage('build') {
 }
 
 def notify = false
+node {
+    stage('test') {
 
-stage('test') {
+        def poolArray = ['asus']
 
-    def poolArray = ['asus']
+        // All of the tags run on AWS. We specify these individually so that we can iterate over each
+        // tag and retry them granularly when they fail.
 
-    // All of the tags run on AWS. We specify these individually so that we can iterate over each
-    // tag and retry them granularly when they fail.
+        def tagArray = ['@MenuTests']
 
-    def tagArray = ['@MenuTests']
+        def cc_android_branch = 'commcare-android'
 
-    def cc_android_branch = 'commcare-android'
+        try {
+            echo 'Running tests...'
+            currentBuild.result = 'SUCCESS'
 
-    try {
-        echo 'Running tests...'
-        currentBuild.result = 'SUCCESS'
+            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+            // times on failure.s
 
-        // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-        // times on failure.s
+           step ([$class: 'CopyArtifact',
+              projectName: 'commcare-odk-build-tests',
+              filter: 'aws/features.zip',
+              fingerprintArtifacts: true,
+              flatten: true]);
 
-       step ([$class: 'CopyArtifact',
-          projectName: 'commcare-odk-build-tests',
-          filter: 'aws/features.zip',
-          fingerprintArtifacts: true,
-          flatten: true]);
+           step ([$class: 'CopyArtifact',
+              projectName: 'commcare-android',
+              filter: '**/app-commcare-release.apk',
+              fingerprintArtifacts: true,
+              flatten: true]);
 
-       step ([$class: 'CopyArtifact',
-          projectName: 'commcare-android',
-          filter: '**/app-commcare-release.apk',
-          fingerprintArtifacts: true,
-          flatten: true]);
-
-        for (pool in poolArray) {
-            for (tag in tagArray) {
-                def stageString = "Testing ${tag} on ${pool}"
-                try {
-                    stage(stageString) {
-                        count = 1
-                        retry(1) {
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            step([$class: 'AWSDeviceFarmRecorder',
-                                                projectName: 'commcare-odk',
-                                                devicePoolName: 'custom pool',
-                                                runName: 'jenkins-functional-tests-${BUILD_ID}',
-                                                appArtifact: 'app-commcare-release.apk',
-                                                testToRun: 'CALABASH',
-                                                calabashFeatures: 'features.zip',
-                                                calabashTags: '@MenuTets' ,
-                                                ignoreRunError: false,
-                                                isRunUnmetered: true,
-                                                storeResults: true,
-                                            ])
+            for (pool in poolArray) {
+                for (tag in tagArray) {
+                    def stageString = "Testing ${tag} on ${pool}"
+                    try {
+                        stage(stageString) {
+                            count = 1
+                            retry(1) {
+                                echo "Testing ${stageString} try number ${count} tag ${tag}"
+                                step([$class: 'AWSDeviceFarmRecorder',
+                                                    projectName: 'commcare-odk',
+                                                    devicePoolName: 'custom pool',
+                                                    runName: 'jenkins-functional-tests-${BUILD_ID}',
+                                                    appArtifact: 'app-commcare-release.apk',
+                                                    testToRun: 'CALABASH',
+                                                    calabashFeatures: 'features.zip',
+                                                    calabashTags: '@MenuTets' ,
+                                                    ignoreRunError: false,
+                                                    isRunUnmetered: true,
+                                                    storeResults: true,
+                                                ])
+                            }
                         }
+                    } catch(error) {
+                        echo "Failed testing ${stageString}"
+                        currentBuild.result = 'FAILURE'
                     }
-                } catch(error) {
-                    echo "Failed testing ${stageString}"
-                    currentBuild.result = 'FAILURE'
                 }
             }
-        }
-    } finally {
-        if (notify) {
-            if (currentBuild.result == 'SUCCESS') {
-                slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
-            } else {
-                slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
-                mail (to: 'mobiledev@dimagi.com',
-                    subject: "Amazon device farm tests failed.",
-                    body: "Amazon device farm tests failed.");
+        } finally {
+            if (notify) {
+                if (currentBuild.result == 'SUCCESS') {
+                    slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+                } else {
+                    slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+                    mail (to: 'mobiledev@dimagi.com',
+                        subject: "Amazon device farm tests failed.",
+                        body: "Amazon device farm tests failed.");
+                }
             }
         }
     }
