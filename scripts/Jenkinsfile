@@ -14,6 +14,10 @@ node {
         def tagArray = ['@MenuTests']
 
         def cc_android_branch = 'commcare-android'
+        def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
+                    '@Setup', '@CaseSharing', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+                    '@SessionExpiration', '@Dialogs']
 
         try {
             echo 'Running tests...'
