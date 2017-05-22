@@ -11,7 +11,7 @@ node {
         def poolArray = ['asus']
 
         // job to copy the tested APK from
-        def cc_android_job = 'commcare-android'
+        def cc_android_job = 'commcare-android-2.36'
 
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
