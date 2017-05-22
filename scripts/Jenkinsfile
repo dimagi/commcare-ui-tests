@@ -49,7 +49,7 @@ node {
                                                     appArtifact: 'app-commcare-release.apk',
                                                     testToRun: 'CALABASH',
                                                     calabashFeatures: 'features.zip',
-                                                    calabashTags: '@MenuTests' ,
+                                                    calabashTags: tag ,
                                                     ignoreRunError: false,
                                                     isRunUnmetered: true,
                                                     storeResults: true,
