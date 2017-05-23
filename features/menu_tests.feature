@@ -61,7 +61,7 @@ Feature: Test all primary CommCare menu options
     Then I go back to the home screen
 
     Then I select "Settings" menu item
-    Then I see the text "CommCare > Application Preferences"
+    Then I see the text "CommCare > Settings"
     Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
     Then I go back to the home screen
 
