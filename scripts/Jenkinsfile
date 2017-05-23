@@ -54,8 +54,7 @@ node {
                                                     appArtifact: 'app-commcare-release.apk',
                                                     testToRun: 'CALABASH',
                                                     calabashFeatures: 'features.zip',
-                                                    calabashTags: tag ,
-                                                    ignoreRunError: false,
+                                                    calabashTags: tag,
                                                     isRunUnmetered: true,
                                                     storeResults: true,
                                                 ])
