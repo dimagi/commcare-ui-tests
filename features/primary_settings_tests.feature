@@ -8,7 +8,7 @@ Feature: Test settings on the "Application Preferences" screen
    # NAVIGATE TO MAIN SETTINGS MENU > SERVER SETTINGS
     Then I wait
     Then I select "Settings" menu item
-    Then I see the text "CommCare > Settings"
+    Then I wait to see "CommCare > Settings"
     Then I touch the "Server Settings" text
 
    # APPLICATION SERVER
@@ -75,7 +75,7 @@ Feature: Test settings on the "Application Preferences" screen
 
     Then I login with username "settings.test" and password "123"
     Then I select "Settings" menu item
-    Then I see the text "CommCare > Server"
+    Then I wait to see "CommCare > Settings"
 
     Then I touch the "Fuzzy Search Matches" text
     Then I see a list that contains all of these items "Enabled,Disabled"
@@ -88,13 +88,13 @@ Feature: Test settings on the "Application Preferences" screen
     Then After selecting the "Enabled" item in the CheckedTextView list for the "Fuzzy Search Matches" setting, rotate, re-enter, and make sure it is still selected
 
     Then I touch the "Cancel" text
-    Then I see the text "CommCare > Server"
+    Then I wait to see "CommCare > Settings"
 
   Scenario: Test that the "Auto Update Frequency" setting can be edited properly
 
     Then I login with username "settings.test" and password "123"
     Then I select "Settings" menu item
-    Then I see the text "CommCare > Server"
+    Then I wait to see "CommCare > Settings"
 
     Then I touch the "Auto Update Frequency" text
     Then I see a list that contains all of these items "Never,Daily,Weekly"
@@ -115,7 +115,7 @@ Feature: Test settings on the "Application Preferences" screen
 
     Then I login with username "settings.test" and password "123"
     Then I select "Settings" menu item
-    Then I see the text "CommCare > Settings"
+    Then I wait to see "CommCare > Settings"
 
     Then I touch the "Set Print Template" text
     Then I wait
