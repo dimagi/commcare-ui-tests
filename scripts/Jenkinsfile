@@ -25,8 +25,11 @@ node {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
 
+            bash scripts/make_features
+            bassh scripts/make_aws_features
+
             // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failure.s
+            // times on failures
 
            step ([$class: 'CopyArtifact',
               projectName: 'commcare-odk-build-tests',
