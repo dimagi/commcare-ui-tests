@@ -25,8 +25,7 @@ node {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
 
-            sh "bash ls"
-            sh "bash ls"
+            sh "ls"
 
            step ([$class: 'CopyArtifact',
               projectName: cc_android_job,
