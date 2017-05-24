@@ -42,7 +42,11 @@ Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]
   wait_for_element_exists("* id:'apps_list_container'", timeout: 60)
 end
 
-Then (/^I auth for install from list with email "([^\"]*)" and password "([^\"]*)"$/) do |email, password|
+Then (/^I auth for install from list with email "([^\"]*)" and password_key "([^\"]*)"$/) do |email, password_key|
+  require 'yaml'
+  properties = YAML.load_file("local.properties.yaml")
+  password = properties['passwords'][password_key]
+
   clear_text_in("* id:'edit_email'")
   enter_text("* id:'edit_email'", email)
   hide_soft_keyboard()
