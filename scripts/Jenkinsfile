@@ -2,16 +2,17 @@ stage('build') {
     build job: 'commcare-odk-build-tests'
 }
 
+// Should send email/slack notification
 def notify = true
+// Number of times to retry a failed test
 def retries = 3
+// Pool of devices on AWS to run on
+def poolArray = ['asus']
+// Job to copy the tested APK from
+def cc_android_job = 'commcare-android-2.36'
 
 node {
     stage('test') {
-
-        def poolArray = ['asus']
-
-        // job to copy the tested APK from
-        def cc_android_job = 'commcare-android-2.36'
 
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
@@ -49,8 +50,8 @@ node {
                                 echo "Testing ${stageString} try number ${count} tag ${tag}"
                                 step([$class: 'AWSDeviceFarmRecorder',
                                                     projectName: 'commcare-odk',
-                                                    devicePoolName: 'custom pool',
-                                                    runName: 'jenkins-functional-tests-${BUILD_ID}',
+                                                    devicePoolName: pool,
+                                                    runName: stageString,
                                                     appArtifact: 'app-commcare-debug.apk',
                                                     testToRun: 'CALABASH',
                                                     calabashFeatures: 'features.zip',
