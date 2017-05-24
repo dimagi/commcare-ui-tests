@@ -52,7 +52,7 @@ node {
                                                     projectName: 'commcare-odk',
                                                     devicePoolName: 'custom pool',
                                                     runName: 'jenkins-functional-tests-${BUILD_ID}',
-                                                    appArtifact: 'app-commcare-release.apk',
+                                                    appArtifact: 'app-commcare-debug.apk',
                                                     testToRun: 'CALABASH',
                                                     calabashFeatures: 'features.zip',
                                                     calabashTags: tag,
