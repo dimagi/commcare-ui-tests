@@ -25,8 +25,8 @@ node {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
 
-            bash make_features
-            bash make_aws_features
+            sh "make_features"
+            sh "make_aws_features"
 
            step ([$class: 'CopyArtifact',
               projectName: cc_android_job,
