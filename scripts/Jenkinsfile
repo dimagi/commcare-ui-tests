@@ -28,21 +28,14 @@ node {
             bash scripts/make_features
             bassh scripts/make_aws_features
 
-            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failures
-
-           step ([$class: 'CopyArtifact',
-              projectName: 'commcare-odk-build-tests',
-              filter: 'aws/features.zip',
-              fingerprintArtifacts: true,
-              flatten: true]);
-
            step ([$class: 'CopyArtifact',
               projectName: cc_android_job,
               filter: '**/app-commcare-debug.apk',
               fingerprintArtifacts: true,
               flatten: true]);
 
+            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+            // times on failures
             for (pool in poolArray) {
                 for (tag in tagArray) {
                     def stageString = "Testing ${tag} on ${pool}"
