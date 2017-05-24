@@ -26,7 +26,7 @@ node {
             currentBuild.result = 'SUCCESS'
 
             bash scripts/make_features
-            bassh scripts/make_aws_features
+            bash scripts/make_aws_features
 
            step ([$class: 'CopyArtifact',
               projectName: cc_android_job,
