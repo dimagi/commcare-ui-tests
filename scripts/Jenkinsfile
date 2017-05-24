@@ -27,7 +27,7 @@ node {
 
             checkout scm
 
-            sh 'bash chmod a+x scripts/make_aws_features'
+            sh 'chmod a+x scripts/make_aws_features'
             sh 'bash scripts/make_aws_features'
 
             step ([$class: 'CopyArtifact',
