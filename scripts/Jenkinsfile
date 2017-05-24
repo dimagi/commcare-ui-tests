@@ -9,7 +9,7 @@ def retries = 3
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 // Job to copy the tested APK from
-def cc_android_job = 'commcare-android-2.36'
+def cc_android_job = 'commcare-android'
 
 node {
     stage('test') {
