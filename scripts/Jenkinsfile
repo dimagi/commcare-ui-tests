@@ -15,11 +15,10 @@ node {
 
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        def tagArray = ['@MenuTests', '@Settings']
-        // def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
-        //            '@Setup', '@CaseSharing', '@Languages',
-        //            '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-        //            '@SessionExpiration', '@Dialogs']
+        def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
+                    '@Setup', '@CaseSharing', '@Languages',
+                    '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+                    '@SessionExpiration', '@Dialogs']
 
         try {
             echo 'Running tests...'
