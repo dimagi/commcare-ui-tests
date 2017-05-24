@@ -11,7 +11,11 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 60)
 end
 
-Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
+Then (/^I login with username "([^\"]*)" and password_key "([^\"]*)", without waiting for completion$/) do |username, password_key|
+  require 'yaml'
+  properties = YAML.load_file("local.properties.yaml")
+  password = properties['passwords'][password_key]
+
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
@@ -20,7 +24,11 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   tap_when_element_exists("* id:'login_button'")
 end
 
-Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]*)" and password "([^\"]*)"$/) do |username, domain, password|
+Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]*)" and password_key "([^\"]*)"$/) do |username, domain, password_key|
+  require 'yaml'
+  properties = YAML.load_file("local.properties.yaml")
+  password = properties['passwords'][password_key]
+
   clear_text_in("* id:'edit_username'")
   enter_text("* id:'edit_username'", username)
   hide_soft_keyboard()

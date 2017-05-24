@@ -1,3 +1,4 @@
+@InstallList
 Feature: Install from list
 
 Scenario: Install an app by getting the list of available apps for a mobile worker
@@ -18,7 +19,7 @@ Scenario: Install an app by getting the list of available apps for a mobile work
 	Then I press view with class "android.widget.Switch" 
 
 	# Test getting app list for a mobile user
-	Then I auth for install from list with username "test" and domain "commcare-tests" and password "123"
+	Then I auth for install from list with username "test" and domain "commcare-tests" and password_key "install-list-mobile-password"
 	
 	# Check that we see each of the apps in this domain, plus the domain name
 	Then I see the text "commcare-tests"
@@ -53,7 +54,7 @@ Scenario: Install an app by getting the list of available apps for a web user
 	Then I see view with id "edit_email"
 
 	# Test getting app list for a web user
-	Then I auth for install from list with email "commcare.mobile.testing@gmail.com" and password "SEe2fRsr"
+	Then I auth for install from list with email "commcare.mobile.testing@gmail.com" and password_key "install-list-web-password"
 	
 	# This web user belongs to the commcare-tests domain and the swat domain, so we should see apps from both
 	Then I see the text "commcare-tests"
