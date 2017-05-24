@@ -11,11 +11,7 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
   wait_for_element_exists("* id:'home_gridview_buttons'", timeout: 60)
 end
 
-Then (/^I login with username "([^\"]*)" and password_key "([^\"]*)", without waiting for completion$/) do |username, password_key|
-  require 'yaml'
-  properties = YAML.load_file("local.properties.yaml")
-  password = properties['passwords'][password_key]
-
+Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
