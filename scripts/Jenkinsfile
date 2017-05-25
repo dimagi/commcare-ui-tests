@@ -41,7 +41,7 @@ node {
                     def stagePassed = false
                     stage(stageString) {
                         count = 0
-                        while (count < 3 and !stagePassed) {
+                        while (count < 3 & !stagePassed) {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
                             step([$class: 'AWSDeviceFarmRecorder',
                                                 projectName: 'commcare-odk',
