@@ -1,7 +1,3 @@
-stage('build') {
-    build job: 'commcare-odk-build-tests'
-}
-
 // Should send email/slack notification
 def notify = false
 // Number of times to retry a failed test
