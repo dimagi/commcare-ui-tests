@@ -1,6 +1,6 @@
 Feature: Lookup Table Update
 
-  @Integration
+  @Integration @LookupTable
   Scenario: Ensure lookup table changes are pulled on sync
     Then I upload the "initial_cities_table.xlsx" lookup table
     Then I install the ccz app at "integration_test_app.ccz"
@@ -12,6 +12,9 @@ Feature: Lookup Table Update
     Then I see 1 select options
     Then I upload the "extended_cities_table.xlsx" lookup table
     Then I go back to the home screen
+    Then I wait for 30 seconds
+    Then I touch the "Sync" text
+    Then I wait for 5 seconds
     Then I touch the "Sync" text
     Then I wait for progress
     Then I scroll until I see the "Start" text
