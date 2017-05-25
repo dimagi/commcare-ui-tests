@@ -3,9 +3,11 @@ def notify = false
 // Number of times to retry a failed test
 def retries = 3
 // Pool of devices on AWS to run on
-def poolArray = ['tab10']
+def poolArray = ['moto']
 // Job to copy the tested APK from
 def cc_android_job = 'commcare-android'
+
+def buildPassing = true
 
 node {
     stage('test') {
@@ -35,32 +37,46 @@ node {
             // times on failures
             for (pool in poolArray) {
                 for (tag in tagArray) {
-                    def stageString = "Testing ${tag} on ${pool}"
-                    try {
-                        stage(stageString) {
-                            count = 1
-                            retry(retries) {
-                                echo "Testing ${stageString} try number ${count} tag ${tag}"
-                                step([$class: 'AWSDeviceFarmRecorder',
-                                                    projectName: 'commcare-odk',
-                                                    devicePoolName: pool,
-                                                    runName: stageString,
-                                                    appArtifact: 'app-commcare-debug.apk',
-                                                    testToRun: 'CALABASH',
-                                                    calabashFeatures: 'aws/features.zip',
-                                                    calabashTags: tag,
-                                                    isRunUnmetered: true,
-                                                    storeResults: true,
-                                                ])
+                    def stageString = "${tag} on ${pool}"
+                    def stagePassed = false
+                    stage(stageString) {
+                        count = 0
+                        while (count < 3 and !stagePassed) {
+                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            step([$class: 'AWSDeviceFarmRecorder',
+                                                projectName: 'commcare-odk',
+                                                devicePoolName: pool,
+                                                runName: stageString,
+                                                appArtifact: 'app-commcare-debug.apk',
+                                                testToRun: 'CALABASH',
+                                                calabashFeatures: 'aws/features.zip',
+                                                calabashTags: tag,
+                                                isRunUnmetered: true,
+                                                storeResults: true,
+                                            ])
+                            if (currentBuild.result == 'SUCCESS') {
+                                echo "Step ${stageString} set to SUCCESS"
+                                stagePassed = true
                             }
+                            count = count + 1
                         }
-                    } catch(error) {
-                        echo "Failed testing ${stageString}"
-                        currentBuild.result = 'FAILURE'
+                        if (!stagePassed) {
+                            echo "Build set to FAILURE after on step ${stageString}"
+                            buildPassing = false
+                        }
+                        currentBuild.result = "UNSET"
                     }
                 }
             }
+        }
         } finally {
+
+            if (buildPassing) {
+                currentBuild.result = 'SUCCESS'
+            } else {
+                currentBuild.result = 'FAILURE'
+            }
+
             if (notify) {
                 if (currentBuild.result == 'SUCCESS') {
                     slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
