@@ -14,7 +14,7 @@ stage('test') {
     def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                    '@SessionExpiration', '@Dialogs']
+                    '@SessionExpiration', '@Dialogs', '@InstallList']
 
     def cc_android_branch = 'commcare-android'
 
