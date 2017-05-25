@@ -25,21 +25,19 @@ node {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
 
-            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failure.s
+            checkout scm
 
-           step ([$class: 'CopyArtifact',
-              projectName: 'commcare-odk-build-tests',
-              filter: 'aws/features.zip',
-              fingerprintArtifacts: true,
-              flatten: true]);
+            sh 'chmod a+x scripts/make_aws_features'
+            sh 'bash scripts/make_aws_features'
 
-           step ([$class: 'CopyArtifact',
+            step ([$class: 'CopyArtifact',
               projectName: cc_android_job,
               filter: '**/app-commcare-debug.apk',
               fingerprintArtifacts: true,
               flatten: true]);
 
+            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+            // times on failures
             for (pool in poolArray) {
                 for (tag in tagArray) {
                     def stageString = "Testing ${tag} on ${pool}"
