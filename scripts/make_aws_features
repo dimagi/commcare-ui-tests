@@ -1,4 +1,4 @@
-cp aws/aws_steps features/step_definitions/services.rb
+cp aws/services_steps_aws features/step_definitions/services_steps_standard.rb
 rm -r aws
 mkdir aws
 zip -r aws/features.zip features/*
