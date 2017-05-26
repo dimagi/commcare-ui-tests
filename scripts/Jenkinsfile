@@ -48,7 +48,7 @@ node {
                                                     runName: stageString,
                                                     appArtifact: 'app-commcare-debug.apk',
                                                     testToRun: 'CALABASH',
-                                                    calabashFeatures: 'features.zip',
+                                                    calabashFeatures: 'aws/features.zip',
                                                     calabashTags: tag,
                                                     isRunUnmetered: true,
                                                     storeResults: true,
