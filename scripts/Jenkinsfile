@@ -17,14 +17,10 @@ node {
         def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-<<<<<<< HEAD
                     '@SessionExpiration', '@Dialogs', '@InstallList']
-=======
-                    '@SessionExpiration', '@Dialogs']
         try {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
->>>>>>> master
 
             checkout scm
 
