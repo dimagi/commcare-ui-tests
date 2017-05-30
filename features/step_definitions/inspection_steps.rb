@@ -124,6 +124,22 @@ Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
   check_element_exists("* id:'#{element_id}' enabled:'false'")
 end
 
+Then (/^I see view with id "([^\"]*)"$/) do |id|
+  if not element_exists("* id:'#{id}'")
+    fail("No element exists with id " % id)
+  end
+end
+
+Then (/^I do not see view with id "([^\"]*)"$/) do |id|
+  if element_exists("* id:'#{id}'")
+    fail("Found element that should not be present with id " % id)
+  end
+end
+
+Then (/^I press view with class "([^\"]*)"$/) do |className|
+  tap_when_element_exists("#{className}")
+end
+
 def check_home_buttons( expected_texts)
   for button_text in expected_texts
     scroll_count = 0
