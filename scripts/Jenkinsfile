@@ -17,7 +17,7 @@ node {
         def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                    '@SessionExpiration', '@Dialogs']
+                    '@SessionExpiration', '@Dialogs', '@InstallList']
         try {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
