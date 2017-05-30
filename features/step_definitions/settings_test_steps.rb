@@ -1,8 +1,8 @@
 
 Then (/^After selecting the "([^\"]*)" item in the CheckedTextView list for the "([^\"]*)" setting, rotate, re-enter, and make sure it is still selected$/) do |item_text, setting_name|
 	
-	# Verify that the window closed and we return to the Application Preferences screen
-	step("I see the text \"CommCare > Application Preferences\"")
+	# Verify that the window closed and we return to the Settings screen
+	step("I see the text \"CommCare > Settings\"")
 	wait_for_element_does_not_exist("android.widget.CheckedTextView")
 
 	step("I rotate to landscape")

@@ -1,60 +1,95 @@
-stage('build') {
-    build job: 'commcare-odk-build-tests'
-}
-
+// Should send email/slack notification
 def notify = true
+// Number of times to retry a failed test
+def retries = 3
+// Pool of devices on AWS to run on
+def poolArray = ['asus']
+// Job to copy the tested APK from
+def cc_android_job = 'commcare-android'
 
-stage('test') {
+def buildPassing = true
 
-    def poolArray = ['asus']
+node {
+    stage('test') {
 
-    // All of the tags run on AWS. We specify these individually so that we can iterate over each
-    // tag and retry them granularly when they fail.
-
-    def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
+        // All of the tags run on AWS. We specify these individually so that we can iterate over each
+        // tag and retry them granularly when they fail.
+        def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
                     '@Setup', '@CaseSharing', '@Languages',
                     '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+<<<<<<< HEAD
                     '@SessionExpiration', '@Dialogs', '@InstallList']
+=======
+                    '@SessionExpiration', '@Dialogs']
+        try {
+            echo 'Running tests...'
+            currentBuild.result = 'SUCCESS'
+>>>>>>> master
 
-    def cc_android_branch = 'commcare-android'
+            checkout scm
 
-    try {
-        echo 'Running tests...'
-        currentBuild.result = 'SUCCESS'
+            sh 'chmod a+x scripts/make_aws_features'
+            sh 'bash scripts/make_aws_features'
 
-        // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-        // times on failure.s
+            step ([$class: 'CopyArtifact',
+              projectName: cc_android_job,
+              filter: '**/app-commcare-debug.apk',
+              fingerprintArtifacts: true,
+              flatten: true]);
 
-        for (pool in poolArray) {
-            for (tag in tagArray) {
-                def stageString = "Testing ${tag} on ${pool}"
-                try {
+            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+            // times on failures
+            for (pool in poolArray) {
+                for (tag in tagArray) {
+                    def stageString = "${tag} on ${pool}"
+                    def stagePassed = false
                     stage(stageString) {
-                        count = 1
-                        retry(3) {
-                            echo "Testing ${stageString} try number ${count}"
-                            build job: 'commcare-odk-tests',
-                                        parameters: [
-                                            [$class: 'StringParameterValue', name: "TAG_NAME", value: "${tag}"],
-                                            [$class: 'StringParameterValue', name: "AWSDEVICEFARM_DEVICE_POOL", value: "${pool}"],
-                                            [$class: 'StringParameterValue', name: "CC_ANDROID_BRANCH", value: "${cc_android_branch}"]]
+                        count = 0
+                        while (count < 3 & !stagePassed) {
+                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            step([$class: 'AWSDeviceFarmRecorder',
+                                                projectName: 'commcare-odk',
+                                                devicePoolName: pool,
+                                                runName: stageString,
+                                                appArtifact: 'app-commcare-debug.apk',
+                                                testToRun: 'CALABASH',
+                                                calabashFeatures: 'aws/features.zip',
+                                                calabashTags: tag,
+                                                isRunUnmetered: true,
+                                                storeResults: true,
+                                            ])
+                            if (currentBuild.result == 'SUCCESS') {
+                                echo "Step ${stageString} set to SUCCESS"
+                                stagePassed = true
+                            }
+                            count = count + 1
                         }
+                        if (!stagePassed) {
+                            echo "Build set to FAILURE after on step ${stageString}"
+                            buildPassing = false
+                        }
+                        currentBuild.result = "UNSET"
                     }
-                } catch(error) {
-                    echo "Failed testing ${stageString}"
-                    currentBuild.result = 'FAILURE'
                 }
             }
         }
-    } finally {
-        if (notify) {
-            if (currentBuild.result == 'SUCCESS') {
-                slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+        finally {
+
+            if (buildPassing) {
+                currentBuild.result = 'SUCCESS'
             } else {
-                slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
-                mail (to: 'mobiledev@dimagi.com',
-                    subject: "Amazon device farm tests failed.",
-                    body: "Amazon device farm tests failed.");
+                currentBuild.result = 'FAILURE'
+            }
+
+            if (notify) {
+                if (currentBuild.result == 'SUCCESS') {
+                    slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+                } else {
+                    slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+                    mail (to: 'mobiledev@dimagi.com',
+                        subject: "Amazon device farm tests failed.",
+                        body: "Amazon device farm tests failed.");
+                }
             }
         }
     }
