@@ -82,6 +82,14 @@ Then (/^I apply the update/) do
   step("I wait for progress")
 end
 
+Then (/^I enable Developer Options/) do
+  for i in 0..4
+    press_menu_button()
+    tap_when_element_exists("* {text CONTAINS[c] 'About CommCare'}")
+    tap_when_element_exists("* id:'button1'")
+  end
+end
+
 Then (/^I open the options menu$/) do
   press_menu_button()
 end
