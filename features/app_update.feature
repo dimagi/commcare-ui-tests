@@ -5,6 +5,14 @@ Scenario: Ensure app update can be obtained from HQ
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
 
+    # Make the "Update Options" setting item visible
+    Then I enable Developer Options
+    Then I select "Settings" menu item
+    Then I touch the "Developer Options" text
+    Then I touch the "Show Update Options Item" text
+    Then I touch the "Enabled" text
+    Then I go back to the home screen
+
     # Make sure the update endpoint is set to "Latest starred build"
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
