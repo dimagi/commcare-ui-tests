@@ -11,6 +11,7 @@ Automated UI level tests for [CommCareODK](https://github.com/dimagi/commcare-od
 + The Android SDK installed locally - [instructions here](http://developer.android.com/sdk/installing/index.html)
 + Install [AndroidViewClient](https://github.com/dtmilano/AndroidViewClient) `sudo easy_install androidviewclient`. This allows control over non-CommCare apps, such as the Camera app
 + A plugged in device accessible via ADB
++ cp local.properties.yaml.example local.properties.yaml and fill in your passwords
 
 ###Running
 
