@@ -1,4 +1,4 @@
-@InstallList
+@Integration @InstallList
 Feature: Install from list
 
 Scenario: Install an app by getting the list of available apps for a mobile worker
