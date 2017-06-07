@@ -56,6 +56,8 @@ end
 Then (/^I install app "([^\"]*)" from the list of available apps$/) do |appName|
   tap_when_element_exists("* {text CONTAINS[c] '#{appName}'}")
   wait_for_element_exists("* {text CONTAINS[c] 'Setting Up App'}")
+  # Wait until the install dialog goes away
+  wait_for_element_does_not_exist("android.widget.ProgressBar")
   # After the install process, we'll either end up on the install screen or the app
   # manager, both of which should be showing the app name if the install was successful
   wait_for_element_exists("* {text CONTAINS[c] '#{appName}'}")
@@ -131,6 +133,15 @@ Then (/^I enable Developer Options/) do
     tap_when_element_exists("* id:'button1'")
   end
 end
+
+Then (/^I enable the "([^\"]*)" Developer Option/) do |setting_name|
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Settings'}")
+  tap_when_element_exists("* {text CONTAINS[c] 'Developer Options'}")
+  tap_when_element_exists("* {text CONTAINS[c] '#{setting_name}'}")
+  tap_when_element_exists("CheckedTextView {text CONTAINS[c] 'Enabled'}")
+end
+
 
 Then (/^I open the options menu$/) do
   press_menu_button()
