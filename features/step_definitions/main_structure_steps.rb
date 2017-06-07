@@ -90,6 +90,15 @@ Then (/^I enable Developer Options/) do
   end
 end
 
+Then (/^I enable the "([^\"]*)" Developer Option/) do |setting_name|
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Settings'}")
+  tap_when_element_exists("* {text CONTAINS[c] 'Developer Options'}")
+  tap_when_element_exists("* {text CONTAINS[c] '#{setting_name}'}")
+  tap_when_element_exists("CheckedTextView {text CONTAINS[c] 'Enabled'}")
+end
+
+
 Then (/^I open the options menu$/) do
   press_menu_button()
 end
