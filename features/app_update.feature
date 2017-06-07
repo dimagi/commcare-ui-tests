@@ -7,10 +7,7 @@ Scenario: Ensure app update can be obtained from HQ
 
     # Make the "Update Options" setting item visible
     Then I enable Developer Options
-    Then I select "Settings" menu item
-    Then I touch the "Developer Options" text
-    Then I touch the "Show Update Options Item" text
-    Then I touch the "Enabled" text
+    Then I enable the "Show Update Options Item" Developer Option
     Then I go back to the home screen
 
     # Make sure the update endpoint is set to "Latest starred build"
