@@ -20,6 +20,50 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waitin
   tap_when_element_exists("* id:'login_button'")
 end
 
+Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]*)" and password_key "([^\"]*)"$/) do |username, domain, password_key|
+  require 'yaml'
+  properties = YAML.load_file("local.properties.yaml")
+  password = properties['passwords'][password_key]
+
+  clear_text_in("* id:'edit_username'")
+  enter_text("* id:'edit_username'", username)
+  hide_soft_keyboard()
+  clear_text_in("* id:'edit_domain'")
+  enter_text("* id:'edit_domain'", domain)
+  hide_soft_keyboard()
+  clear_text_in("* id:'edit_password'")
+  enter_text("* id:'edit_password'", password)
+  hide_soft_keyboard()
+  tap_when_element_exists("* {text CONTAINS[c] 'See Available Apps'}")
+  wait_for_element_exists("* id:'apps_list_container'", timeout: 60)
+end
+
+Then (/^I auth for install from list with email "([^\"]*)" and password_key "([^\"]*)"$/) do |email, password_key|
+  require 'yaml'
+  properties = YAML.load_file("local.properties.yaml")
+  password = properties['passwords'][password_key]
+
+  clear_text_in("* id:'edit_email'")
+  enter_text("* id:'edit_email'", email)
+  hide_soft_keyboard()
+  clear_text_in("* id:'edit_password'")
+  enter_text("* id:'edit_password'", password)
+  hide_soft_keyboard()
+  tap_when_element_exists("* {text CONTAINS[c] 'See Available Apps'}")
+  wait_for_element_exists("* id:'apps_list_container'", timeout: 60)
+end
+
+Then (/^I install app "([^\"]*)" from the list of available apps$/) do |appName|
+  tap_when_element_exists("* {text CONTAINS[c] '#{appName}'}")
+  wait_for_element_exists("* {text CONTAINS[c] 'Setting Up App'}")
+  # Wait until the install dialog goes away
+  wait_for_element_does_not_exist("android.widget.ProgressBar")
+  # After the install process, we'll either end up on the install screen or the app
+  # manager, both of which should be showing the app name if the install was successful
+  wait_for_element_exists("* {text CONTAINS[c] '#{appName}'}")
+end
+
+
 Then (/^I press login$/) do
   tap_when_element_exists("* id:'login_button'")
 end
