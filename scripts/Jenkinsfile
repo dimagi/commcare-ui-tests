@@ -15,12 +15,11 @@ node {
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
         // def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
-        //             '@Setup', '@CaseSharing', '@Languages',
-        //             '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-        //             '@SessionExpiration', '@Dialogs', '@InstallList']
+        //           '@Setup', '@CaseSharing', '@Languages',
+        //            '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+        //            '@SessionExpiration', '@Dialogs', '@InstallList']
 
         def tagArray = ['@InstallList']
-
         try {
             echo 'Running tests...'
             currentBuild.result = 'SUCCESS'
@@ -68,13 +67,13 @@ node {
                             echo "Build set to FAILURE after on step ${stageString}"
                             buildPassing = false
                         }
-                        currentBuild.result = "UNSET"
+                        currentBuild.result = 'NOT_BUILT'
                     }
                 }
             }
         }
         finally {
-
+            echo "Finally buildPassing=${buildPassing} currentBuild.result=${currentBuild.result}"
             if (buildPassing) {
                 currentBuild.result = 'SUCCESS'
             } else {
@@ -82,7 +81,7 @@ node {
             }
 
             if (notify) {
-                if (currentBuild.result == 'SUCCESS') {
+                if (buildPassing) {
                     slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
                 } else {
                     slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
