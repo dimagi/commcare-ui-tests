@@ -25,7 +25,7 @@ node {
             sh 'chmod a+x scripts/make_aws_features'
             sh 'bash scripts/make_aws_features'
 
-            step ([$class: 'CopyArtifact',
+            step ([$class: 'CopyArtifact',src/test/resources/restores/schema.xml
               projectName: cc_android_job,
               filter: '**/app-commcare-debug.apk',
               fingerprintArtifacts: true,
@@ -37,38 +37,46 @@ node {
                 for (tag in tagArray) {
                     def stageString = "${tag} on ${pool}"
                     def stagePassed = false
-                    stage(stageString) {
+                    stage (stageString) {
                         count = 0
                         while (count < 3 & !stagePassed) {
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
-                                                projectName: 'commcare-odk',
-                                                devicePoolName: pool,
-                                                runName: stageString,
-                                                appArtifact: 'app-commcare-debug.apk',
-                                                testToRun: 'CALABASH',
-                                                calabashFeatures: 'aws/features.zip',
-                                                calabashTags: tag,
-                                                isRunUnmetered: true,
-                                                storeResults: true,
-                                            ])
-                            def runResult = runWrapper.getResult()
-                            echo "RunWrapper ${runWrapper}, result: ${runResult}"
-                            if (runResult == 'SUCCESS') {
-                                echo "Step ${stageString} set to SUCCESS"
-                                stagePassed = true
+                            stage ("${stageString try ${count}") {
+                                echo "Testing ${stageString} try number ${count} tag ${tag}"
+                                def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
+                                                    projectName: 'commcare-odk',
+                                                    devicePoolName: pool,
+                                                    runName: stageString,
+                                                    appArtifact: 'app-commcare-debug.apk',
+                                                    testToRun: 'CALABASH',
+                                                    calabashFeatures: 'aws/features.zip',
+                                                    calabashTags: tag,
+                                                    isRunUnmetered: true,
+                                                    storeResults: true,
+                                                    ignoreRunError: false,
+                                                ])
+                                if (currentBuild.result = 'SUCCESS') {
+                                    echo "Step ${stageString} set to SUCCESS"
+                                    stagePassed = true
+                                }
+                                count = count + 1
                             }
-                            count = count + 1
                         }
                         if (!stagePassed) {
                             echo "Build set to FAILURE after on step ${stageString}"
                             buildPassing = false
                         }
+                        // We set this back to 'NOT_BUILT' so that we can detect new failures still
+                        currentBuild.result = 'NOT_BUILT'
                     }
                 }
             }
         }
         finally {
+            if (buildPassing) {
+                currentBuild.result = 'SUCCESS'
+            } else {
+                currentBuild.result = 'FAILURE'
+            }
             echo "Finally buildPassing=${buildPassing} currentBuild.result=${currentBuild.result}"
             if (notify) {
                 if (buildPassing) {
