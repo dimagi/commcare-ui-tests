@@ -54,7 +54,7 @@ node {
                                                     storeResults: true,
                                                     ignoreRunError: false,
                                                 ])
-                                if (currentBuild.result = 'SUCCESS') {
+                                if (currentBuild.result == 'SUCCESS') {
                                     echo "Step ${stageString} set to SUCCESS"
                                     stagePassed = true
                                 }
