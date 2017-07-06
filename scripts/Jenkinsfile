@@ -40,7 +40,7 @@ node {
                     stage (stageString) {
                         count = 0
                         while (count < 3 & !stagePassed) {
-                            stage ("${stageString try ${count}") {
+                            stage ("${stageString} try ${count}") {
                                 echo "Testing ${stageString} try number ${count} tag ${tag}"
                                 def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
                                                     projectName: 'commcare-odk',
