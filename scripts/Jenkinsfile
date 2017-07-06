@@ -1,5 +1,5 @@
 // Should send email/slack notification
-def notify = true
+def notify = false
 // Number of times to retry a failed test
 def retries = 3
 // Pool of devices on AWS to run on
@@ -21,10 +21,7 @@ node {
 
         try {
             echo 'Running tests...'
-            currentBuild.result = 'SUCCESS'
-
             checkout scm
-
             sh 'chmod a+x scripts/make_aws_features'
             sh 'bash scripts/make_aws_features'
 
@@ -44,7 +41,7 @@ node {
                         count = 0
                         while (count < 3 & !stagePassed) {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            step([$class: 'AWSDeviceFarmRecorder',
+                            def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
                                                 projectName: 'commcare-odk',
                                                 devicePoolName: pool,
                                                 runName: stageString,
@@ -55,8 +52,9 @@ node {
                                                 isRunUnmetered: true,
                                                 storeResults: true,
                                             ])
-                            echo "Current build result ${currentBuild.result}"
-                            if (currentBuild.result == 'SUCCESS') {
+                            def runResult = runWrapper.getResult()
+                            echo "RunWrapper ${runWrapper}, result: ${runResult}"
+                            if (runResult == 'SUCCESS') {
                                 echo "Step ${stageString} set to SUCCESS"
                                 stagePassed = true
                             }
@@ -66,19 +64,12 @@ node {
                             echo "Build set to FAILURE after on step ${stageString}"
                             buildPassing = false
                         }
-                        currentBuild.result = 'NOT_BUILT'
                     }
                 }
             }
         }
         finally {
             echo "Finally buildPassing=${buildPassing} currentBuild.result=${currentBuild.result}"
-            if (buildPassing) {
-                currentBuild.result = 'SUCCESS'
-            } else {
-                currentBuild.result = 'FAILURE'
-            }
-
             if (notify) {
                 if (buildPassing) {
                     slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
