@@ -35,7 +35,7 @@ node {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
                                 [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                [$class: 'StringParameterValue', name: 'stageString', value: stageString]
+                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
                                 [$class: 'StringParameterValue', name: 'tag', value: tag]
                             ]
                             def runResult = testRun.getResult()
