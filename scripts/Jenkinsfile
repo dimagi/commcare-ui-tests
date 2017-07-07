@@ -22,14 +22,6 @@ node {
         try {
             echo 'Running tests...'
             checkout scm
-            sh 'chmod a+x scripts/make_aws_features'
-            sh 'bash scripts/make_aws_features'
-
-            step ([$class: 'CopyArtifact',
-              projectName: cc_android_job,
-              filter: '**/app-commcare-debug.apk',
-              fingerprintArtifacts: true,
-              flatten: true]);
 
             // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
             // times on failures
@@ -41,26 +33,18 @@ node {
                     while (count < 3 & !stagePassed) {
                         stage ("${stageString} try ${count}") {
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            echo "CurrentBuild.result before test ${currentBuild.result}"
-                            def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
-                                                projectName: 'commcare-odk',
-                                                devicePoolName: pool,
-                                                runName: stageString,
-                                                appArtifact: 'app-commcare-debug.apk',
-                                                testToRun: 'CALABASH',
-                                                calabashFeatures: 'aws/features.zip',
-                                                calabashTags: tag,
-                                                isRunUnmetered: true,
-                                                storeResults: false,
-                                                ignoreRunError: false,
-                                            ])
-                            echo "CurrentBuild.result after test ${currentBuild.result}"
-                            if (currentBuild.result == 'SUCCESS') {
+                            def testRun = build job: 'pipeline-runner', parameters: [
+                                [$class: 'StringParameterValue', name: 'pool', value: pool],
+                                [$class: 'StringParameterValue', name: 'stageString', value: stageString]
+                                [$class: 'StringParameterValue', name: 'tag', value: tag]
+                            ]
+                            def runResult = testRun.getResult()
+                            echo "testRun result ${runResult}"
+                            if (runResult == 'SUCCESS') {
                                 echo "Step ${stageString} set to SUCCESS"
                                 stagePassed = true
                             }
                             count = count + 1
-                            currentBuild.result = null
                         }
                     }
                     if (!stagePassed) {
