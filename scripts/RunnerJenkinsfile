@@ -5,7 +5,7 @@ node {
     sh 'bash scripts/make_aws_features'
 
     step ([$class: 'CopyArtifact',
-                  projectName: cc_android_job,
+                  projectName: ${cc_android_job},
                   filter: '**/app-commcare-debug.apk',
                   fingerprintArtifacts: true,
                   flatten: true]);
