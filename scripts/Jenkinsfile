@@ -1,5 +1,5 @@
 // Should send email/slack notification
-def notify = false
+def notify = true
 // Number of times to retry a failed test
 def retries = 3
 // Pool of devices on AWS to run on
@@ -8,6 +8,8 @@ def poolArray = ['asus']
 def cc_android_job = 'commcare-android'
 
 def buildPassing = true
+
+def failureList = []
 
 node {
     stage('test') {
@@ -27,43 +29,42 @@ node {
             for (pool in poolArray) {
                 for (tag in tagArray) {
                     def stageString = "${tag} on ${pool}"
-                    def stagePassed = false
                     count = 0
-                    retry(3) {
-                        stage ("${stageString} try ${count}") {
-                            count = count + 1
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
-                            def testRun = build job: 'pipeline-runner', parameters: [
-                                [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                            ]
-                            def runResult = testRun.getResult()
-                            echo "testRun result ${runResult}"
-                            echo "Step ${stageString} set to SUCCESS"
-                            stagePassed = true
+                    try {
+                        retry(3) {
+                            stage ("${stageString} try ${count}") {
+                                count = count + 1
+                                echo "Testing ${stageString} try number ${count} tag ${tag}"
+                                def testRun = build job: 'pipeline-runner', parameters: [
+                                    [$class: 'StringParameterValue', name: 'pool', value: pool],
+                                    [$class: 'StringParameterValue', name: 'stageString', value: stageString],
+                                    [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                    [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
+                                ]
+                                echo "Step ${stageString} set to SUCCESS"
+                            }
                         }
-                    }
-                    if (!stagePassed) {
-                        echo "Build set to FAILURE after on step ${stageString}"
+                    } catch (exc) {
+                        echo "Step ${stageString} set to FAILURE"
                         buildPassing = false
+                        failureList.add(tag)
                     }
                 }
             }
         }
         finally {
             if (buildPassing) {
+                echo "Passed"
                 currentBuild.result = 'SUCCESS'
             } else {
+                echo "Failed with failing tags ${failureList}"
                 currentBuild.result = 'FAILURE'
             }
-            echo "Finally buildPassing=${buildPassing} currentBuild.result=${currentBuild.result}"
             if (notify) {
                 if (buildPassing) {
                     slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
                 } else {
-                    slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:'
+                    slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:. Failing tests ${failureList}'
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
                         body: "Amazon device farm tests failed.");
