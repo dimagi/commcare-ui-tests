@@ -35,7 +35,8 @@ node {
                             def testRun = build job: 'pipeline-runner', parameters: [
                                 [$class: 'StringParameterValue', name: 'pool', value: pool],
                                 [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                [$class: 'StringParameterValue', name: 'tag', value: tag]
+                                [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                             ]
                             def runResult = testRun.getResult()
                             echo "testRun result ${runResult}"
