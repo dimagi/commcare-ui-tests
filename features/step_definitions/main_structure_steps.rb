@@ -22,7 +22,7 @@ end
 
 Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]*)" and password_key "([^\"]*)"$/) do |username, domain, password_key|
   require 'yaml'
-  properties = YAML.load_file("local.properties.yaml")
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
   password = properties['passwords'][password_key]
 
   clear_text_in("* id:'edit_username'")
@@ -40,7 +40,7 @@ end
 
 Then (/^I auth for install from list with email "([^\"]*)" and password_key "([^\"]*)"$/) do |email, password_key|
   require 'yaml'
-  properties = YAML.load_file("local.properties.yaml")
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
   password = properties['passwords'][password_key]
 
   clear_text_in("* id:'edit_email'")
