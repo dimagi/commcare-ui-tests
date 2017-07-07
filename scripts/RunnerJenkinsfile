@@ -1,3 +1,5 @@
+checkout scm
+
 sh 'chmod a+x scripts/make_aws_features'
 sh 'bash scripts/make_aws_features'
 

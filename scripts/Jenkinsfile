@@ -21,7 +21,6 @@ node {
 
         try {
             echo 'Running tests...'
-            checkout scm
 
             // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
             // times on failures
