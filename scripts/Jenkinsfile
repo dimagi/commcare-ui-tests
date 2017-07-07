@@ -14,10 +14,10 @@ node {
 
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures', '@FormSettings',
-                        '@Setup', '@CaseSharing', '@Languages',
-                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
-                        '@SessionExpiration', '@Dialogs', '@InstallList']
+        def tagArray = ['@MenuTests', '@Login', '@FormEntry', '@Fixtures']
+        //                '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
+        //                '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering',
+        //                '@SessionExpiration', '@Dialogs', '@InstallList']
 
         try {
             echo 'Running tests...'
@@ -37,35 +37,35 @@ node {
                 for (tag in tagArray) {
                     def stageString = "${tag} on ${pool}"
                     def stagePassed = false
-                    stage (stageString) {
-                        count = 0
-                        while (count < 3 & !stagePassed) {
-                            stage ("${stageString} try ${count}") {
-                                echo "Testing ${stageString} try number ${count} tag ${tag}"
-                                def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
-                                                    projectName: 'commcare-odk',
-                                                    devicePoolName: pool,
-                                                    runName: stageString,
-                                                    appArtifact: 'app-commcare-debug.apk',
-                                                    testToRun: 'CALABASH',
-                                                    calabashFeatures: 'aws/features.zip',
-                                                    calabashTags: tag,
-                                                    isRunUnmetered: true,
-                                                    storeResults: true,
-                                                    ignoreRunError: false,
-                                                ])
-                                echo "CurrentBuild.result ${currentBuild.result}"
-                                if (currentBuild.result == 'SUCCESS') {
-                                    echo "Step ${stageString} set to SUCCESS"
-                                    stagePassed = true
-                                }
-                                count = count + 1
+                    count = 0
+                    while (count < 3 & !stagePassed) {
+                        stage ("${stageString} try ${count}") {
+                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            echo "CurrentBuild.result before test ${currentBuild.result}"
+                            def runWrapper = step([$class: 'AWSDeviceFarmRecorder',
+                                                projectName: 'commcare-odk',
+                                                devicePoolName: pool,
+                                                runName: stageString,
+                                                appArtifact: 'app-commcare-debug.apk',
+                                                testToRun: 'CALABASH',
+                                                calabashFeatures: 'aws/features.zip',
+                                                calabashTags: tag,
+                                                isRunUnmetered: true,
+                                                storeResults: true,
+                                                ignoreRunError: false,
+                                            ])
+                            echo "CurrentBuild.result after test ${currentBuild.result}"
+                            if (currentBuild.result == 'SUCCESS') {
+                                echo "Step ${stageString} set to SUCCESS"
+                                stagePassed = true
                             }
+                            count = count + 1
+                            currentBuild.result == 'SUCCESS'
                         }
-                        if (!stagePassed) {
-                            echo "Build set to FAILURE after on step ${stageString}"
-                            buildPassing = false
-                        }
+                    }
+                    if (!stagePassed) {
+                        echo "Build set to FAILURE after on step ${stageString}"
+                        buildPassing = false
                     }
                 }
             }
