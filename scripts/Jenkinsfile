@@ -51,7 +51,7 @@ node {
                                                 calabashFeatures: 'aws/features.zip',
                                                 calabashTags: tag,
                                                 isRunUnmetered: true,
-                                                storeResults: true,
+                                                storeResults: false,
                                                 ignoreRunError: false,
                                             ])
                             echo "CurrentBuild.result after test ${currentBuild.result}"
