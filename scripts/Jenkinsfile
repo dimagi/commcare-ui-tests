@@ -60,7 +60,7 @@ node {
                                 stagePassed = true
                             }
                             count = count + 1
-                            currentBuild.result == 'SUCCESS'
+                            currentBuild.result = null
                         }
                     }
                     if (!stagePassed) {
