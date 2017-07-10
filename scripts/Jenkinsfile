@@ -62,9 +62,9 @@ node {
             }
             if (notify) {
                 if (buildPassing) {
-                    slackSend color: 'good', message: 'Amazon device farm tests passed, :tight:'
+                    slackSend color: 'good', message: 'CommCare 2.37 UI tests passed, :tight:'
                 } else {
-                    slackSend color: 'bad', message: 'Amazon device farm tests failed, :nottight:. Failing tests ${failureList}'
+                    slackSend color: 'bad', message: 'CommCare 2.37 UI tests failed, :nottight:. Failing tests ${failureList}'
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
                         body: "Amazon device farm tests failed.");
