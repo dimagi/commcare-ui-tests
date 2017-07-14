@@ -11,6 +11,7 @@ Feature: Lookup Table Update
     And I select form "Lookup Tables"
     Then I see 1 select options
     Then I upload the "extended_cities_table.xlsx" lookup table
+    Then I wait for 60 seconds
     Then I go back to the home screen
     Then I touch the "Sync" text
     Then I wait for progress
