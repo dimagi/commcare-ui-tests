@@ -15,6 +15,8 @@ Feature: Lookup Table Update
     Then I go back to the home screen
     Then I touch the "Sync" text
     Then I wait for progress
+    Then I touch the "Sync" text
+    Then I wait for progress
     Then I scroll until I see the "Start" text
     Then I touch the "Start" text
     Then I select module "Misc"
