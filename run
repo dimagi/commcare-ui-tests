@@ -36,11 +36,11 @@ fi
 # download/build apk
 if [ "$BUILD" == "master" ]; then
   echo "downloading latest master apk from jenkins"
-  wget "https://jenkins.dimagi.com/job/commcare-android/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
+  wget "https://jenkins.dimagi.com/job/commcare-android/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/app-commcare-release.apk" -O commcare.apk
   bundler exec calabash-android resign commcare.apk
 elif [ "$BUILD" == "version" ]; then
   echo "downloading latest master apk from jenkins"
-  wget "https://jenkins.dimagi.com/job/commcare-android-$VERSION/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/commcare-android-commcare-release.apk" -O commcare.apk
+  wget "https://jenkins.dimagi.com/job/commcare-android-$VERSION/lastSuccessfulBuild/artifact/commcare-android/build/outputs/apk/app-commcare-release.apk" -O commcare.apk
   bundler exec calabash-android resign commcare.apk
 elif [ "$BUILD" == "release" ]; then
   echo "downloading latest release apk from jenkins"
