@@ -5,6 +5,8 @@ Feature: Lookup Table Update
     Then I upload the "initial_cities_table.xlsx" lookup table
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
+    Then I touch the "Sync" text
+    Then I wait for progress
     Then I scroll until I see the "Start" text
     Then I touch the "Start" text
     Then I select module "Misc"
