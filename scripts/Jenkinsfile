@@ -53,18 +53,19 @@ node {
             }
         }
         finally {
+            def failingListString = failureList.join(",")
             if (buildPassing) {
                 echo "Passed"
                 currentBuild.result = 'SUCCESS'
             } else {
-                echo "Failed with failing tags ${failureList}"
+                echo "Failed with failing tags ${failingListString}"
                 currentBuild.result = 'FAILURE'
             }
             if (notify) {
                 if (buildPassing) {
-                    slackSend color: 'good', message: 'CommCare 2.37 UI tests passed, :tight:'
+                    slackSend color: 'good', message: "${cc_android_job} UI tests passed, :tight:"
                 } else {
-                    slackSend color: 'bad', message: 'CommCare 2.37 UI tests failed, :nottight:. Failing tests ${failureList}'
+                    slackSend color: 'bad', message: "${cc_android_job} UI tests failed, :nottight:. Failing tests ${failingListString}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
                         body: "Amazon device farm tests failed.");
