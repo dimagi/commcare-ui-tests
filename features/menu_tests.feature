@@ -55,7 +55,6 @@ Feature: Test all primary CommCare menu options
     Then I wait
 
     Then I select "Advanced" menu item
-    Then I verify that the current activity is "AdvancedActionsActivity"
     Then I see the text "CommCare > Advanced"
     Then I see a list that contains all of these items "Wifi Direct,Manage SD,Report Problem,Force Log Submission,Validate Media,Connection Test,Recovery Mode,Clear User Data"
     Then I go back to the home screen
