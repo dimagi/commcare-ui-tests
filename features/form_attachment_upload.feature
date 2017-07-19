@@ -1,4 +1,5 @@
 Feature: Submit form with multimedia
+@Lookup
 @HasExternal @Integration
 Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I store most recent form submission time
