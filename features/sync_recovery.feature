@@ -1,5 +1,6 @@
 Feature: Perform 412 Recovery Sync
 
+  @Lookup
   @Integration
   Scenario: Make sure recovery syncs work
     Then I install the ccz app at "case_claim.ccz"

@@ -1,5 +1,6 @@
 Feature: Lookup Table Update
 
+  @Lookup
   @Integration
   Scenario: Ensure lookup table changes are pulled on sync
     Then I upload the "initial_cities_table.xlsx" lookup table
