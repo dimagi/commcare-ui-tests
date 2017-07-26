@@ -1,3 +1,4 @@
+@DemoUser
 Feature: Offline demo user restore
 
 Scenario: Use practice mode with a custom demo user
