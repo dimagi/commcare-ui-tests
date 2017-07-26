@@ -35,9 +35,14 @@ Scenario: Use practice mode with a custom demo user
 Scenario: Update to an app version with a different demo user and use that
 
 	# Perform an update to an app version with a different demo user
+
+	# Briefly turn the internet back on to allow us to log in
 	Then I turn on the internet
+
 	Then I login with username "test" and password "123"
 	Then I do an offline update to the ccz app at "demo_user_test_2.ccz"
+
+	# Internet back off
 	Then I turn off the internet
 
 	# Enter Practice mode and check that the demo user has changed
@@ -49,4 +54,6 @@ Scenario: Update to an app version with a different demo user and use that
 	Then I select module "Case List"
 	Then I select module "Followup"
 	Then I see a list that contains all of these items "balloon,block,bear"
+
+	# Turn internet back on for ensuing tests
 	Then I turn on the internet
