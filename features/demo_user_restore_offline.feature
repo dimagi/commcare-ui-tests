@@ -1,4 +1,4 @@
-@DemoUser
+@DemoUserOffline
 Feature: Offline demo user restore
 # This is identical to demo_user_restore_online.feature, but is run with airplane mode on
 
