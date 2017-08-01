@@ -5,9 +5,8 @@ def retries = 3
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
-def env = System.getenv()
 // Job to copy the tested APK from
-def cc_android_job = env["CUSTOM_JOB_TARGET"] ?: 'commcare-android'
+def cc_android_job = System.getProperty("CUSTOM_JOB_TARGET") ?: 'commcare-android'
 
 def buildPassing = true
 
