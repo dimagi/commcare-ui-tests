@@ -14,14 +14,18 @@ def failureList = []
 
 node {
     stage('test') {
-
+        
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        //def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
-          //              '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
-            //            '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-              //          '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline']
-        def tagArray = ['@DemoUserOffline']
+        def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
+                        '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
+                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
+                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline']
+        
+        if (this.hasProperty("CUSTOM_TAG_TO_RUN") {
+            tagArray =  ["${CUSTOM_TAG_TO_RUN}"]
+        }
+
 
         try {
             echo 'Running tests...'
