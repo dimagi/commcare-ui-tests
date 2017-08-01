@@ -8,6 +8,8 @@ def poolArray = ['asus']
 // Job to copy the tested APK from
 def cc_android_job = this.hasProperty("CUSTOM_JOB_TARGET") ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
 
+def custom_tag =  this.hasProperty("CUSTOM_TAG_TO_RUN") ? "${CUSTOM_TAG_TO_RUN}" : ''
+
 def buildPassing = true
 
 def failureList = []
@@ -22,8 +24,8 @@ node {
                         '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                         '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline']
         
-        if (this.hasProperty("CUSTOM_TAG_TO_RUN") && "${CUSTOM_TAG_TO_RUN}" != "") {
-            tagArray =  ["${CUSTOM_TAG_TO_RUN}"]
+        if (custom_tag != '') {
+            tagArray =  [custom_tag]
         }
 
 
