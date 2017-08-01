@@ -43,6 +43,7 @@ Scenario: Update to an app version with a different demo user and use that
 	Then I do an offline update to the ccz app at "demo_user_test_2.ccz"
 
 	# Internet back off
+	Then I wait
 	Then I turn off the internet
 
 	# Enter Practice mode and check that the demo user has changed
