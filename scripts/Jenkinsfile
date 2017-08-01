@@ -5,9 +5,10 @@ def retries = 3
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
-binding.variables.each {
-  println "${it.key} = ${it.value}"
-}
+def config = new HashMap()
+config.putAll(binding.variables)
+
+echo config
 
 // Job to copy the tested APK from
 def cc_android_job = this.hasProperty("CUSTOM_JOB_TARGET") ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
