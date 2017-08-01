@@ -6,7 +6,7 @@ def retries = 3
 def poolArray = ['asus']
 
 // Job to copy the tested APK from
-def cc_android_job = "${CUSTOM_JOB_TARGET}" ?: 'commcare-android'
+def cc_android_job = this.hasProperty("CUSTOM_JOB_TARGET") ? "${CUSTOM_JOB_TARGET}" ?: 'commcare-android'
 
 def buildPassing = true
 
