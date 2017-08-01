@@ -8,6 +8,8 @@ def poolArray = ['asus']
 // Job to copy the tested APK from
 def cc_android_job = this.hasProperty("CUSTOM_JOB_TARGET") ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
 
+echo "Custom job: " + cc_android_job
+
 def custom_tag =  this.hasProperty("CUSTOM_TAG_TO_RUN") ? "${CUSTOM_TAG_TO_RUN}" : ''
 
 echo "Custom tag: " + custom_tag
