@@ -10,6 +10,8 @@ def cc_android_job = this.hasProperty("CUSTOM_JOB_TARGET") ? "${CUSTOM_JOB_TARGE
 
 def custom_tag =  this.hasProperty("CUSTOM_TAG_TO_RUN") ? "${CUSTOM_TAG_TO_RUN}" : ''
 
+echo "Custom tag: " + custom_tag
+
 def buildPassing = true
 
 def failureList = []
