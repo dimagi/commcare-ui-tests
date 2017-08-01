@@ -32,10 +32,9 @@ Scenario: Use practice mode with a custom demo user
 	Then I select module "Followup"
 	Then I see a list that contains all of these items "alligator,animal,apple,carrot"
 
+Scenario: Update to an app version with a different demo user and use that
+
 	# Perform an update to an app version with a different demo user
-	
-	Then I go back to the home screen
-	Then I logout
 
 	# Briefly turn the internet back on to allow us to log in
     Then I turn on the internet
