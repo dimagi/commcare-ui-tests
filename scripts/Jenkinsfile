@@ -22,7 +22,7 @@ node {
                         '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                         '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline']
         
-        if (this.hasProperty("CUSTOM_TAG_TO_RUN") {
+        if (this.hasProperty("CUSTOM_TAG_TO_RUN") && "${CUSTOM_TAG_TO_RUN}" != "") {
             tagArray =  ["${CUSTOM_TAG_TO_RUN}"]
         }
 
