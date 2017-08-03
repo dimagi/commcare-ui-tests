@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<suite version="2" descriptor="Media Suite File">
+  <media path="../../commcare/video/data">
+    <resource descriptor="Video File: choice.mp4" id="media-9bd4ed14c150f6c9717946457c452b44-choice.mp4" version="2">
+      <location authority="local">./commcare/video/data/choice.mp4</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareVideo/179df9cb5623005d2b0f38a78b70145f/choice.mp4</location>
+    </resource>
+  </media>
+  <media path="../../commcare/image/data">
+    <resource descriptor="Image File: text1.png" id="media-011ac938b2f7203c50c76d047f013ba8-text1.png" version="2">
+      <location authority="local">./commcare/image/data/text1.png</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareImage/98aed5f3913d94f744c453fa0c1616f9/text1.png</location>
+    </resource>
+  </media>
+  <media path="../../commcare/audio">
+    <resource descriptor="Audio File: module0_en.mp3" id="media-8db8573f0cbb0f53d8e13a9ff3139bb6-module0_en.mp3" version="2">
+      <location authority="local">./commcare/audio/module0_en.mp3</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareAudio/a66faa347801394ebf0ca85689e33954/module0_en.mp3</location>
+    </resource>
+  </media>
+  <media path="../../commcare/image/data">
+    <resource descriptor="Image File: question3.png" id="media-9b0e43081031c309ed5fcc12a06759da-question3.png" version="2">
+      <location authority="local">./commcare/image/data/question3.png</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareImage/98aed5f3913d94f744c453fa0c1616f9/question3.png</location>
+    </resource>
+  </media>
+  <media path="../../commcare/audio/data">
+    <resource descriptor="Audio File: choice.mp3" id="media-3cfc493e23320b35b0b1657f4b2321d6-choice.mp3" version="2">
+      <location authority="local">./commcare/audio/data/choice.mp3</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareAudio/a66faa347801394ebf0ca85689e33954/choice.mp3</location>
+    </resource>
+  </media>
+  <media path="../../commcare/image">
+    <resource descriptor="Image File: module0_en.png" id="media-b51156f9baf9c4da8beb7e65777c9189-module0_en.png" version="2">
+      <location authority="local">./commcare/image/module0_en.png</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareImage/4fa753d60317b42385ce4579df706e65/module0_en.png</location>
+    </resource>
+  </media>
+  <media path="../../commcare/image/data">
+    <resource descriptor="Image File: choice.png" id="media-910f9eb0665301b8e2341eb836261df5-choice.png" version="2">
+      <location authority="local">./commcare/image/data/choice.png</location>
+      <location authority="remote">https://www.commcarehq.org/hq/multimedia/file/CommCareImage/4fa753d60317b42385ce4579df706e65/choice.png</location>
+    </resource>
+  </media>
+</suite>

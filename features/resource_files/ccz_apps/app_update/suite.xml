@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<suite version="2" descriptor="Suite File">
+  <xform>
+    <resource id="6ee9d7fffcea94f67acb4b89792ba6d3168308f" version="2" descriptor="Form: (Module Module One) - Example 1">
+      <location authority="local">./modules-0/forms-0.xml</location>
+      <location authority="remote">./modules-0/forms-0.xml</location>
+    </resource>
+  </xform>
+  <xform>
+    <resource id="eb2392336835317aae888ccee5927a849edc2e58" version="2" descriptor="Form: (Module Module Two) - New Case">
+      <location authority="local">./modules-1/forms-0.xml</location>
+      <location authority="remote">./modules-1/forms-0.xml</location>
+    </resource>
+  </xform>
+  <xform>
+    <resource id="485e01a12bbe74aba5a78e1c4bfacdcdf46d76cd" version="2" descriptor="Form: (Module Module Two) - Update Case">
+      <location authority="local">./modules-1/forms-1.xml</location>
+      <location authority="remote">./modules-1/forms-1.xml</location>
+    </resource>
+  </xform>
+  <xform>
+    <resource id="4c544d525b649538fc717937135dae16601e10d8" version="2" descriptor="Form: (Module Module Three) - Example 2">
+      <location authority="local">./modules-2/forms-0.xml</location>
+      <location authority="remote">./modules-2/forms-0.xml</location>
+    </resource>
+  </xform>
+  <xform>
+    <resource id="2e731c88621f207a50603d3bf7d89cef6aba602d" version="2" descriptor="Form: (Module Module Three) - Example 3">
+      <location authority="local">./modules-2/forms-1.xml</location>
+      <location authority="remote">./modules-2/forms-1.xml</location>
+    </resource>
+  </xform>
+  <locale language="default">
+    <resource id="app_default_strings" version="2" descriptor="Translations: Default Language">
+      <location authority="local">./default/app_strings.txt</location>
+      <location authority="remote">./default/app_strings.txt</location>
+    </resource>
+  </locale>
+  <locale language="en">
+    <resource id="app_en_strings" version="2" descriptor="Translations: English">
+      <location authority="local">./en/app_strings.txt</location>
+      <location authority="remote">./en/app_strings.txt</location>
+    </resource>
+  </locale>
+  <detail id="m0_case_short">
+    <title>
+      <text>
+        <locale id="m0.case_short.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m0.case_short.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+      <sort type="string" order="1" direction="ascending">
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </sort>
+    </field>
+  </detail>
+  <detail id="m0_case_long">
+    <title>
+      <text>
+        <locale id="m0.case_long.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m0.case_long.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+    </field>
+  </detail>
+  <detail id="m1_case_short">
+    <title>
+      <text>
+        <locale id="m1.case_short.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m1.case_short.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+      <sort type="string" order="1" direction="ascending">
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </sort>
+    </field>
+  </detail>
+  <detail id="m1_case_long">
+    <title>
+      <text>
+        <locale id="m1.case_long.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m1.case_long.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+    </field>
+    <field>
+      <header>
+        <text>
+          <locale id="m1.case_long.case_int_2.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="int"/>
+        </text>
+      </template>
+    </field>
+  </detail>
+  <detail id="m2_case_short">
+    <title>
+      <text>
+        <locale id="m2.case_short.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m2.case_short.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+      <sort type="string" order="1" direction="ascending">
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </sort>
+    </field>
+  </detail>
+  <detail id="m2_case_long">
+    <title>
+      <text>
+        <locale id="m2.case_long.title"/>
+      </text>
+    </title>
+    <field>
+      <header>
+        <text>
+          <locale id="m2.case_long.case_name_1.header"/>
+        </text>
+      </header>
+      <template>
+        <text>
+          <xpath function="case_name"/>
+        </text>
+      </template>
+    </field>
+  </detail>
+  <entry>
+    <form>http://openrosa.org/formdesigner/DB8D7EF0-F04E-4B48-A90C-D67CF1791457</form>
+    <command id="m0-f0">
+      <text>
+        <locale id="forms.m0f0"/>
+      </text>
+    </command>
+  </entry>
+  <entry>
+    <form>http://openrosa.org/formdesigner/7CEB155F-CBD3-4173-A51E-B8F52A10B3FE</form>
+    <command id="m1-f0">
+      <text>
+        <locale id="forms.m1f0"/>
+      </text>
+    </command>
+    <session>
+      <datum id="case_id_new_cases_0" function="uuid()"/>
+    </session>
+  </entry>
+  <entry>
+    <form>http://openrosa.org/formdesigner/D1D8AC72-D35F-4F1E-94D2-51810E1ABF76</form>
+    <command id="m1-f1">
+      <text>
+        <locale id="forms.m1f1"/>
+      </text>
+    </command>
+    <instance id="casedb" src="jr://instance/casedb"/>
+    <session>
+      <datum id="case_id" nodeset="instance('casedb')/casedb/case[@case_type='cases'][@status='open']" value="./@case_id" detail-select="m1_case_short" detail-confirm="m1_case_long"/>
+    </session>
+  </entry>
+  <entry>
+    <command id="m1-case-list">
+      <text>
+        <locale id="case_lists.m1"/>
+      </text>
+    </command>
+    <instance id="casedb" src="jr://instance/casedb"/>
+    <session>
+      <datum id="case_id" nodeset="instance('casedb')/casedb/case[@case_type='cases'][@status='open']" value="./@case_id" detail-select="m1_case_short" detail-confirm="m1_case_long"/>
+    </session>
+  </entry>
+  <entry>
+    <form>http://openrosa.org/formdesigner/2DD50EF4-9A3E-4C4F-B0FB-12230EFAF9F1</form>
+    <command id="m2-f0">
+      <text>
+        <locale id="forms.m2f0"/>
+      </text>
+    </command>
+  </entry>
+  <entry>
+    <form>http://openrosa.org/formdesigner/F34DC158-DFC3-4DCD-96BC-0F9544EBE4A9</form>
+    <command id="m2-f1">
+      <text>
+        <locale id="forms.m2f1"/>
+      </text>
+    </command>
+  </entry>
+  <menu id="m0">
+    <display>
+      <text>
+        <locale id="modules.m0"/>
+      </text>
+      <text form="image">
+        <locale id="modules.m0.icon"/>
+      </text>
+      <text form="audio">
+        <locale id="modules.m0.audio"/>
+      </text>
+    </display>
+    <command id="m0-f0"/>
+  </menu>
+  <menu id="m1">
+    <text>
+      <locale id="modules.m1"/>
+    </text>
+    <command id="m1-f0"/>
+    <command id="m1-f1"/>
+    <command id="m1-case-list"/>
+  </menu>
+  <menu id="m2">
+    <text>
+      <locale id="modules.m2"/>
+    </text>
+    <command id="m2-f0"/>
+    <command id="m2-f1"/>
+  </menu>
+</suite>

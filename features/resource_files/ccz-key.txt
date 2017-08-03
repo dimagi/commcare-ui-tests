@@ -10,3 +10,4 @@ session_expiration.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/9946e
 settings_sheet_tests.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/3a8891c60af83ac44f2dc242f3e7fe2c/
 test_list_search.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/a5c7bb6839b4f31463827956e80cf4a5/
 test_select_filters.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/7d5921a03ba61e4b048458590fbb3001/
+upload_test.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/2ffacef3663aff48641b023ddc118f10/

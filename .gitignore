@@ -16,3 +16,4 @@ scripts/ccc
 scripts/checkout_cross_request_repo.py
 latest_form_time.txt
 local.properties.yaml
+*.lock

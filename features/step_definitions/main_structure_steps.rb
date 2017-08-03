@@ -160,3 +160,9 @@ Then (/^I robust touch the "([^\"]*)" text$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
   step("I wait for 10 seconds")
 end
+
+# Pushes the file to sdcard and enter the new path to text field
+Then (/^I load the forms from "([^\"]*)"$/) do |path|
+  push("features/resource_files/forms/%s" % path, "/sdcard/%s" % path)
+  step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
+end
