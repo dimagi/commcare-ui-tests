@@ -18,7 +18,7 @@ Feature: Benchmarking Upload
     Then I touch the "Load form payload status" text
     Then I wait to see "Unsent"
     Then I touch the "Unsent" text
-    Then I touch the "Form Record File" text
+    Then I touch the "Local Form Payload File" text
     Then I load the forms from "form_upload.xml"
     Then I touch the "OK" text
     Then I go back
