@@ -27,7 +27,13 @@ Scenario: Submit a form with an index to a case that doesn't exist
 	# Start with an app that uses parent/child cases
 	Then I install the ccz app at "parent_child_app.ccz"
 
-	# Download a restore file with a few parent cases in it
-	# Delete 1 of those parent cases from HQ
+	# Create a few parent cases under user 'test' and then download the restore for that user (done outside of test)
+
+	# AFTER restore is downloaded, delete 1 of those parent cases from HQ (done outside of test)
+
 	# Do a custom restore from Developer Preferences with that restore file
+	Then I select "Settings" menu item
+	Then I touch the "Developer Options" text
+	Then I touch the "Restore a custom user XML data file" text
+
 	# Fill out child registration form against the deleted parent case
