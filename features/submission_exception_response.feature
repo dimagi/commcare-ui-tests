@@ -25,6 +25,8 @@ Scenario: Submit a form with a case name that is too long
 Scenario: Submit a form with an index to a case that doesn't exist
 
 	# Start with an app that uses parent/child cases
+	Then I install the ccz app at "parent_child_app.ccz"
+
 	# Download a restore file with a few parent cases in it
 	# Delete 1 of those parent cases from HQ
 	# Do a custom restore from Developer Preferences with that restore file
