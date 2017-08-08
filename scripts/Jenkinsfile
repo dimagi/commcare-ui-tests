@@ -22,7 +22,7 @@ node {
         def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
                         '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
                         '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline']
+                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline', '@LookupTableOptionSorting']
         
         if (custom_tag != '') {
             tagArray =  [custom_tag]
