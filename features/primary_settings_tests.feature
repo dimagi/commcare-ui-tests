@@ -59,17 +59,28 @@ Feature: Test settings on the "Application Preferences" screen
    # Verify that we are back on the Server Settings screen
     Then I go to back to Server Settings
 
-   # FORM RECORD SERVER
-    Then I touch the "Form Record Server" text
-   # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "Form Record Server"
+  Scenario: Verify that the "Form Payload Server" setting opens up properly
+
+    # Enable and Navigate to Developer Options
+    Then I login with username "settings.test" and password "123"
+    Then I enable Developer Options
+    Then I select "Settings" menu item
+    Then I scroll until I see the "Developer Options" text
+    Then I touch the "Developer Options" text
+    Then I wait to see "Developer Mode Enabled"
+
+    # FORM Payload SERVER
+    Then I scroll until I see the "Form Payload Server" text
+    Then I touch the "Form Payload Server" text
+
+     # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
+    Then I see the text "Form Payload Server"
     Then I see an empty EditText
     Then I rotate to landscape
-    Then I see the text "Form Record Server"
+    Then I see the text "Form Payload Server"
     Then I see an empty EditText
     Then I rotate to portrait
-   # Verify that we are back on the Server Settings screen
-    Then I go to back to Server Settings
+    Then I go back
 
   Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
@@ -111,7 +122,7 @@ Feature: Test settings on the "Application Preferences" screen
     Then I touch the "Cancel" text
     Then I see the text "CommCare > Settings"
 
-  Scenario: Verify that the "Set Print Template" setting opens a file browswer of some sort
+  Scenario: Verify that the "Set Print Template" setting opens a file browser of some sort
 
     Then I login with username "settings.test" and password "123"
     Then I select "Settings" menu item
