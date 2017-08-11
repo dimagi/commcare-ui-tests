@@ -6,7 +6,8 @@ def retries = 3
 def poolArray = ['asus']
 
 // Job to copy the tested APK from
-def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
+def cc_android_job = 'commcare-android-2.38'
+
 
 def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
 
