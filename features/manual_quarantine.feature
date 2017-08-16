@@ -1,3 +1,4 @@
+@ManualQuarantine
 Feature: Manually Quarantining a Form
 
 Scenario: Create and quarantine 2 forms
