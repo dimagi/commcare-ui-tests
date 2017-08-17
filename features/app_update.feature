@@ -13,7 +13,7 @@ Scenario: Ensure app update can be obtained from HQ
     # Make sure the update endpoint is set to "Latest starred build"
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
-    Then I touch the "Latest starred build" text
+    Then I touch the "Latest starred version" text
     Then I go back to the home screen
     
     # check base form content
