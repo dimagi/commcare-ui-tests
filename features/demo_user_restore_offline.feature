@@ -1,4 +1,4 @@
-@DemoUser
+@DemoUserOffline
 Feature: Offline demo user restore
 # This is identical to demo_user_restore_online.feature, but is run with airplane mode on
 
@@ -37,12 +37,15 @@ Scenario: Update to an app version with a different demo user and use that
 	# Perform an update to an app version with a different demo user
 
 	# Briefly turn the internet back on to allow us to log in
-	Then I turn on the internet
+    Then I turn on the internet
+
+    Then I wait for 45 seconds
 
 	Then I login with username "test" and password "123"
 	Then I do an offline update to the ccz app at "demo_user_test_2.ccz"
 
 	# Internet back off
+	Then I wait
 	Then I turn off the internet
 
 	# Enter Practice mode and check that the demo user has changed

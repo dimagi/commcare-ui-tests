@@ -41,7 +41,11 @@ Then (/^I see a compact single-select widget with row labels "([^\"]*)" and opti
     fail("The number of radio buttons present is not correct, based upon the given labels and options")
   end
 end
-    
+
+Then (/^I see a list of options in the given order "([^\"]*)"$/) do |items_in_order|
+  items = items_in_order.split(",")
+  test_text_views_present_in_order(items)
+end 
 
 # Assert that all of the given text views are present, and appear in the order they were inputted
 def test_text_views_present_in_order(labels)

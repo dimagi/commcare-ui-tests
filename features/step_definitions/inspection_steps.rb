@@ -140,6 +140,24 @@ Then (/^I press view with class "([^\"]*)"$/) do |className|
   tap_when_element_exists("#{className}")
 end
 
+Then (/^I see the tile expand button$/) do
+  if not element_exists("* id:'com_tile_holder_btn_open'")
+      fail("Did not see the tile expand button")
+  end
+end
+
+Then (/^I don't see the tile expand button$/) do
+  if element_exists("* id:'com_tile_holder_btn_open'")
+      fail("Should not see the tile expend button")
+  end
+end
+
+Then (/^I press the tile expand button$/) do
+  tap_when_element_exists("* id:'com_tile_holder_btn_open'")
+end
+
+
+
 def check_home_buttons( expected_texts)
   for button_text in expected_texts
     scroll_count = 0
