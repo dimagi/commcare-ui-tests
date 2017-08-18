@@ -10,6 +10,8 @@ def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-
 
 def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
 
+def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_test_branch}" : 'master'
+
 def buildPassing = true
 
 def failureList = []
@@ -47,6 +49,7 @@ node {
                                     [$class: 'StringParameterValue', name: 'pool', value: pool],
                                     [$class: 'StringParameterValue', name: 'stageString', value: stageString],
                                     [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                    [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
                                     [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                                 ]
                                 echo "Step ${stageString} set to SUCCESS"
