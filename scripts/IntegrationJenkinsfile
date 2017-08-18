@@ -36,7 +36,7 @@ node {
                     def stageString = "${tag} on ${pool}"
                     count = 0
                     try {
-                        retry(3) {
+                        retry(retries) {
                             stage ("${stageString} try ${count}") {
                                 count = count + 1
                                 echo "Testing ${stageString} try number ${count} tag ${tag}"
