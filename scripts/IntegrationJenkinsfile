@@ -1,0 +1,81 @@
+// Should send email/slack notification
+def notify = false
+// Number of times to retry a failed test
+def retries = 1
+// Pool of devices on AWS to run on
+def poolArray = ['asus']
+
+// Job to copy the tested APK from
+def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android-2.37'
+
+def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
+
+def buildPassing = true
+
+def failureList = []
+
+node {
+    stage('test') {
+        
+        // All of the tags run on AWS. We specify these individually so that we can iterate over each
+        // tag and retry them granularly when they fail.
+        def tagArray = ['@AppUpdate']
+        
+        if (custom_tag != '') {
+            tagArray =  [custom_tag]
+        }
+
+
+        try {
+            echo 'Running tests...'
+
+            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
+            // times on failures
+            for (pool in poolArray) {
+                for (tag in tagArray) {
+                    def stageString = "${tag} on ${pool}"
+                    count = 0
+                    try {
+                        retry(3) {
+                            stage ("${stageString} try ${count}") {
+                                count = count + 1
+                                echo "Testing ${stageString} try number ${count} tag ${tag}"
+                                def testRun = build job: 'pipeline-runner', parameters: [
+                                    [$class: 'StringParameterValue', name: 'pool', value: pool],
+                                    [$class: 'StringParameterValue', name: 'stageString', value: stageString],
+                                    [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                    [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
+                                ]
+                                echo "Step ${stageString} set to SUCCESS"
+                            }
+                        }
+                    } catch (exc) {
+                        echo "Step ${stageString} set to FAILURE"
+                        buildPassing = false
+                        failureList.add(tag)
+                    }
+                }
+            }
+        }
+        finally {
+            def failingListString = failureList.join(",")
+            if (buildPassing) {
+                echo "Passed"
+                currentBuild.result = 'SUCCESS'
+            } else {
+                echo "Failed with failing tags ${failingListString}"
+                currentBuild.result = 'FAILURE'
+            }
+            if (notify) {
+                if (buildPassing) {
+                    slackSend color: 'good', message: "${cc_android_job} UI tests passed, :tight:"
+                } else {
+                    slackSend color: 'bad', message: "${cc_android_job} UI tests failed, :nottight:. Failing tests ${failingListString}"
+                    mail (to: 'mobiledev@dimagi.com',
+                        subject: "Amazon device farm tests failed.",
+                        body: "Amazon device farm tests failed.");
+                }
+            }
+        }
+    }
+}
