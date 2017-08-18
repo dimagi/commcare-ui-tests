@@ -48,6 +48,7 @@ node {
                                     [$class: 'StringParameterValue', name: 'pool', value: pool],
                                     [$class: 'StringParameterValue', name: 'stageString', value: stageString],
                                     [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                    [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: 'commcare_2.38'],
                                     [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                                 ]
                                 echo "Step ${stageString} set to SUCCESS"
