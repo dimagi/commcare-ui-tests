@@ -95,7 +95,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I turn off the internet
     Then I wait for 10 seconds
     Then I select "Update App" menu item
-    Then I wait 60
+    Then I wait for 60 seconds
     Then I check that id "button" is disabled
     Then I see the text "No network connectivity"
     Then I turn on the internet
