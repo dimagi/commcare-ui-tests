@@ -33,14 +33,14 @@ Scenario: Ensure app update can be obtained from HQ
 
     # download the app update
     Then I select "Update App" menu item
-    Then I see the text "Current build: 2"
+    Then I see the text "Current version: 2"
     Then I touch the "Stop checking" text
 
     Then I rotate to portrait
     Then I touch the "Recheck" text
     Then I rotate to landscape
 
-    Then I wait to see "Update to build"
+    Then I wait to see "Update to version"
     Then I see the text "version 11"
     Then I rotate to portrait
 
@@ -49,7 +49,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I go back
     Then I wait
     Then I select "Update App" menu item
-    Then I wait to see "Update to build"
+    Then I wait to see "Update to version"
     Then I apply the update
 
     # check updated data, including multimedia
@@ -83,7 +83,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I touch the "Latest version" text
     Then I go back to the home screen
     Then I select "Update App" menu item
-    Then I wait to see "Update to build"
+    Then I wait to see "Update to version"
     Then I see the text "version 22"
     Then I apply the update
     Then I login with username "user_with_no_data" and password "123"
