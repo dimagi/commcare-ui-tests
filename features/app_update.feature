@@ -1,6 +1,6 @@
 Feature: App update test
 
-@Integration
+@Integration @AppUpdate
 Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
@@ -10,12 +10,12 @@ Scenario: Ensure app update can be obtained from HQ
     Then I enable the "Show Update Options Item" Developer Option
     Then I go back to the home screen
 
-    # Make sure the update endpoint is set to "Latest starred version"
+    # Make sure the update endpoint is set to "Latest starred build"
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
-    Then I touch the "Latest starred version" text
+    Then I touch the "Latest starred build" text
     Then I go back to the home screen
-    
+
     # check base form content
     Then I press start
     Then I see the text "Module Three"
@@ -76,11 +76,11 @@ Scenario: Ensure app update can be obtained from HQ
     Then I touch the "Recheck" text
     Then I see the text "Current version: 11"
 
-    # Change the update endpoint to "Latest version" and update again
+    # Change the update endpoint to "Latest build" and update again
     Then I go back to the home screen
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
-    Then I touch the "Latest version" text
+    Then I touch the "Latest build" text
     Then I go back to the home screen
     Then I select "Update App" menu item
     Then I wait to see "Update to version"
@@ -93,7 +93,7 @@ Scenario: Ensure app update can be obtained from HQ
     # turn off wifi and try updating
     Then I go back
     Then I turn off the internet
-    Then I wait
+    Then I wait for 10 seconds
     Then I select "Update App" menu item
     Then I wait
     Then I check that id "button" is disabled
