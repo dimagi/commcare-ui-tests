@@ -1,6 +1,6 @@
 Feature: Verify that syncing with a deleted user errors correctly
 
-@Integration @2.31
+@Integration @2.31 @DeletedUser
 Scenario: Create and restore a user, then delete and sync
 
 	Then I create a user with name "tempuser" and password "Password123!"
