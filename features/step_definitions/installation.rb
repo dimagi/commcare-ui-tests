@@ -27,6 +27,26 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
   wait_for_element_exists("* id:'edit_password'", timeout: 6000)
 end
 
+Then (/^I do an offline update to the ccz app at "([^\"]*)"$/) do |path|
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  wait_for_element_exists("* {text contains[c] 'Current version'}", timeout: 1000)
+  press_menu_button()
+  tap_when_element_exists("* {text CONTAINS[c] 'Offline Update'}")
+  push("features/resource_files/ccz_apps/%s" % path, "/sdcard/%s" % path)
+  step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
+  hide_soft_keyboard()
+
+  # get around bug where the install button is disabled after entering text
+  perform_action('set_activity_orientation', 'landscape')
+  perform_action('set_activity_orientation', 'portrait')
+  sleep 1
+
+  tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
+  tap_when_element_exists("* {text CONTAINS[c] 'Update to version'}'")
+  step("I wait for progress")
+end
+
 Then (/^I uninstall the "([^\"]*)" apk app$/) do |apk|
   system("adb uninstall %s" % apk)
 end

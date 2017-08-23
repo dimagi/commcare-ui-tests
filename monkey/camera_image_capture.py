@@ -62,6 +62,11 @@ def get_bottom_right_dims():
     return {'x': display_info['width'] * ratio,
             'y': display_info['height'] * ratio}
 
+def fallback():
+    try: 
+        image_capture_marshmallow()
+    except:
+        no_implementation()
 
 def fallback():
     try:

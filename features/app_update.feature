@@ -1,6 +1,6 @@
 Feature: App update test
 
-@Integration
+@Integration @AppUpdate
 Scenario: Ensure app update can be obtained from HQ 
     Then I install the ccz app at "app_update.ccz"
     Then I login with username "user_with_no_data" and password "123"
@@ -10,10 +10,10 @@ Scenario: Ensure app update can be obtained from HQ
     Then I enable the "Show Update Options Item" Developer Option
     Then I go back to the home screen
 
-    # Make sure the update endpoint is set to "Latest starred build"
+    # Make sure the update endpoint is set to "Latest starred version"
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
-    Then I touch the "Latest starred build" text
+    Then I touch the "Latest starred version" text
     Then I go back to the home screen
     
     # check base form content
@@ -76,11 +76,11 @@ Scenario: Ensure app update can be obtained from HQ
     Then I touch the "Recheck" text
     Then I see the text "Current version: 11"
 
-    # Change the update endpoint to "Latest build" and update again 
+    # Change the update endpoint to "Latest version" and update again
     Then I go back to the home screen
     Then I select "Settings" menu item
     Then I touch the "Update Options" text
-    Then I touch the "Latest build" text
+    Then I touch the "Latest version" text
     Then I go back to the home screen
     Then I select "Update App" menu item
     Then I wait to see "Update to version"
