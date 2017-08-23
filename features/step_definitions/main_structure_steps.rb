@@ -128,6 +128,7 @@ end
 
 Then (/^I enable Developer Options/) do
   for i in 0..4
+    sleep 1
     press_menu_button()
     tap_when_element_exists("* {text CONTAINS[c] 'About CommCare'}")
     tap_when_element_exists("* id:'button1'")

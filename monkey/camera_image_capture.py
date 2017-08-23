@@ -63,6 +63,12 @@ def get_bottom_right_dims():
             'y': display_info['height'] * ratio}
 
 
+def fallback():
+    try:
+        image_capture_marshmallow()
+    except:
+        no_implementation()
+
 def no_implementation():
     raise Exception("No image capture implementation for sdk " +
                     device.getSdkVersion())
@@ -76,5 +82,5 @@ image_capture_implementations = {
 }
 
 capture = image_capture_implementations.get(device.getSdkVersion(),
-                                            no_implementation)
+                                            fallback)
 capture()

@@ -93,7 +93,7 @@ Scenario: Ensure app update can be obtained from HQ
     # turn off wifi and try updating
     Then I go back
     Then I turn off the internet
-    Then I wait
+    Then I wait for 10 seconds
     Then I select "Update App" menu item
     Then I wait
     Then I check that id "button" is disabled

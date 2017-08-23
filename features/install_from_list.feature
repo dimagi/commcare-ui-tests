@@ -57,8 +57,8 @@ Scenario: Install an app by getting the list of available apps for a web user
 	Then I auth for install from list with email "commcare.mobile.testing@gmail.com" and password_key "install-list-web-password"
 	
 	# This web user belongs to the commcare-tests domain and the swat domain, so we should see apps from both
-	Then I see the text "commcare-tests"
-	Then I see the text "swat"
+	Then I scroll until I see the "commcare-tests" text
+	Then I scroll until I see the "swat" text
 	Then I scroll until I see the "Case callout test for Simprints" text
 	Then I scroll until I see the "Case Search and Claim" text
 	Then I scroll until I see the "Integration Tests" text
