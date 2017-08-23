@@ -18,7 +18,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I sync
     Then I scroll until I see the "Saved" text
     Then I touch the "Saved" text
-    Then I wait for the view with id "screen_entity_select_list" to appear
+    Then I wait
     Then I see 1 list entries
     Then I check form was uploaded
     Then I check that 2 attachments for latest form are on HQ
