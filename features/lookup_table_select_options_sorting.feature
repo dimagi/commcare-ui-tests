@@ -3,6 +3,7 @@ Feature: Lookup Table Select Options Sorting
 
 Scenario: Test the sorting of answer choices in a Lookup Table Select Question
 
+	Then I upload the "extended_cities_table.xlsx" lookup table
 	Then I install the ccz app at "lookup_table_sort_test.ccz"
 	Then I login with username "test" and password "123"
 
