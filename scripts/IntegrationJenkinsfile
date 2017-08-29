@@ -1,17 +1,14 @@
 // Should send email/slack notification
 def notify = false
 // Number of times to retry a failed test
-def retries = 3
+def retries = 1
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
 // Job to copy the tested APK from
-
-def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
+def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android-2.37'
 
 def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
-
-def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_test_branch}" : 'master'
 
 def buildPassing = true
 
@@ -22,14 +19,12 @@ node {
         
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
-                       '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
-                       '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline', '@LookupTableOptionSorting', '@ManualQuarantine']
-
+        def tagArray = ['@AppUpdate']
+        
         if (custom_tag != '') {
             tagArray =  [custom_tag]
         }
+
 
         try {
             echo 'Running tests...'
@@ -49,7 +44,6 @@ node {
                                     [$class: 'StringParameterValue', name: 'pool', value: pool],
                                     [$class: 'StringParameterValue', name: 'stageString', value: stageString],
                                     [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                    [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
                                     [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                                 ]
                                 echo "Step ${stageString} set to SUCCESS"

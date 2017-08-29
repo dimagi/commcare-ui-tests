@@ -9,7 +9,7 @@ Scenario: Create and quarantine 2 forms
 
 	# Complete 2 forms with the internet off, so that they don't submit
 
-	Then I wait
+	Then I wait for 5 seconds
 	Then I press start
 	Then I scroll until I see the "Display Form" text
 	Then I select form "Display Form"
