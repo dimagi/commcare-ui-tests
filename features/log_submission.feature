@@ -1,3 +1,4 @@
+@LogSubmission
 Feature: Log Submission
 
   @Integration @2.39
