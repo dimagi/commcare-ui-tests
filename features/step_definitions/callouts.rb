@@ -1,6 +1,6 @@
 Then (/^I take a photo$/) do
   print Dir.glob("**/*/")
-  system("python monkey/camera_image_capture.py")
+  system("python features/monkey/camera_image_capture.py")
 end
 
 Then (/^I sign with a cross$/) do
