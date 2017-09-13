@@ -1,1 +1,1 @@
-zip -r features.zip features/*
+zip -r features.zip features/* monkey/ commcare-hq-api/
