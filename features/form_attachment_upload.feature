@@ -7,9 +7,9 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I press start
     Then I select module "Form Attachments"
     Then I select form "Multimedia Capture"
-    Then I press the "Take Picture" button
-    Then I take a photo
-    Then I wait for 5 seconds
+#    Then I press the "Take Picture" button
+#    Then I take a photo
+#    Then I wait for 5 seconds
     Then Next
     Then I press the "Gather Signature" button
     Then I sign with a cross
