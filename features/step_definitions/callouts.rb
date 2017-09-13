@@ -1,5 +1,4 @@
 Then (/^I take a photo$/) do
-  print Dir.glob("**/*/")
   system("python features/monkey/camera_image_capture.py")
 end
 
