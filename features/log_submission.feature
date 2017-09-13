@@ -1,7 +1,6 @@
 @LogSubmission
 Feature: Log Submission
 
-  @Integration @2.39
   Scenario: Logs get submitted successfully
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
