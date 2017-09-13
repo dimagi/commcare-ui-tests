@@ -13,6 +13,7 @@ try:
     sys.path.append(view_path)
     print(view_path)
 except:
+    print("ANDROID_VIEW_CLIENT_HOME not found")
     pass
 
 from com.dtmilano.android.viewclient import ViewClient
