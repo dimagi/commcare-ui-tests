@@ -12,5 +12,5 @@ Feature: Log Submission
     Then I select "Advanced" menu item
     Then I press "Force Log Submission"
     Then I wait for 30 seconds
-    Then I start "UITestInfoActivity" activity with extras "--ei info_type 1"
+    Then I start "UITestInfoActivity" activity with extras "-e info_type log_submission"
     Then I see the text "Logs successfully submitted"
