@@ -91,6 +91,11 @@ Scenario: Ensure app update can be obtained from HQ
     Then I see the text "version 22"
     Then I apply the update
     Then I login with username "user_with_no_data" and password "123"
+
+    # Check that a sync gets triggered after the update
+    Then I see the text "Communicating with Server"
+    Then I wait for syncing to complete
+    
     Then I press start
     Then I see the text "Module One, renamed"
 
