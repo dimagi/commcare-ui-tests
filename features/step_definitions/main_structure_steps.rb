@@ -86,6 +86,13 @@ Then (/^I sync, without waiting for completion$/) do
   tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
 end
 
+Then (/^I wait for syncing to complete$/) do
+  count = query("android.widget.ProgressBar")
+  if count != 0
+    wait_for_element_does_not_exist("android.widget.ProgressBar")
+  end
+end
+
 Then (/^I select module "([^\"]*)"$/) do |text|
   wait_for_element_exists("* id:'screen_suite_menu_list'")
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")

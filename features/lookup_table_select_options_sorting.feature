@@ -11,11 +11,11 @@ Scenario: Test the sorting of answer choices in a Lookup Table Select Question
 	Then I select module "Test Forms"
 	Then I select form "Lookup Table Select WITHOUT sorting"
 	Then I wait for form to load
-	Then I see a list of options in the given order "Boston,Cambridge,Wilmington,Billerica,Winthrop,Saugus,Andover"
+	Then I see a list of options in the given order "Orange,Banana,Plum,Pear,Grape,Kiwi,Apple"
 	Then I go back to the home screen
 
 	Then I press start
 	Then I select module "Test Forms"
 	Then I select form "Lookup Table Select WITH sorting"
 	Then I wait for form to load
-	Then I see a list of options in the given order "Andover,Billerica,Boston,Cambridge,Saugus,Wilmington,Winthrop"
+	Then I see a list of options in the given order "Apple,Banana,Grape,Kiwi,Orange,Pear,Plum"
