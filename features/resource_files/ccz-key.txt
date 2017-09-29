@@ -12,3 +12,4 @@ test_list_search.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/a5c7bb6
 test_select_filters.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/7d5921a03ba61e4b048458590fbb3001/
 tiles.ccz --> https://www.commcarehq.org/a/commcare-tests/apps/view/96fc5696f3faddd3a22ca024cd68596c/
 parent_child_app.ccz —> https://www.commcarehq.org/a/commcare-tests/apps/view/460de912d5e266dac435d359013f6630/
+lookup_table_sort_test.ccz —> https://www.commcarehq.org/a/commcare-tests/apps/view/6577cc4f8ced4c01be65459d79e16b2b/
