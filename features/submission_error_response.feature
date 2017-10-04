@@ -1,4 +1,4 @@
-@SubmissionExceptions @Integration
+@Integration
 Feature: Test mobile handling of 422 response to form submission
 
 #IllegalCaseId - update case in different domain from the form submission
