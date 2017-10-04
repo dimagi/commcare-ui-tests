@@ -4,7 +4,7 @@
 		user_id="test" date_modified="2013-03-09T06:30:09.007+03"
 		xmlns:n0="http://commcarehq.org/case/transaction/v2">
         <n0:create>
-            <n0:case_name>test_case</n0:case_type>
+            <n0:case_name>test_case</n0:case_name>
             <n0:case_type>test_openrosa_3</n0:case_type>
         </n0:create>
 		<n0:update>

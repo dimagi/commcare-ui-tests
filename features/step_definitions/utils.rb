@@ -21,7 +21,7 @@ Then (/^I load the form payload at "([^\"]*)" onto the phone as a "([^\"]*)" for
 
 	# Set the path to the file
 	step("I scroll until I see the \"Local Form Payload File\" text")
-	sleep 1
+	sleep 2
 	tap_when_element_exists("* {text CONTAINS[c] 'Local Form Payload File'}")
 	enter_text("android.widget.EditText id:'edit'", "storage/emulated/0/%s" % payload_path)
 	tap_when_element_exists("* {text CONTAINS[c] 'OK'}")
