@@ -19,7 +19,7 @@ node {
                         calabashFeatures: 'aws/features.zip',
                         calabashTags: params.tag,
                         isRunUnmetered: true,
-                        storeResults: true,
+                        storeResults: false,
                         ignoreRunError: false,
                     ])
 }
