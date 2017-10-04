@@ -1,0 +1,24 @@
+<?xml version='1.0' ?>
+<data uiVersion="1" version="303" name="Visit" xmlns:jrm="http://dev.commcarehq.org/jr/xforms" xmlns="http://openrosa.org/formdesigner/test_openrosa_3">
+	<n0:case case_id="0123456789"
+		user_id="test" date_modified="2013-03-09T06:30:09.007+03"
+		xmlns:n0="http://commcarehq.org/case/transaction/v2">
+        <n0:create>
+            <n0:case_type>test_openrosa_3</n0:case_type>
+        </n0:create>
+		<n0:update>
+			<n0:gps_location />
+			<n0:name>t1</n0:name>
+		</n0:update>
+		<n0:index><n0:parent case_type="missing">not-a-real-case-id</n0:parent></n0:index>
+	</n0:case>
+	<n1:meta xmlns:n1="http://openrosa.org/jr/xforms">
+		<n1:deviceID>agrajag</n1:deviceID>
+		<n1:timeStart>2013-03-09T06:26:56.240+03</n1:timeStart>
+		<n1:timeEnd>2013-03-09T06:30:09.007+03</n1:timeEnd>
+		<n1:username>test</n1:username>
+		<n1:userID>test</n1:userID>
+		<n1:instanceID>123123123-456456-123456</n1:instanceID>
+		<n2:appVersion xmlns:n2="http://commcarehq.org/xforms"></n2:appVersion>
+	</n1:meta>
+</data>
