@@ -167,3 +167,11 @@ Then (/^I robust touch the "([^\"]*)" text$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
   step("I wait for 10 seconds")
 end
+
+Then (/^I retry touch the "([^\"]*)" text$/) do
+  while true
+    break if (element_does_not_exist("* {text CONTAINS[c] '#{text}'}"))
+    touch("* {text CONTAINS[c] '#{text}'}")
+    sleep 1
+  end
+end
