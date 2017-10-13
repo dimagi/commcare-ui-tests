@@ -97,7 +97,7 @@ Feature: Test all primary CommCare menu options
     Then I touch the "Wifi Direct" text
     Then I see the text "Do you want to send, receive, or submit forms?"
     Then I wait to see "Transfer"
-    Then I touch the "Transfer" text
+    Then I retry touch the "Transfer" text
     Then I verify that the current activity is "CommCareWiFiDirectActivity"
     Then I go back to the home screen
 
@@ -108,7 +108,7 @@ Feature: Test all primary CommCare menu options
     Then I wait to see "No problems were detected."
     Then I turn off the internet
     Then I touch the "Run Connection Test" text
-    Then I see the text "Please run this test again after verifying your network connection."
+    Then I wait to see "Please run this test again after verifying your network connection."
     Then I turn on the internet
     Then I go back to the home screen
 
