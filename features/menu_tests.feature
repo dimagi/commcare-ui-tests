@@ -39,18 +39,10 @@ Feature: Test all primary CommCare menu options
 
     Then I select "Change Language" menu item
     Then I see a choice dialog with 2 panels
-    Then I rotate to landscape
-    Then I wait for 5 seconds
-    Then I see a choice dialog with 2 panels
-    Then I rotate to portrait
-    Then I wait for 5 seconds
     Then I go back
 
     Then I select "About CommCare" menu item
     Then I see the text "About CommCare"
-    Then I rotate to landscape
-    Then I see the text "About CommCare"
-    Then I rotate to portrait
     Then I press view with id "button1"
     Then I wait
 
@@ -117,9 +109,6 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Recovery Mode" text
     Then I see the expected recovery mode UI
-    Then I rotate to landscape
-    Then I see the expected recovery mode UI
-    Then I rotate to portrait
     Then I go back to the home screen
 
     Then I select "Advanced" menu item
