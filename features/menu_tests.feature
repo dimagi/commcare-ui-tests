@@ -66,7 +66,8 @@ Feature: Test all primary CommCare menu options
     Then I touch the "Validate Media" text
     Then I see the text "multimedia is installed"
    # Wait until we are back on the home screen
-    Then I wait to see "Start"
+    Then I wait
+    Then I scroll until I see the "Start" text
 
    # Just verifying that the buttons work properly; the actual feature is tested elsewhere
     Then I select "Advanced" menu item
