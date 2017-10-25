@@ -12,6 +12,7 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
+  perform_action('set_activity_orientation', 'portrait')
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
@@ -166,12 +167,4 @@ end
 Then (/^I robust touch the "([^\"]*)" text$/) do |text|
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
   step("I wait for 10 seconds")
-end
-
-Then (/^I retry touch the "([^\"]*)" text$/) do |text|
-  while true
-    break if (element_does_not_exist("* {text CONTAINS[c] '#{text}'}"))
-    touch("* {text CONTAINS[c] '#{text}'}")
-    sleep 1
-  end
 end
