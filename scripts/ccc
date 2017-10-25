@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 
 """
 ccc (commcare control center) allows you to automate oft performed actions.
@@ -12,10 +12,13 @@ import os
 
 HELP_MSG = """'capture' saves the current session for restoring later.
 'install some_app.ccz' pushes and installs the ccz to device.
+'update' updates to latest unstarred build
 'uninstall app_id' uninstalls an installed app.
 'login username password' logs into the currently seated app
 'invalidate' forces recovery on next sync by providing fake case db hash.
-'clear_restore_cache' sets a flag that will cause the next restore request to include a param that clears the cache on HQ.
+'expire_key username' updates a user key record to expire yesterday.
+'clear_restore_cache' sets a flag that will cause the next restore request to
+                      include a param that clears the cache on HQ.
 'remote domain app_id build' downloads an app from HQ and installs it.
                              The 'build' argument is optional
 'media_remote domain app_id build' downloads an app with multimedia from HQ and
@@ -54,12 +57,36 @@ def login(username, password):
 
 
 # None -> None
+def update():
+    """
+    Update logged in app to latest unstarred build
+    """
+    extras = {"useLatestBuild": True}
+    cmd = receiver_command("org.commcare.dalvik.api.action." +
+                           "RefreshToLatestBuildAction", extras)
+    print(cmd)
+    subprocess.call(cmd, shell=True)
+
+
+# None -> None
 def stage_recover():
     """
     Alter case db hash token to trigger a recover on next sync
     """
     cmd = receiver_command("org.commcare.dalvik.api.action" +
                            ".TriggerSyncRecover")
+    print(cmd)
+    subprocess.call(cmd, shell=True)
+
+
+# String -> None
+def expire_key(username):
+    """
+    Expire user key record for user by setting 'validTo' to yesterday
+    """
+    extras = {"username": username}
+    cmd = receiver_command("org.commcare.dalvik.api.action" +
+                           ".ExpireUserKeyRecord", extras)
     print(cmd)
     subprocess.call(cmd, shell=True)
 
@@ -199,6 +226,8 @@ def main():
             lambda: uninstall(sys.argv[2]),
         'invalidate':
             lambda: stage_recover(),
+        'expire_key':
+            lambda: expire_key(sys.argv[2]),
         'remote':
             lambda: remote_install(*sys.argv[2:5]),
         'media_remote':
@@ -209,6 +238,8 @@ def main():
             lambda: download(*sys.argv[2:5], with_media=True),
         'login':
             lambda: login(sys.argv[2], sys.argv[3]),
+        'update':
+            lambda: update(),
         'help':
             lambda: print(HELP_MSG),
         'clear_restore_cache':

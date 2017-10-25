@@ -93,6 +93,14 @@ Then (/^I check that an async incremental sync occurred successfully$/) do
   wait_for_element_does_not_exist("android.widget.ProgressBar")
 end
 
+Then (/^I change "([^\"]*)" password to "([^\"]*)"$/) do |user_id, new_password|
+  system("python3 commcare-hq-api/commcare_hq_api.py change_password #{user_id} #{new_password}")
+end
+
+Then (/^I locally expire user "([^\"]*)"$/) do |username|
+  system("python3 scripts/ccc expire_key #{username}")
+end
+
 Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |name, password|
   system("python3 commcare-hq-api/commcare_hq_api.py user_create #{name} #{password}")
 end
