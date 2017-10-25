@@ -19,6 +19,11 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
   step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
   hide_soft_keyboard()
 
+  # get around bug where the install button is disabled after entering text
+  perform_action('set_activity_orientation', 'landscape')
+  perform_action('set_activity_orientation', 'portrait')
+  sleep 1
+
   tap_when_element_exists("* {text CONTAINS[c] 'Install App'}")
   wait_for_element_exists("* id:'edit_password'", timeout: 6000)
 end
