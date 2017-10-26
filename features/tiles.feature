@@ -4,8 +4,7 @@ Feature: Case Tiles
   Scenario: No tile
     Then I install the ccz app at "tiles.ccz"
     Then I login with username "tile.test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "NoPersist"
 
@@ -32,8 +31,7 @@ Feature: Case Tiles
 
   Scenario: Persistent Tile w/Dropdown
     Then I login with username "tile.test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "PersistentInline"
 
@@ -104,8 +102,7 @@ Feature: Case Tiles
     
   Scenario: Persistent w/Detail
     Then I login with username "tile.test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "PersistentWithDetail"
 
@@ -136,8 +133,7 @@ Feature: Case Tiles
 
   Scenario: Persistent no Detail no Inline
     Then I login with username "tile.test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "PersistentNoDetailNoInline"
 
@@ -161,8 +157,7 @@ Feature: Case Tiles
 
   Scenario: Breadcrumb
     Then I login with username "tile.test" and password "123"
-    Then I scroll until I see the "Start" text
-    Then I touch the "Start" text
+    Then I press start
 
     Then I select module "Breadcrumb"
 
