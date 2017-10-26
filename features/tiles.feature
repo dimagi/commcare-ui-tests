@@ -62,6 +62,21 @@ Feature: Case Tiles
 
     Then I don't see the text "Secret"
 
+    # Test using the back button to close the expanded tile
+    Then I press the tile expand button
+    Then I see the text "Secret"
+    Then I go back
+    # I should now see the full Tile but not expanded
+    Then I don't see the text "Secret"
+    Then I see the text "Sally Ride"
+    Then I see the text "Sex F"
+    Then I see the text "Date"
+    Then I see the text "01/07/17"
+    Then I go back
+    # Should now actually be on previous screen
+    Then I verify that the current activity is "EntitySelectActivity"
+    Then I touch the "Sally Ride" text
+
     #Full Tile
     Then I see the text "Sally Ride"
     Then I see the text "Sex F"
