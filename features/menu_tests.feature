@@ -39,18 +39,10 @@ Feature: Test all primary CommCare menu options
 
     Then I select "Change Language" menu item
     Then I see a choice dialog with 2 panels
-    Then I rotate to landscape
-    Then I wait for 5 seconds
-    Then I see a choice dialog with 2 panels
-    Then I rotate to portrait
-    Then I wait for 5 seconds
     Then I go back
 
     Then I select "About CommCare" menu item
     Then I see the text "About CommCare"
-    Then I rotate to landscape
-    Then I see the text "About CommCare"
-    Then I rotate to portrait
     Then I press view with id "button1"
     Then I wait
 
@@ -74,7 +66,8 @@ Feature: Test all primary CommCare menu options
     Then I touch the "Validate Media" text
     Then I see the text "multimedia is installed"
    # Wait until we are back on the home screen
-    Then I wait to see "Start"
+    Then I wait
+    Then I scroll until I see the "Start" text
 
    # Just verifying that the buttons work properly; the actual feature is tested elsewhere
     Then I select "Advanced" menu item
@@ -96,7 +89,7 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Wifi Direct" text
     Then I see the text "Do you want to send, receive, or submit forms?"
-    Then I wait
+    Then I select Transfer mode
     Then I touch the "Transfer" text
     Then I verify that the current activity is "CommCareWiFiDirectActivity"
     Then I go back to the home screen
@@ -108,7 +101,7 @@ Feature: Test all primary CommCare menu options
     Then I wait to see "No problems were detected."
     Then I turn off the internet
     Then I touch the "Run Connection Test" text
-    Then I see the text "Please run this test again after verifying your network connection."
+    Then I wait to see "Please run this test again after verifying your network connection."
     Then I turn on the internet
     Then I go back to the home screen
 
@@ -117,9 +110,6 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Recovery Mode" text
     Then I see the expected recovery mode UI
-    Then I rotate to landscape
-    Then I see the expected recovery mode UI
-    Then I rotate to portrait
     Then I go back to the home screen
 
     Then I select "Advanced" menu item

@@ -16,6 +16,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I rotate to portrait
     Then Submit
     Then I sync
+    Then I wait to see "Sync Successful!"
     Then I scroll until I see the "Saved" text
     Then I touch the "Saved" text
     Then I wait

@@ -11,6 +11,7 @@ end
 
 # peform offline install using ccz file pushed from repository
 Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
+  step("I rotate to portrait")
   wait_for_element_exists("* {text contains[c] 'Welcome to CommCare'}", timeout: 6000)
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Offline install'}")
@@ -19,8 +20,8 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
   hide_soft_keyboard()
 
   # get around bug where the install button is disabled after entering text
-  perform_action('set_activity_orientation', 'landscape')
-  perform_action('set_activity_orientation', 'portrait')
+  step("I rotate to landscape")
+  step("I rotate to portrait")
   sleep 1
 
   tap_when_element_exists("* {text CONTAINS[c] 'Install App'}")
@@ -38,8 +39,8 @@ Then (/^I do an offline update to the ccz app at "([^\"]*)"$/) do |path|
   hide_soft_keyboard()
 
   # get around bug where the install button is disabled after entering text
-  perform_action('set_activity_orientation', 'landscape')
-  perform_action('set_activity_orientation', 'portrait')
+  step("I rotate to landscape")
+  step("I rotate to portrait")
   sleep 1
 
   tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
