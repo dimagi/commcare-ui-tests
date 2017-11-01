@@ -89,8 +89,7 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Wifi Direct" text
     Then I see the text "Do you want to send, receive, or submit forms?"
-    Then I select Transfer mode
-    Then I touch the "Transfer" text
+    Then I press view with id "negative_button"
     Then I verify that the current activity is "CommCareWiFiDirectActivity"
     Then I go back to the home screen
 
