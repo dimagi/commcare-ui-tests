@@ -123,6 +123,7 @@ Then (/^Submit/) do
   else
     tap_when_element_exists("* id:'nav_btn_next'")
   end
+  sleep 1
 end
 
 Then (/^Prev$/) do
