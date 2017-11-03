@@ -21,6 +21,7 @@ Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
 
   # get around bug where the install button is disabled after entering text
   step("I rotate to landscape")
+  sleep 1
   step("I rotate to portrait")
   sleep 1
 
@@ -40,6 +41,7 @@ Then (/^I do an offline update to the ccz app at "([^\"]*)"$/) do |path|
 
   # get around bug where the install button is disabled after entering text
   step("I rotate to landscape")
+  sleep 1
   step("I rotate to portrait")
   sleep 1
 
