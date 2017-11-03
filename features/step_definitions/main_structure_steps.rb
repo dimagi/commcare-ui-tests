@@ -12,6 +12,8 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
+  perform_action('set_activity_orientation', 'portrait')
+  sleep 1
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
