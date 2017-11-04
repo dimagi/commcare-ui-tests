@@ -15,6 +15,8 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
+    perform_action('set_activity_orientation', 'portrait')
+    sleep 1
     hide_soft_keyboard()
     step("I scroll until I see the \"Start\" text")
     wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 60)
