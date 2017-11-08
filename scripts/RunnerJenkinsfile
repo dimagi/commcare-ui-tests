@@ -14,7 +14,7 @@ node {
                         projectName: 'commcare-odk',
                         devicePoolName: params.pool,
                         runName: params.stageString,
-                        appArtifact: 'app-commcare-debug.apk',
+                        appArtifact: 'app-commcare-release.apk',
                         testToRun: 'CALABASH',
                         calabashFeatures: 'aws/features.zip',
                         calabashTags: params.tag,
