@@ -2,7 +2,8 @@
 Feature: Test settings on the "Application Preferences" screen
   
   Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
-
+    
+    Then I install the ccz app at "settings_sheet_tests.ccz"
     Then I login with username "settings.test" and password "123"
     Then I select "Settings" menu item
     Then I wait to see "CommCare > Settings"
