@@ -16,71 +16,7 @@ Feature: Test settings on the "Application Preferences" screen
    # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
     Then I see the text "CommCare Application Server"
     Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
-    Then I rotate to landscape
-    Then I see the text "CommCare Application Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
-    Then I rotate to portrait
-   # Verify that we are back on the Server Settings screen
     Then I go to back to Server Settings
-
-   # DATA SERVER
-    Then I touch the "Data Server" text
-    Then I wait
-   # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "Data Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
-    Then I rotate to landscape
-    Then I see the text "Data Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/phone/restore/"
-    Then I rotate to portrait
-   # Verify that we are back on the Server Settings screen
-    Then I go to back to Server Settings
-
-   # SUBMISSION SERVER
-    Then I touch the "Submission Server" text
-   # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "CommCare Submission Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/receiver/"
-    Then I rotate to landscape
-    Then I see the text "CommCare Submission Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/receiver/"
-    Then I rotate to portrait
-    Then I go to back to Server Settings
-
-   # KEY SERVER
-    Then I touch the "Key Server" text
-   # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "Key Server"
-    Then I should see text containing "https://pact.dimagi.com/keys/getkey"
-    Then I rotate to landscape
-    Then I see the text "Key Server"
-    Then I should see text containing "https://pact.dimagi.com/keys/getkey"
-    Then I rotate to portrait
-   # Verify that we are back on the Server Settings screen
-    Then I go to back to Server Settings
-
-  Scenario: Verify that the "Form Payload Server" setting opens up properly
-
-    # Enable and Navigate to Developer Options
-    Then I login with username "settings.test" and password "123"
-    Then I enable Developer Options
-    Then I select "Settings" menu item
-    Then I scroll until I see the "Developer Options" text
-    Then I touch the "Developer Options" text
-    Then I wait to see "Developer Mode Enabled"
-
-    # FORM Payload SERVER
-    Then I scroll until I see the "Form Payload Server" text
-    Then I touch the "Form Payload Server" text
-
-     # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "Form Payload Server"
-    Then I see an empty EditText
-    Then I rotate to landscape
-    Then I see the text "Form Payload Server"
-    Then I see an empty EditText
-    Then I rotate to portrait
-    Then I go back
 
   Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
