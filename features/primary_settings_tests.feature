@@ -1,23 +1,6 @@
 @Settings
 Feature: Test settings on the "Application Preferences" screen
-
-  Scenario: Verify that all server settings menus can be opened and edited
-    Then I install the ccz app at "settings_sheet_tests.ccz"
-    Then I login with username "settings.test" and password "123"
-
-   # NAVIGATE TO MAIN SETTINGS MENU > SERVER SETTINGS
-    Then I wait
-    Then I select "Settings" menu item
-    Then I wait to see "CommCare > Settings"
-    Then I touch the "Server Settings" text
-
-   # APPLICATION SERVER
-    Then I touch the "CommCare Application Server" text
-   # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "CommCare Application Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
-    Then I go to back to Server Settings
-
+  
   Scenario: Test that the "Fuzzy Search Matches" setting can be edited properly
 
     Then I login with username "settings.test" and password "123"
