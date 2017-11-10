@@ -127,7 +127,7 @@ end
 Then (/^I update the app$/) do
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
-  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
+  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 30)
 end
 
 Then (/^I apply the update/) do
