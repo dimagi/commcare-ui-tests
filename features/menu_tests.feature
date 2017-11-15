@@ -53,17 +53,7 @@ Feature: Test all primary CommCare menu options
 
     Then I select "Settings" menu item
     Then I wait to see "CommCare > Settings"
-    Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
-
-    # Verify that server settings UI works
-    Then I touch the "Server Settings" text
-    # APPLICATION SERVER
-    Then I touch the "CommCare Application Server" text
-    # Make sure that a dialog with the correct title and edit text appear, and that it persists on rotation
-    Then I see the text "CommCare Application Server"
-    Then I should see text containing "https://www.commcarehq.org/a/ui-tests/apps/download/"
-    Then I go to back to Server Settings
-
+    Then I see a list that contains all of these items "Auto Update Frequency,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
     Then I go back to the home screen
 
   Scenario: Test that all actions available from the Advanced Actions menu work properly
