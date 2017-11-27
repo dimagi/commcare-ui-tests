@@ -1,3 +1,4 @@
+@DeletedUser
 Feature: Verify that syncing with a deleted user errors correctly
 
 @Integration @2.31
