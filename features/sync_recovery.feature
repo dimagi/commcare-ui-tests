@@ -1,3 +1,4 @@
+@SyncRecovery
 Feature: Perform 412 Recovery Sync
 
   @Integration
