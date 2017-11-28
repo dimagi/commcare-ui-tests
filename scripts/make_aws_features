@@ -3,4 +3,5 @@ rm -r aws
 mkdir aws
 cp -r monkey features/.
 cp -r commcare-hq-api features/.
+cp -r scripts features/.
 zip -r aws/features.zip features/*
