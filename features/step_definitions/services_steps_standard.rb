@@ -14,3 +14,7 @@ Then (/^I turn on the internet$/) do
   system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
   system("adb shell input keyevent 4")
 end
+
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |name, password|
+  system("python3 commcare-hq-api/commcare_hq_api.py user_create #{name} #{password}")
+end

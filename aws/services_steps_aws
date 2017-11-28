@@ -5,3 +5,12 @@ end
 Then (/^I turn on the internet$/) do
     system("curl -H \"Content-Type: application/json\" -X POST -d '{\"uplink_bandwidth\": 104857600, \"uplink_delay\": 0, \"uplink_jitter\": 0, \"uplink_loss\": 0, \"downlink_bandwidth\": 104857600, \"downlink_delay\": 0, \"downlink_jitter\": 0, \"downlink_loss\": 0}' http://localhost:32417/set_qos")
 end
+
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |name, password|
+  require 'yaml'
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
+  webusername = properties['hqauth']['username']
+  webpassword = properties['hqauth']['password']
+  response = system("curl -u #{webusername}:#{webpassword} -H \"Content-Type: application/json\" -X POST -d '{\"first_name\": \"Temporary\", \"username\": \"#{name}\", \"password\": \"#{password}\", \"last_name\": \"User\"}' https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/")
+  print response
+end

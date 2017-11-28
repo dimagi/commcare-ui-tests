@@ -15,7 +15,7 @@ Scenario: Ensure app update can be obtained from HQ
     Then I touch the "Update Options" text
     Then I touch the "Latest starred version" text
     Then I go back to the home screen
-    
+
     # check base form content
     Then I press start
     Then I see the text "Module Three"
@@ -102,9 +102,9 @@ Scenario: Ensure app update can be obtained from HQ
     # turn off wifi and try updating
     Then I go back
     Then I turn off the internet
-    Then I wait
+    Then I wait for 10 seconds
     Then I select "Update App" menu item
-    Then I wait
+    Then I wait for 300 seconds
     Then I check that id "button" is disabled
     Then I see the text "No network connectivity"
     Then I turn on the internet
