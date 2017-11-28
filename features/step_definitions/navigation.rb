@@ -15,7 +15,10 @@ Then (/^I select "([^\"]*)" menu item$/) do |entry|
 end
 
 Then (/^I press start$/) do
+    perform_action('set_activity_orientation', 'portrait')
+    sleep 1
     hide_soft_keyboard()
+    step("I scroll until I see the \"Start\" text")
     wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 60)
     touch("android.support.v7.widget.CardView index:0")
     wait_for_element_exists("* id:'screen_suite_menu_list'", timeout: 60)
@@ -122,6 +125,7 @@ Then (/^Submit/) do
   else
     tap_when_element_exists("* id:'nav_btn_next'")
   end
+  sleep 1
 end
 
 Then (/^Prev$/) do

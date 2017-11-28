@@ -24,7 +24,8 @@ node {
         def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
                        '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline', '@LookupTableOptionSorting', '@ManualQuarantine']
+                       '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
+                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         if (custom_tag != '') {
             tagArray =  [custom_tag]
@@ -79,7 +80,7 @@ node {
                     slackSend color: 'bad', message: "${cc_android_job} UI tests failed, :nottight:. Failing tests ${failingListString}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
-                        body: "Amazon device farm tests failed.");
+                        body: "${cc_android_job} UI tests failed, weak! Failing tests ${failingListString}");
                 }
             }
         }

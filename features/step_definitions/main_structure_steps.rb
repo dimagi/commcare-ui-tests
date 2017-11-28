@@ -12,6 +12,8 @@ Then (/^I login with username "([^\"]*)" and password "([^\"]*)"$/) do |username
 end
 
 Then (/^I login with username "([^\"]*)" and password "([^\"]*)", without waiting for completion$/) do |username, password|
+  perform_action('set_activity_orientation', 'portrait')
+  sleep 1
   wait_for_element_exists("* id:'edit_password'", timeout: 60)
   clear_text_in("android.widget.AutoCompleteTextView id:'edit_username'")
   enter_text("android.widget.AutoCompleteTextView id:'edit_username'", username)
@@ -86,6 +88,13 @@ Then (/^I sync, without waiting for completion$/) do
   tap_when_element_exists("* {text CONTAINS[c] 'Sync with Server'}")
 end
 
+Then (/^I wait for syncing to complete$/) do
+  count = query("android.widget.ProgressBar")
+  if count != 0
+    wait_for_element_does_not_exist("android.widget.ProgressBar")
+  end
+end
+
 Then (/^I select module "([^\"]*)"$/) do |text|
   wait_for_element_exists("* id:'screen_suite_menu_list'")
   tap_when_element_exists("* {text CONTAINS[c] '#{text}'}")
@@ -118,7 +127,7 @@ end
 Then (/^I update the app$/) do
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Update App'}")
-  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 10)
+  wait_for_element_exists("* {text CONTAINS[c] 'Update to version'}'", :timeout => 30)
 end
 
 Then (/^I apply the update/) do

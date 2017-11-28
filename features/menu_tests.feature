@@ -39,18 +39,10 @@ Feature: Test all primary CommCare menu options
 
     Then I select "Change Language" menu item
     Then I see a choice dialog with 2 panels
-    Then I rotate to landscape
-    Then I wait for 5 seconds
-    Then I see a choice dialog with 2 panels
-    Then I rotate to portrait
-    Then I wait for 5 seconds
     Then I go back
 
     Then I select "About CommCare" menu item
     Then I see the text "About CommCare"
-    Then I rotate to landscape
-    Then I see the text "About CommCare"
-    Then I rotate to portrait
     Then I press view with id "button1"
     Then I wait
 
@@ -61,7 +53,7 @@ Feature: Test all primary CommCare menu options
 
     Then I select "Settings" menu item
     Then I wait to see "CommCare > Settings"
-    Then I see a list that contains all of these items "Auto Update Frequency,Server Settings,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
+    Then I see a list that contains all of these items "Auto Update Frequency,Set Print Template,Grid Menus Enabled,Fuzzy Search Matches,Opt Out of Analytics"
     Then I go back to the home screen
 
   Scenario: Test that all actions available from the Advanced Actions menu work properly
@@ -74,7 +66,8 @@ Feature: Test all primary CommCare menu options
     Then I touch the "Validate Media" text
     Then I see the text "multimedia is installed"
    # Wait until we are back on the home screen
-    Then I wait to see "Start"
+    Then I wait
+    Then I scroll until I see the "Start" text
 
    # Just verifying that the buttons work properly; the actual feature is tested elsewhere
     Then I select "Advanced" menu item
@@ -96,8 +89,7 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Wifi Direct" text
     Then I see the text "Do you want to send, receive, or submit forms?"
-    Then I wait
-    Then I touch the "Transfer" text
+    Then I press view with id "negative_button"
     Then I verify that the current activity is "CommCareWiFiDirectActivity"
     Then I go back to the home screen
 
@@ -108,7 +100,7 @@ Feature: Test all primary CommCare menu options
     Then I wait to see "No problems were detected."
     Then I turn off the internet
     Then I touch the "Run Connection Test" text
-    Then I see the text "Please run this test again after verifying your network connection."
+    Then I wait to see "Please run this test again after verifying your network connection."
     Then I turn on the internet
     Then I go back to the home screen
 
@@ -117,9 +109,6 @@ Feature: Test all primary CommCare menu options
     Then I select "Advanced" menu item
     Then I touch the "Recovery Mode" text
     Then I see the expected recovery mode UI
-    Then I rotate to landscape
-    Then I see the expected recovery mode UI
-    Then I rotate to portrait
     Then I go back to the home screen
 
     Then I select "Advanced" menu item
