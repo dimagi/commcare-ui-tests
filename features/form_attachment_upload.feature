@@ -1,7 +1,7 @@
 Feature: Submit form with multimedia
 @HasExternal @Integration
 Scenario: Test that form multimedia attachments get uploaded to HQ
-    Then I store most recent form submission time
+#    Then I store most recent form submission time
     Then I install the ccz app at "integration_test_app.ccz"
     Then I login with username "test" and password "123"
     Then I press start
