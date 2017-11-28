@@ -1,93 +1,28 @@
-#!/usr/bin/python2
+require 'calabash-android/management/app_installation'
 
-"""
-Take a photo for image capture callout and mark it okay.
-"""
+AfterConfiguration do |config|
+  FeatureMemory.feature = nil
+end
 
-import sys
-import os
-import time
+Before do |scenario|
+  scenario = scenario.scenario_outline if scenario.respond_to?(:scenario_outline)
 
-try:
-    view_path = os.environ['ANDROID_VIEW_CLIENT_HOME']
-    sys.path.append(view_path)
-    print(view_path)
-except:
-    pass
+  feature = scenario.feature
+  if FeatureMemory.feature != feature || ENV['RESET_BETWEEN_SCENARIOS'] == '1'
+    if ENV['RESET_BETWEEN_SCENARIOS'] == '1'
+      log 'New scenario - reinstalling apps'
+    else
+      log 'First scenario in feature - reinstalling apps'
+    end
 
-from com.dtmilano.android.viewclient import ViewClient
+    uninstall_apps
+    install_app(ENV['TEST_APP_PATH'])
+    install_app(ENV['APP_PATH'])
+    FeatureMemory.feature = feature
+    FeatureMemory.invocation = 1
+  else
+    FeatureMemory.invocation += 1
+  end
+end
 
-device, serialno = ViewClient.connectToDeviceOrExit()
-vc = ViewClient(device, serialno, autodump=False)
-
-
-def image_capture_marshmallow():
-    try :
-        vc.dump()
-        vc.findViewWithContentDescriptionOrRaise(u'''Capture photo''').touch()
-        vc.dump()
-    except:
-        vc.dump()
-        vc.findViewWithContentDescriptionOrRaise(u'''Shutter''').touch()
-        vc.dump()
-    try:
-        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
-    except:
-        # try one more time, sometimes it takes a while due to focus issues
-        time.sleep(2)
-        vc.dump()
-        vc.findViewWithContentDescriptionOrRaise(u'''Done''').touch()
-
-
-def image_capture_kitkat_tablet():
-    device.press('KEYCODE_VOLUME_DOWN')
-    vc.dump()
-    vc.findViewWithTextOrRaise(u'Save').touch()
-
-
-def image_capture_jellybean():
-    vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''Shutter button''').touch()
-    vc.dump()
-    press_dims = get_bottom_right_dims()
-    device.touch(press_dims['x'], press_dims['y'], 0)
-
-def image_capture_lollipop():
-    vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''Shutter Button''').touch()
-    vc.dump()
-    vc.findViewWithContentDescriptionOrRaise(u'''OK''').touch()
-
-
-def get_bottom_right_dims():
-    """
-    Find location of bottom right 'okay' button regardless of screen dimension
-    """
-    ratio = 0.88
-    display_info = device.getDisplayInfo()
-    return {'x': display_info['width'] * ratio,
-            'y': display_info['height'] * ratio}
-
-def fallback():
-    try: 
-        image_capture_marshmallow()
-    except:
-        no_implementation()
-
-def no_implementation():
-    raise Exception("No image capture implementation for sdk " +
-                    device.getSdkVersion())
-
-
-image_capture_implementations = {
-    24: image_capture_marshmallow,
-    23: image_capture_marshmallow,
-    21: image_capture_lollipop,
-    22: image_capture_lollipop,
-    19: image_capture_kitkat_tablet,
-    17: image_capture_jellybean,
-}
-
-capture = image_capture_implementations.get(device.getSdkVersion(),
-                                            fallback)
-capture()
+FeatureMemory = Struct.new(:feature, :invocation).new
