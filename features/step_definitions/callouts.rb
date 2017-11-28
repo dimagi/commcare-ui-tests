@@ -1,5 +1,5 @@
 Then (/^I take a photo$/) do
-  system("python monkey/camera_image_capture.py")
+  system("python3 monkey/camera_image_capture")
 end
 
 Then (/^I sign with a cross$/) do
