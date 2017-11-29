@@ -96,3 +96,31 @@ end
 Then (/^I delete the user with name "([^\"]*)"$/) do |name|
   system("python3 commcare-hq-api/commcare_hq_api.py delete_worker_named #{name}")
 end
+
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
+  
+  require 'yaml'
+  require 'net/http'
+  require 'json'
+  require 'uri'
+  
+  uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
+  
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
+  web_username = properties['hqauth']['username']
+  web_password = properties['hqauth']['password']
+  req.basic_auth web_username, web_password
+
+  req.body ="{
+    \"first_name\": \"Temporary\",
+    \"last_name\": \"User\",
+    \"username\": \"#{username}@commcare-tests.commcarehq.org\",
+    \"password\": \"#{password}\"
+  }"
+
+  resp = http.request(req)
+  puts(resp.body)
+end
