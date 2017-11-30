@@ -1,3 +1,8 @@
+require 'yaml'
+require 'net/http'
+require 'json'
+require 'uri'
+
 Then (/^I check form was uploaded$/) do
   was_upload_success = system("python3 commcare-hq-api/utils.py assert_newer_form")
   if not was_upload_success
@@ -94,33 +99,82 @@ Then (/^I check that an async incremental sync occurred successfully$/) do
 end
 
 Then (/^I delete the user with name "([^\"]*)"$/) do |name|
-  system("python3 commcare-hq-api/commcare_hq_api.py delete_worker_named #{name}")
+  # system("python3 commcare-hq-api/commcare_hq_api.py delete_worker_named #{name}")
+  # make a get request to get all workers for the domain 
+  # and then filter them by name to get userid
+  userid = get_workerid_by_name(name)
+  delete_worker(userid)
+end
+
+def get_workerid_by_name(username)
+  workers = get_request("user")["objects"]
+  matching_ids = []
+  workers.each do |worker|
+      matching_ids << worker["id"] if worker["username"] == get_domian_username(username)
+  end
+
+  if matching_ids.count != 1
+    raise "username #{username} matched #{matching_ids.count} workers"
+  end
+
+  return matching_ids[0]
+end
+
+def delete_worker(userid)
+  uri = URI("https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/#{userid}/")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Delete.new(uri.path)
+  set_auth(req)
+  resp = http.request(req)
+  if resp.code.to_i >= 200 and resp.code.to_i < 300
+    puts("Successfully deleted worker with user_id #{userid}")
+  else
+    raise "Request to delete worker with user_id #{userid} failed with code #{resp.code} and error #{resp}"
+  end
+end
+
+def set_auth(req)
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
+  web_username = properties['hqauth']['username']
+  web_password = properties['hqauth']['password']
+  req.basic_auth web_username, web_password
+end
+
+def get_request(action)
+  uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Get.new(uri.request_uri)
+  set_auth(req)
+
+  resp = http.request(req)
+  if resp.code == '200'
+    return JSON.parse(resp.body)
+  else
+    raise "request to #{uri} failed with code #{resp.code}"
+  end
 end
 
 Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  
-  require 'yaml'
-  require 'net/http'
-  require 'json'
-  require 'uri'
   
   uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
-  
-  properties = YAML.load_file("features/resource_files/local.properties.yaml")
-  web_username = properties['hqauth']['username']
-  web_password = properties['hqauth']['password']
-  req.basic_auth web_username, web_password
+  set_auth(req)
 
   req.body ="{
     \"first_name\": \"Temporary\",
     \"last_name\": \"User\",
-    \"username\": \"#{username}@commcare-tests.commcarehq.org\",
+    \"username\": \"#{get_domian_username(username)}\",
     \"password\": \"#{password}\"
   }"
 
   resp = http.request(req)
   puts(resp.body)
+end
+
+def get_domian_username(username)
+  return "#{username}@commcare-tests.commcarehq.org"
 end
