@@ -28,7 +28,12 @@ node {
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         if (custom_tag != '') {
-            tagArray =  [custom_tag]
+            if (custom_tag.indexOf(',') > 0) {
+                // Parse as a list if contains commas
+                tagArray = Eval.me(custom_tag)
+            } else {
+                tagArray =  [custom_tag]
+            }
         }
 
 
