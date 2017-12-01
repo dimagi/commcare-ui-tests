@@ -178,3 +178,15 @@ def check_home_buttons( expected_texts)
     end
   end
 end
+
+Then (/^I see one item from the list "([^\"]*)"$/) do |items|
+  saw_item = false
+  for item in items.split(",")
+    if element_exists("* {text CONTAINS[c] '#{item}'}")
+      saw_item = true
+    end
+  end
+  if !saw_item
+    fail("Did not see item from list \"#{items}\".")
+  end
+end
