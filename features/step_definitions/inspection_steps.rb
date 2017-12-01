@@ -43,14 +43,14 @@ Then (/^I scroll until I see the "([^\"]*)" text$/) do |text|
     count = 0
     while count < attempts
       break if element_exists("* {text CONTAINS[c] '#{text}'}")
-      pan_down
+      scroll_down
       count = count + 1
     end
     count = 0
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
     while count < attempts
       break if element_exists("* {text CONTAINS[c] '#{text}'}")
-      pan_up
+      scroll_up
       count = count + 1
     end
     break if element_exists("* {text CONTAINS[c] '#{text}'}")
@@ -116,6 +116,18 @@ Then (/^I see at least one element of type "([^\"]*)"$/) do |element|
   end
 end
 
+Then (/^I see one item from the list "([^\"]*)"$/) do |items|
+  saw_item = false
+  for item in items.split(",")
+    if element_exists("* {text CONTAINS[c] '#{item}'}")
+      saw_item = true
+    end
+  end
+  if !saw_item
+    fail("Did not see item from list \"#{items}\".")
+  end
+end
+
 Then (/^I check that id "([^\"]*)" is enabled$/) do |element_id|
   check_element_exists("* id:'#{element_id}' enabled:'true'")
 end
@@ -123,40 +135,6 @@ end
 Then (/^I check that id "([^\"]*)" is disabled/) do |element_id|
   check_element_exists("* id:'#{element_id}' enabled:'false'")
 end
-
-Then (/^I see view with id "([^\"]*)"$/) do |id|
-  if not element_exists("* id:'#{id}'")
-    fail("No element exists with id " % id)
-  end
-end
-
-Then (/^I do not see view with id "([^\"]*)"$/) do |id|
-  if element_exists("* id:'#{id}'")
-    fail("Found element that should not be present with id " % id)
-  end
-end
-
-Then (/^I press view with class "([^\"]*)"$/) do |className|
-  tap_when_element_exists("#{className}")
-end
-
-Then (/^I see the tile expand button$/) do
-  if not element_exists("* id:'com_tile_holder_btn_open'")
-      fail("Did not see the tile expand button")
-  end
-end
-
-Then (/^I don't see the tile expand button$/) do
-  if element_exists("* id:'com_tile_holder_btn_open'")
-      fail("Should not see the tile expend button")
-  end
-end
-
-Then (/^I press the tile expand button$/) do
-  tap_when_element_exists("* id:'com_tile_holder_btn_open'")
-end
-
-
 
 def check_home_buttons( expected_texts)
   for button_text in expected_texts
