@@ -22,13 +22,18 @@ node {
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
         def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
-                       '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
+                       '@FormSettings', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         if (custom_tag != '') {
-            tagArray =  [custom_tag]
+            if (custom_tag.indexOf(',') > 0) {
+                // Parse as a list if contains commas
+                tagArray = Eval.me(custom_tag)
+            } else {
+                tagArray =  [custom_tag]
+            }
         }
 
 
@@ -80,7 +85,7 @@ node {
                     slackSend color: 'bad', message: "${cc_android_job} UI tests failed, :nottight:. Failing tests ${failingListString}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
-                        body: "Amazon device farm tests failed.");
+                        body: "${cc_android_job} UI tests failed, weak! Failing tests ${failingListString}");
                 }
             }
         }
