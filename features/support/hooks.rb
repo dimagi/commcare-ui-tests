@@ -4,7 +4,6 @@ require 'calabash-android/operations'
 permission_array = ["CAMERA", "CALL_PHONE", "READ_EXTERNAL_STORAGE", "RECORD_AUDIO", "ACCESS_FINE_LOCATION"]
 
 Before do |scenario|
-  Rails.logger.debug "Starting scenario: #{scenario.title}"
   permission_array.each { |permission| grant_permission(permission) }
 end
 
