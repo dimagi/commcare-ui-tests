@@ -9,6 +9,7 @@ end
 
 def grant_permission(permission)
   log "Grant permission android.permission.#{permission}"
+  cmd = "adb shell pm grant org.commcare.dalvik.debug.test android.permission.#{permission}"
   cmd = "adb shell pm grant org.commcare.dalvik.debug android.permission.#{permission}"
   raise "Could not set permission for #{permission}" unless system(cmd)
 end
