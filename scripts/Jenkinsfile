@@ -47,7 +47,7 @@ node {
                 try {
                     retry(3) {
                         stage ("${stageString} try ${count}") {
-                            pool = poolArray.get(count)
+                            def pool = poolArray.get(count)
                             count = count + 1
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
