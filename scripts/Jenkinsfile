@@ -42,12 +42,12 @@ node {
 
             // Run the commcare-odk-tests job for each tag, retrying up to three times on failures
             for (tag in tagArray) {
-                def stageString = "${tag} on ${pool}"
+                def stageString = "${tag}"
                 count = 0
                 try {
                     retry(3) {
                         stage ("${stageString} try ${count}") {
-                            def pool = poolArray.get(count)
+                            pool = poolArray.get(count)
                             count = count + 1
                             echo "Testing ${stageString} try number ${count} tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
