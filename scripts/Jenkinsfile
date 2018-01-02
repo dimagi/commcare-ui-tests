@@ -3,7 +3,7 @@ def notify = false
 // Number of times to retry a failed test
 def retries = 1
 // Pool of devices on AWS to run on
-def poolArray = ['asus']
+def poolArray = ['asus_5_0', 'asus_5_1', 'moto_g']
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
@@ -40,32 +40,30 @@ node {
         try {
             echo 'Running tests...'
 
-            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failures
-            for (pool in poolArray) {
-                for (tag in tagArray) {
-                    def stageString = "${tag} on ${pool}"
-                    count = 0
-                    try {
-                        retry(3) {
-                            stage ("${stageString} try ${count}") {
-                                count = count + 1
-                                echo "Testing ${stageString} try number ${count} tag ${tag}"
-                                def testRun = build job: 'pipeline-runner', parameters: [
-                                    [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                    [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                    [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                    [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                                    [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                                ]
-                                echo "Step ${stageString} set to SUCCESS"
-                            }
+            // Run the commcare-odk-tests job for each tag, retrying up to three times on failures
+            for (tag in tagArray) {
+                def stageString = "${tag} on ${pool}"
+                count = 0
+                try {
+                    retry(3) {
+                        stage ("${stageString} try ${count}") {
+                            pool = poolArray.get(count)
+                            count = count + 1
+                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            def testRun = build job: 'pipeline-runner', parameters: [
+                                [$class: 'StringParameterValue', name: 'pool', value: pool],
+                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
+                                [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
+                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
+                            ]
+                            echo "Step ${stageString} set to SUCCESS"
                         }
-                    } catch (exc) {
-                        echo "Step ${stageString} set to FAILURE"
-                        buildPassing = false
-                        failureList.add(tag)
                     }
+                } catch (exc) {
+                    echo "Step ${stageString} set to FAILURE"
+                    buildPassing = false
+                    failureList.add(tag)
                 }
             }
         }
