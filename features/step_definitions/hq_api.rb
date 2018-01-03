@@ -14,10 +14,6 @@ Then (/^I store most recent form submission time$/) do
   system("python3 commcare-hq-api/utils.py store_latest_form")
 end
 
-Then (/^I stage a recovery sync$/) do
-  system("python3 scripts/ccc invalidate")
-end
-
 Then (/^I check that (\d+) attachments for latest form are on HQ$/) do |attachment_count|
   # since the form.xml is counted as an attachment, increment count
   attachment_count_including_form = attachment_count.to_i + 1
