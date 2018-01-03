@@ -1,9 +1,9 @@
 // Should send email/slack notification
-def notify = false
+def notify = true
 // Number of times to retry a failed test
-def retries = 1
+def retries = 4
 // Pool of devices on AWS to run on
-def poolArray = ['asus_5_0', 'asus_5_1', 'moto_g']
+def poolArray = ['asus_5_0', 'asus_5_1', 'asus_5_0', 'asus_5_1']
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
@@ -45,7 +45,7 @@ node {
                 def stageString = "${tag}"
                 count = 0
                 try {
-                    retry(3) {
+                    retry(retries) {
                         stage ("${stageString} try ${count}") {
                             pool = poolArray.get(count)
                             count = count + 1
