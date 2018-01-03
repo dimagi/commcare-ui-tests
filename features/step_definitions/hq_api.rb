@@ -53,10 +53,10 @@ Then (/^I close case with name "([^\"]*)" of type "([^\"]*)" as user_id "([^\"]*
 end
 
 Then (/^I make sure that user "([^\"]*)" is in group "([^\"]*)"$/) do |user_id, group_id|
-  in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+  in_group = is_user_in_group(user_id, group_id)
   if not in_group
-    system("python3 commcare-hq-api/utils.py set_user_group #{user_id} #{group_id}")
-    in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+    set_user_group(user_id, group_id)
+    in_group = is_user_in_group(user_id, group_id)
     if not in_group
       fail("Could not successfully add user to group")
     end
@@ -64,18 +64,14 @@ Then (/^I make sure that user "([^\"]*)" is in group "([^\"]*)"$/) do |user_id, 
 end
 
 Then (/^I make sure that user "([^\"]*)" is not in group "([^\"]*)"$/) do |user_id, group_id|
-  in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+  in_group = is_user_in_group(user_id, group_id)
   if in_group
-    system("python3 commcare-hq-api/utils.py set_user_group #{user_id} []")
-    in_group = system("python3 commcare-hq-api/utils.py assert_group_membership #{user_id} #{group_id}")
+    set_user_group(user_id, '[]')
+    in_group = is_user_in_group(user_id, group_id)
     if in_group
       fail("Could not successfully remove user from group")
     end
   end
-end
-
-Then (/^I set the next restore to clear cache$/) do
-  system("python3 scripts/ccc clear_restore_cache")
 end
 
 Then (/^I check that an async restore occurred successfully$/) do
@@ -106,18 +102,78 @@ Then (/^I delete the user with name "([^\"]*)"$/) do |name|
   delete_worker(userid)
 end
 
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
+  
+  uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
+  set_auth(req)
+
+  req.body ="{
+    \"first_name\": \"Temporary\",
+    \"last_name\": \"User\",
+    \"username\": \"#{get_domian_username(username)}\",
+    \"password\": \"#{password}\"
+  }"
+
+  resp = http.request(req)
+  puts(resp.body)
+end
+
+def get_mobile_worker(userid)
+  return get_request("user/#{userid}/?format=json")
+end
+
+def get_groups_for_user(userid)
+  user_json = get_mobile_worker(userid)
+  return user_json["groups"]
+end
+
+def is_user_in_group(userid, groupid)
+  groups = get_groups_for_user(userid)
+  if groups.include? groupid
+    return true
+  else
+    return false
+  end
+end
+
+def set_user_group(userid, groupid)
+  if groupid == "[]"
+        update_mobile_worker(userid, '{"groups": []}')
+  else
+        update_mobile_worker(userid, "{\"groups\": [\"#{groupid}\"]}")
+        # update_mobile_worker(userid, '{"groups": ["78185f2132bd8ba3af30b488f9974b41"]}')
+  end
+end
+
 def get_workerid_by_name(username)
   workers = get_request("user")["objects"]
-  matching_ids = []
+  matching_workers = []
   workers.each do |worker|
-      matching_ids << worker["id"] if worker["username"] == get_domian_username(username)
+      matching_workers << worker if worker["username"] == get_domian_username(username)
   end
 
-  if matching_ids.count != 1
-    raise "username #{username} matched #{matching_ids.count} workers"
+  if matching_workers.count != 1
+    raise "username #{username} matched #{matching_workers.count} workers"
   end
+  return matching_workers[0]
+end
 
-  return matching_ids[0]
+def update_mobile_worker(userid, payload)
+  uri = URI("https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/#{userid}/")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Put.new(uri.path, 'Content-Type' => 'application/json')
+  req.body = payload
+  set_auth(req)
+  resp = http.request(req)
+  if resp.code.to_i >= 200 and resp.code.to_i < 300
+    puts("Successfully updated worker with user_id #{userid}")
+  else
+    raise "Request to update worker with user_id #{userid} failed with code #{resp.code} and error #{resp}"
+  end
 end
 
 def delete_worker(userid)
@@ -142,7 +198,7 @@ def set_auth(req)
 end
 
 def get_request(action)
-  uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
+  uri = URI("https://www.commcarehq.org/a/commcare-tests/api/v0.5/#{action}/")
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   req = Net::HTTP::Get.new(uri.request_uri)
@@ -154,25 +210,6 @@ def get_request(action)
   else
     raise "request to #{uri} failed with code #{resp.code}"
   end
-end
-
-Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  
-  uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
-  http = Net::HTTP.new(uri.host, uri.port)
-  http.use_ssl = true
-  req = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
-  set_auth(req)
-
-  req.body ="{
-    \"first_name\": \"Temporary\",
-    \"last_name\": \"User\",
-    \"username\": \"#{get_domian_username(username)}\",
-    \"password\": \"#{password}\"
-  }"
-
-  resp = http.request(req)
-  puts(resp.body)
 end
 
 def get_domian_username(username)
