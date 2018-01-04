@@ -2,22 +2,23 @@ require 'yaml'
 require 'net/http'
 require 'json'
 require 'uri'
+require 'date'
 
 Then (/^I check form was uploaded$/) do
-  was_upload_success = system("python3 commcare-hq-api/utils.py assert_newer_form")
+  was_upload_success = assert_new_form_on_hq()
   if not was_upload_success
     fail("No new form submission since last check")
   end
 end
 
 Then (/^I store most recent form submission time$/) do
-  system("python3 commcare-hq-api/utils.py store_latest_form")
+  store_latest_form_time()
 end
 
 Then (/^I check that (\d+) attachments for latest form are on HQ$/) do |attachment_count|
   # since the form.xml is counted as an attachment, increment count
   attachment_count_including_form = attachment_count.to_i + 1
-  correct_attachment_count = system("python3 commcare-hq-api/utils.py assert_attachments #{attachment_count_including_form}")
+  correct_attachment_count = assert_attachments(attachment_count_including_form)
   if not correct_attachment_count
     fail("Submitted form didn't contain the expected #{attachment_count} attachments")
   end
@@ -115,6 +116,65 @@ Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |user
 
   resp = http.request(req)
   puts(resp.body)
+end
+
+
+def assert_attachments(expected_count)
+  attachment_count = get_latest_form_attachment_count()
+  if expected_count != attachment_count
+      puts("#{expected_count} attachments expected, #{attachment_count} found")
+      return false
+  end
+  return true
+end
+
+def get_latest_form_attachment_count
+   form = get_forms()[0]
+   form_id = form['id']
+   attachments = form['attachments']
+   attachments_with_data = 0
+   for attachment_name in attachments.keys
+       file_size = get_attachment(form_id, attachment_name)
+       if file_size > 0
+          attachments_with_data += 1
+       end
+   end
+   return attachments_with_data
+end
+
+def get_attachment(form_id, attachment_name)
+  uri = URI("https://www.commcarehq.org/a/commcare-tests/api/form/attachment/#{form_id}/#{attachment_name}")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  req = Net::HTTP::Get.new(uri.request_uri)
+  set_auth(req)
+  resp = http.request(req)
+  return resp.body.size
+end
+
+def assert_new_form_on_hq()
+  file = open("latest_form_time.txt", 'r')
+  old_form_submit_time = file.readline().to_i
+  file.close
+  if old_form_submit_time >= get_latest_form_time()
+      return false
+  end
+  return true
+end
+
+def get_forms()
+  return get_request("form")['objects']
+end
+
+def get_latest_form_time()
+   date_str = get_forms()[0]['received_on']
+   return DateTime.rfc3339(date_str).to_time.to_i
+end
+
+def store_latest_form_time()
+  form_file = open("latest_form_time.txt", 'w')
+  form_file.write(get_latest_form_time())
+  form_file.close
 end
 
 def get_mobile_worker(userid)
