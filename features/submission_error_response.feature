@@ -1,3 +1,4 @@
+@SubmissionErrorResponse
 @Integration
 Feature: Test mobile handling of 422 response to form submission
 
