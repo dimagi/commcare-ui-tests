@@ -1,6 +1,4 @@
 cp aws/services_steps_aws features/step_definitions/services_steps_standard.rb
 rm -r aws
 mkdir aws
-cp -r monkey features/.
-cp -r commcare-hq-api features/.
 zip -r aws/features.zip features/*
