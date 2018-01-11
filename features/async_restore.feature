@@ -1,3 +1,4 @@
+@AsyncRestore
 Feature: Perform Async Restore
 
 @Integration @2.29

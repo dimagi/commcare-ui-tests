@@ -214,7 +214,7 @@ def get_workerid_by_name(username)
   if matching_workers.count != 1
     raise "username #{username} matched #{matching_workers.count} workers"
   end
-  return matching_workers[0]
+  return matching_workers[0]["id"]
 end
 
 def update_mobile_worker(userid, payload)
