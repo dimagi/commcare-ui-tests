@@ -1,8 +1,11 @@
 require 'yaml'
 require 'net/http'
+require 'net/http/post/multipart'
 require 'json'
 require 'uri'
 require 'date'
+require 'cgi'
+require 'securerandom'
 
 Then (/^I check form was uploaded$/) do
   was_upload_success = assert_new_form_on_hq()
@@ -46,7 +49,7 @@ Then (/^I assert case list count against stored count$/) do
 end
 
 Then (/^I close case with name "([^\"]*)" of type "([^\"]*)" as user_id "([^\"]*)"$/) do |name, type, user_id|
-  system("python3 commcare-hq-api/utils.py close_case_named #{name} #{type} #{user_id}")
+  close_case_with_name(name, type, user_id)
 end
 
 Then (/^I make sure that user "([^\"]*)" is in group "([^\"]*)"$/) do |user_id, group_id|
@@ -92,15 +95,13 @@ Then (/^I check that an async incremental sync occurred successfully$/) do
 end
 
 Then (/^I delete the user with name "([^\"]*)"$/) do |name|
-  # system("python3 commcare-hq-api/commcare_hq_api.py delete_worker_named #{name}")
   # make a get request to get all workers for the domain 
   # and then filter them by name to get userid
   userid = get_workerid_by_name(name)
   delete_worker(userid)
 end
 
-Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|
-  
+Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |username, password|  
   uri = URI('https://www.commcarehq.org/a/commcare-tests/api/v0.5/user/')
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
@@ -115,7 +116,96 @@ Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |user
   }"
 
   resp = http.request(req)
-  puts(resp.body)
+end
+
+def close_case_with_name(name, type=nil, user_id=nil)
+    user_id = "system" if not user_id else user_id
+    params = {"name": name, "closed": "False"}
+    if type
+        params["case_type"] = type
+    end
+    cases_with_name = get_cases(params)
+    if cases_with_name.length != 0
+        case_id = cases_with_name[0]["case_id"]
+        response_code = submit_case_close(case_id, user_id)
+        if response_code >= 200 and response_code < 300
+            puts("Successfully closed #{case_id} case")
+            exit(0)
+        else
+            puts("Unable to close #{case_id} case, HTTP code #{response_code}")
+            exit(1)
+        end
+    else
+        puts("Couldn't find case that satisfies the predicate")
+    end
+end
+
+def submit_case_close(case_id, user_id)
+    submission_filename = "case_close.xml"
+    create_submission_file(submission_filename, case_id, user_id)
+    response_code = submit_form(submission_filename)
+    return response_code
+end
+
+def create_submission_file(filename, case_id, user_id)
+   submission_contents = format_close_form(case_id, user_id)
+   file = open(filename, 'w')
+   file.write(submission_contents)
+   file.close
+end
+
+def format_close_form(case_id, user_id)
+    # time = DateTime.now.strftime("%Y-%m-%dT%H:%M:%S.%L%z")
+    time = "2018-01-15T07:41:01.615143Z"
+    uid = SecureRandom.hex()
+    xmlns = "http://commcarehq.org/case"
+    username = get_username()
+
+    xml = 
+    "<?xml version='1.0' ?>
+    <system version=\"1\" uiVersion=\"1\" xmlns=\"#{xmlns}\"
+            xmlns:orx=\"http://openrosa.org/jr/xforms\">
+        <orx:meta xmlns:cc=\"http://commcarehq.org/xforms\">
+            <orx:deviceID />
+            <orx:timeStart>#{time}</orx:timeStart>
+            <orx:timeEnd>#{time}</orx:timeEnd>
+            <orx:username>#{username}</orx:username>
+            <orx:userID>#{user_id}</orx:userID>
+            <orx:instanceID>#{uid}</orx:instanceID>
+            <cc:appVersion />
+        </orx:meta>
+        <case case_id=\"#{case_id}\"
+              date_modified=\"#{time}\"
+              user_id=\"#{user_id}\"
+              xmlns=\"http://commcarehq.org/case/transaction/v2\">
+              <close/>
+        </case>
+    </system>"
+    return xml
+end
+
+#   Same as
+#   curl --request POST -F xml_submission_file=@file.xml
+#   /a/your-domain/receiver -v -u
+#   username@your-domain.commcarehq.org:password
+def submit_form(filename)
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
+  username = properties['hqauth']['username']
+  password = properties['hqauth']['password']
+  uri = URI.parse('https://www.commcarehq.org/a/commcare-tests/receiver/')
+
+  req = Net::HTTP::Post::Multipart.new uri.path,
+  "xml_submission_file" => UploadIO.new(File.new(filename), "multipart/form-data", filename)
+  set_auth(req)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  response = http.request(req)
+  return response.code.to_i
+end
+
+def get_cases(params)
+  cases = get_request("case", params)
+  return cases["objects"]
 end
 
 
@@ -253,8 +343,15 @@ def set_auth(req)
   req.basic_auth web_username, web_password
 end
 
-def get_request(action)
-  uri = URI("https://www.commcarehq.org/a/commcare-tests/api/v0.5/#{action}/")
+def get_username()
+  properties = YAML.load_file("features/resource_files/local.properties.yaml")
+  return properties['hqauth']['username']
+end
+
+def get_request(action, params={})
+  base_path = "https://www.commcarehq.org/a/commcare-tests/api/v0.5/#{action}/"
+  path_with_params = "#{base_path}?".concat(params.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join('&')) if not params.nil?
+  uri = URI(path_with_params)
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   req = Net::HTTP::Get.new(uri.request_uri)
