@@ -1,6 +1,5 @@
 require 'yaml'
 require 'net/http'
-require 'net/http/post/multipart'
 require 'json'
 require 'uri'
 require 'date'
@@ -129,8 +128,7 @@ def close_case_with_name(name, type=nil, user_id=nil)
         case_id = cases_with_name[0]["case_id"]
         response_code = submit_case_close(case_id, user_id)
         if response_code >= 200 and response_code < 300
-            puts("Successfully closed #{case_id} case")
-            exit(0)
+            puts("Successfully closed #{case_id} case")        
         else
             puts("Unable to close #{case_id} case, HTTP code #{response_code}")
             exit(1)

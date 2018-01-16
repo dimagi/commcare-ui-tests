@@ -1,9 +1,3 @@
-#--
-# Copyright (c) 2007-2013 Nick Sieger.
-# See the file README.txt included with the distribution for
-# software license details.
-#++
-
 module Parts
   module Part #:nodoc:
     def self.new(boundary, name, value, headers = {})

@@ -2,4 +2,3 @@
 source "https://rubygems.org"
 gem 'calabash-android', '0.8.2'
 gem 'cucumber'
-gem 'multipart-post'
