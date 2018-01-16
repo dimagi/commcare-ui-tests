@@ -10,7 +10,7 @@ Scenario: Create a case with one user, claim it with another
 
     # create a case with one user
     Then I login with username "claim_test1" and password "123", without waiting for completion
-    Then I wait for progress up to 200 seconds
+    Then I wait for progress up to 100 seconds
     Then I press start
 
     # make sure case doesn't already exist
@@ -95,7 +95,7 @@ Scenario: Create a case with one user, claim it with another
 
     # login with first user, sync and make sure the case is no longer around
     Then I login with username "claim_test1" and password "123", without waiting for completion
-    Then I wait for progress up to 200 seconds
+    Then I wait for progress up to 100 seconds
     Then I wait to see "Sync"
     Then I sync
 
