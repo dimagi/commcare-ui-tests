@@ -10,6 +10,14 @@ Then (/^I stage a recovery sync$/) do
   stage_recover()
 end
 
+Then (/^I push file with path "([^\"]*)" to "([^\"]*)"$/) do |source, destination|
+  push(source, destination)
+end
+
+Then (/^I broadcast image attachment file path "([^\"]*)"$/) do |file_path|
+  system(receiver_command("org.commcare.dalvik.debug.api.action.SetImageWidgetPath") + " --es file_path " + file_path)
+end
+
 def receiver_command(action)
     return "adb shell am broadcast -a #{action}"
 end

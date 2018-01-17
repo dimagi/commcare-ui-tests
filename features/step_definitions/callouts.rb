@@ -1,12 +1,5 @@
 Then (/^I take a photo$/) do
-  # system("python monkey/camera_image_capture.py")
-  sleep(2)
-  system('adb shell input keyevent 27') # click take picture button
-  # sleep(2)
-  # tap_when_element_exists("* id:'com.android.camera:id/btn_done'")
-  # tap_when_element_exists("* marked:'com.android.camera:id/btn_done'")
-  # tap_when_element_exists("android.widget.ImageView index:1")
-  step("I press image button number 1")
+  system("python monkey/camera_image_capture.py")
 end
 
 Then (/^I sign with a cross$/) do
