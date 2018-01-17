@@ -1,7 +1,7 @@
 // Should send email/slack notification
 def notify = false
 // Number of times to retry a failed test
-def retries = 1
+def retries = 3
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
@@ -26,8 +26,8 @@ node {
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission', '@InstallList',
-                       '@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore', '@AppUpdate',
-                       '@FormAttachmentUpload', '@CaseClaim']
+                       '@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore', '@LookupTableSync',
+                       '@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 
         if (custom_tag != '') {
             tagArray =  [custom_tag]

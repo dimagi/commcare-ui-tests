@@ -14,7 +14,7 @@ Then (/^I push file with path "([^\"]*)" to "([^\"]*)"$/) do |source, destinatio
   push(source, destination)
 end
 
-Then (/^I broadcast image attachment file path "([^\"]*)"$/) do |file_path|
+Then (/^I broadcast image attachment with file path "([^\"]*)"$/) do |file_path|
   system(receiver_command("org.commcare.dalvik.debug.api.action.SetImageWidgetPath") + " --es file_path " + file_path)
 end
 

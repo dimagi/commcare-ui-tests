@@ -187,11 +187,7 @@ end
 #   /a/your-domain/receiver -v -u
 #   username@your-domain.commcarehq.org:password
 def submit_form(filename)
-  properties = YAML.load_file("features/resource_files/local.properties.yaml")
-  username = properties['hqauth']['username']
-  password = properties['hqauth']['password']
   uri = URI.parse('https://www.commcarehq.org/a/commcare-tests/receiver/')
-
   req = Net::HTTP::Post::Multipart.new uri.path,
   "xml_submission_file" => UploadIO.new(File.new(filename), "multipart/form-data", filename)
   set_auth(req)
@@ -199,6 +195,22 @@ def submit_form(filename)
   http.use_ssl = true
   response = http.request(req)
   return response.code.to_i
+end
+
+ def upload_fixture(filename)
+        uri = URI.parse('https://www.commcarehq.org/a/commcare-tests/fixtures/fixapi/')                     
+        req = Net::HTTP::Post::Multipart.new uri.path,
+        "file-to-upload" => UploadIO.new(File.new(filename), "multipart/form-data", filename),
+        "replace" => true
+        set_auth(req)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true        
+        resp = http.request(req)
+        if resp.code.to_i >= 200 and resp.code.to_i < 300
+          return true
+        else
+          return false
+        end
 end
 
 def get_cases(params)

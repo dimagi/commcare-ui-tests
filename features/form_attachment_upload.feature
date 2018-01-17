@@ -9,7 +9,7 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I select module "Form Attachments"
     Then I select form "Multimedia Capture"
     Then I push file with path "features/resource_files/multimedia/form_image_attachment.png" to "/sdcard/form_image_attachment.png"
-    Then I broadcast image attachment file path "/sdcard/form_image_attachment.png"
+    Then I broadcast image attachment with file path "/sdcard/form_image_attachment.png"
     Then I press the "Choose Image" button
     Then I wait for 5 seconds
     Then Next

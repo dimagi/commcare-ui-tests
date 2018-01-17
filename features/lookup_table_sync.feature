@@ -1,3 +1,4 @@
+@LookupTableSync
 Feature: Lookup Table Update
 
   Scenario: Ensure lookup table changes are pulled on sync
