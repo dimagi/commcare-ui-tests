@@ -1,3 +1,4 @@
+@FormAttachmentUpload
 Feature: Submit form with multimedia
 @HasExternal @Integration
 Scenario: Test that form multimedia attachments get uploaded to HQ
