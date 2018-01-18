@@ -25,7 +25,7 @@ node {
                        '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
-                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission', '@InstallList',
+                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission',
                        '@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore', '@LookupTableSync',
                        '@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 

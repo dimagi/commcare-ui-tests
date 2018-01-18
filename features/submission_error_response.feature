@@ -15,7 +15,7 @@ Scenario: Submit a form with an index to a case that doesn't exist
     Then I wait for form to load
     Then I enter text "Case that will cause processing error"
     Then Submit
-    Then I see the text "Form Record Quarantined"
-    Then I see the text "The server encountered an error processing your data."
+    Then I wait to see "Form Record Quarantined"
+    Then I wait to see "The server encountered an error processing your data."
 
 
