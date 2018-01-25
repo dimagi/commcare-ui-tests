@@ -1,7 +1,7 @@
 // Should send email/slack notification
 def notify = false
 // Number of times to retry a failed test
-def retries = 1
+def retries = 3
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
@@ -30,19 +30,14 @@ node {
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 
-        echo 'integration_job'
-        echo env.integration_job
         def tagArray
         if (custom_tag != '') {
              tagArray =  [custom_tag]
         } else if (env.integration_job == 'true') {
-             echo 'foo'
              tagArray = integration_tests_list
         } else {
-             echo 'bar'
              tagArray = ui_tests_list
         }
-
 
         try {
             echo 'Running tests...'
