@@ -38,7 +38,7 @@ node {
         } else if (integration_job) {
              tagArray = integration_tests_list
         } else {
-             tagArray = ui_tests_list + integration_tests_list
+             tagArray = ui_tests_list
         }
 
 
