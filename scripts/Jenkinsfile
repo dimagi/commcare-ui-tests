@@ -1,7 +1,7 @@
 // Should send email/slack notification
 def notify = false
 // Number of times to retry a failed test
-def retries = 3
+def retries = 1
 // Pool of devices on AWS to run on
 def poolArray = ['asus']
 
@@ -11,8 +11,6 @@ def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-
 def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
 
 def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_test_branch}" : 'master'
-
-def integration_job = env.integration_job ? ${integration_job} : false
 
 def buildPassing = true
 
@@ -32,12 +30,16 @@ node {
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 
+        echo 'integration_job'
+        echo '${env.integration_job}'
         def tagArray
         if (custom_tag != '') {
              tagArray =  [custom_tag]
-        } else if (integration_job) {
+        } else if (env.integration_job) {
+             echo 'foo'
              tagArray = integration_tests_list
         } else {
+             echo 'bar'
              tagArray = ui_tests_list
         }
 
