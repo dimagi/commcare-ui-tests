@@ -12,7 +12,7 @@ def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
 
 def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_test_branch}" : 'master'
 
-def integration_job = env.integration_job
+def integration_job = env.integration_job ? ${integration_job} : false
 
 def buildPassing = true
 
