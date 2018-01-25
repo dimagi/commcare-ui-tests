@@ -32,7 +32,7 @@ node {
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 
-
+        def tagArray
         if (custom_tag != '') {
              tagArray =  [custom_tag]
         } else if (integration_job) {
