@@ -12,6 +12,8 @@ def custom_tag =  env.CUSTOM_TAG_TO_RUN ? "${CUSTOM_TAG_TO_RUN}" : ''
 
 def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_test_branch}" : 'master'
 
+def integration_job = env.integration_job ? true : false
+
 def buildPassing = true
 
 def failureList = []
@@ -21,16 +23,22 @@ node {
         
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
+        def ui_tests_list = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
                        '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
-                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission',
-                       '@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore', '@LookupTableSync',
-                       '@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
+                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
+
+        def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
+                                '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
+
 
         if (custom_tag != '') {
-            tagArray =  [custom_tag]
+             tagArray =  [custom_tag]
+        } else if (integration_job) {
+             tagArray = integration_tests_list
+        } else {
+             tagArray = ui_tests_list + integration_tests_list
         }
 
 

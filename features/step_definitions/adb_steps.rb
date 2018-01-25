@@ -1,5 +1,5 @@
 Then (/^I start "([^\"]*)" activity with extras "([^\"]*)"$/) do |activity, extra|
- system("adb shell am start -n " + "org.commcare.dalvik.debug/org.commcare.activities." + activity + " " + extra)
+ system("adb shell am start -n " + "#{getApplicationId}/org.commcare.activities." + activity + " " + extra)
 end
 
 Then (/^I set the next restore to clear cache$/) do
@@ -15,7 +15,7 @@ Then (/^I push file with path "([^\"]*)" to "([^\"]*)"$/) do |source, destinatio
 end
 
 Then (/^I broadcast image attachment with file path "([^\"]*)"$/) do |file_path|
-  system(receiver_command("org.commcare.dalvik.debug.api.action.SetImageWidgetPath") + " --es file_path " + file_path)
+  system(receiver_command("#{getApplicationId}.api.action.SetImageWidgetPath") + " --es file_path " + file_path)
 end
 
 def receiver_command(action)
@@ -23,9 +23,13 @@ def receiver_command(action)
 end
 
 def clear_restore_cache()
-    system(receiver_command("org.commcare.dalvik.debug.api.action.ClearCacheOnRestore"))
+    system(receiver_command("#{getApplicationId}.api.action.ClearCacheOnRestore"))
 end
 
 def stage_recover()
-    system(receiver_command("org.commcare.dalvik.debug.api.action.TriggerSyncRecover"))
+    system(receiver_command("#{getApplicationId}.api.action.TriggerSyncRecover"))
+end
+
+def getApplicationId()
+    return "org.commcare.dalvik.release"
 end
