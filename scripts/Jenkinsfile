@@ -35,7 +35,7 @@ node {
         def tagArray
         if (custom_tag != '') {
              tagArray =  [custom_tag]
-        } else if (env.integration_job) {
+        } else if (env.integration_job == 'true') {
              echo 'foo'
              tagArray = integration_tests_list
         } else {
