@@ -31,7 +31,7 @@ node {
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim']
 
         echo 'integration_job'
-        echo '${env.integration_job}'
+        echo $env.integration_job
         def tagArray
         if (custom_tag != '') {
              tagArray =  [custom_tag]
