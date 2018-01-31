@@ -25,10 +25,10 @@ Feature: User session expiration
     Then I wait for 30 seconds
     Then I see the text "Log In"
 
-      # check that session expiration saves a form as incomplete
-    Then I login with username "user_with_no_data" and password "123"
-    Then I open incomplete forms
-    Then I see 1 list entries
-    Then I press list item number 1
+      # check that session expiration saves a form as incomplete and re-opens in incomplete form view
+    Then I login with username "user_with_no_data" and password "123", without waiting for completion
+    Then I wait to see "Form Hierarchy"
+    Then I see the text "Go To Start"
+    Then I see the text "Select a color and proceed!"
     Then I see the text "2"
 

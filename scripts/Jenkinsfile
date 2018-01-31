@@ -21,8 +21,9 @@ node {
         
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
+
         def ui_tests_list = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
-                       '@FormSettings', '@Setup', '@CaseSharing', '@Languages',
+                       '@FormSettings', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
@@ -32,7 +33,12 @@ node {
 
         def tagArray
         if (custom_tag != '') {
-             tagArray =  [custom_tag]
+             if (custom_tag.indexOf(',') > 0) {
+               // Parse as a list if contains commas
+               tagArray = Eval.me(custom_tag)
+             } else {
+               tagArray =  [custom_tag]
+             }
         } else if (env.integration_job == 'true') {
              tagArray = integration_tests_list
         } else {
