@@ -140,6 +140,7 @@ Then (/^I enable Developer Options/) do
     press_menu_button()
     tap_when_element_exists("* {text CONTAINS[c] 'About CommCare'}")
     tap_when_element_exists("* id:'button1'")
+    sleep 1
   end
 end
 
