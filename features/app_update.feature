@@ -105,6 +105,6 @@ Scenario: Ensure app update can be obtained from HQ
     Then I wait for 10 seconds
     Then I select "Update App" menu item
     Then I wait for 300 seconds
-    Then I check that id "button" is disabled
+    Then I check that id "check_for_update_button" is disabled
     Then I see the text "No network connectivity"
     Then I turn on the internet
