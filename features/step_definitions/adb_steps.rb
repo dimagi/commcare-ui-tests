@@ -31,5 +31,5 @@ def stage_recover()
 end
 
 def getApplicationId()
-    return "org.commcare.dalvik.release"
+    return "org.commcare.dalvik"
 end
