@@ -1,1 +1,1 @@
-zip -r features.zip features/*
+zip -r aws/features.zip features/*
