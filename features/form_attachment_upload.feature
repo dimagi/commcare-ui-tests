@@ -25,4 +25,4 @@ Scenario: Test that form multimedia attachments get uploaded to HQ
     Then I wait for the view with id "screen_entity_select_list" to appear
     Then I see 1 list entries
     Then I check form was uploaded
-    Then I check that 3 attachments for latest form are on HQ
+    Then I check that 2 attachments for latest form are on HQ
