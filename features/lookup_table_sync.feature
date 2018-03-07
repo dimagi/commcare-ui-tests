@@ -1,6 +1,7 @@
 @LookupTableSync
 Feature: Lookup Table Update
 
+  @Integration
   Scenario: Ensure lookup table changes are pulled on sync
     Then I upload the "initial_cities_table.xlsx" lookup table
     Then I install the ccz app at "integration_test_app.ccz"

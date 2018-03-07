@@ -1,8 +1,8 @@
 node {
     checkout scm
 
-    sh 'chmod a+x scripts/make_aws_features'
-    sh 'bash scripts/make_aws_features'
+    sh 'chmod a+x scripts/make_features'
+    sh 'bash scripts/make_features'
 
     step ([$class: 'CopyArtifact',
                   projectName: params.cc_android_job,
@@ -16,7 +16,7 @@ node {
                         runName: params.stageString,
                         appArtifact: 'app-commcare-release.apk',
                         testToRun: 'CALABASH',
-                        calabashFeatures: 'aws/features.zip',
+                        calabashFeatures: 'features.zip',
                         calabashTags: params.tag,
                         isRunUnmetered: true,
                         storeResults: false,
