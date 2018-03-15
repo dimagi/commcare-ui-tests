@@ -1,3 +1,4 @@
+@LookupTableSync
 Feature: Lookup Table Update
 
   @Integration

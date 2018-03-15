@@ -1,3 +1,4 @@
+@CaseClaim
 Feature: Claim a case
 
 # NOTE: should be @Integration, but it fails quite often, so until it gets fixed, only run on QA
