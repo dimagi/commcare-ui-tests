@@ -29,7 +29,7 @@ node {
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
-                                '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', @InstallList]
+                                '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', '@InstallList']
 
         def tagArray
         if (custom_tag != '') {
