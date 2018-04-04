@@ -4,6 +4,8 @@ AfterConfiguration do |config|
   FeatureMemory.feature = nil
 end
 
+$first_run = true
+
 Before do |scenario|
   scenario = scenario.scenario_outline if scenario.respond_to?(:scenario_outline)
 
@@ -15,9 +17,13 @@ Before do |scenario|
       log 'First scenario in feature - reinstalling apps'
     end
 
-    uninstall_apps
-    install_app(ENV['TEST_APP_PATH'])
-    install_app(ENV['APP_PATH'])
+    if $first_run
+      $first_run = false
+      uninstall_apps
+      install_app(ENV["TEST_APP_PATH"])
+      install_app(ENV["APP_PATH"])
+    end
+
     FeatureMemory.feature = feature
     FeatureMemory.invocation = 1
   else
