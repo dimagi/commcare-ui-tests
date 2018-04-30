@@ -19,7 +19,7 @@ node {
                         calabashFeatures: 'features.zip',
                         calabashTags: params.tag,
                         isRunUnmetered: true,
-                        storeResults: false,
+                        storeResults: true,
                         ignoreRunError: false,
                     ])
 }
