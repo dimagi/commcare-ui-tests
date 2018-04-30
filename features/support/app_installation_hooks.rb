@@ -14,13 +14,6 @@ Before do |scenario|
     else
       log 'First scenario in feature - reinstalling apps'
     end
-
-    if not application_installed?(ENV['TEST_APP_PATH'])
-      install_app(ENV['TEST_APP_PATH'])
-    end
-    if not application_installed?(ENV['APP_PATH'])
-      install_app(ENV['APP_PATH'])
-    end
     FeatureMemory.feature = feature
     FeatureMemory.invocation = 1
   else
