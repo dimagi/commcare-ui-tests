@@ -2,7 +2,7 @@
 Feature: Install from list
 
 Scenario: Install an app by getting the list of available apps for a mobile worker
-	Then I select "See Apps For My User (NEW!)" menu item
+	Then I select "See Apps For My User" menu item
 	Then I verify that the current activity is "InstallFromListActivity"
 	
 	# Verify that we start out in mobile user auth mode
@@ -36,7 +36,7 @@ Scenario: Install an app by getting the list of available apps for a web user
 	Then I select "Go To App Manager" menu item
 	Then I touch the "Install An App" text
 
-	Then I select "See Apps For My User (NEW!)" menu item
+	Then I select "See Apps For My User" menu item
 	Then I verify that the current activity is "InstallFromListActivity"
 
 	# Clear out our existing results
