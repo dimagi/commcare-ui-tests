@@ -5,6 +5,7 @@ Feature: Offline demo user restore
 Scenario: Use practice mode with a custom demo user
 	# We want to run this without connection
 	Then I turn off the internet
+	Then I wait for 10 seconds
 
 	# Enter practice mode
 	Then I install the ccz app at "demo_user_test_1.ccz"
