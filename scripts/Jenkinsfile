@@ -47,8 +47,8 @@ node {
 
         try {
             echo 'Running tests...'
-
-                stage ("All Tags") {
+                def stageString = "AllTags"
+                stage ("${stageString}") {
                     echo "Testing ${stageString} try number ${count} tag ${tag}"
                     def testRun = build job: 'pipeline-runner', parameters: [
                         [$class: 'StringParameterValue', name: 'pool', value: 'asus'],
@@ -57,7 +57,7 @@ node {
                         [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
                         [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                     ]
-                    echo "Step All Tags set to SUCCESS"
+                    echo "Step ${stageString} set to SUCCESS"
                 }
         }
         finally {
