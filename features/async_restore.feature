@@ -1,3 +1,4 @@
+@AsyncRestore
 Feature: Perform Async Restore
 
 @Integration @2.29
@@ -5,7 +6,6 @@ Scenario: Do an async restore on an initial login
 
 	# Make sure user many.cases1 is in the Async Restore Testing group
 	Then I make sure that user "13a0910ea963acbf9f4b59dcc9a0f9aa" is in group "78185f2132bd8ba3af30b488f9974b41"
-
 	Then I install the ccz app at "integration_test_app.ccz"
 	Then I set the next restore to clear cache
 	Then I login with username "many.cases1" and password "123", without waiting for completion

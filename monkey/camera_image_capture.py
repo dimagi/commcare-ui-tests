@@ -52,6 +52,12 @@ def image_capture_jellybean():
     press_dims = get_bottom_right_dims()
     device.touch(press_dims['x'], press_dims['y'], 0)
 
+def image_capture_lollipop():
+    vc.dump()
+    vc.findViewWithContentDescriptionOrRaise(u'''Shutter Button''').touch()
+    vc.dump()
+    vc.findViewWithContentDescriptionOrRaise(u'''OK''').touch()
+
 
 def get_bottom_right_dims():
     """
@@ -82,6 +88,8 @@ def no_implementation():
 image_capture_implementations = {
     24: image_capture_marshmallow,
     23: image_capture_marshmallow,
+    21: image_capture_lollipop,
+    22: image_capture_lollipop,
     19: image_capture_kitkat_tablet,
     17: image_capture_jellybean,
 }
