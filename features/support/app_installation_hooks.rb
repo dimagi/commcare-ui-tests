@@ -2,7 +2,7 @@ require 'calabash-android/management/app_installation'
 
 AfterConfiguration do |config|
   puts "Config #{config}"
-  ENV['RESET_BETWEEN_SCENARIOS'] =='0'
+  ENV['RESET_BETWEEN_SCENARIOS'] ='0'
   FeatureMemory.feature = nil
 end
 
