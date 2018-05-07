@@ -18,6 +18,7 @@ node {
                         testToRun: 'CALABASH',
                         calabashFeatures: 'features.zip',
                         calabashTags: params.tag,
+                        calabashProfile: 'android_device'
                         isRunUnmetered: true,
                         storeResults: false,
                         ignoreRunError: false,
