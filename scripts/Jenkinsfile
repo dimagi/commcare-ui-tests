@@ -49,7 +49,7 @@ node {
             echo 'Running tests...'
                 def stageString = "AllTags"
                 stage ("${stageString}") {
-                    echo "Testing ${stageString} try number ${count} tag ${tag}"
+                    echo "Testing ${stageString}"
                     def testRun = build job: 'pipeline-runner', parameters: [
                         [$class: 'StringParameterValue', name: 'pool', value: 'asus'],
                         [$class: 'StringParameterValue', name: 'stageString', value: stageString],
