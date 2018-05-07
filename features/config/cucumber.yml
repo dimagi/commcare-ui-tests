@@ -1,0 +1,4 @@
+# config/cucumber.yml
+##YAML Template
+---
+android_device: RESET_BETWEEN_SCENARIOS=0
