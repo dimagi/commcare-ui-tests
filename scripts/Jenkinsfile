@@ -48,34 +48,18 @@ node {
         try {
             echo 'Running tests...'
 
-            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failures
-            for (pool in poolArray) {
-                for (tag in tagArray) {
-                    def stageString = "${tag} on ${pool}"
-                    count = 0
-                    try {
-                        retry(retries) {
-                            stage ("${stageString} try ${count}") {
-                                count = count + 1
-                                echo "Testing ${stageString} try number ${count} tag ${tag}"
-                                def testRun = build job: 'pipeline-runner', parameters: [
-                                    [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                    [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                    [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                    [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                                    [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                                ]
-                                echo "Step ${stageString} set to SUCCESS"
-                            }
-                        }
-                    } catch (exc) {
-                        echo "Step ${stageString} set to FAILURE"
-                        buildPassing = false
-                        failureList.add(tag)
-                    }
+                stage ("${stageString} try ${count}") {
+                    count = count + 1
+                    echo "Testing ${stageString} try number ${count} tag ${tag}"
+                    def testRun = build job: 'pipeline-runner', parameters: [
+                        [$class: 'StringParameterValue', name: 'pool', value: 'asus'],
+                        [$class: 'StringParameterValue', name: 'stageString', value: stageString],
+                        [$class: 'StringParameterValue', name: 'tag', value: tagArray],
+                        [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
+                        [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
+                    ]
+                    echo "Step ${stageString} set to SUCCESS"
                 }
-            }
         }
         finally {
             def failingListString = failureList.join(",")
