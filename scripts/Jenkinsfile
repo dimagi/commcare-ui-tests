@@ -48,7 +48,7 @@ node {
         try {
             echo 'Running tests...'
 
-                stage ("${stageString} try ${count}") {
+                stage ("All Tags") {
                     count = count + 1
                     echo "Testing ${stageString} try number ${count} tag ${tag}"
                     def testRun = build job: 'pipeline-runner', parameters: [
