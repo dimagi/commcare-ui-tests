@@ -57,7 +57,7 @@ node {
                         [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
                         [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                     ]
-                    echo "Step ${stageString} set to SUCCESS"
+                    echo "Step All Tags set to SUCCESS"
                 }
         }
         finally {
