@@ -22,7 +22,7 @@ node {
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
 
-        def ui_tests_list = "@Fixtures @MenuTests @Login @FormEntry @FormSettings @CaseSharing @Languages @CaseListSearch @CaseListSort @Settings @FormFiltering @Tiles @SessionExpiration @Dialogs @InstallList @DemoserOnline @DemoUserOffline @LookupTableOptionSorting @ManualQuarantine @LogSubmission"
+        def ui_tests_list = "@Fixtures, @MenuTests, @Login, @FormEntry, @FormSettings, @CaseSharing, @Languages, @CaseListSearch, @CaseListSort, @Settings, @FormFiltering, @Tiles, @SessionExpiration, @Dialogs, @InstallList, @DemoserOnline, @DemoUserOffline, @LookupTableOptionSorting, @ManualQuarantine, @LogSubmission"
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', '@InstallList']
 
