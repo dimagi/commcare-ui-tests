@@ -21,21 +21,29 @@ node {
         
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
-        def tagArray = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
+
+        def ui_tests_list = ['@Fixtures', '@MenuTests', '@Login', '@FormEntry',
                        '@FormSettings', '@CaseSharing', '@Languages',
                        '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
                        '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
                        '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
-        if (custom_tag != '') {
-            if (custom_tag.indexOf(',') > 0) {
-                // Parse as a list if contains commas
-                tagArray = Eval.me(custom_tag)
-            } else {
-                tagArray =  [custom_tag]
-            }
-        }
+        def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
+                                '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', '@InstallList']
 
+        def tagArray
+        if (custom_tag != '') {
+             if (custom_tag.indexOf(',') > 0) {
+               // Parse as a list if contains commas
+               tagArray = Eval.me(custom_tag)
+             } else {
+               tagArray =  [custom_tag]
+             }
+        } else if (env.integration_job == 'true') {
+             tagArray = integration_tests_list
+        } else {
+             tagArray = ui_tests_list
+        }
 
         try {
             echo 'Running tests...'
@@ -47,7 +55,7 @@ node {
                     def stageString = "${tag} on ${pool}"
                     count = 0
                     try {
-                        retry(3) {
+                        retry(retries) {
                             stage ("${stageString} try ${count}") {
                                 count = count + 1
                                 echo "Testing ${stageString} try number ${count} tag ${tag}"
@@ -79,13 +87,14 @@ node {
                 currentBuild.result = 'FAILURE'
             }
             if (notify) {
+                def test_label = env.integration_job == 'true' ? "Integration" : "UI"
                 if (buildPassing) {
-                    slackSend color: 'good', message: "${cc_android_job} UI tests passed, :tight:"
+                    slackSend color: 'good', message: "${cc_android_job} ${test_label} tests passed, :tight:"
                 } else {
-                    slackSend color: 'bad', message: "${cc_android_job} UI tests failed, :nottight:. Failing tests ${failingListString}"
+                    slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListString}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
-                        body: "${cc_android_job} UI tests failed, weak! Failing tests ${failingListString}");
+                        body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListString}");
                 }
             }
         }
