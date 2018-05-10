@@ -3,7 +3,7 @@ def notify = false
 // Number of times to retry a failed test
 def retries = 1
 // Pool of devices on AWS to run on
-def poolArray = ['asus']
+def poolArray = ['asus_4_4']
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
