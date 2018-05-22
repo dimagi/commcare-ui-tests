@@ -25,11 +25,11 @@ node {
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
 
-        def ui_tests_list = ['@FormEntry', '@Fixtures', '@MenuTests', '@Login',
-                       '@FormSettings', '@CaseSharing', '@Languages',
-                       '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-                       '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
-                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
+        def ui_tests_list = ['@FormEntry', '@Fixtures', '@MenuTests', '@Login']
+        //               '@FormSettings', '@CaseSharing', '@Languages',
+        //               '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
+        //               '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
+        //               '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', '@InstallList']
@@ -78,7 +78,8 @@ node {
             }
 
             def failingListString1 = failureList.join(",")
-            echo "Failed first round with failing tags ${failingListString}"
+            echo "Failed first round with failing tags ${failingListString1}"
+            pool = 'asus'
 
             for (tag in failureList) {
                 def stageString = "${tag} on ${pool}"
@@ -138,7 +139,7 @@ node {
                 echo "Passed"
                 currentBuild.result = 'SUCCESS'
             } else {
-                echo "Failed with failing tags ${failingListString}"
+                echo "Failed with failing tags ${failingListStringFinal}"
                 currentBuild.result = 'FAILURE'
             }
             if (notify) {
@@ -146,10 +147,10 @@ node {
                 if (buildPassing) {
                     slackSend color: 'good', message: "${cc_android_job} ${test_label} tests passed, :tight:"
                 } else {
-                    slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListString}"
+                    slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListStringFinal}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
-                        body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListString}");
+                        body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListStringFinal}");
                 }
             }
         }
