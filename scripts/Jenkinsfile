@@ -3,8 +3,7 @@ def notify = false
 // Number of times to retry a failed test
 def retries = 1
 // Pool of devices on AWS to run on
-def poolArray = ['asus_4_4']
-def pool = 'asus_4_4'
+def pool = 'asus'
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
@@ -26,10 +25,10 @@ node {
         // tag and retry them granularly when they fail.
 
         def ui_tests_list = ['@FormEntry', '@Fixtures', '@MenuTests', '@Login']
-        //               '@FormSettings', '@CaseSharing', '@Languages',
-        //               '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
-        //               '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
-        //               '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
+                       '@FormSettings', '@CaseSharing', '@Languages',
+                       '@CaseListSearch', '@CaseListSort', '@Settings', '@FormFiltering', '@Tiles',
+                       '@SessionExpiration', '@Dialogs', '@InstallList', '@DemoUserOnline', '@DemoUserOffline',
+                       '@LookupTableOptionSorting', '@ManualQuarantine', '@LogSubmission']
 
         def integration_tests_list = ['@DeletedUser', '@SyncRecovery', '@SubmissionErrorResponse', '@AsyncRestore',
                                 '@LookupTableSync','@AppUpdate', '@FormAttachmentUpload', '@CaseClaim', '@InstallList']
@@ -58,9 +57,9 @@ node {
                 count = 0
                 try {
                     retry(retries) {
-                        stage ("${stageString} try ${count}") {
+                        stage ("${stageString} try 1") {
                             count = count + 1
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            echo "Testing ${stageString} try number 1 tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
                                 [$class: 'StringParameterValue', name: 'pool', value: pool],
                                 [$class: 'StringParameterValue', name: 'stageString', value: stageString],
@@ -79,16 +78,16 @@ node {
 
             def failingListString1 = failureList.join(",")
             echo "Failed first round with failing tags ${failingListString1}"
-            pool = 'asus'
+            pool = 'asus_4_4'
 
             for (tag in failureList) {
                 def stageString = "${tag} on ${pool}"
                 count = 0
                 try {
                     retry(retries) {
-                        stage ("${stageString} try ${count}") {
+                        stage ("${stageString} try 2") {
                             count = count + 1
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            echo "Testing ${stageString} try number 2 tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
                                 [$class: 'StringParameterValue', name: 'pool', value: pool],
                                 [$class: 'StringParameterValue', name: 'stageString', value: stageString],
@@ -106,16 +105,17 @@ node {
             }
 
             def failingListString2 = failureList2.join(",")
-            echo "Failed first round with failing tags ${failingListString2}"
+            echo "Failed second round with failing tags ${failingListString2}"
+            pool = 'asus'
 
             for (tag in failureList2) {
                 def stageString = "${tag} on ${pool}"
                 count = 0
                 try {
                     retry(retries) {
-                        stage ("${stageString} try ${count}") {
+                        stage ("${stageString} try 3") {
                             count = count + 1
-                            echo "Testing ${stageString} try number ${count} tag ${tag}"
+                            echo "Testing ${stageString} try number 3 tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
                                 [$class: 'StringParameterValue', name: 'pool', value: pool],
                                 [$class: 'StringParameterValue', name: 'stageString', value: stageString],
