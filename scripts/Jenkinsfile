@@ -3,7 +3,7 @@ def notify = false
 // Number of times to retry a failed test
 def retries = 1
 // Pool of devices on AWS to run on
-def pool = 'asus'
+def pool = 'asus_5_1'
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
@@ -16,6 +16,7 @@ def buildPassing = true
 
 def failureList = []
 def failureList2 = []
+def failureList3 = []
 def failureListFinal = []
 
 node {
@@ -106,7 +107,7 @@ node {
 
             def failingListString2 = failureList2.join(",")
             echo "Failed second round with failing tags ${failingListString2}"
-            pool = 'asus'
+            pool = 'asus_5_0'
 
             for (tag in failureList2) {
                 def stageString = "${tag} on ${pool}"
@@ -129,7 +130,34 @@ node {
                 } catch (exc) {
                     echo "Step ${stageString} set to FAILURE"
                     buildPassing = false
-                    failureList2.add(tag)
+                    failureList3.add(tag)
+                }
+            }
+
+            pool = 'asus_6_0'
+
+            for (tag in failureList3) {
+                def stageString = "${tag} on ${pool}"
+                count = 0
+                try {
+                    retry(retries) {
+                        stage ("${stageString} try 4") {
+                            count = count + 1
+                            echo "Testing ${stageString} try number 4 tag ${tag}"
+                            def testRun = build job: 'pipeline-runner', parameters: [
+                                [$class: 'StringParameterValue', name: 'pool', value: pool],
+                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
+                                [$class: 'StringParameterValue', name: 'tag', value: tag],
+                                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
+                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
+                            ]
+                            echo "Step ${stageString} set to SUCCESS"
+                        }
+                    }
+                } catch (exc) {
+                    echo "Step ${stageString} set to FAILURE"
+                    buildPassing = false
+                    failureListFinal.add(tag)
                 }
             }
         }
