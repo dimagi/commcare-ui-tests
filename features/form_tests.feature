@@ -119,7 +119,7 @@ Feature: Form Tests
     Then I see the text "Unsent Forms: 1"
     Then I turn on the internet
     # wait for wifi to connect again
-    Then I wait for 10 seconds
+    Then I wait for 30 seconds
 
     # confirm form was sent
     Then I sync
