@@ -1,5 +1,5 @@
 // Should send email/slack notification
-def notify = false
+def notify = true
 // Number of times to retry a failed test
 def retries = 1
 // Pool of devices on AWS to run on
