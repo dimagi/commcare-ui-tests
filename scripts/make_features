@@ -1,1 +1,1 @@
-zip -r tests.zip features/*
+zip -r features.zip features/*
