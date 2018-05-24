@@ -1,2 +1,0 @@
-default: --tags @Fixtures,@MenuTests,@Login,@FormEntry -p retry 2
-ui: --tags @Fixtures,@MenuTests,@Login,@FormEntry -p retry 2
