@@ -66,24 +66,23 @@ node {
                 storeResults: false,
                 ignoreRunError: false,
             ])
-        }
+    }
+    if (buildPassing) {
+        echo "Passed"
+        currentBuild.result = 'SUCCESS'
+    } else {
+        echo "Failed with failing tags ${failingListString}"
+        currentBuild.result = 'FAILURE'
+    }
+    if (notify) {
+        def test_label = env.integration_job == 'true' ? "Integration" : "UI"
         if (buildPassing) {
-            echo "Passed"
-            currentBuild.result = 'SUCCESS'
+            slackSend color: 'good', message: "${cc_android_job} ${test_label} tests passed, :tight:"
         } else {
-            echo "Failed with failing tags ${failingListString}"
-            currentBuild.result = 'FAILURE'
-        }
-        if (notify) {
-            def test_label = env.integration_job == 'true' ? "Integration" : "UI"
-            if (buildPassing) {
-                slackSend color: 'good', message: "${cc_android_job} ${test_label} tests passed, :tight:"
-            } else {
-                slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListString}"
-                mail (to: 'mobiledev@dimagi.com',
-                    subject: "Amazon device farm tests failed.",
-                    body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListString}");
-            }
+            slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListString}"
+            mail (to: 'mobiledev@dimagi.com',
+                subject: "Amazon device farm tests failed.",
+                body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListString}");
         }
     }
 }
