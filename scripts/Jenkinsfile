@@ -51,7 +51,7 @@ node {
         sh 'bash scripts/make_features'
 
         step ([$class: 'CopyArtifact',
-              projectName: params.cc_android_job,
+              projectName: 'commcare-android',
               filter: '**/app-commcare-release.apk',
               fingerprintArtifacts: true,
               flatten: true]);
