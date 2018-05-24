@@ -51,9 +51,7 @@ node {
 
         try {
             echo 'Running tests...'
-
-            // Run the commcare-odk-tests job for each device pool and each tag, retrying up to three
-            // times on failures
+            buildPassing = true
             for (tag in tagArray) {
                 def stageString = "${tag} on ${pool}"
                 count = 0
@@ -157,7 +155,6 @@ node {
                     }
                 } catch (exc) {
                     echo "Step ${stageString} set to FAILURE"
-                    buildPassing = false
                     failureList4.add(tag)
                 }
             }
