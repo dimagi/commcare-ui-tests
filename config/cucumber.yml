@@ -1,2 +1,1 @@
-default: --retryCount 2
-ui: --tags @Fixtures,@MenuTests,@Login,@FormEntry --retryCount 2
+ui: --tags @Fixtures,@MenuTests,@Login,@FormEntry -p retry 2
