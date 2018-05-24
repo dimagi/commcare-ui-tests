@@ -62,7 +62,7 @@ node {
                 runName: 'Test Run',
                 appArtifact: 'app-commcare-release.apk',
                 testToRun: 'CALABASH',
-                calabashFeatures: 'tests.zip',
+                calabashFeatures: 'features.zip',
                 calabashProfile: 'ui',
                 isRunUnmetered: true,
                 storeResults: false,
