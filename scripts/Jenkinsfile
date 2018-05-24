@@ -45,14 +45,27 @@ node {
              tagArray = ui_tests_list
         }
 
-        stage ("Test Run") {
-            def testRun = build job: 'pipeline-runner', parameters: [
-                [$class: 'StringParameterValue', name: 'pool', value: pool],
-                [$class: 'StringParameterValue', name: 'stageString', value: 'Test Run'],
-                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-            ]
-            echo "Step ${stageString} set to SUCCESS"
+        sh 'chmod a+x scripts/make_features'
+        sh 'bash scripts/make_features'
+
+        step ([$class: 'CopyArtifact',
+              projectName: params.cc_android_job,
+              filter: '**/app-commcare-release.apk',
+              fingerprintArtifacts: true,
+              flatten: true]);
+
+        step([$class: 'AWSDeviceFarmRecorder',
+                projectName: 'commcare-odk',
+                devicePoolName: pool,
+                runName: 'Test Run',
+                appArtifact: 'app-commcare-release.apk',
+                testToRun: 'CALABASH',
+                calabashFeatures: 'tests.zip',
+                calabashProfile: 'ui',
+                isRunUnmetered: true,
+                storeResults: false,
+                ignoreRunError: false,
+            ])
         }
         finally {
             def failingListString = failureList.join(",")
