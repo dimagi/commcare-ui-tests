@@ -45,6 +45,8 @@ node {
              tagArray = ui_tests_list
         }
 
+        checkout scm
+
         sh 'chmod a+x scripts/make_features'
         sh 'bash scripts/make_features'
 
