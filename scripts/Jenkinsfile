@@ -128,7 +128,6 @@ node {
                     }
                 } catch (exc) {
                     echo "Step ${stageString} set to FAILURE"
-                    buildPassing = false
                     failureList3.add(tag)
                 }
             }
