@@ -49,6 +49,8 @@ node {
              tagArray = ui_tests_list
         }
 
+        pool = 'asus_6_0'
+
         try {
             echo 'Running tests...'
             buildPassing = true
@@ -78,89 +80,10 @@ node {
 
             def failingListString1 = failureList.join(",")
             echo "Failed first round with failing tags ${failingListString1}"
-            pool = 'lg_5_1'
 
-            for (tag in failureList) {
-                def stageString = "${tag} on ${pool}"
-                count = 0
-                try {
-                    retry(retries) {
-                        stage ("${stageString} try 2") {
-                            count = count + 1
-                            echo "Testing ${stageString} try number 2 tag ${tag}"
-                            def testRun = build job: 'pipeline-runner', parameters: [
-                                [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                            ]
-                            echo "Step ${stageString} set to SUCCESS"
-                        }
-                    }
-                } catch (exc) {
-                    echo "Step ${stageString} set to FAILURE"
-                    failureList2.add(tag)
-                }
-            }
+            pool = 'moto_6_0'
 
-            def failingListString2 = failureList2.join(",")
-            echo "Failed second round with failing tags ${failingListString2}"
-            pool = 'asus_5_0'
-
-            for (tag in failureList2) {
-                def stageString = "${tag} on ${pool}"
-                count = 0
-                try {
-                    retry(retries) {
-                        stage ("${stageString} try 3") {
-                            count = count + 1
-                            echo "Testing ${stageString} try number 3 tag ${tag}"
-                            def testRun = build job: 'pipeline-runner', parameters: [
-                                [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                            ]
-                            echo "Step ${stageString} set to SUCCESS"
-                        }
-                    }
-                } catch (exc) {
-                    echo "Step ${stageString} set to FAILURE"
-                    failureList3.add(tag)
-                }
-            }
-
-            pool = 'asus_6_0'
-
-            for (tag in failureList3) {
-                def stageString = "${tag} on ${pool}"
-                count = 0
-                try {
-                    retry(retries) {
-                        stage ("${stageString} try 4") {
-                            count = count + 1
-                            echo "Testing ${stageString} try number 4 tag ${tag}"
-                            def testRun = build job: 'pipeline-runner', parameters: [
-                                [$class: 'StringParameterValue', name: 'pool', value: pool],
-                                [$class: 'StringParameterValue', name: 'stageString', value: stageString],
-                                [$class: 'StringParameterValue', name: 'tag', value: tag],
-                                [$class: 'StringParameterValue', name: 'target_ui_test_branch', value: pipeline_runner_branch_target],
-                                [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
-                            ]
-                            echo "Step ${stageString} set to SUCCESS"
-                        }
-                    }
-                } catch (exc) {
-                    echo "Step ${stageString} set to FAILURE"
-                    failureList4.add(tag)
-                }
-            }
-
-            pool = 'asus_4_4'
-
-            for (tag in failureList4) {
+            for (tag in failingListString1) {
                 def stageString = "${tag} on ${pool}"
                 count = 0
                 try {
