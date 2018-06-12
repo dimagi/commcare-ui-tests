@@ -23,8 +23,8 @@ Before do |scenario|
   cmd = "adb shell pm grant org.commcare.dalvik android.permission.WRITE_EXTERNAL_STORAGE"
   raise "Could not set permission for WRITE_EXTERNAL_STORAGE" unless system(cmd)
 
-  cmd = "adb shell pm grant org.commcare.dalvik android.permission.WRITE_EXTERNAL_STORAGE"
-  raise "Could not set permission for WRITE_EXTERNAL_STORAGE" unless system(cmd)
+  cmd = "adb shell pm grant org.commcare.dalvik android.permission.READ_PHONE_STATE"
+  raise "Could not set permission for READ_PHONE_STATE" unless system(cmd)
 
   cmd = "adb shell pm grant org.commcare.dalvik android.permission.ACCESS_COARSE_LOCATION"
   raise "Could not set permission for ACCESS_COARSE_LOCATION" unless system(cmd)
