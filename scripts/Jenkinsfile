@@ -83,7 +83,7 @@ node {
 
             pool = 'moto_6_0'
 
-            for (tag in failingListString1) {
+            for (tag in failureList) {
                 def stageString = "${tag} on ${pool}"
                 count = 0
                 try {

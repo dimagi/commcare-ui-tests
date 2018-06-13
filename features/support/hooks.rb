@@ -33,7 +33,7 @@ Before do |scenario|
   raise "Could not set permission for ACCESS_FINE_LOCATION" unless system(cmd)
 
 
-  cmd = "adb shell pm grant org.commcare.dalvik.test.test android.permission.CAMERA"
+  cmd = "adb shell pm grant org.commcare.dalviktest android.permission.CAMERA"
   raise "Could not set permission for CAMERA" unless system(cmd)
 
   cmd = "adb shell pm grant org.commcare.dalvik.test android.permission.RECORD_AUDIO"
