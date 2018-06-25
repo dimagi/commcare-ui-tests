@@ -49,7 +49,7 @@ node {
              tagArray = ui_tests_list
         }
 
-        pool = 'asus_6_0'
+        pool = 'asus_5_0'
 
         try {
             echo 'Running tests...'
@@ -81,7 +81,7 @@ node {
             def failingListString1 = failureList.join(",")
             echo "Failed first round with failing tags ${failingListString1}"
 
-            pool = 'moto_6_0'
+            pool = 'asus_5_!'
 
             for (tag in failureList) {
                 def stageString = "${tag} on ${pool}"
