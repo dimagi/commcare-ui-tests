@@ -22,6 +22,6 @@ node {
                         storeResults: false,
                         ignoreRunError: false,
                         extraData: true,
-                        extraDataArtifact: 'features/resource_files/ccz_apps/cczs.zip'
+                        extraDataArtifact: 'cczs.zip'
                     ])
 }
