@@ -23,6 +23,7 @@ node {
                         ignoreRunError: false,
                         extraData: true,
                         extraDataArtifact: 'cczs.zip',
-                        ifWebApp: false
+                        ifWebApp: false,
+                        jobTimeoutMinutes: 45
                     ])
 }
