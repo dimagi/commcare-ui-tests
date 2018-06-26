@@ -81,7 +81,7 @@ node {
             def failingListString1 = failureList.join(",")
             echo "Failed first round with failing tags ${failingListString1}"
 
-            pool = 'asus_5_!'
+            pool = 'asus_5_1'
 
             for (tag in failureList) {
                 def stageString = "${tag} on ${pool}"
