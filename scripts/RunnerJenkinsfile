@@ -22,6 +22,7 @@ node {
                         storeResults: false,
                         ignoreRunError: false,
                         extraData: true,
-                        extraDataArtifact: 'cczs.zip'
+                        extraDataArtifact: 'cczs.zip',
+                        ifWebApp: false
                     ])
 }
