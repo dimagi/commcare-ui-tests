@@ -1,2 +1,2 @@
 zip -r features.zip features/*
-zip -r cczs.zip features/resource_files/ccz_apps/*
+zip -jr cczs.zip features/resource_files/ccz_apps/*
