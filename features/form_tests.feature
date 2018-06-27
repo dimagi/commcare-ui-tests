@@ -48,7 +48,7 @@ Feature: Form Tests
 
     # check that the form moved from incomplete to saved
     Then Submit
-    Then I open saved forms
+    Then I go to Saved Forms
     Then I see the text "Languages"
     Then I go back to the home screen
     Then I open incomplete forms
@@ -129,7 +129,7 @@ Feature: Form Tests
     Then I go back
     Then I see the text "You last synced with the server:"
 
-    Then I open saved forms
+    Then I go to Saved Forms
     Then I see the text "Languages"
     Then I go back to the home screen
 
