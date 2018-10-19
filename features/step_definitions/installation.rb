@@ -13,8 +13,8 @@ end
 Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
   #sleep 10
   #step("I rotate to portrait")
-  #wait_for_element_exists("* {text contains[c] 'Welcome to CommCare'}", timeout: 6000)
-  #press_menu_button()
+  wait_for_element_exists("* {text contains[c] 'Welcome to CommCare'}", timeout: 6000)
+  press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Offline install'}")
   #push("features/resource_files/cczs/%s" % path, "/sdcard/%s" % path)
   step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
