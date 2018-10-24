@@ -6,6 +6,7 @@ Scenario: Install an app by getting the list of available apps for a mobile work
 	Then I verify that the current activity is "InstallFromListActivity"
 	
 	# Verify that we start out in mobile user auth mode
+	Then I wait for 2 seconds
 	Then I see view with id "edit_domain"
 	Then I do not see view with id "edit_email"
 	
