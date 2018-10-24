@@ -88,7 +88,7 @@ node {
                 count = 0
                 try {
                     retry(retries) {
-                        stage ("${stageString} try 5") {
+                        stage ("${stageString} try 2") {
                             count = count + 1
                             echo "Testing ${stageString} try number 4 tag ${tag}"
                             def testRun = build job: 'pipeline-runner', parameters: [
