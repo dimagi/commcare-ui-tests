@@ -7,12 +7,12 @@ Then (/^I turn off the internet$/) do
 #  system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
 #  system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
 #  system("adb shell input keyevent 4")
-   system("db shell settings put global airplane_mode_on 1")
+   system("adb shell settings put global airplane_mode_on 1")
 end
 
 Then (/^I turn on the internet$/) do
 #  system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
 #  system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
 #  system("adb shell input keyevent 4")
-   system("db shell settings put global airplane_mode_on 0")
+   system("adb shell settings put global airplane_mode_on 0")
 end
