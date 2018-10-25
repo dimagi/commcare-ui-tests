@@ -59,12 +59,12 @@ Scenario: Install an app by getting the list of available apps for a web user
 	
 	# This web user belongs to the commcare-tests domain and the swat domain, so we should see apps from both
 	Then I scroll until I see the "commcare-tests" text
-	Then I scroll until I see the "swat" text
 	Then I scroll until I see the "Case callout test for Simprints" text
 	Then I scroll until I see the "Case Search and Claim" text
-	Then I scroll until I see the "Integration Tests" text
 	Then I scroll until I see the "Demo - Form Design Patterns" text
 	Then I scroll until I see the "Demo - Live XForm Examples" text
+	Then I scroll until I see the "Integration Tests" text
+	Then I scroll until I see the "swat" text
 	Then I scroll until I see the "SWAT: CommCare Projects Phone Survey" text
 	Then I scroll until I see the "SWAT: App Tracker" text
 
