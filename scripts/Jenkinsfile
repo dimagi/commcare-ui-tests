@@ -1,5 +1,5 @@
 // Should send email/slack notification
-def notify = true
+def notify = false
 // Number of times to retry a failed test
 def retries = 2
 // Pool of devices on AWS to run on
@@ -15,10 +15,6 @@ def pipeline_runner_branch_target =  env.target_ui_test_branch ? "${target_ui_te
 def buildPassing = true
 
 def failureList = []
-def failureList2 = []
-def failureList3 = []
-def failureList4 = []
-def failureListFinal = []
 
 node {
     stage('test') {
@@ -51,6 +47,7 @@ node {
 
         pool = 'asus_5_0'
 
+        def failingListString
         try {
             echo 'Running tests...'
             buildPassing = true
@@ -78,7 +75,7 @@ node {
                 }
             }
 
-            def failingListString1 = failureList.join(",")
+            failingListString = failureList.join(",")
             echo "Failed first round with failing tags ${failingListString1}"
 
             pool = 'asus_5_1'
@@ -104,17 +101,17 @@ node {
                 } catch (exc) {
                     echo "Step ${stageString} set to FAILURE"
                     buildPassing = false
-                    failureListFinal.add(tag)
+                    failureList.add(tag)
                 }
             }
         }
         finally {
-            def failingListStringFinal = failureListFinal.join(",")
+            failingListString = failureList.join(",")
             if (buildPassing) {
                 echo "Passed"
                 currentBuild.result = 'SUCCESS'
             } else {
-                echo "Failed with failing tags ${failingListStringFinal}"
+                echo "Failed with failing tags ${failingListString}"
                 currentBuild.result = 'FAILURE'
             }
             if (notify) {
@@ -122,10 +119,10 @@ node {
                 if (buildPassing) {
                     slackSend color: 'good', message: "${cc_android_job} ${test_label} tests passed, :tight:"
                 } else {
-                    slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListStringFinal}"
+                    slackSend color: 'bad', message: "${cc_android_job} ${test_label} tests failed, :nottight:. Failing tests ${failingListString}"
                     mail (to: 'mobiledev@dimagi.com',
                         subject: "Amazon device farm tests failed.",
-                        body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListStringFinal}");
+                        body: "${cc_android_job} ${test_label} tests failed, weak! Failing tests ${failingListString}");
                 }
             }
         }

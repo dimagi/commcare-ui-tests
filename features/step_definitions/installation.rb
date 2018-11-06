@@ -11,12 +11,9 @@ end
 
 # peform offline install using ccz file pushed from repository
 Then (/^I install the ccz app at "([^\"]*)"$/) do |path|
-  #sleep 10
-  #step("I rotate to portrait")
   wait_for_element_exists("* {text contains[c] 'Welcome to CommCare'}", timeout: 6000)
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Offline install'}")
-  #push("features/resource_files/cczs/%s" % path, "/sdcard/%s" % path)
   step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
   hide_soft_keyboard()
 
@@ -36,7 +33,6 @@ Then (/^I do an offline update to the ccz app at "([^\"]*)"$/) do |path|
   wait_for_element_exists("* {text contains[c] 'Current version'}", timeout: 1000)
   press_menu_button()
   tap_when_element_exists("* {text CONTAINS[c] 'Offline Update'}")
-  #push("features/resource_files/ccz_apps/%s" % path, "/sdcard/%s" % path)
   step("I enter \"storage/emulated/0/%s\" into input field number 1" % path)
   hide_soft_keyboard()
 

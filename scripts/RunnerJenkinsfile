@@ -24,6 +24,6 @@ node {
                         extraData: true,
                         extraDataArtifact: 'cczs.zip',
                         ifWebApp: false,
-                        jobTimeoutMinutes: 45
+                        jobTimeoutMinutes: 30
                     ])
 }
