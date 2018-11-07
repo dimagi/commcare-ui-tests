@@ -43,7 +43,7 @@ node {
              tagArray = ui_tests_list
         }
 
-        def failureList = tagArray
+
         try {
             echo 'Running tests...'
             buildPassing = true
@@ -51,7 +51,8 @@ node {
             def round = 0
             for (pool in poolArray) {
                 round = round + 1
-                for (tag in failureList) {
+                tagArray = failureList
+                for (tag in tagArray) {
                     def stageString = "${tag} on ${pool}"
                     try {
                         def trial = 0
