@@ -75,7 +75,7 @@ node {
                     }
                 }
                 def failingListString = failureList.join(",")
-                echo "Failed round ${round} with failing tags ${failingListString1}"
+                echo "Failed round ${round} with failing tags ${failingListString}"
             }
         } finally {
             buildPassing = failureList.size() > 0
