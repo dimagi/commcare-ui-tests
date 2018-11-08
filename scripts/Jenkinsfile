@@ -42,7 +42,7 @@ node {
         } else {
              tagArray = ui_tests_list
         }
-        def failureList = tagArray
+        def failureList
         try {
             echo 'Running tests...'
             buildPassing = true
@@ -50,7 +50,7 @@ node {
             def round = 0
             for (pool in poolArray) {
                 round = round + 1
-                tagArray = failureList
+                failureList = []
                 for (tag in tagArray) {
                     def stageString = "${tag} on ${pool}"
                     try {
@@ -67,18 +67,18 @@ node {
                                     [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                                 ]
                                 echo "Step ${stageString} set to SUCCESS"
-                                if(failureList.contains(tag)){
-                                    failureList.remove(tag)
-                                }
                             }
                         }
                     } catch (exc) {
                         echo "Step ${stageString} set to FAILURE"
-                        failureList.add(tag)
+                        if(!failureList.contains(tag)){
+                            failureList.add(tag)
+                        }
                     }
                 }
                 def failingListString = failureList.join(",")
                 echo "Failed round ${round} with failing tags ${failingListString}"
+                tagArray = failureList
             }
         } finally {
             buildPassing = failureList.size() > 0
