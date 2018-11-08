@@ -67,6 +67,9 @@ node {
                                     [$class: 'StringParameterValue', name: 'cc_android_job', value: cc_android_job]
                                 ]
                                 echo "Step ${stageString} set to SUCCESS"
+                                if(failureList.contains(tag)){
+                                    failureList.remove(tag)
+                                }
                             }
                         }
                     } catch (exc) {
