@@ -81,7 +81,7 @@ node {
                 tagArray = failureList
             }
         } finally {
-            buildPassing = failureList.size() > 0
+            buildPassing = failureList.size() == 0
             failingListString = failureList.join(",")
             if (buildPassing) {
                 echo "Passed"
