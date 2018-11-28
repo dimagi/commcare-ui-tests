@@ -21,5 +21,9 @@ node {
                         isRunUnmetered: true,
                         storeResults: false,
                         ignoreRunError: false,
+                        extraData: true,
+                        extraDataArtifact: 'cczs.zip',
+                        ifWebApp: false,
+                        jobTimeoutMinutes: 30
                     ])
 }

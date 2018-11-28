@@ -116,12 +116,10 @@ end
 
 Then (/^I rotate to portrait$/) do
   perform_action('set_activity_orientation', 'portrait')
-  step("I wait for 5 seconds")
 end
 
 Then (/^I rotate to landscape/) do
   perform_action('set_activity_orientation', 'landscape')
-  step("I wait for 5 seconds")
 end
 
 Then (/^I update the app$/) do

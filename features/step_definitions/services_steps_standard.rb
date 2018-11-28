@@ -3,14 +3,18 @@
 # Anything added to this file should also be added to aws/aws_steps as that file will completely replace this one
 # when running on AWS.
 
+#Turns on the airplane mode and try to disable wifi
 Then (/^I turn off the internet$/) do
-  system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
-  system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
-  system("adb shell input keyevent 4")
+   system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
+   system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
+   system("adb shell input keyevent 4")
+   system("adb shell svc wifi disable")
 end
 
+#Turns off the airplane mode and try to enable wifi
 Then (/^I turn on the internet$/) do
-  system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
-  system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
-  system("adb shell input keyevent 4")
+   system("adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS && sleep 0.5")
+   system("adb shell input keyevent 19 && sleep 1 && adb shell input keyevent 23")
+   system("adb shell input keyevent 4")
+   system("adb shell svc wifi enable")
 end
