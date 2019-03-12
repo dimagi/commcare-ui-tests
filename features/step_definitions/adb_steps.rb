@@ -19,7 +19,7 @@ Then (/^I broadcast image attachment with file path "([^\"]*)"$/) do |file_path|
 end
 
 def receiver_command(action)
-    return "adb shell am broadcast -a #{action}"
+    return "adb shell am broadcast -a #{action} -n #{getApplicationId}/org.commcare.provider.DebugControlsReceiver"
 end
 
 def clear_restore_cache()

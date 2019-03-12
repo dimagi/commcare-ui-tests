@@ -123,8 +123,6 @@ def install(ccz_file):
     """
     Pushes CCZ file to android device and tells commcare to install it.
     """
-    cmd = "adb push {} /sdcard/{}".format(ccz_file, basename(ccz_file))
-    subprocess.call(cmd, shell=True)
     extras = {"validate": True}
     cmd = activity_command("org.commcare.dalvik/" +
                            "org.commcare.activities.CommCareSetupActivity",

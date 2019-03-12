@@ -79,4 +79,4 @@ Feature: Login behavior
 
     Then I clear input field number 2
     Then I press login
-    Then I see the text "Empty Password"
+    Then I scroll until I see the "Empty Password" text
