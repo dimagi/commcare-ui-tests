@@ -1,4 +1,4 @@
-app_update.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/0841e3049fd00508782eb4f996e36611/
+app_update.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/0841e3049fd00508782eb4f996e36611/ (Custom ccz with choice.mp4 removed to decrease size)
 case_claim.ccz --> 
 case_sharing.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/74f57b9558045e21329034d67ad71862/
 ccqa.ccz --> https://www.commcarehq.org/a/ui-tests/apps/view/db79603c9810a2ed3f637ebaf518bd1e/
