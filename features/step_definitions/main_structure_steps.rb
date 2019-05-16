@@ -26,6 +26,7 @@ Then (/^I auth for install from list with username "([^\"]*)" and domain "([^\"]
   require 'yaml'
   properties = YAML.load_file("features/resource_files/local.properties.yaml")
   password = properties['passwords'][password_key]
+  puts password
 
   clear_text_in("* id:'edit_username'")
   enter_text("* id:'edit_username'", username)
