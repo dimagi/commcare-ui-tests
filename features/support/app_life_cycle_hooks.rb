@@ -22,9 +22,6 @@ Before do |scenario|
   cmd = "adb shell pm grant org.commcare.dalvik android.permission.CALL_PHONE"
   raise "Could not set permission for CALL_PHONE" unless system(cmd)
 
-  cmd = "adb shell pm grant org.commcare.dalvik android.permission.READ_SMS"
-  raise "Could not set permission for READ_SMS" unless system(cmd)
-
   cmd = "adb shell pm grant org.commcare.dalvik android.permission.CAMERA"
   raise "Could not set permission for PERMISSION_TO_GRANT" unless system(cmd)
 
