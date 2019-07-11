@@ -118,7 +118,10 @@ Then (/^I create a user with name "([^\"]*)" and password "([^\"]*)"$/) do |user
 end
 
 def close_case_with_name(name, type=nil, user_id=nil)
-    user_id = "system" if not user_id else user_id
+    if not user_id
+       user_id = "system"
+    end
+
     params = {"name": name, "closed": "False"}
     if type
         params["case_type"] = type
