@@ -64,7 +64,7 @@ Scenario: Put one back into the unsent queue and send it
 
 	Then I go back
 	Then I turn on the internet
-	Then I wait for 10 seconds
+	Then I wait for 20 seconds
 	Then I touch the "Sync with Server" text
 	Then I see the text "1 form sent to server!"
 
