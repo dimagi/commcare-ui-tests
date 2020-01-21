@@ -20,7 +20,7 @@ Then (/^I press start$/) do
     hide_soft_keyboard()
     step("I scroll until I see the \"Start\" text")
     wait_for_element_exists("* {text CONTAINS[c] 'Start'}'", timeout: 60)
-    touch("android.support.v7.widget.CardView index:0")
+    touch("androidx.cardview.widget.CardView index:0")
     wait_for_element_exists("* id:'screen_suite_menu_list'", timeout: 60)
 end
 
@@ -41,7 +41,7 @@ Then (/^I save form as incomplete$/) do
     if element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
       tap_when_element_exists("* {text CONTAINS[c] 'SAVE INCOMPLETE'}")
     end
-    wait_for_element_exists("android.support.v7.widget.CardView index:0", timeout: 60)
+    wait_for_element_exists("androidx.cardview.widget.CardView index:0", timeout: 60)
 end
 
 Then (/^I logout/) do
