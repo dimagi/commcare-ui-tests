@@ -15,7 +15,7 @@ Feature: List Sorting
     Then I see "Middle" above "Last"
 
     Then I select "Sort By..." menu item
-    Then I touch the "Name" text
+    Then I press Name button
 
     Then I see "Earliest" above "Last"
     Then I see "Last" above "Middle"
