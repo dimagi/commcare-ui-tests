@@ -3,7 +3,7 @@ def notify = true
 // Number of times to retry a failed test
 def retries = 2
 // Pool of devices on AWS to run on
-def poolArray = ['asus_5_0','asus_5_1']
+def poolArray = ['android10','asus_5_0']
 
 // Job to copy the tested APK from
 def cc_android_job = env.CUSTOM_JOB_TARGET ? "${CUSTOM_JOB_TARGET}" : 'commcare-android'
@@ -16,7 +16,7 @@ def buildPassing = true
 
 node {
     stage('test') {
-        
+
         // All of the tags run on AWS. We specify these individually so that we can iterate over each
         // tag and retry them granularly when they fail.
 
